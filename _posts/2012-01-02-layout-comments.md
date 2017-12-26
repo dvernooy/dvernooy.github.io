@@ -12,4 +12,3 @@ tags:
 This post should display comments.
 
 {% include comments.html %}
-{% include comment.html %}
