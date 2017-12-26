@@ -24,7 +24,7 @@ var idx = lunr(function () {
   
     idx.add({
       title: "Layout: Comments Enabled",
-      excerpt: "This post should display comments.\n",
+      excerpt: "This post should display comments.\n\n\n  \n  Name\n  E-mail\n  Message\n\n  Go!\n\n\n",
       categories: ["Layout","Uncategorized"],
       tags: ["comments","layout"],
       id: 1
@@ -59,7 +59,7 @@ var store = [
       {
         "title": "Layout: Comments Enabled",
         "url": "http://localhost:4000/layout/uncategorized/layout-comments/",
-        "excerpt": "This post should display comments.\n",
+        "excerpt": "This post should display comments.\n\n\n  \n  Name\n  E-mail\n  Message\n\n  Go!\n\n\n",
         "teaser":
           
             null
