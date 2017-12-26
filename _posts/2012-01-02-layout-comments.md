@@ -1,6 +1,5 @@
 ---
 title: "Layout: Comments Enabled"
-comments: true
 categories:
   - Layout
   - Uncategorized
@@ -12,4 +11,3 @@ tags:
 This post should display comments.
 
 {% include comments.html %}
-{% include comment.html %}

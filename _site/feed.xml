@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-12-26T15:55:53-05:00</updated><id>http://localhost:4000/</id><title type="html">Ab hinc</title><subtitle>A website with a blog and various projects I've done.</subtitle><author><name>Dave Vernooy</name><uri>https://dvernooy.github.io</uri></author><entry><title type="html">Layout: Comments Enabled</title><link href="http://localhost:4000/layout/uncategorized/layout-comments/" rel="alternate" type="text/html" title="Layout: Comments Enabled" /><published>2012-01-02T00:00:00-05:00</published><updated>2012-01-02T00:00:00-05:00</updated><id>http://localhost:4000/layout/uncategorized/layout-comments</id><content type="html" xml:base="http://localhost:4000/layout/uncategorized/layout-comments/">&lt;p&gt;This post should display comments.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-12-26T16:13:51-05:00</updated><id>http://localhost:4000/</id><title type="html">Ab hinc</title><subtitle>A website with a blog and various projects I've done.</subtitle><author><name>Dave Vernooy</name><uri>https://dvernooy.github.io</uri></author><entry><title type="html">Layout: Comments Enabled</title><link href="http://localhost:4000/layout/uncategorized/layout-comments/" rel="alternate" type="text/html" title="Layout: Comments Enabled" /><published>2012-01-02T00:00:00-05:00</published><updated>2012-01-02T00:00:00-05:00</updated><id>http://localhost:4000/layout/uncategorized/layout-comments</id><content type="html" xml:base="http://localhost:4000/layout/uncategorized/layout-comments/">&lt;p&gt;This post should display comments.&lt;/p&gt;
 
 &lt;div class=&quot;page__comments&quot;&gt;
   
@@ -63,21 +63,4 @@
         
       &lt;/section&gt;
     
-&lt;/div&gt;
-&lt;article id=&quot;comment&quot; class=&quot;js-comment comment&quot; itemprop=&quot;comment&quot; itemscope=&quot;&quot; itemtype=&quot;http://schema.org/Comment&quot;&gt;
-  &lt;div class=&quot;comment__avatar-wrapper&quot;&gt;
-    &lt;img class=&quot;comment__avatar&quot; src=&quot;https://www.gravatar.com/avatar/?d=mm&amp;amp;s=80&quot; alt=&quot;&quot; /&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;comment__content-wrapper&quot;&gt;
-    &lt;h3 class=&quot;comment__author&quot; itemprop=&quot;author&quot; itemscope=&quot;&quot; itemtype=&quot;http://schema.org/Person&quot;&gt;
-      
-        &lt;span itemprop=&quot;name&quot;&gt;&lt;/span&gt;
-      
-    &lt;/h3&gt;
-    &lt;p class=&quot;comment__date&quot;&gt;
-      
-    &lt;/p&gt;
-    &lt;div itemprop=&quot;text&quot;&gt;
-&lt;/div&gt;
-  &lt;/div&gt;
-&lt;/article&gt;</content><author><name>Dave Vernooy</name><uri>https://dvernooy.github.io</uri></author><category term="comments" /><category term="layout" /><summary type="html">This post should display comments.</summary></entry></feed>
+&lt;/div&gt;</content><author><name>Dave Vernooy</name><uri>https://dvernooy.github.io</uri></author><category term="comments" /><category term="layout" /><summary type="html">This post should display comments.</summary></entry></feed>
