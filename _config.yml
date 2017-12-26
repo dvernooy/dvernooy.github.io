@@ -178,17 +178,20 @@ kramdown:
 
 # Collections
 collections:
-  docs:
+  #docs:
+  #  output: false
+  #  permalink: /:collection/:path/
+  embedded:
     output: true
     permalink: /:collection/:path/
   recipes:
-    output: true
+    output: false
     permalink: /:collection/:path/
   pets:
-    output: true
+    output: false
     permalink: /:collection/:path/
   portfolio:
-    output: true
+    output: false
     permalink: /:collection/:path/
 
 
@@ -212,16 +215,26 @@ defaults:
     values:
       layout: single
       author_profile: true
-  # _docs
+  # _embedded
   - scope:
       path: ""
-      type: docs
+      type: embedded
     values:
       layout: single
       read_time: false
       author_profile: true
       share: false
       comments: false
+  # _docs
+  #- scope:
+  #    path: ""
+  #    type: docs
+  #  values:
+  #    layout: single
+  #    read_time: false
+  #    author_profile: true
+  #    share: false
+  #    comments: false
       #sidebar:
       #  nav: "docs"
   # _recipes
