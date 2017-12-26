@@ -23,32 +23,11 @@ var idx = lunr(function () {
   
   
     idx.add({
-      title: "Lhasa Apso",
-      excerpt: "The Lhasa Apso (/ˈlɑːsə ˈæpsoʊ/ lah-sə ap-soh) is a non-sporting dog breed originating in Tibet. It was bred as an...",
-      categories: [],
-      tags: [],
-      id: 1
-    });
-    
-  
-    idx.add({
-      title: "Tabby",
-      excerpt: "A tabby is any domestic cat that has a coat featuring distinctive stripes, dots, lines or swirling patterns, usually together...",
-      categories: [],
-      tags: [],
-      id: 2
-    });
-    
-  
-
-  
-  
-    idx.add({
       title: "Baz Boom Identity",
       excerpt: "Pictures of Goats section West Seattle Blog dingbat newspaper rubber cement Google+ newsroom cafe news.me rubber cement, Ushahidi Kindle Single...",
       categories: [],
       tags: [],
-      id: 3
+      id: 1
     });
     
   
@@ -57,7 +36,7 @@ var idx = lunr(function () {
       excerpt: "Pictures of Goats section West Seattle Blog dingbat newspaper rubber cement Google+ newsroom cafe news.me rubber cement, Ushahidi Kindle Single...",
       categories: [],
       tags: [],
-      id: 4
+      id: 2
     });
     
   
@@ -66,7 +45,7 @@ var idx = lunr(function () {
       excerpt: "Pictures of Goats section West Seattle Blog dingbat newspaper rubber cement Google+ newsroom cafe news.me rubber cement, Ushahidi Kindle Single...",
       categories: [],
       tags: [],
-      id: 5
+      id: 3
     });
     
   
@@ -75,7 +54,7 @@ var idx = lunr(function () {
       excerpt: "Pictures of Goats section West Seattle Blog dingbat newspaper rubber cement Google+ newsroom cafe news.me rubber cement, Ushahidi Kindle Single...",
       categories: [],
       tags: [],
-      id: 6
+      id: 4
     });
     
   
@@ -87,7 +66,7 @@ var idx = lunr(function () {
       excerpt: "Nested and mixed lists are an interesting beast. It’s a corner case to make sure that Lists within lists do...",
       categories: ["Edge Case"],
       tags: ["content","css","edge case","lists","markup"],
-      id: 7
+      id: 5
     });
     
   
@@ -96,7 +75,7 @@ var idx = lunr(function () {
       excerpt: "This post has many tags.\n",
       categories: ["Edge Case"],
       tags: ["8BIT","alignment","Articles","captions","categories","chat","comments","content","css","dowork","edge case","embeds","excerpt","Fail","featured image","FTW","Fun","gallery","html","image","Jekyll","layout","link","Love","markup","Mothership","Must Read","Nailed It","Pictures","Post Formats","quote","standard","Success","Swagger","Tags","template","title","twitter","Unseen","video","YouTube"],
-      id: 8
+      id: 6
     });
     
   
@@ -105,7 +84,7 @@ var idx = lunr(function () {
       excerpt: "This post has many categories.\n",
       categories: ["aciform","antiquarianism","arrangement","asmodeus","broder","buying","championship","chastening","disinclination","disinfection","dispatch","echappee","enphagy"],
       tags: ["categories","edge case"],
-      id: 9
+      id: 7
     });
     
   
@@ -114,7 +93,7 @@ var idx = lunr(function () {
       excerpt: "\n",
       categories: ["Edge Case"],
       tags: ["content","edge case","layout"],
-      id: 10
+      id: 8
     });
     
   
@@ -123,7 +102,7 @@ var idx = lunr(function () {
       excerpt: "This post has no title specified in the YAML Front Matter. Jekyll should auto-generate a title from the filename.\n",
       categories: ["Edge Case"],
       tags: ["edge case","layout","title"],
-      id: 11
+      id: 9
     });
     
   
@@ -132,7 +111,7 @@ var idx = lunr(function () {
       excerpt: "Title should not overflow the content area A few things to check for: Non-breaking text in the title, content, and...",
       categories: ["Edge Case"],
       tags: ["content","css","edge case","html","layout","title"],
-      id: 12
+      id: 10
     });
     
   
@@ -141,7 +120,7 @@ var idx = lunr(function () {
       excerpt: "Check for long titles and how they might break a template.\n",
       categories: ["Edge Case"],
       tags: ["content","css","edge case","html","layout","title"],
-      id: 13
+      id: 11
     });
     
   
@@ -150,7 +129,7 @@ var idx = lunr(function () {
       excerpt: "This post has been updated and should show a modified date if used in a layout. All children, except one,...",
       categories: ["Post Formats"],
       tags: ["Post Formats","readability","standard"],
-      id: 14
+      id: 12
     });
     
   
@@ -159,7 +138,7 @@ var idx = lunr(function () {
       excerpt: "All children, except one, grow up. They soon know that they will grow up, and the way Wendy knew was...",
       categories: ["Post Formats"],
       tags: ["Post Formats","readability","standard"],
-      id: 15
+      id: 13
     });
     
   
@@ -168,7 +147,7 @@ var idx = lunr(function () {
       excerpt: "Abbott: Strange as it may seem, they give ball players nowadays very peculiar names. Costello: Funny names? Abbott: Nicknames, nicknames....",
       categories: ["Post Formats"],
       tags: ["chat","Post Formats"],
-      id: 16
+      id: 14
     });
     
   
@@ -177,7 +156,7 @@ var idx = lunr(function () {
       excerpt: "A notice displays information that explains nearby content. Often used to call attention to a particular detail. When using Kramdown...",
       categories: ["Post Formats"],
       tags: ["Post Formats","notice"],
-      id: 17
+      id: 15
     });
     
   
@@ -186,7 +165,7 @@ var idx = lunr(function () {
       excerpt: "Only one thing is impossible for God: To find any sense in any copyright law on the planet. Mark Twain...",
       categories: ["Post Formats"],
       tags: ["Post Formats","quote"],
-      id: 18
+      id: 16
     });
     
   
@@ -195,7 +174,7 @@ var idx = lunr(function () {
       excerpt: "This theme supports link posts, made famous by John Gruber. To use, just add link: http://url-you-want-linked to the post’s YAML...",
       categories: ["Post Formats"],
       tags: ["link","Post Formats"],
-      id: 19
+      id: 17
     });
     
   
@@ -204,7 +183,7 @@ var idx = lunr(function () {
       excerpt: "YouTube video embed below.\n\n\n",
       categories: ["Post Formats"],
       tags: ["Post Formats"],
-      id: 20
+      id: 18
     });
     
   
@@ -213,7 +192,7 @@ var idx = lunr(function () {
       excerpt: "This post has a header image with an OpenGraph override.\n\nheader:\n  image: /assets/images/page-header-image.png\n  og_image: /assets/images/page-header-og-image.png\n\n",
       categories: ["Layout","Uncategorized"],
       tags: ["edge case","image","layout"],
-      id: 21
+      id: 19
     });
     
   
@@ -222,7 +201,7 @@ var idx = lunr(function () {
       excerpt: "This post has a header image with an OpenGraph override. header: overlay_image: /assets/images/unsplash-image-1.jpg og_image: /assets/images/page-header-og-image.png caption: \"Photo credit: [**Unsplash**](https://unsplash.com)\" cta_url:...",
       categories: ["Layout","Uncategorized"],
       tags: ["edge case","image","layout"],
-      id: 22
+      id: 20
     });
     
   
@@ -231,7 +210,7 @@ var idx = lunr(function () {
       excerpt: "\n",
       categories: ["Post Formats"],
       tags: ["image","Post Formats"],
-      id: 23
+      id: 21
     });
     
   
@@ -240,7 +219,7 @@ var idx = lunr(function () {
       excerpt: "The preferred way of using images is placing them in the /assets/images/ directory and referencing them with an absolute path....",
       categories: ["Post Formats"],
       tags: ["image","Post Formats"],
-      id: 24
+      id: 22
     });
     
   
@@ -249,7 +228,7 @@ var idx = lunr(function () {
       excerpt: "This post has a teaser image with an OpenGraph override.\n\nheader:\n  teaser: /assets/images/page-header-teaser.png\n  og_image: /assets/images/page-header-og-image.png\n\n",
       categories: ["Layout","Uncategorized"],
       tags: ["edge case","image","layout"],
-      id: 25
+      id: 23
     });
     
   
@@ -258,7 +237,7 @@ var idx = lunr(function () {
       excerpt: "\n\n  \n\n\n  \nStairs? Were we’re going we don’t need no stairs.\n\n\n",
       categories: ["Post Formats"],
       tags: ["image","Post Formats"],
-      id: 26
+      id: 24
     });
     
   
@@ -267,7 +246,7 @@ var idx = lunr(function () {
       excerpt: "\n\n  \n\n\n  Photo from Unsplash.\n\n",
       categories: ["Post Formats"],
       tags: ["image","Post Formats"],
-      id: 27
+      id: 25
     });
     
   
@@ -276,7 +255,7 @@ var idx = lunr(function () {
       excerpt: "These are gallery tests for image wrapped in &lt;figure&gt; elements. To place a gallery add the necessary YAML Front Matter:...",
       categories: ["Post Formats"],
       tags: ["gallery","Post Formats","tiled"],
-      id: 28
+      id: 26
     });
     
   
@@ -285,7 +264,7 @@ var idx = lunr(function () {
       excerpt: "🎨 Finally got around to adding all my @procreateapp creations with time lapse videos https://t.co/1nNbkefC3L pic.twitter.com/gcNLJoJ0Gn&mdash; Michael Rose (@mmistakes) November...",
       categories: ["Media"],
       tags: ["content","embeds","media","twitter"],
-      id: 29
+      id: 27
     });
     
   
@@ -294,7 +273,7 @@ var idx = lunr(function () {
       excerpt: "This post has its comments disabled.\n\nThere should be no comment form.\n",
       categories: ["Layout","Uncategorized"],
       tags: ["comments","layout"],
-      id: 30
+      id: 28
     });
     
   
@@ -303,7 +282,7 @@ var idx = lunr(function () {
       excerpt: "This post should display comments.\n",
       categories: ["Layout","Uncategorized"],
       tags: ["comments","layout"],
-      id: 31
+      id: 29
     });
     
   
@@ -312,7 +291,7 @@ var idx = lunr(function () {
       excerpt: "This post has reading time disabled. The estimated time that it takes to read this post should not be showing...",
       categories: [],
       tags: ["read time"],
-      id: 32
+      id: 30
     });
     
   
@@ -321,7 +300,7 @@ var idx = lunr(function () {
       excerpt: "This post has reading time enabled. The estimated time that it takes to read this post should show if also...",
       categories: [],
       tags: ["read time"],
-      id: 33
+      id: 31
     });
     
   
@@ -330,7 +309,7 @@ var idx = lunr(function () {
       excerpt: "This post has related posts disabled.\n\nRelated post links should not appear.\n",
       categories: ["Layout","Uncategorized"],
       tags: ["related posts","layout"],
-      id: 34
+      id: 32
     });
     
   
@@ -339,7 +318,7 @@ var idx = lunr(function () {
       excerpt: "This post has related posts enabled.\n",
       categories: ["Layout","Uncategorized"],
       tags: ["related posts","layout"],
-      id: 35
+      id: 33
     });
     
   
@@ -348,7 +327,7 @@ var idx = lunr(function () {
       excerpt: "This post has social sharing disabled.\n\nSocial sharing links should not appear.\n",
       categories: ["Layout","Uncategorized"],
       tags: ["social","layout"],
-      id: 36
+      id: 34
     });
     
   
@@ -357,7 +336,7 @@ var idx = lunr(function () {
       excerpt: "This post should display social sharing links.\n",
       categories: ["Layout","Uncategorized"],
       tags: ["social","layout"],
-      id: 37
+      id: 35
     });
     
   
@@ -366,7 +345,7 @@ var idx = lunr(function () {
       excerpt: "This post has reading time, comments, social sharing links, and related posts disabled. Reading time, comments, social sharing and related...",
       categories: ["Layout","Uncategorized"],
       tags: ["related posts","social","comments","layout"],
-      id: 38
+      id: 36
     });
     
   
@@ -375,7 +354,7 @@ var idx = lunr(function () {
       excerpt: "Enable table of contents on post or page by adding toc: true to its YAML Front Matter. The title and...",
       categories: [],
       tags: ["table of contents"],
-      id: 39
+      id: 37
     });
     
   
@@ -384,7 +363,7 @@ var idx = lunr(function () {
       excerpt: "This is the post content with inline code, (e.g. &lt;span style=\"color: red;\"&gt;red&lt;/span&gt;. It should be displayed in place of the...",
       categories: ["Layout","Uncategorized"],
       tags: ["content","excerpt","layout"],
-      id: 40
+      id: 38
     });
     
   
@@ -393,7 +372,7 @@ var idx = lunr(function () {
       excerpt: "This is the post content. It should be displayed in place of the user-defined excerpt in archive-index pages. This paragraph...",
       categories: ["Layout","Uncategorized"],
       tags: ["content","excerpt","layout"],
-      id: 41
+      id: 39
     });
     
   
@@ -402,7 +381,7 @@ var idx = lunr(function () {
       excerpt: "This is the post content. Archive-index pages should display an auto-generated excerpt of this content. Be sure to test the...",
       categories: ["Layout","Uncategorized"],
       tags: ["content","excerpt","layout"],
-      id: 42
+      id: 40
     });
     
   
@@ -411,7 +390,7 @@ var idx = lunr(function () {
       excerpt: "Sites that may have content authored from various individuals can be accommodated by using data files. To attribute an author...",
       categories: [],
       tags: [],
-      id: 43
+      id: 41
     });
     
   
@@ -420,7 +399,7 @@ var idx = lunr(function () {
       excerpt: "This post has the author sidebar disabled.\n\nTo disable add author_profile: false to YAML Front Matter.\n",
       categories: [],
       tags: [],
-      id: 44
+      id: 42
     });
     
   
@@ -429,7 +408,7 @@ var idx = lunr(function () {
       excerpt: "This post should display a header image, if the theme supports it. Featured image is an external asset and should...",
       categories: ["Layout","Uncategorized"],
       tags: ["edge case","featured image","image","layout"],
-      id: 45
+      id: 43
     });
     
   
@@ -438,7 +417,7 @@ var idx = lunr(function () {
       excerpt: "This post should display a header image, if the theme supports it. Non-square images can provide some unique styling issues....",
       categories: ["Layout","Uncategorized"],
       tags: ["edge case","featured image","image","layout"],
-      id: 46
+      id: 44
     });
     
   
@@ -447,7 +426,7 @@ var idx = lunr(function () {
       excerpt: "This is a sample post with a large feature image1 up top and tons of text. Odio ad blue bottle...",
       categories: [],
       tags: ["sample post","readability","test"],
-      id: 47
+      id: 45
     });
     
   
@@ -456,7 +435,7 @@ var idx = lunr(function () {
       excerpt: "This post should display a header image, if the theme supports it. Non-square images can provide some unique styling issues. This...",
       categories: ["Layout","Uncategorized"],
       tags: ["edge case","featured image","image","layout"],
-      id: 48
+      id: 46
     });
     
   
@@ -465,7 +444,7 @@ var idx = lunr(function () {
       excerpt: "This post should display a header with a solid background color, if the theme supports it. Non-square images can provide...",
       categories: ["Layout","Uncategorized"],
       tags: ["edge case","image","layout"],
-      id: 49
+      id: 47
     });
     
   
@@ -474,7 +453,7 @@ var idx = lunr(function () {
       excerpt: "This post should display a header with an overlay image, if the theme supports it. Non-square images can provide some...",
       categories: ["Layout","Uncategorized"],
       tags: ["edge case","image","layout"],
-      id: 50
+      id: 48
     });
     
   
@@ -483,7 +462,7 @@ var idx = lunr(function () {
       excerpt: "This content is before the excerpt separator tag. Right after this sentence there should be a continue reading link of...",
       categories: ["Layout","Uncategorized"],
       tags: ["content","read more","layout"],
-      id: 51
+      id: 49
     });
     
   
@@ -492,7 +471,7 @@ var idx = lunr(function () {
       excerpt: "This post has a custom sidebar set in the post’s YAML Front Matter. An example of how that YAML could...",
       categories: [],
       tags: [],
-      id: 52
+      id: 50
     });
     
   
@@ -501,7 +480,7 @@ var idx = lunr(function () {
       excerpt: "This post has a custom navigation list set in the post’s YAML Front Matter. sidebar: title: \"Sample Title\" nav: sidebar-sample...",
       categories: [],
       tags: [],
-      id: 53
+      id: 51
     });
     
   
@@ -510,7 +489,7 @@ var idx = lunr(function () {
       excerpt: "Portland in shoreditch Vice, labore typewriter pariatur hoodie fap sartorial Austin. Pinterest literally occupy Schlitz forage. Odio ad blue bottle...",
       categories: [],
       tags: ["sample post","readability","test"],
-      id: 54
+      id: 52
     });
     
   
@@ -519,7 +498,7 @@ var idx = lunr(function () {
       excerpt: "Verify that: The post title renders the word “with” in italics and the word “Markdown” in bold. The post title...",
       categories: ["Markdown"],
       tags: ["css","html","title"],
-      id: 55
+      id: 53
     });
     
   
@@ -528,7 +507,7 @@ var idx = lunr(function () {
       excerpt: "Putting special characters in the title should have no adverse effect on the layout or functionality. Special characters in the...",
       categories: ["Markup"],
       tags: ["html","markup","post","title"],
-      id: 56
+      id: 54
     });
     
   
@@ -537,7 +516,7 @@ var idx = lunr(function () {
       excerpt: "Default This is a paragraph. It should not have any alignment of any kind. It should just flow like you...",
       categories: ["Markup"],
       tags: ["alignment","content","css","markup"],
-      id: 57
+      id: 55
     });
     
   
@@ -546,7 +525,7 @@ var idx = lunr(function () {
       excerpt: "Welcome to image alignment! The best way to demonstrate the ebb and flow of the various image positioning options is...",
       categories: ["Markup"],
       tags: ["alignment","captions","content","css","image","markup"],
-      id: 58
+      id: 56
     });
     
   
@@ -555,7 +534,7 @@ var idx = lunr(function () {
       excerpt: "A variety of common markup showing how the theme styles them. Header two Header three Header four Header five Header...",
       categories: ["Markup"],
       tags: ["content","css","formatting","html","markup"],
-      id: 59
+      id: 57
     });
     
   
@@ -564,7 +543,7 @@ var idx = lunr(function () {
       excerpt: "Here are some examples of what a post with images might look like. If you want to display two or...",
       categories: [],
       tags: ["sample post","images","test"],
-      id: 60
+      id: 58
     });
     
   
@@ -573,7 +552,7 @@ var idx = lunr(function () {
       excerpt: "Syntax highlighting is a feature that displays source code, in different colors and fonts according to the category of terms....",
       categories: [],
       tags: ["code","syntax highlighting"],
-      id: 61
+      id: 59
     });
     
   
@@ -582,7 +561,7 @@ var idx = lunr(function () {
       excerpt: "You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your...",
       categories: ["Jekyll"],
       tags: ["update"],
-      id: 62
+      id: 60
     });
     
   
@@ -591,7 +570,7 @@ var idx = lunr(function () {
       excerpt: "Jekyll themes distributed as Ruby gems are finally here to make installing and upgrading much easier. Gone are the days...",
       categories: ["Jekyll"],
       tags: ["update"],
-      id: 63
+      id: 61
     });
     
   
@@ -600,7 +579,7 @@ var idx = lunr(function () {
       excerpt: "Hot on the heels of Jekyll v3.3.0 is a beta release of Minimal Mistakes… as a gemified theme. minimal-mistakes-jekyll can...",
       categories: ["Jekyll"],
       tags: ["update"],
-      id: 64
+      id: 62
     });
     
   
@@ -609,37 +588,7 @@ var idx = lunr(function () {
       excerpt: "This post should display a header with a responsive video, if the theme supports it. Settings Parameter Required Description id...",
       categories: ["Layout","Uncategorized"],
       tags: ["video","layout"],
-      id: 65
-    });
-    
-  
-
-  
-  
-    idx.add({
-      title: "Chocolate Chip Cookies",
-      excerpt: "A chocolate chip cookie is a drop cookie that originated in the United States and features chocolate chips as its...",
-      categories: [],
-      tags: [],
-      id: 66
-    });
-    
-  
-    idx.add({
-      title: "Oatmeal Cookies",
-      excerpt: "Oatmeal cookies are a proverbial favorite with both kids and adults. This crisp and chewy cookie is loaded with oats,...",
-      categories: [],
-      tags: [],
-      id: 67
-    });
-    
-  
-    idx.add({
-      title: "Peanut Butter Cookies",
-      excerpt: "A peanut butter cookie is a type of cookie that is distinguished for having peanut butter as a principal ingredient....",
-      categories: [],
-      tags: [],
-      id: 68
+      id: 63
     });
     
   
@@ -657,32 +606,6 @@ var store = [
         "title": "Ergware",
         "url": "http://localhost:4000/docs/ergware/",
         "excerpt": "Open source software for an open source ergometer Hey all, Dave Vernooy here. I’m assuming you stumbled across this site...",
-        "teaser":
-          
-            null
-          
-      },
-    
-  
-    
-    
-    
-      
-      {
-        "title": "Lhasa Apso",
-        "url": "http://localhost:4000/pets/lhasa-apso/",
-        "excerpt": "The Lhasa Apso (/ˈlɑːsə ˈæpsoʊ/ lah-sə ap-soh) is a non-sporting dog breed originating in Tibet. It was bred as an...",
-        "teaser":
-          
-            null
-          
-      },
-    
-      
-      {
-        "title": "Tabby",
-        "url": "http://localhost:4000/pets/tabby/",
-        "excerpt": "A tabby is any domestic cat that has a coat featuring distinctive stripes, dots, lines or swirling patterns, usually together...",
         "teaser":
           
             null
@@ -1384,43 +1307,6 @@ var store = [
         "title": "Layout: Header Video",
         "url": "http://localhost:4000/layout/uncategorized/layout-header-video/",
         "excerpt": "This post should display a header with a responsive video, if the theme supports it. Settings Parameter Required Description id...",
-        "teaser":
-          
-            null
-          
-      },
-    
-  
-    
-    
-    
-      
-      {
-        "title": "Chocolate Chip Cookies",
-        "url": "http://localhost:4000/recipes/chocolate-chip-cookies/",
-        "excerpt": "A chocolate chip cookie is a drop cookie that originated in the United States and features chocolate chips as its...",
-        "teaser":
-          
-            null
-          
-      },
-    
-      
-      {
-        "title": "Oatmeal Cookies",
-        "url": "http://localhost:4000/recipes/oatmeal-cookies/",
-        "excerpt": "Oatmeal cookies are a proverbial favorite with both kids and adults. This crisp and chewy cookie is loaded with oats,...",
-        "teaser":
-          
-            null
-          
-      },
-    
-      
-      {
-        "title": "Peanut Butter Cookies",
-        "url": "http://localhost:4000/recipes/peanut-butter-cookies/",
-        "excerpt": "A peanut butter cookie is a type of cookie that is distinguished for having peanut butter as a principal ingredient....",
         "teaser":
           
             null

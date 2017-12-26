@@ -184,12 +184,6 @@ collections:
   embedded:
     output: true
     permalink: /:collection/:path/
-  recipes:
-    output: false
-    permalink: /:collection/:path/
-  pets:
-    output: false
-    permalink: /:collection/:path/
   portfolio:
     output: false
     permalink: /:collection/:path/
@@ -237,24 +231,6 @@ defaults:
   #    comments: false
       #sidebar:
       #  nav: "docs"
-  # _recipes
-  - scope:
-      path: ""
-      type: recipes
-    values:
-      layout: single
-      author_profile: true
-      share: true
-      comments: true
-  # _pets
-  - scope:
-      path: ""
-      type: pets
-    values:
-      layout: single
-      author_profile: true
-      share: true
-      comment: true
   # _portfolio
   - scope:
       path: ""
