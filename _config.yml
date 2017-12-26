@@ -14,7 +14,7 @@ locale                   : "en-US"
 title                    : "Ab hinc"
 title_separator          : "-"
 name                     : &name "Dave Vernooy" # &name is a YAML anchor which can be *referenced later
-description              : &description "A flexible Jekyll theme for your blog or site with a minimalist aesthetic."
+description              : &description "A website with a blog and various projects I've done."
 url                      : https://dvernooy.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : #"/minimal-mistakes" # the subpath of your site, e.g. "/blog"
 repository               : #"mmistakes/minimal-mistakes"
@@ -178,14 +178,8 @@ kramdown:
 
 # Collections
 collections:
-  #docs:
-  #  output: false
-  #  permalink: /:collection/:path/
   embedded:
     output: true
-    permalink: /:collection/:path/
-  portfolio:
-    output: false
     permalink: /:collection/:path/
 
 
@@ -219,26 +213,6 @@ defaults:
       author_profile: true
       share: false
       comments: false
-  # _docs
-  #- scope:
-  #    path: ""
-  #    type: docs
-  #  values:
-  #    layout: single
-  #    read_time: false
-  #    author_profile: true
-  #    share: false
-  #    comments: false
-      #sidebar:
-      #  nav: "docs"
-  # _portfolio
-  - scope:
-      path: ""
-      type: portfolio
-    values:
-      layout: single
-      author_profile: false
-      share: true
 
 
 # Sass/SCSS
