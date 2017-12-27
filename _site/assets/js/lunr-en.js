@@ -43,7 +43,7 @@ var store = [
       
       {
         "title": "Ergware",
-        "url": "http://localhost:4000/docs/ergware/",
+        "url": "http://localhost:4000/projects/ergware/",
         "excerpt": "Open source software for an open source ergometer Hey all, Dave Vernooy here. I’m assuming you stumbled across this site...",
         "teaser":
           
@@ -58,7 +58,7 @@ var store = [
       
       {
         "title": "Layout: Comments Enabled",
-        "url": "http://localhost:4000/layout/uncategorized/layout-comments/",
+        "url": "http://localhost:4000/blog/comments",
         "excerpt": "This post should display comments.\n",
         "teaser":
           

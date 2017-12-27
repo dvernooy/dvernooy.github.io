@@ -1,5 +1,6 @@
 ---
 title: "Layout: Comments Enabled"
+permalink: /blog/comments
 comments: true
 categories:
   - Layout

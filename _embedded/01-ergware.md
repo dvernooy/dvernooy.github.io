@@ -1,6 +1,6 @@
 ---
 title: "Ergware"
-permalink: /docs/ergware/
+permalink: /projects/ergware/
 excerpt: "Open source software for an open source ergometer"
 last_modified_at: 2017-11-15T09:49:52-05:00
 redirect_from:
