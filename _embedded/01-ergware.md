@@ -2,7 +2,7 @@
 title: "Ergware"
 permalink: /projects/ergware/
 excerpt: "Open source software for an open source ergometer"
-last_modified_at: 2017-11-15T09:49:52-05:00
+last_modified_at: 2017-2-20
 redirect_from:
   - /theme-setup/
 toc: true

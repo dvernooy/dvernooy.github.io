@@ -23,8 +23,8 @@ var idx = lunr(function () {
   
   
     idx.add({
-      title: "Layout: Comments Enabled",
-      excerpt: "This post should display comments.\n",
+      title: "Christmas payback",
+      excerpt: "A really cool Christmas present After many years of bike mechanicry, with cry being the operative word, I was paid...",
       categories: ["Layout","Uncategorized"],
       tags: ["comments","layout"],
       id: 1
@@ -57,9 +57,9 @@ var store = [
     
       
       {
-        "title": "Layout: Comments Enabled",
+        "title": "Christmas payback",
         "url": "http://localhost:4000/blog/comments",
-        "excerpt": "This post should display comments.\n",
+        "excerpt": "A really cool Christmas present After many years of bike mechanicry, with cry being the operative word, I was paid...",
         "teaser":
           
             null
