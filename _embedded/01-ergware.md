@@ -23,7 +23,7 @@ It was great fun to build, and is even more fun to use.
 After noodling on the original design, we decided it would be neat to add the software & display so the rower could get real-time feedback on the basic things a rower would want to know. We were able to get good estimates of stroke rate, power output, effective 500m split pace, distance rowed, fraction of time spent in power phase of stroke, etc..  Here is a close-in screenshot of the current version (you can see this display in the main picture above attached to the pvc tubing).
 
 <figure>
-	<img src="{{ '/assets/images/erg-interface.jpg' | absolute_url }}">
+	<img class="resize" src="{{ '/assets/images/erg-interface.jpg' | absolute_url }}">
 </figure>
 
 The whole idea worked out pretty well, so I thought it would be good to add it back to the community as an open project. The source code and all documentation is hosted [here](https://www.github.com/dvernooy/ergware/) and available for free to download, use & modify. The documentation package includes 3 things:
