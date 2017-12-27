@@ -1,3 +1,7 @@
+---
+layout: null
+---
+
 var idx = lunr(function () {
   this.field('title', {boost: 10})
   this.field('excerpt')
@@ -6,67 +10,48 @@ var idx = lunr(function () {
   this.ref('id')
 });
 
-
-
-  
-  
+{% assign count = 0 %}
+{% for c in site.collections %}
+  {% assign docs = c.docs | where_exp:'doc','doc.search != false' %}
+  {% for doc in docs %}
     idx.add({
-      title: "Ergware",
-      excerpt: "Open source software for an open source ergometer Hey all, Dave Vernooy here. I’m assuming you stumbled across this site...",
-      categories: [],
-      tags: [],
-      id: 0
+      title: {{ doc.title | jsonify }},
+      excerpt: {{ doc.content | strip_html | truncatewords: 20 | jsonify }},
+      categories: {{ doc.categories | jsonify }},
+      tags: {{ doc.tags | jsonify }},
+      id: {{ count }}
     });
-    
-  
-
-  
-  
-    idx.add({
-      title: "Layout: Comments Enabled",
-      excerpt: "This post should display comments.\n",
-      categories: ["Layout","Uncategorized"],
-      tags: ["comments","layout"],
-      id: 1
-    });
-    
-  
-
+    {% assign count = count | plus: 1 %}
+  {% endfor %}
+{% endfor %}
 
 console.log( jQuery.type(idx) );
 
 var store = [
-  
-    
-    
-    
-      
+  {% for c in site.collections %}
+    {% if forloop.last %}
+      {% assign l = true %}
+    {% endif %}
+    {% assign docs = c.docs | where_exp:'doc','doc.search != false' %}
+    {% for doc in docs %}
+      {% if doc.header.teaser %}
+        {% capture teaser %}{{ doc.header.teaser }}{% endcapture %}
+      {% else %}
+        {% assign teaser = site.teaser %}
+      {% endif %}
       {
-        "title": "Ergware",
-        "url": "http://localhost:4000/docs/ergware/",
-        "excerpt": "Open source software for an open source ergometer Hey all, Dave Vernooy here. I’m assuming you stumbled across this site...",
+        "title": {{ doc.title | jsonify }},
+        "url": {{ doc.url | absolute_url | jsonify }},
+        "excerpt": {{ doc.content | strip_html | truncatewords: 20 | jsonify }},
         "teaser":
-          
-            null
-          
-      },
-    
-  
-    
-    
-    
-      
-      {
-        "title": "Layout: Comments Enabled",
-        "url": "http://localhost:4000/layout/uncategorized/layout-comments/",
-        "excerpt": "This post should display comments.\n",
-        "teaser":
-          
-            null
-          
-      }
-    
-  ]
+          {% if teaser contains "://" %}
+            {{ teaser | jsonify }}
+          {% else %}
+            {{ teaser | absolute_url | jsonify }}
+          {% endif %}
+      }{% unless forloop.last and l %},{% endunless %}
+    {% endfor %}
+  {% endfor %}]
 
 $(document).ready(function() {
   $('input#search').on('keyup', function () {
@@ -74,7 +59,7 @@ $(document).ready(function() {
     var query = $(this).val();
     var result = idx.search(query);
     resultdiv.empty();
-    resultdiv.prepend('<p class="results__found">'+result.length+' Result(s) found</p>');
+    resultdiv.prepend('<p class="results__found">'+result.length+' {{ site.data.ui-text[site.locale].results_found | default: "Result(s) found" }}</p>');
     for (var item in result) {
       var ref = result[item].ref;
       if(store[ref].teaser){

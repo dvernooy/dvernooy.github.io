@@ -34,4 +34,3 @@ The whole idea worked out pretty well, so I thought it would be good to add it b
 The main purpose of this website is to answer questions about the software for those who have them & update on any new progress we may (or may not) make. I don’t have immediate plans to do much more on this project, but you never know. I’ll do my best to respond to any posted comments.
 
 
-

@@ -209,10 +209,10 @@ defaults:
       type: embedded
     values:
       layout: single
-      read_time: false
+      read_time: true
       author_profile: true
-      share: false
-      comments: false
+      share: true
+      comments: true
 
 
 # Sass/SCSS
