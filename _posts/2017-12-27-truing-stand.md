@@ -19,7 +19,7 @@ tags:
 ### A really cool Christmas present
 
 <figure>
-  <img src="{{ '/assets/images/truing-stand.jpg' | absolute_url }}">
+  <img class="resize" src="{{ '/assets/images/truing-stand.jpg' | absolute_url }}">
 </figure>
 
 
