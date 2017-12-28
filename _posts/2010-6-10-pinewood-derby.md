@@ -8,6 +8,8 @@ comments: true
 toc: true
 ---
 
+![]({{ site.url }}/assets/images/cars.jpg){:width="550px"}
+*Thumbs way up for the Pinewood Derby*
 
 ### The master equation
 OK. If you are going for speed (uuh .. you *are* going for speed) ...there is really one equation that describes everything.
@@ -30,6 +32,9 @@ In a game where every millisecond counts ...  punch this thing into a spreadshee
 
 
 ### So what does it all mean?
+![]({{ site.url }}/assets/images/kaicar.jpg){:height="512px"}
+*Awesome ... that's what it all means*
+
 Besides having fun .. here are my 4 golden rules (plus one). 
 
 > Do the basics right ... de-burr the wheels, smooth the axles, graphite the axles & make sure the car rolls straight by testing and tweaking the axle positions. No extraneous friction. 
@@ -47,7 +52,14 @@ Beyond these, everything else in the master equation ($$g$$, $$m$$) is fixed eit
 
 
 ### If you can't go fast ...
-Soooo ... did we ever win the derby? Well, once. We also got confused <sup>1</sup> a couple of years and went for creativity points ... and that worked out ok, too. By far our best car ... the 'ol Adirondack Log'.
+Soooo ... did we ever win the derby? Well, once. 
+![]({{ site.url }}/assets/images/fast.jpg){:height="568px"}
+*Fast*
+
+We also got confused <sup>1</sup> a couple of years and got creative ... and that worked out ok, too ... turns out, there are points for style.
+
+![]({{ site.url }}/assets/images/adlog.jpg)
+*The ol' Adirondack log*
 
 ### Even more math
 [This gem](https://en.wikibooks.org/wiki/How_To_Build_a_Pinewood_Derby_Car/Physics) goes into a ton more detail for all you budding Newtons out there.

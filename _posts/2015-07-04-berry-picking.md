@@ -7,14 +7,17 @@ last_modified_at: 2015-07-04
 comments: true
 toc: yes
 ---
+![]({{ site.url }}/assets/images/berries.jpg){:width="700px"}
+*Summer is here*
+
+### How long is the berry season, anyways?
+The date is Sunday, June 29th 2014. For some reason, we have a blackberry bush in our front yard & counted 60 unripe berries. Score. But how long until they ripen? Well, we started doing a daily count
+and found out they're basically all ripe within 2 weeks. 
 
 ![]({{ site.url }}/assets/images/berries-2014.png){:width="913px"}
 *What is our RR? (ripening rate)*
 
-### How long is the berry season, anyways?
-The date is Sunday, June 29th 2014. For some reason, we have a blackberry bush in our front yard & counted 60 unripe berries. Score. But how long until they ripen? Well, we started doing a daily count
-and found out they're basically all ripe within 2 weeks. Now, we weren't super scientific this first year, so we upped our game in 2015 ... learn by (re)doing. 
-
+Now, we weren't super scientific this first year, so we upped our game in 2015 ... learn by (re)doing. 
 The season was earlier by about a week in 2015 ... here's the data:
 
 ![]({{ site.url }}/assets/images/berries-2015.png){:width="899px"}
@@ -34,3 +37,6 @@ There you have it.
 No. 
 
 Yum.
+
+![]({{ site.url }}/assets/images/yummy.jpg){:width="600px"}
+*Thanks, Mom*

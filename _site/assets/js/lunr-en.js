@@ -24,7 +24,7 @@ var idx = lunr(function () {
   
     idx.add({
       title: "Pinewood Derby",
-      excerpt: "The master equation OK. If you are going for speed (uuh .. you are going for speed) …there is really...",
+      excerpt: "Thumbs way up for the Pinewood Derby The master equation OK. If you are going for speed (uuh .. you...",
       categories: [],
       tags: [],
       id: 1
@@ -33,7 +33,7 @@ var idx = lunr(function () {
   
     idx.add({
       title: "Berry Picking",
-      excerpt: "What is our RR? (ripening rate) How long is the berry season, anyways? The date is Sunday, June 29th 2014....",
+      excerpt: "Summer is here How long is the berry season, anyways? The date is Sunday, June 29th 2014. For some reason,...",
       categories: [],
       tags: [],
       id: 2
@@ -77,7 +77,7 @@ var store = [
       {
         "title": "Pinewood Derby",
         "url": "http://localhost:4000/blog/derby",
-        "excerpt": "The master equation OK. If you are going for speed (uuh .. you are going for speed) …there is really...",
+        "excerpt": "Thumbs way up for the Pinewood Derby The master equation OK. If you are going for speed (uuh .. you...",
         "teaser":
           
             null
@@ -88,7 +88,7 @@ var store = [
       {
         "title": "Berry Picking",
         "url": "http://localhost:4000/blog/berry",
-        "excerpt": "What is our RR? (ripening rate) How long is the berry season, anyways? The date is Sunday, June 29th 2014....",
+        "excerpt": "Summer is here How long is the berry season, anyways? The date is Sunday, June 29th 2014. For some reason,...",
         "teaser":
           
             null
