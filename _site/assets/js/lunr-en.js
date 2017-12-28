@@ -32,11 +32,20 @@ var idx = lunr(function () {
     
   
     idx.add({
+      title: "Berry Picking",
+      excerpt: "What is our RR? (ripening rate) How long is the berry season, anyways? The date is Sunday, June 29th 2014....",
+      categories: [],
+      tags: [],
+      id: 2
+    });
+    
+  
+    idx.add({
       title: "Christmas payback",
       excerpt: "Nah … no bike repairs needed after this race, right Ian? A really cool Christmas present After many years of...",
       categories: ["Layout","Uncategorized"],
       tags: ["comments","layout"],
-      id: 2
+      id: 3
     });
     
   
@@ -69,6 +78,17 @@ var store = [
         "title": "Pinewood Derby",
         "url": "http://localhost:4000/blog/derby",
         "excerpt": "The master equation OK. If you are going for speed (uuh .. you are going for speed) …there is really...",
+        "teaser":
+          
+            null
+          
+      },
+    
+      
+      {
+        "title": "Berry Picking",
+        "url": "http://localhost:4000/blog/berry",
+        "excerpt": "What is our RR? (ripening rate) How long is the berry season, anyways? The date is Sunday, June 29th 2014....",
         "teaser":
           
             null

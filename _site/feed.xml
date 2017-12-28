@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-12-28T06:23:29-05:00</updated><id>http://localhost:4000/</id><title type="html">Ab hinc</title><subtitle>A website with a blog and various projects I've done.</subtitle><author><name>Dave Vernooy</name><uri>https://dvernooy.github.io</uri></author><entry><title type="html">Christmas payback</title><link href="http://localhost:4000/blog/truing" rel="alternate" type="text/html" title="Christmas payback" /><published>2017-12-27T00:00:00-05:00</published><updated>2017-12-27T00:00:00-05:00</updated><id>http://localhost:4000/blog/truing-stand</id><content type="html" xml:base="http://localhost:4000/blog/truing">&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/ian-cyclocross.png&quot; alt=&quot;&quot; width=&quot;420px&quot; /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-12-28T07:23:37-05:00</updated><id>http://localhost:4000/</id><title type="html">Ab hinc</title><subtitle>A website with a blog and various projects I've done.</subtitle><author><name>Dave Vernooy</name><uri>https://dvernooy.github.io</uri></author><entry><title type="html">Christmas payback</title><link href="http://localhost:4000/blog/truing" rel="alternate" type="text/html" title="Christmas payback" /><published>2017-12-27T00:00:00-05:00</published><updated>2017-12-27T00:00:00-05:00</updated><id>http://localhost:4000/blog/truing-stand</id><content type="html" xml:base="http://localhost:4000/blog/truing">&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/ian-cyclocross.png&quot; alt=&quot;&quot; width=&quot;420px&quot; /&gt;
 &lt;em&gt;Nah … no bike repairs needed after this race, right Ian?&lt;/em&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;a-really-cool-christmas-present&quot;&gt;A really cool Christmas present&lt;/h3&gt;
@@ -13,7 +13,38 @@ from scratch with the sawdust flying until late on Christmas Eve.&lt;/p&gt;
 
 &lt;p&gt;Pretty cool, eh? Now maybe I can learn how to expertly true a wheel … I’ve got a basement full of ‘em.&lt;/p&gt;
 
-&lt;p&gt;Check back for updates on progress.&lt;/p&gt;</content><author><name>Dave Vernooy</name><uri>https://dvernooy.github.io</uri></author><category term="comments" /><category term="layout" /><summary type="html">Now I can really learn to true a wheel</summary></entry><entry><title type="html">Pinewood Derby</title><link href="http://localhost:4000/blog/derby" rel="alternate" type="text/html" title="Pinewood Derby" /><published>2010-06-10T00:00:00-04:00</published><updated>2010-06-10T00:00:00-04:00</updated><id>http://localhost:4000/blog/pinewood-derby</id><content type="html" xml:base="http://localhost:4000/blog/derby">&lt;h3 id=&quot;the-master-equation&quot;&gt;The master equation&lt;/h3&gt;
+&lt;p&gt;Check back for updates on progress.&lt;/p&gt;</content><author><name>Dave Vernooy</name><uri>https://dvernooy.github.io</uri></author><category term="comments" /><category term="layout" /><summary type="html">Now I can really learn to true a wheel</summary></entry><entry><title type="html">Berry Picking</title><link href="http://localhost:4000/blog/berry" rel="alternate" type="text/html" title="Berry Picking" /><published>2015-07-04T00:00:00-04:00</published><updated>2015-07-04T00:00:00-04:00</updated><id>http://localhost:4000/blog/berry-picking</id><content type="html" xml:base="http://localhost:4000/blog/berry">&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/berries-2014.png&quot; alt=&quot;&quot; width=&quot;913px&quot; /&gt;
+&lt;em&gt;What is our RR? (ripening rate)&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;how-long-is-the-berry-season-anyways&quot;&gt;How long is the berry season, anyways?&lt;/h3&gt;
+&lt;p&gt;The date is Sunday, June 29th 2014. For some reason, we have a blackberry bush in our front yard &amp;amp; counted 60 unripe berries. Score. But how long until they ripen? Well, we started doing a daily count
+and found out they’re basically all ripe within 2 weeks. Now, we weren’t super scientific this first year, so we upped our game in 2015 … learn by (re)doing.&lt;/p&gt;
+
+&lt;p&gt;The season was earlier by about a week in 2015 … here’s the data:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/berries-2015.png&quot; alt=&quot;&quot; width=&quot;899px&quot; /&gt;
+&lt;em&gt;Berry good data in 2015&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Yes, there were more berries in 2015 &amp;amp; there were a few error bars here and there (ahem … Kai) but our initial estimate of 400 berries was pretty darn close, &amp;amp; I was fascinated by that S-curve. The final stats:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;2 week season, starting last week of June through 2nd week of July&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;7 days from first ripe berry to the “berries-galore” knee in the S-curve&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;7 days from hitting “berries-galore” to end of season&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;There you have it.&lt;/p&gt;
+
+&lt;h3 id=&quot;do-you-have-to-make-everything-soooo-boring&quot;&gt;Do you have to make everything soooo boring?&lt;/h3&gt;
+&lt;p&gt;No.&lt;/p&gt;
+
+&lt;p&gt;Yum.&lt;/p&gt;</content><author><name>Dave Vernooy</name><uri>https://dvernooy.github.io</uri></author><summary type="html">Time it right for a yummy delight</summary></entry><entry><title type="html">Pinewood Derby</title><link href="http://localhost:4000/blog/derby" rel="alternate" type="text/html" title="Pinewood Derby" /><published>2010-06-10T00:00:00-04:00</published><updated>2010-06-10T00:00:00-04:00</updated><id>http://localhost:4000/blog/pinewood-derby</id><content type="html" xml:base="http://localhost:4000/blog/derby">&lt;h3 id=&quot;the-master-equation&quot;&gt;The master equation&lt;/h3&gt;
 &lt;p&gt;OK. If you are going for speed (uuh .. you &lt;em&gt;are&lt;/em&gt; going for speed) …there is really one equation that describes everything.&lt;/p&gt;
 
 &lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML&quot;&gt;
@@ -54,10 +85,12 @@ all about conversion of potential energy to kinetic energy, this is about the on
   &lt;p&gt;+1: Make the car look awesome (for karma) … and also so the guy or gal staging them on the start ramp handles your torpedo with kid gloves.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;beyond these, everything else in the master equation ($g$, $m$) is fixed by either nature or the kit you got.&lt;/p&gt;
+&lt;p&gt;Beyond these, everything else in the master equation (&lt;script type=&quot;math/tex&quot;&gt;g&lt;/script&gt;, &lt;script type=&quot;math/tex&quot;&gt;m&lt;/script&gt;) is fixed either by nature or the car kit you got at your cub scout troop.&lt;/p&gt;
 
 &lt;h3 id=&quot;if-you-cant-go-fast-&quot;&gt;If you can’t go fast …&lt;/h3&gt;
-&lt;p&gt;Soooo … did we ever win the derby? Well, once. We also got confused a couple of years and went for creativity points … and that worked out ok, too. By far our best car … the ‘ol Adirondack Log’.&lt;/p&gt;
+&lt;p&gt;Soooo … did we ever win the derby? Well, once. We also got confused &lt;sup&gt;1&lt;/sup&gt; a couple of years and went for creativity points … and that worked out ok, too. By far our best car … the ‘ol Adirondack Log’.&lt;/p&gt;
 
 &lt;h3 id=&quot;even-more-math&quot;&gt;Even more math&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&quot;https://en.wikibooks.org/wiki/How_To_Build_a_Pinewood_Derby_Car/Physics&quot;&gt;This gem&lt;/a&gt; goes into a ton more detail for all you kids out there.&lt;/p&gt;</content><author><name>Dave Vernooy</name><uri>https://dvernooy.github.io</uri></author><summary type="html">4 Golden rules ... plus one</summary></entry></feed>
+&lt;p&gt;&lt;a href=&quot;https://en.wikibooks.org/wiki/How_To_Build_a_Pinewood_Derby_Car/Physics&quot;&gt;This gem&lt;/a&gt; goes into a ton more detail for all you budding Newtons out there.&lt;/p&gt;
+
+&lt;p&gt;&lt;sup&gt;1&lt;/sup&gt; &lt;em&gt;see the opening sentence of the blog&lt;/em&gt;&lt;/p&gt;</content><author><name>Dave Vernooy</name><uri>https://dvernooy.github.io</uri></author><summary type="html">4 Golden rules ... plus one</summary></entry></feed>

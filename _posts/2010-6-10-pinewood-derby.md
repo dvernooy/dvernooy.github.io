@@ -43,12 +43,13 @@ all about conversion of potential energy to kinetic energy, this is about the on
 
 > +1: Make the car look awesome (for karma) ... and also so the guy or gal staging them on the start ramp handles your torpedo with kid gloves.
 
-beyond these, everything else in the master equation ($g$, $m$) is fixed by either nature or the kit you got. 
+Beyond these, everything else in the master equation ($$g$$, $$m$$) is fixed either by nature or the car kit you got at your cub scout troop. 
 
 
 ### If you can't go fast ...
-Soooo ... did we ever win the derby? Well, once. We also got confused a couple of years and went for creativity points ... and that worked out ok, too. By far our best car ... the 'ol Adirondack Log'.
-
+Soooo ... did we ever win the derby? Well, once. We also got confused <sup>1</sup> a couple of years and went for creativity points ... and that worked out ok, too. By far our best car ... the 'ol Adirondack Log'.
 
 ### Even more math
-[This gem](https://en.wikibooks.org/wiki/How_To_Build_a_Pinewood_Derby_Car/Physics) goes into a ton more detail for all you kids out there.
+[This gem](https://en.wikibooks.org/wiki/How_To_Build_a_Pinewood_Derby_Car/Physics) goes into a ton more detail for all you budding Newtons out there.
+
+<sup>1</sup> *see the opening sentence of the blog*
