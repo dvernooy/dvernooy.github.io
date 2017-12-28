@@ -10,7 +10,7 @@ toc: true
 ### Open source software for an open source ergometer
 
 <figure>
-  <img src="{{ '/assets/images/erg-full.jpg' | absolute_url }}">
+  <img class="resize" src="{{ '/assets/images/erg-full.jpg' | absolute_url }}">
 </figure>
 
 

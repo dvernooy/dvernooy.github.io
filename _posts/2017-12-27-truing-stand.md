@@ -13,7 +13,7 @@ tags:
 ---
 
 <figure>
-	<img src="{{ '/assets/images/ian-cyclocross.png' | absolute_url }}">
+	<img class="resize" src="{{ '/assets/images/ian-cyclocross.png' | absolute_url }}">
 </figure>
 
 ### A really cool Christmas present
