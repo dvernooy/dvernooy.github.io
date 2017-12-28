@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-12-28T09:19:44-05:00</updated><id>http://localhost:4000/</id><title type="html">Ab hinc</title><subtitle>A website with a blog and various projects I've done.</subtitle><author><name>Dave Vernooy</name><uri>https://dvernooy.github.io</uri></author><entry><title type="html">Christmas payback</title><link href="http://localhost:4000/blog/truing" rel="alternate" type="text/html" title="Christmas payback" /><published>2017-12-27T00:00:00-05:00</published><updated>2017-12-27T00:00:00-05:00</updated><id>http://localhost:4000/blog/truing-stand</id><content type="html" xml:base="http://localhost:4000/blog/truing">&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/ian-cyclocross.png&quot; alt=&quot;&quot; width=&quot;420px&quot; /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-12-28T10:19:31-05:00</updated><id>http://localhost:4000/</id><title type="html">Ab hinc</title><subtitle>A website with a blog and various projects I've done.</subtitle><author><name>Dave Vernooy</name><uri>https://dvernooy.github.io</uri></author><entry><title type="html">Christmas payback</title><link href="http://localhost:4000/blog/truing" rel="alternate" type="text/html" title="Christmas payback" /><published>2017-12-27T00:00:00-05:00</published><updated>2017-12-27T00:00:00-05:00</updated><id>http://localhost:4000/blog/truing-stand</id><content type="html" xml:base="http://localhost:4000/blog/truing">&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/ian-cyclocross.png&quot; alt=&quot;&quot; width=&quot;420px&quot; /&gt;
 &lt;em&gt;Nah … no bike repairs needed after this race, right Ian?&lt;/em&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;a-really-cool-christmas-present&quot;&gt;A really cool Christmas present&lt;/h3&gt;
@@ -72,7 +72,7 @@ In a game where every millisecond counts …  punch this thing into a spreadshee
 &lt;em&gt;Crunching the numbers&lt;/em&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;so-what-does-it-all-mean&quot;&gt;So what does it all mean?&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/kaicar.jpg&quot; alt=&quot;&quot; height=&quot;512px&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/kaicar_old.jpg&quot; alt=&quot;&quot; height=&quot;512px&quot; /&gt;
 &lt;em&gt;Awesome … that’s what it all means&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;Besides having fun .. here are my 4 golden rules (plus one).&lt;/p&gt;
@@ -101,9 +101,12 @@ all about conversion of potential energy to kinetic energy, this is about the on
 &lt;p&gt;Beyond these, everything else in the master equation (&lt;script type=&quot;math/tex&quot;&gt;g&lt;/script&gt;, &lt;script type=&quot;math/tex&quot;&gt;m&lt;/script&gt;) is fixed either by nature or the car kit you got at your cub scout troop.&lt;/p&gt;
 
 &lt;h3 id=&quot;if-you-cant-go-fast-&quot;&gt;If you can’t go fast …&lt;/h3&gt;
-&lt;p&gt;Soooo … did we ever win the derby? Well, once. 
+&lt;p&gt;Soooo … did we ever win the derby? Well, once or twice. 
 &lt;img src=&quot;http://localhost:4000/assets/images/fast.jpg&quot; alt=&quot;&quot; height=&quot;568px&quot; /&gt;
 &lt;em&gt;Fast&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/kaicar.jpg&quot; alt=&quot;&quot; height=&quot;512px&quot; /&gt;
+&lt;em&gt;Faster&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;We also got confused &lt;sup&gt;1&lt;/sup&gt; a couple of years and got creative … and that worked out ok, too … turns out, there are points for style.&lt;/p&gt;
 

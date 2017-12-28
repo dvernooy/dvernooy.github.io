@@ -1,5 +1,6 @@
 ---
 title: "Pinewood Derby"
+published: true
 subtitle: "Learning by (re)doing at its finest"
 permalink: /blog/derby
 excerpt: "4 Golden rules ... plus one"
@@ -32,7 +33,7 @@ In a game where every millisecond counts ...  punch this thing into a spreadshee
 
 
 ### So what does it all mean?
-![]({{ site.url }}/assets/images/kaicar.jpg){:height="512px"}
+![]({{ site.url }}/assets/images/kaicar_old.jpg){:height="512px"}
 *Awesome ... that's what it all means*
 
 Besides having fun .. here are my 4 golden rules (plus one). 
@@ -52,9 +53,13 @@ Beyond these, everything else in the master equation ($$g$$, $$m$$) is fixed eit
 
 
 ### If you can't go fast ...
-Soooo ... did we ever win the derby? Well, once. 
+Soooo ... did we ever win the derby? Well, once or twice. 
 ![]({{ site.url }}/assets/images/fast.jpg){:height="568px"}
 *Fast*
+
+![]({{ site.url }}/assets/images/kaicar.jpg){:height="512px"}
+*Faster*
+
 
 We also got confused <sup>1</sup> a couple of years and got creative ... and that worked out ok, too ... turns out, there are points for style.
 

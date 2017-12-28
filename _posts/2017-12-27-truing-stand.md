@@ -1,5 +1,6 @@
 ---
 title: "Christmas payback"
+published: true
 subtitle: "Now I can really learn to true a wheel"
 permalink: /blog/truing
 excerpt: "Now I can really learn to true a wheel"

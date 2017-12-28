@@ -1,5 +1,6 @@
 ---
 title: "Ergware"
+published: true
 subtitle: "Open source software for an open source ergometer"
 permalink: /projects/ergware/
 excerpt: "Open source software for an open source ergometer"

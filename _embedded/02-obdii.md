@@ -1,5 +1,6 @@
 ---
 title: "OBD-II 4u"
+published: true
 subtitle: "The journey of 1000 miles"
 permalink: /projects/obd-ii/
 excerpt: "Hacking my car"
