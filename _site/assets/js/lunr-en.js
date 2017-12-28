@@ -12,7 +12,7 @@ var idx = lunr(function () {
   
     idx.add({
       title: "Ergware",
-      excerpt: "Open source software for an open source ergometer Hey all, Dave Vernooy here. I’m assuming you stumbled across this site...",
+      excerpt: "Open source software for an open source ergometer Our DIY ergometer … with its new “brain” Hey all, Dave Vernooy...",
       categories: [],
       tags: [],
       id: 0
@@ -24,7 +24,7 @@ var idx = lunr(function () {
   
     idx.add({
       title: "Christmas payback",
-      excerpt: "A really cool Christmas present After many years of bike mechanicry, with cry being the operative word, I was paid...",
+      excerpt: "Nah … no bike repairs needed after this race A really cool Christmas present After many years of bike mechanicry,...",
       categories: ["Layout","Uncategorized"],
       tags: ["comments","layout"],
       id: 1
@@ -44,7 +44,7 @@ var store = [
       {
         "title": "Ergware",
         "url": "http://localhost:4000/projects/ergware/",
-        "excerpt": "Open source software for an open source ergometer Hey all, Dave Vernooy here. I’m assuming you stumbled across this site...",
+        "excerpt": "Open source software for an open source ergometer Our DIY ergometer … with its new “brain” Hey all, Dave Vernooy...",
         "teaser":
           
             null
@@ -59,7 +59,7 @@ var store = [
       {
         "title": "Christmas payback",
         "url": "http://localhost:4000/blog/comments",
-        "excerpt": "A really cool Christmas present After many years of bike mechanicry, with cry being the operative word, I was paid...",
+        "excerpt": "Nah … no bike repairs needed after this race A really cool Christmas present After many years of bike mechanicry,...",
         "teaser":
           
             null
