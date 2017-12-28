@@ -20,13 +20,4 @@ Ab hinc (*latin: from here*) is Dave Vernooy's blog. Welcome & enjoy.
 ## Credits
 
 
-Ab hinc is designed, developed, and maintained by Dave Vernooy. 
-
-
-
-
-
-
-
-
-*Shout out to Michael Rose at Minimal Mistakes for getting me started* 
+Ab hinc is authored and maintained by Dave Vernooy .. & uses the Minimal Mistakes theme by Michael Rose

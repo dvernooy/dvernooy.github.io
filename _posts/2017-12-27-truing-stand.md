@@ -18,7 +18,7 @@ tags:
 ### A really cool Christmas present
 
 After many years of bike mechani*cry*, with *cry* being the operative word, 
-I was paid back in spades with this really cool homemade bike stand. My son (pictured above
+I was paid back in spades with this really cool homemade bicycle wheel truing stand. My son (pictured above
 at 2017 cyclocross nationals in Hartford) was the brainchild here - he built it all himself
 from scratch with the sawdust flying until late on Christmas Eve.
 
