@@ -19,6 +19,15 @@ var idx = lunr(function () {
     });
     
   
+    idx.add({
+      title: "OBD-II 4u",
+      excerpt: "And the answer is …. 59.7 mph Project overview Have you ever seen that poster of the grizzly bear with...",
+      categories: [],
+      tags: [],
+      id: 1
+    });
+    
+  
 
   
   
@@ -27,7 +36,7 @@ var idx = lunr(function () {
       excerpt: "Thumbs way up for the Pinewood Derby The master equation OK. If you are going for speed (uuh .. you...",
       categories: [],
       tags: [],
-      id: 1
+      id: 2
     });
     
   
@@ -36,7 +45,7 @@ var idx = lunr(function () {
       excerpt: "Summer is here How long is the berry season, anyways? The date is Sunday, June 29th 2014. For some reason,...",
       categories: [],
       tags: [],
-      id: 2
+      id: 3
     });
     
   
@@ -45,7 +54,7 @@ var idx = lunr(function () {
       excerpt: "Nah … no bike repairs needed after this race, right Ian? A really cool Christmas present After many years of...",
       categories: ["Layout","Uncategorized"],
       tags: ["comments","layout"],
-      id: 3
+      id: 4
     });
     
   
@@ -63,6 +72,17 @@ var store = [
         "title": "Ergware",
         "url": "http://localhost:4000/projects/ergware/",
         "excerpt": "Our DIY ergometer … with its new “brain” Project overview Hey all, Dave Vernooy here. I’m assuming you stumbled across...",
+        "teaser":
+          
+            null
+          
+      },
+    
+      
+      {
+        "title": "OBD-II 4u",
+        "url": "http://localhost:4000/projects/obd-ii/",
+        "excerpt": "And the answer is …. 59.7 mph Project overview Have you ever seen that poster of the grizzly bear with...",
         "teaser":
           
             null
