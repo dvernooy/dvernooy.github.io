@@ -1,6 +1,7 @@
 ---
 title: "Christmas payback"
-permalink: /blog/comments
+subtitle: "Now I can really learn to true a wheel"
+permalink: /blog/truing
 excerpt: "Now I can really learn to true a wheel"
 last_modified_at: 2017-12-27
 comments: true
@@ -12,10 +13,11 @@ tags:
   - layout
 ---
 
-![]({{ site.url }}/assets/images/ian-cyclocross.png)
-*Nah ... no bike repairs needed after this race*
+![]({{ site.url }}/assets/images/ian-cyclocross.png){:width="420px"}
+*Nah ... no bike repairs needed after this race, right Ian?*
 
 ### A really cool Christmas present
+
 
 After many years of bike mechani*cry*, with *cry* being the operative word, 
 I was paid back in spades with this really cool homemade bicycle wheel truing stand. My son (pictured above

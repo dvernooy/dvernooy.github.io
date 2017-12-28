@@ -1,5 +1,6 @@
 ---
 title: "Ergware"
+subtitle: "Open source software for an open source ergometer"
 permalink: /projects/ergware/
 excerpt: "Open source software for an open source ergometer"
 last_modified_at: 2017-2-20
@@ -7,11 +8,10 @@ redirect_from:
   - /theme-setup/
 toc: true
 ---
-### Open source software for an open source ergometer
-
 ![]({{ site.url }}/assets/images/erg-full.jpg)
 *Our DIY ergometer ... with its new "brain"*
 
+### Project overview
 Hey all, Dave Vernooy  here. I’m assuming you stumbled across this site after reading about DIY rowing machines, aka ergometers. 
 
 This is just a simple website to answer questions about the ErgWare software, which is a project I undertook to add a digital interface to the excellent [openergo](http://openergo.webs.com) project. You can see the erg we built above using the original project documentation as a guide. It was a present for my daughter, which my dad & I pulled off in a month. He focused on the woodcraft, and I chipped in with the mechanical stuff, the electronics and the software.

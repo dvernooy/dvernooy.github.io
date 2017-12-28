@@ -12,7 +12,7 @@ var idx = lunr(function () {
   
     idx.add({
       title: "Ergware",
-      excerpt: "Open source software for an open source ergometer Our DIY ergometer … with its new “brain” Hey all, Dave Vernooy...",
+      excerpt: "Our DIY ergometer … with its new “brain” Project overview Hey all, Dave Vernooy here. I’m assuming you stumbled across...",
       categories: [],
       tags: [],
       id: 0
@@ -23,11 +23,20 @@ var idx = lunr(function () {
   
   
     idx.add({
+      title: "Pinewood Derby",
+      excerpt: "The master equation OK. If you are going for speed (uuh .. you are going for speed) …there is really...",
+      categories: [],
+      tags: [],
+      id: 1
+    });
+    
+  
+    idx.add({
       title: "Christmas payback",
-      excerpt: "Nah … no bike repairs needed after this race A really cool Christmas present After many years of bike mechanicry,...",
+      excerpt: "Nah … no bike repairs needed after this race, right Ian? A really cool Christmas present After many years of...",
       categories: ["Layout","Uncategorized"],
       tags: ["comments","layout"],
-      id: 1
+      id: 2
     });
     
   
@@ -44,7 +53,7 @@ var store = [
       {
         "title": "Ergware",
         "url": "http://localhost:4000/projects/ergware/",
-        "excerpt": "Open source software for an open source ergometer Our DIY ergometer … with its new “brain” Hey all, Dave Vernooy...",
+        "excerpt": "Our DIY ergometer … with its new “brain” Project overview Hey all, Dave Vernooy here. I’m assuming you stumbled across...",
         "teaser":
           
             null
@@ -57,9 +66,20 @@ var store = [
     
       
       {
+        "title": "Pinewood Derby",
+        "url": "http://localhost:4000/blog/derby",
+        "excerpt": "The master equation OK. If you are going for speed (uuh .. you are going for speed) …there is really...",
+        "teaser":
+          
+            null
+          
+      },
+    
+      
+      {
         "title": "Christmas payback",
-        "url": "http://localhost:4000/blog/comments",
-        "excerpt": "Nah … no bike repairs needed after this race A really cool Christmas present After many years of bike mechanicry,...",
+        "url": "http://localhost:4000/blog/truing",
+        "excerpt": "Nah … no bike repairs needed after this race, right Ian? A really cool Christmas present After many years of...",
         "teaser":
           
             null

@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-12-27T20:04:14-05:00</updated><id>http://localhost:4000/</id><title type="html">Ab hinc</title><subtitle>A website with a blog and various projects I've done.</subtitle><author><name>Dave Vernooy</name><uri>https://dvernooy.github.io</uri></author><entry><title type="html">Christmas payback</title><link href="http://localhost:4000/blog/comments" rel="alternate" type="text/html" title="Christmas payback" /><published>2017-12-27T00:00:00-05:00</published><updated>2017-12-27T00:00:00-05:00</updated><id>http://localhost:4000/blog/truing-stand</id><content type="html" xml:base="http://localhost:4000/blog/comments">&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/ian-cyclocross.png&quot; alt=&quot;&quot; /&gt;
-&lt;em&gt;Nah … no bike repairs needed after this race&lt;/em&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-12-28T06:00:56-05:00</updated><id>http://localhost:4000/</id><title type="html">Ab hinc</title><subtitle>A website with a blog and various projects I've done.</subtitle><author><name>Dave Vernooy</name><uri>https://dvernooy.github.io</uri></author><entry><title type="html">Christmas payback</title><link href="http://localhost:4000/blog/truing" rel="alternate" type="text/html" title="Christmas payback" /><published>2017-12-27T00:00:00-05:00</published><updated>2017-12-27T00:00:00-05:00</updated><id>http://localhost:4000/blog/truing-stand</id><content type="html" xml:base="http://localhost:4000/blog/truing">&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/ian-cyclocross.png&quot; alt=&quot;&quot; width=&quot;420px&quot; /&gt;
+&lt;em&gt;Nah … no bike repairs needed after this race, right Ian?&lt;/em&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;a-really-cool-christmas-present&quot;&gt;A really cool Christmas present&lt;/h3&gt;
 
 &lt;p&gt;After many years of bike mechani&lt;em&gt;cry&lt;/em&gt;, with &lt;em&gt;cry&lt;/em&gt; being the operative word, 
-I was paid back in spades with this really cool homemade bike stand. My son (pictured above
+I was paid back in spades with this really cool homemade bicycle wheel truing stand. My son (pictured above
 at 2017 cyclocross nationals in Hartford) was the brainchild here - he built it all himself
 from scratch with the sawdust flying until late on Christmas Eve.&lt;/p&gt;
 
@@ -13,4 +13,51 @@ from scratch with the sawdust flying until late on Christmas Eve.&lt;/p&gt;
 
 &lt;p&gt;Pretty cool, eh? Now maybe I can learn how to expertly true a wheel … I’ve got a basement full of ‘em.&lt;/p&gt;
 
-&lt;p&gt;Check back for updates on progress.&lt;/p&gt;</content><author><name>Dave Vernooy</name><uri>https://dvernooy.github.io</uri></author><category term="comments" /><category term="layout" /><summary type="html">Now I can really learn to true a wheel</summary></entry></feed>
+&lt;p&gt;Check back for updates on progress.&lt;/p&gt;</content><author><name>Dave Vernooy</name><uri>https://dvernooy.github.io</uri></author><category term="comments" /><category term="layout" /><summary type="html">Now I can really learn to true a wheel</summary></entry><entry><title type="html">Pinewood Derby</title><link href="http://localhost:4000/blog/derby" rel="alternate" type="text/html" title="Pinewood Derby" /><published>2010-06-10T00:00:00-04:00</published><updated>2010-06-10T00:00:00-04:00</updated><id>http://localhost:4000/blog/pinewood-derby</id><content type="html" xml:base="http://localhost:4000/blog/derby">&lt;h3 id=&quot;the-master-equation&quot;&gt;The master equation&lt;/h3&gt;
+&lt;p&gt;OK. If you are going for speed (uuh .. you &lt;em&gt;are&lt;/em&gt; going for speed) …there is really one equation that describes everything.&lt;/p&gt;
+
+&lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML&quot;&gt;
+&lt;/script&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align*}
+  &amp; v_{max} = \sqrt{\frac{2gH}{1+0.58N\cfrac{m}{M}}}
+\end{align*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;where &lt;script type=&quot;math/tex&quot;&gt;v_{max}&lt;/script&gt; is the max speed of the car, &lt;script type=&quot;math/tex&quot;&gt;g&lt;/script&gt; is a constant, &lt;script type=&quot;math/tex&quot;&gt;H&lt;/script&gt; is the height of the car, &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt; is the number of wheels, &lt;script type=&quot;math/tex&quot;&gt;m&lt;/script&gt; is the mass of one wheel and &lt;script type=&quot;math/tex&quot;&gt;M&lt;/script&gt; is the mass of car.
+In a game where every millisecond counts …  punch this thing into a spreadsheet &amp;amp; start playing. Here is a screenshot of some realistic values showing the impact of several different design choices.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/pinewood_spreadsheet.png&quot; alt=&quot;&quot; width=&quot;1102px&quot; /&gt;
+&lt;em&gt;Crunching the numbers&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;so-what-does-it-all-mean&quot;&gt;So what does it all mean?&lt;/h3&gt;
+&lt;p&gt;Besides having fun .. here are my 4 golden rules (plus one).&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Do the basics right … smooth the axles, graphite the axles &amp;amp; make sure the car rolls straight by testing and tweaking the axle positions. No extraneous friction.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The math says as large an &lt;script type=&quot;math/tex&quot;&gt;H&lt;/script&gt; as possible, &lt;em&gt;but how&lt;/em&gt;? … Here’s how: get the extra weight you add as far back on the car as you can without it tipping over. This effectively “raises the height” of the car. Since the master equation is 
+all about conversion of potential energy to kinetic energy, this is about the only (legal) way to do it.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The math says as large an &lt;script type=&quot;math/tex&quot;&gt;M&lt;/script&gt; as possible … so add weight right up to the max. This has nothing to do with heavier objects going faster (they don’t) .. it is because the larger the ratio &lt;script type=&quot;math/tex&quot;&gt;\frac{M}{m}&lt;/script&gt; the more of the original potential energy is converted into translational (vs. rotational) kinetic energy.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The math says as small an &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt; as possible. So &lt;script type=&quot;math/tex&quot;&gt;3&lt;/script&gt;. So tweak it so only &lt;script type=&quot;math/tex&quot;&gt;3&lt;/script&gt; wheels touch the track … the goal here is to keep one from not spinning &amp;amp; use that saved energy to propel the car forward.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;+1: Make the car look awesome (for karma) … and also so the guy or gal launching handles it with kid gloves.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;beyond these, everything else in the master equation ($g$, $m$) is fixed by either nature or the kit you got. Did we ever win? Once.&lt;/p&gt;
+
+&lt;h3 id=&quot;if-you-cant-go-fast&quot;&gt;If you can’t go fast&lt;/h3&gt;
+&lt;p&gt;You need to go see a different blogger for this. Below is our best car … the ‘ol Adirondack Log’.&lt;/p&gt;
+
+&lt;h3 id=&quot;even-more-math&quot;&gt;Even more math&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://en.wikibooks.org/wiki/How_To_Build_a_Pinewood_Derby_Car/Physics&quot;&gt;This gem&lt;/a&gt; goes into a ton more detail for all you kids out there.&lt;/p&gt;</content><author><name>Dave Vernooy</name><uri>https://dvernooy.github.io</uri></author><summary type="html">4 Golden rules ... plus one</summary></entry></feed>

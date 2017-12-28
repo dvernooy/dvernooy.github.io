@@ -21,12 +21,12 @@
 
 
 
-<title>Ergware - Ab hinc</title>
+<title>Pinewood Derby - Ab hinc</title>
 
 
 
 
-<meta name="description" content="Open source software for an open source ergometer">
+<meta name="description" content="4 Golden rules … plus one">
 
 
 
@@ -35,15 +35,15 @@
 
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Ab hinc">
-<meta property="og:title" content="Ergware">
+<meta property="og:title" content="Pinewood Derby">
 
 
-  <link rel="canonical" href="http://localhost:4000/projects/ergware/">
-  <meta property="og:url" content="http://localhost:4000/projects/ergware/">
+  <link rel="canonical" href="http://localhost:4000/blog/derby">
+  <meta property="og:url" content="http://localhost:4000/blog/derby">
 
 
 
-  <meta property="og:description" content="Open source software for an open source ergometer">
+  <meta property="og:description" content="4 Golden rules … plus one">
 
 
 
@@ -72,7 +72,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2017-12-28T06:00:56-05:00">
+  <meta property="article:published_time" content="2010-06-10T00:00:00-04:00">
 
 
 
@@ -325,24 +325,24 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Ergware">
-    <meta itemprop="description" content="Open source software for an open source ergometer">
-    <meta itemprop="datePublished" content="December 28, 2017">
-    <meta itemprop="dateModified" content="February 20, 2017">
+    <meta itemprop="headline" content="Pinewood Derby">
+    <meta itemprop="description" content="4 Golden rules … plus one">
+    <meta itemprop="datePublished" content="June 10, 2010">
+    <meta itemprop="dateModified" content="June 10, 2010">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">Ergware
+          <h1 class="page__title" itemprop="headline">Pinewood Derby
 </h1>
-          <h4 class="page__related-title">Open source software for an open source ergometer</h4> 
+          <h4 class="page__related-title">Learning by (re)doing at its finest</h4> 
           
             <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
 
 
 
 
-  2 minute read
+  1 minute read
 </p>
           
         </header>
@@ -354,37 +354,62 @@
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fa fa-file-text"></i> On This Page</h4></header>
               <ul class="toc__menu">
-  <li><a href="#project-overview">Project overview</a></li>
+  <li><a href="#the-master-equation">The master equation</a></li>
+  <li><a href="#so-what-does-it-all-mean">So what does it all mean?</a></li>
+  <li><a href="#if-you-cant-go-fast">If you can’t go fast</a></li>
+  <li><a href="#even-more-math">Even more math</a></li>
 </ul>
             </nav>
           </aside>
         
-        <p><img src="http://localhost:4000/assets/images/erg-full.jpg" alt="" />
-<em>Our DIY ergometer … with its new “brain”</em></p>
+        <h3 id="the-master-equation">The master equation</h3>
+<p>OK. If you are going for speed (uuh .. you <em>are</em> going for speed) …there is really one equation that describes everything.</p>
 
-<h3 id="project-overview">Project overview</h3>
-<p>Hey all, Dave Vernooy  here. I’m assuming you stumbled across this site after reading about DIY rowing machines, aka ergometers.</p>
+<script type="text/javascript" async="" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
 
-<p>This is just a simple website to answer questions about the ErgWare software, which is a project I undertook to add a digital interface to the excellent <a href="http://openergo.webs.com">openergo</a> project. You can see the erg we built above using the original project documentation as a guide. It was a present for my daughter, which my dad &amp; I pulled off in a month. He focused on the woodcraft, and I chipped in with the mechanical stuff, the electronics and the software.</p>
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+  & v_{max} = \sqrt{\frac{2gH}{1+0.58N\cfrac{m}{M}}}
+\end{align*} %]]></script>
 
-<p>It was great fun to build, and is even more fun to use.</p>
+<p>where <script type="math/tex">v_{max}</script> is the max speed of the car, <script type="math/tex">g</script> is a constant, <script type="math/tex">H</script> is the height of the car, <script type="math/tex">N</script> is the number of wheels, <script type="math/tex">m</script> is the mass of one wheel and <script type="math/tex">M</script> is the mass of car.
+In a game where every millisecond counts …  punch this thing into a spreadsheet &amp; start playing. Here is a screenshot of some realistic values showing the impact of several different design choices.</p>
 
-<p>After noodling on the original design, we decided it would be neat to add the software &amp; display so the rower could get real-time feedback on the basic things a rower would want to know. We were able to get good estimates of stroke rate, power output, effective 500m split pace, distance rowed, fraction of time spent in power phase of stroke, etc..  Here is a close-in screenshot of the current version (you can see this display in the main picture above attached to the pvc tubing).</p>
+<p><img src="http://localhost:4000/assets/images/pinewood_spreadsheet.png" alt="" width="1102px" />
+<em>Crunching the numbers</em></p>
 
-<p><img src="http://localhost:4000/assets/images/erg-interface.jpg" alt="" />
-<em>Screenshot of the software interface</em></p>
+<h3 id="so-what-does-it-all-mean">So what does it all mean?</h3>
+<p>Besides having fun .. here are my 4 golden rules (plus one).</p>
 
-<p>The whole idea worked out pretty well, so I thought it would be good to add it back to the community as an open project. The source code and all documentation is hosted <a href="https://www.github.com/dvernooy/ergware/">here</a> and available for free to download, use &amp; modify. The documentation package includes 3 things:</p>
 <blockquote>
-  <ol>
-    <li>A pdf document with circuit diagram, some rudimentary construction notes and links to useful web sources I used in the project.</li>
-    <li>An excel spreadsheet with a numerical model I built just so I could make sense of what is going on in an erg. [I am not a rower, but made some good progress with this approach. It was cool to see data from the erg match the model really closely … so I think the numbers all make reasonable sense. We’ll continue to learn as we put it through its paces].</li>
-    <li>All of the source code, designed for the Atmega328 microcontroller (Atmel AVR series).</li>
-  </ol>
+  <p>Do the basics right … smooth the axles, graphite the axles &amp; make sure the car rolls straight by testing and tweaking the axle positions. No extraneous friction.</p>
 </blockquote>
 
-<p>The main purpose of this website is to answer questions about the software for those who have them &amp; update on any new progress we may (or may not) make. I don’t have immediate plans to do much more on this project, but you never know. I’ll do my best to respond to any posted comments.</p>
+<blockquote>
+  <p>The math says as large an <script type="math/tex">H</script> as possible, <em>but how</em>? … Here’s how: get the extra weight you add as far back on the car as you can without it tipping over. This effectively “raises the height” of the car. Since the master equation is 
+all about conversion of potential energy to kinetic energy, this is about the only (legal) way to do it.</p>
+</blockquote>
 
+<blockquote>
+  <p>The math says as large an <script type="math/tex">M</script> as possible … so add weight right up to the max. This has nothing to do with heavier objects going faster (they don’t) .. it is because the larger the ratio <script type="math/tex">\frac{M}{m}</script> the more of the original potential energy is converted into translational (vs. rotational) kinetic energy.</p>
+</blockquote>
+
+<blockquote>
+  <p>The math says as small an <script type="math/tex">N</script> as possible. So <script type="math/tex">3</script>. So tweak it so only <script type="math/tex">3</script> wheels touch the track … the goal here is to keep one from not spinning &amp; use that saved energy to propel the car forward.</p>
+</blockquote>
+
+<blockquote>
+  <p>+1: Make the car look awesome (for karma) … and also so the guy or gal launching handles it with kid gloves.</p>
+</blockquote>
+
+<p>beyond these, everything else in the master equation ($g$, $m$) is fixed by either nature or the kit you got. Did we ever win? Once.</p>
+
+<h3 id="if-you-cant-go-fast">If you can’t go fast</h3>
+<p>You need to go see a different blogger for this. Below is our best car … the ‘ol Adirondack Log’.</p>
+
+<h3 id="even-more-math">Even more math</h3>
+<p><a href="https://en.wikibooks.org/wiki/How_To_Build_a_Pinewood_Derby_Car/Physics">This gem</a> goes into a ton more detail for all you kids out there.</p>
 
         
       </section>
@@ -395,7 +420,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2017-02-20">February 20, 2017</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2010-06-10">June 10, 2010</time></p>
         
       </footer>
 
@@ -404,17 +429,27 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Ergware%20http%3A%2F%2Flocalhost%3A4000%2Fprojects%2Fergware%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Pinewood+Derby%20http%3A%2F%2Flocalhost%3A4000%2Fblog%2Fderby" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fprojects%2Fergware%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fblog%2Fderby" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=http%3A%2F%2Flocalhost%3A4000%2Fprojects%2Fergware%2F" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=http%3A%2F%2Flocalhost%3A4000%2Fblog%2Fderby" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fprojects%2Fergware%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fblog%2Fderby" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
+  <nav class="pagination">
+    
+      <a href="#" class="pagination--pager disabled">Previous</a>
+    
+    
+      <a href="http://localhost:4000/blog/truing" class="pagination--pager" title="Christmas payback
+">Next</a>
+    
+  </nav>
+
     </div>
 
     
@@ -432,8 +467,8 @@
     <script>
       // var disqus_developer = 1;
       var disqus_config = function () {
-      this.page.url = "/projects/ergware/";
-      this.page.identifier = "/projects/ergware/";
+      this.page.url = "/blog/derby";
+      this.page.identifier = "/blog/derby";
       };
 
       (function() {
@@ -448,6 +483,41 @@
     
   </article>
 
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/blog/truing" rel="permalink">Christmas payback
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  less than 1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Now I can really learn to true a wheel
+</p>
+  </article>
+</div>
+        
+      </div>
+    </div>
   
   
 </div>
@@ -505,8 +575,8 @@
     
   <script>
     var disqus_config = function () {
-      this.page.url = "http://localhost:4000/projects/ergware/";  // Replace PAGE_URL with your page's canonical URL variable
-      this.page.identifier = "/projects/01-ergware"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      this.page.url = "http://localhost:4000/blog/derby";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/blog/pinewood-derby"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
     (function() { // DON'T EDIT BELOW THIS LINE
       var d = document, s = d.createElement('script');
