@@ -72,7 +72,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2017-12-31T12:35:58-05:00">
+  <meta property="article:published_time" content="2017-12-31T13:32:40-05:00">
 
 
 
@@ -390,7 +390,7 @@
 
 <p>This project started as a shotgun marriage between a dead Nokia 2115i cellphone and a chest strap for an old Polar T6 heartrate monitor - both of which were lying around. I thought .. what better way to kill a couple of Saturdays then try to build my own receiver using the LCD out of the cell phone. Little did I know the long &amp; winding road .. and if you’re still with me, you’ll know that navigating that winding road is where the real fun is!!!</p>
 
-<p>The end result was not super pretty looking, but it was such a fun project I thought I’d take you through all my trials and tribulations. If you’re already laughing at me for doing this (i.e., hey, dude … Polar has been making these things since the early ’80s, where have you been &amp; by the way, ever heard of Fitbit), you’ll laugh harder when you see the picture below of the receiver on my bike:</p>
+<p>The end result was not super pretty looking, but it was such a fun project I thought I’d take you through it from soup to nuts. If you’re already laughing at me for doing this (i.e., hey, dude … Polar has been making these things since the early ’80s, where have you been &amp; by the way, ever heard of Fitbit), you’ll laugh harder when you see the picture below of the receiver on my bike:</p>
 
 <p><img src="http://localhost:4000/assets/images/bike_view.png" alt="" />
 <em>Nothing unusual to see here, move along</em></p>
@@ -400,7 +400,7 @@
 <p><img src="http://localhost:4000/assets/images/correlation.png" alt="" />
 <em>Pretty good match between hills &amp; workout … duh, whaddya expect?</em></p>
 
-<p>If you are still with me, here we go … time for some fun.</p>
+<p>Here we go … time for some fun.</p>
 
 <h2 id="hardware">Hardware</h2>
 <p>Here’s how I built up my understanding, piece by piece.</p>
@@ -515,7 +515,7 @@
 
 <p>To measure the timing between heartbeats, I had a choice of whether to do an interrupt driven timing scheme, or a polling-based scheme. I opted for a polling based scheme simply because I was really early in understanding how all of this was going to work and I found it to be the most flexible way of dealing with some of the tricky bits (below) that arose. In hindsight, it would be fun to convert to an interrupt-driven approach.</p>
 
-<p>Every time through the master polling loop, I took an analog to digital converter (ADC) measurement and compared it to a threshold value. If it was above the threshold, I had a hit. In order to turn this into a time measurement (and eventually a beats-per-minute (bpm)rate), I used the polling loop counter (whose counter variable was “H”), which I calibrated offline by feeding my software a fake heartbeat signal from a function generator that simulated a range of heartbeats from 30bpm to 200bpm, and figured out the calibration constant corresponding to one pass through the loop. The polling loop was 1.61ms long, so it would be 1245 polling loops for a heart rate of 30bpm and ~ 185 polling loops for 200bpm. If you read the code, that is where the factor 37312 comes from. So how did I get such a long polling loop time, and, more importantly, since it is really the master timer, not have it change from loop to loop? More on this later.</p>
+<p>Every time through the master polling loop, I took an analog to digital converter (ADC) measurement and compared it to a threshold value. If it was above the threshold, I had a hit. In order to turn this into a time measurement (and eventually a beats-per-minute (bpm)rate), I used the polling loop counter (whose counter variable was <script type="math/tex">H</script>), which I calibrated offline by feeding my software a fake heartbeat signal from a function generator that simulated a range of heartbeats from 30bpm to 200bpm, and figured out the calibration constant corresponding to one pass through the loop. The polling loop was 1.61ms long, so it would be 1245 polling loops for a heart rate of 30bpm and ~ 185 polling loops for 200bpm. If you read the code, that is where the factor 37312 comes from. So how did I get such a long polling loop time, and, more importantly, since it is really the master timer, not have it change from loop to loop? More on this later.</p>
 
 <p>There were actually a number of practical tricky bits to deal with to make this algorithm robust. I’ll explain how I dealt with them one by one, but it is probably best to start with a timing diagram/sketch.</p>
 
@@ -541,9 +541,12 @@
 
 <p>Ok, so I’m riding on my regular route on a bike path and I notice a drop-out at a couple particular sections. Here is a google map view of one of them, anyone see the issue?</p>
 
+<p><img src="http://localhost:4000/assets/images/power_lines.png" alt="" />
+<em>Not a friend, an enEMI</em></p>
+
 <p>Yeah, overhead or underground power lines, especially those running somewhat parallel to my route, carry a current that generates a magnetic field that induces more currents in my receiver that swamp the receiver. Even though its not resonant, it causes large enough noise to wreak havoc. So how to recover the heartbeat in a case like this, especially in an extreme case where my heartbeat changes alot during this interval?</p>
 
-<p>I set an absolute lower limit on the detector threshold so as not to trigger on noise, but if the heartbeat loop counter “H” exceeded a maximum determined by the previous hearbeat interval, I start to allow the detection threshold to drop, &amp; I continue aggressively dropping the detection threshold until it reaches a pre-determined lower limit. This allows the system to re-lock. I also use the same pre-determined lower limit to establish initial lock &amp; the re-set the baseline after the first few beats.</p>
+<p>I set an absolute lower limit on the detector threshold so as not to trigger on noise, but if the heartbeat loop counter <script type="math/tex">H</script> exceeded a maximum determined by the previous hearbeat interval, I start to allow the detection threshold to drop, &amp; I continue aggressively dropping the detection threshold until it reaches a pre-determined lower limit. This allows the system to re-lock. I also use the same pre-determined lower limit to establish initial lock &amp; the re-set the baseline after the first few beats.</p>
 
 <blockquote>
   <p>Give myself a visual indication that all of this was working</p>

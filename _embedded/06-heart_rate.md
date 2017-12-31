@@ -22,7 +22,7 @@ Welcome to my heartrate monitor project - these things have been around for a lo
 
 This project started as a shotgun marriage between a dead Nokia 2115i cellphone and a chest strap for an old Polar T6 heartrate monitor - both of which were lying around. I thought .. what better way to kill a couple of Saturdays then try to build my own receiver using the LCD out of the cell phone. Little did I know the long & winding road .. and if you're still with me, you'll know that navigating that winding road is where the real fun is!!!
 
-The end result was not super pretty looking, but it was such a fun project I thought I'd take you through all my trials and tribulations. If you're already laughing at me for doing this (i.e., hey, dude ... Polar has been making these things since the early '80s, where have you been & by the way, ever heard of Fitbit), you'll laugh harder when you see the picture below of the receiver on my bike:
+The end result was not super pretty looking, but it was such a fun project I thought I'd take you through it from soup to nuts. If you're already laughing at me for doing this (i.e., hey, dude ... Polar has been making these things since the early '80s, where have you been & by the way, ever heard of Fitbit), you'll laugh harder when you see the picture below of the receiver on my bike:
 
 ![]({{ site.url }}/assets/images/bike_view.png)
 *Nothing unusual to see here, move along*
@@ -32,8 +32,7 @@ Here are a couple of charts of my heart rate vs. time for the 90 min bike ride n
 ![]({{ site.url }}/assets/images/correlation.png)
 *Pretty good match between hills & workout ... duh, whaddya expect?*
 
-
-If you are still with me, here we go ... time for some fun.
+Here we go ... time for some fun.
 
 ## Hardware
 Here's how I built up my understanding, piece by piece.
@@ -143,7 +142,7 @@ My starting point now was the analog signal (masquerading basically as a digital
 
 To measure the timing between heartbeats, I had a choice of whether to do an interrupt driven timing scheme, or a polling-based scheme. I opted for a polling based scheme simply because I was really early in understanding how all of this was going to work and I found it to be the most flexible way of dealing with some of the tricky bits (below) that arose. In hindsight, it would be fun to convert to an interrupt-driven approach. 
 
-Every time through the master polling loop, I took an analog to digital converter (ADC) measurement and compared it to a threshold value. If it was above the threshold, I had a hit. In order to turn this into a time measurement (and eventually a beats-per-minute (bpm)rate), I used the polling loop counter (whose counter variable was "H"), which I calibrated offline by feeding my software a fake heartbeat signal from a function generator that simulated a range of heartbeats from 30bpm to 200bpm, and figured out the calibration constant corresponding to one pass through the loop. The polling loop was 1.61ms long, so it would be 1245 polling loops for a heart rate of 30bpm and ~ 185 polling loops for 200bpm. If you read the code, that is where the factor 37312 comes from. So how did I get such a long polling loop time, and, more importantly, since it is really the master timer, not have it change from loop to loop? More on this later.
+Every time through the master polling loop, I took an analog to digital converter (ADC) measurement and compared it to a threshold value. If it was above the threshold, I had a hit. In order to turn this into a time measurement (and eventually a beats-per-minute (bpm)rate), I used the polling loop counter (whose counter variable was $$H$$), which I calibrated offline by feeding my software a fake heartbeat signal from a function generator that simulated a range of heartbeats from 30bpm to 200bpm, and figured out the calibration constant corresponding to one pass through the loop. The polling loop was 1.61ms long, so it would be 1245 polling loops for a heart rate of 30bpm and ~ 185 polling loops for 200bpm. If you read the code, that is where the factor 37312 comes from. So how did I get such a long polling loop time, and, more importantly, since it is really the master timer, not have it change from loop to loop? More on this later.
 
 There were actually a number of practical tricky bits to deal with to make this algorithm robust. I'll explain how I dealt with them one by one, but it is probably best to start with a timing diagram/sketch.
 
@@ -163,10 +162,12 @@ I kept track of highest ADC value we got the last time through the loop (remembe
 
 Ok, so I'm riding on my regular route on a bike path and I notice a drop-out at a couple particular sections. Here is a google map view of one of them, anyone see the issue? 
 
+![]({{ site.url }}/assets/images/power_lines.png)
+*Not a friend, an enEMI*
 
 Yeah, overhead or underground power lines, especially those running somewhat parallel to my route, carry a current that generates a magnetic field that induces more currents in my receiver that swamp the receiver. Even though its not resonant, it causes large enough noise to wreak havoc. So how to recover the heartbeat in a case like this, especially in an extreme case where my heartbeat changes alot during this interval?
 
-I set an absolute lower limit on the detector threshold so as not to trigger on noise, but if the heartbeat loop counter "H" exceeded a maximum determined by the previous hearbeat interval, I start to allow the detection threshold to drop, & I continue aggressively dropping the detection threshold until it reaches a pre-determined lower limit. This allows the system to re-lock. I also use the same pre-determined lower limit to establish initial lock & the re-set the baseline after the first few beats.
+I set an absolute lower limit on the detector threshold so as not to trigger on noise, but if the heartbeat loop counter $$H$$ exceeded a maximum determined by the previous hearbeat interval, I start to allow the detection threshold to drop, & I continue aggressively dropping the detection threshold until it reaches a pre-determined lower limit. This allows the system to re-lock. I also use the same pre-determined lower limit to establish initial lock & the re-set the baseline after the first few beats.
 
 > Give myself a visual indication that all of this was working
 
