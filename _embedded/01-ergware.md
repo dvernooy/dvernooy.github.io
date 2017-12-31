@@ -12,7 +12,7 @@ toc: true
 ![]({{ site.url }}/assets/images/erg-full.jpg)
 *Our DIY ergometer ... with its new "brain"*
 
-### Project overview
+## Project overview
 Hey all, Dave Vernooy  here. I’m assuming you stumbled across this site after reading about DIY rowing machines, aka ergometers. 
 
 This is just a simple website to answer questions about the ErgWare software, which is a project I undertook to add a digital interface to the excellent [openergo](http://openergo.webs.com) project. You can see the erg we built above using the original project documentation as a guide. It was a present for my daughter, which my dad & I pulled off in a month. He focused on the woodcraft, and I chipped in with the mechanical stuff, the electronics and the software.
@@ -31,8 +31,8 @@ The whole idea worked out pretty well, so I thought it would be good to add it b
 
 The main purpose of this website is to answer questions about the software for those who have them & update on any new progress we may (or may not) make. I don’t have immediate plans to do much more on this project, but you never know. I’ll do my best to respond to any posted comments.
 
-### Hardware
+## Hardware
 
 
-### Software
+## Software
 
