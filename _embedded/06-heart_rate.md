@@ -134,7 +134,7 @@ There are a bunch of things I learned building this, like:
 
 ## Software
 ### Code
-All the code is posted here. It is actually just one C file. You can call it ugly (it is), you can call it unreadable (it is) ... but it works, & very robustly. Maybe some day I'll clean it up. If you actually do read it, all the action is in a single main() loop. Here are the details...
+All the code is posted [here](https://www.github.com/dvernooy/heart_rate_monitor/). It is actually just one C file. You can call it ugly (it is), you can call it unreadable (it is) ... but it works, & very robustly. Maybe some day I'll clean it up. If you actually do read it, all the action is in a single main() loop. Here are the details...
 
 
 ### Detecting a beat
@@ -245,4 +245,4 @@ This algorithm guarantees a nice display that follows the heartbeat changes well
 
 ### Last thoughts
 
-I am thinking about making major changes - learn by (re)doing & all that - to the packaging & code at some point ... or maybe I'll buy a fitbit. It has 10X the functionality at 1/10th the hassle. All of the code & spreadsheets are posted here. Enjoy.
+I am thinking about making major changes - learn by (re)doing & all that - to the packaging & code at some point ... or maybe I'll buy a fitbit. It has 10X the functionality at 1/10th the hassle. All of the code & spreadsheets are posted [here](https://www.github.com/dvernooy/heart_rate_monitor/). Enjoy.
