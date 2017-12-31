@@ -95,8 +95,8 @@ where $$N$$ is the number of turns, $$A$$ is the area, $$l$$ is the length and $
 ### Analog receiver
 Here is the circuit I built, with credit to Rick Moll. I think he had this posted many years ago, but I can't find that link anymore. If I do, I'll put it here. 
 
-[![]({{ site.url }}/assets/images/HRM-circuit.jpg)]({{ site.url }}/assets/images/HRM-circuit.jpg)
-<span style="color:red; font-size: 75%"> <em>Circuit diagram for HRM receiver</em></span>
+[![]({{ site.url }}/assets/images/HRM-circuit.jpg)]({{ site.url}}/assets/images/HRM-circuit.jpg)
+*Circuit diagram for HRM receiver*
 
 The main idea is to amplify & filter the ac signal (first two op-amp stages), then do peak detection with a diode.  It is all done with a single supply (I used LM324's instead of the LM660C's) so a virtual ground of 2.5V (assuming Vcc of 5V) is used at each of the first 4 stages followed by a buffer/level shifter suitable for the microcontroller ADC input.
 
