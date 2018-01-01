@@ -1,6 +1,6 @@
 ---
 title: "OBD-II 4u"
-published: true
+published: false
 subtitle: "The journey of 1000 miles"
 permalink: /projects/obd-ii/
 excerpt: "Hacking my car"
@@ -13,8 +13,8 @@ toc: true
 *And the answer is .... 59.7 mph*
 
 ### Project overview
-Have you ever seen that poster of the grizzly bear with the salmon in its mouth, subcaptioned "Sometimes the journey of 1000 miles ends very, very badly"? 
-Well \[spoiler alert\], this is one of those journeys. The OBD-II interface that I spent about 10 months hacking - relatively successfully - 
+Have you ever seen that poster of the grizzly bear with the salmon in its mouth, subcaptioned "Sometimes the journey of 1000 miles ends very, very badly"?
+Well \[spoiler alert\], this is one of those journeys. The OBD-II interface that I spent about 10 months hacking - relatively successfully -
 is no longer used in cars. So if you want to skip this one, feel free. Otherwise, I'll take you on my torturous journey to hack the car.
 
 
@@ -23,5 +23,3 @@ is no longer used in cars. So if you want to skip this one, feel free. Otherwise
 
 
 ### Software
-
-

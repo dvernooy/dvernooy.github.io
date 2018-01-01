@@ -20,20 +20,11 @@ var idx = lunr(function () {
     
   
     idx.add({
-      title: "OBD-II 4u",
-      excerpt: "And the answer is …. 59.7 mph Project overview Have you ever seen that poster of the grizzly bear with...",
+      title: "Heart Rate Monitor",
+      excerpt: "MacGyver … eat your heart out Project overview Welcome to my heart rate monitor project. These things have been around...",
       categories: [],
       tags: [],
       id: 1
-    });
-    
-  
-    idx.add({
-      title: "Heart Rate Monitor",
-      excerpt: "MacGyver.. eat your heart out Project overview Welcome to my heartrate monitor project - these things have been around for...",
-      categories: [],
-      tags: [],
-      id: 2
     });
     
   
@@ -45,7 +36,7 @@ var idx = lunr(function () {
       excerpt: "Thumbs way up for the Pinewood Derby The master equation OK. If you are going for speed (uuh .. you...",
       categories: [],
       tags: [],
-      id: 3
+      id: 2
     });
     
   
@@ -54,7 +45,7 @@ var idx = lunr(function () {
       excerpt: "Summer is here How long is the berry season, anyways? The date is Sunday, June 29th 2014. For some reason,...",
       categories: [],
       tags: [],
-      id: 4
+      id: 3
     });
     
   
@@ -63,7 +54,7 @@ var idx = lunr(function () {
       excerpt: "Nah … no bike repairs needed after this race, right Ian? A really cool Christmas present After many years of...",
       categories: ["Layout","Uncategorized"],
       tags: ["comments","layout"],
-      id: 5
+      id: 4
     });
     
   
@@ -89,20 +80,9 @@ var store = [
     
       
       {
-        "title": "OBD-II 4u",
-        "url": "http://localhost:4000/projects/obd-ii/",
-        "excerpt": "And the answer is …. 59.7 mph Project overview Have you ever seen that poster of the grizzly bear with...",
-        "teaser":
-          
-            null
-          
-      },
-    
-      
-      {
         "title": "Heart Rate Monitor",
         "url": "http://localhost:4000/projects/HRM/",
-        "excerpt": "MacGyver.. eat your heart out Project overview Welcome to my heartrate monitor project - these things have been around for...",
+        "excerpt": "MacGyver … eat your heart out Project overview Welcome to my heart rate monitor project. These things have been around...",
         "teaser":
           
             null
