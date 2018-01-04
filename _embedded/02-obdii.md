@@ -9,7 +9,7 @@ redirect_from:
   - /theme-setup/
 toc: true
 ---
-![]({{ site.url }}/assets/images/mpg-camry.png)
+![]({{ site.url }}/assetsimages/projects/OBD2/mpg-camry.png)
 *And the answer is .... 59.7 mph*
 
 ### Project overview

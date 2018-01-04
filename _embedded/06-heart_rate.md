@@ -14,7 +14,7 @@ toc: true
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
-![]({{ site.url }}/assets/images/screenshot.png)
+![]({{ site.url }}/assets/images/projects/HRM/screenshot.png)
 *MacGyver ... eat your heart out*
 
 ## Project overview
@@ -24,12 +24,12 @@ It started as a shotgun marriage between a dead Nokia 2115i cellphone and a ches
 
 The end result was not super pretty looking, but it was such a fun project I thought I'd take you through it in detail. If you're already laughing at me for doing this (i.e., hey, dude, Polar has been making these things since the early '80s, where have you been & by the way, ever heard of Fitbit?), you'll laugh harder when you see the pictures of the receiver attached to my bike with some modified pvc tubing:
 
-![]({{ site.url }}/assets/images/bike_view.png)
+![]({{ site.url }}/assets/images/projects/HRM/bike_view.png)
 *Nothing unusual to see here, move along*
 
 Here are a couple of charts of my heart rate vs. time for a 1.5 hour bike ride near my house, along with a screenshot of the elevation changes - pretty good correlation between the two. I used to be a decent hill climber.
 
-![]({{ site.url }}/assets/images/correlation.png)
+![]({{ site.url }}/assets/images/projects/HRM/correlation.png)
 *Pretty good match between hills & workout ... duh, whaddya expect?*
 
 So here we go ... time for some fun.
@@ -40,27 +40,27 @@ Here's how I built up my understanding, piece by piece.
 ### Polar T6, talk to me
 I had no idea what the old Polar T6 transmitter did or how it worked, so I opened it up - I don't have an actual picture of the inside handy, but this "x-ray" picture (the second image of the two below) that I found on the web is pretty similar to what I saw inside. The key feature here is that inductor/coil on the bottom ... especially the magnetic field pattern that it creates (dashed lines):
 
-![]({{ site.url }}/assets/images/transmitter.png)
+![]({{ site.url }}/assets/images/projects/HRM/transmitter.png)
 *Heart rate monitor transmitter*
 
 I was armed with background knowledge that many of these older transmitters work at 5.3 kHz. So, I did a couple of experiments after I had changed out the battery and made some modifications to the chest strap, which was in rough shape.
 
-![]({{ site.url }}/assets/images/strap.jpg)
+![]({{ site.url }}/assets/images/projects/HRM/strap.jpg)
 *Oh yeah, and this new chest strap looks so awesome*
 
 The first step was to directly wire this other old coil I had lying around into my oscilloscope:
 
-![]({{ site.url }}/assets/images/coil-sniff.jpg)
+![]({{ site.url }}/assets/images/projects/HRM/coil-sniff.jpg)
 *The coil I used to understand the transmitter*
 
 I held this second coil over top of the transmitter piece as it was attached to my chest. Here is what I saw on the scope:
 
-![]({{ site.url }}/assets/images/zoom0.jpg)
+![]({{ site.url }}/assets/images/projects/HRM/zoom0.jpg)
 *My heart be still! ... I'm alive*
 
 Heartbeats! ... spaced about 1 second apart. Here's what the waveform looked like on successively zooming in from 100 ms to 5 ms to 1 ms to 100 $$\mu$$s (you can see the time scales on the scope images):
 
-![]({{ site.url }}/assets/images/scope_shots.png)
+![]({{ site.url }}/assets/images/projects/HRM/scope_shots.png)
 *Successive zoom-ins on the oscilloscope while using the coil to see what the transmitter was doing*
 
 Interesting, it has some significant structure to it. Overall time of the heartbeat signal is about 8 ms, with the main bursts at 5.3 kHz interrupted by much shorter bursts at about 300 kHz. It might be coded or something. Wanting to move forward, I decided just to build a 5.3 kHz receiver & not worry about understanding the coding, because if I could reliably detect those 5.3 kHz bursts, I'd have my heart rate. So how do you detect a 5.3 kHz electrical signal?
@@ -94,7 +94,7 @@ where $$N$$ is the number of turns, $$A$$ is the area, $$l$$ is the length and $
 ### Analog receiver & overall circuit diagram
 Here is the circuit I built-
 
-[![]({{ site.url }}/assets/images/HRM_circuit.png)]({{ site.url}}/assets/images/HRM_circuit.png)
+[![]({{ site.url }}/assets/images/projects/HRM/HRM_circuit.png)]({{ site.url}}/assets/images/projects/HRM/HRM_circuit.png)
 *Circuit diagram for heart rate monitor*
 
 I have a note scribbled that Rick Moll(?) had a receiver very similar to this posted, but I can't find that link anymore. If I do, I'll put it here.
@@ -106,24 +106,24 @@ I know there are many things I could improve, but this project was not about sty
  If I get time, I'll add a few images of the analog part of the circuit and receiver waveform output, but now I had something a digital circuit could deal with.
 
 ### Nokia 2115i LCD
-After a huge amount of googling, I found out that the mono LCD was from a Nokia 2115i cell phone (same pinout as 1100/1600/1200). It had a special Hirose DF23-10 connector that I needed an adapter for
+After a huge amount of googling, I found out that the Nokia 2115i's mono LCD had the same pinout as those in the 1100/1200/1600. It had a special Hirose DF23-10 connector that I needed an adapter for
 
-![]({{ site.url }}/assets/images/lcd_pinout.png)
+![]({{ site.url }}/assets/images/projects/HRM/lcd_pinout.png)
 *Essential to avoiding smoke ... pinout for LCD*
 
 and, most importantly, I found out it used the Philips PCF8814 96x65 pixel LCD driver. The spec sheet for this driver was indispensable - I was able to use it to bit-bang the SPI interface. The spec is posted with the code.
 
-![]({{ site.url }}/assets/images/PCF8814.png)
+![]({{ site.url }}/assets/images/projects/HRM/PCF8814.png)
 *pages 26-29 of PCF8814 spec ... dog-eared at the end of this project*
 
 ### Supporting character set
 I used a spreadsheet to build my own character bitmap set for the LCD, along with a few custom "graphics" ... a bike and a heart that you can see on the LCD. I've also included this spreadsheet with the code.
 
-![]({{ site.url }}/assets/images/icon_bitmap.png)
+![]({{ site.url }}/assets/images/projects/HRM/icon_bitmap.png)
 *From raw material to finished product ... WYSIWYG*
 
 ### Microcontroller
-And the rest of the circuit is based on the Atmel ATmega88 microcontroller. I used the built-in an 8MHz clock and used two different AA's (3.2V) to power the digital part separately from the analog. I also included the ability for remote programming via an SPI header. All of the details are in the circuit diagram above.
+And the rest of the circuit is based on the Atmel ATmega88 microcontroller. I used the built-in an 8MHz clock and a couple of AA batteries (3.2V) to power the digital part separately from the analog. I also included the ability for remote programming via an SPI header. All of the details are in the circuit diagram above.
 
 There are a bunch of things I learned building this:
 > Filter the reset pin with 10K and 10nF
@@ -134,7 +134,7 @@ There are a bunch of things I learned building this:
 
 ## Software
 ### Code
-All the code is posted [here](https://www.github.com/dvernooy/heart_rate_monitor/). It is actually just one C file. You can call it ugly (it is), you can call it unreadable (it is) ... and I know there are a bunch of typos in the comments which I'll try to fix up at some point. But it works, & very robustly. If you actually do read it, all the action is in a single main() loop. Here are the details...
+All the code is posted [here](https://www.github.com/dvernooy/heart_rate_monitor/). It is actually just one C file. You can call it ugly (it is), you can call it unreadable (it is) ... and I know there are a bunch of typos in the comments which I'll try to fix up at some point. But it works, & very robustly. If you actually do read it, all the action is in a single main() loop. Here is my thought process ...
 
 ### Detecting a beat
 My starting point now was the analog signal (masquerading basically as a digital signal at this point due to the speed and gain of my receiver) that rose and saturated very quickly when a 5.3 kHz burst was detected. The saturated voltage is about 4.7V at the upper rail of the last stage op-amp (I used a 5V regulated supply for the analog portion). I fed this waveform into the analog-to-digital converter of the Atmega88 and compared it to a software threshold that I set to determine whether it was a real heart beat signal.
@@ -143,7 +143,7 @@ To measure the timing between heartbeats, I had a choice of whether to do an int
 
 Every time through the master polling loop (more details and a diagram just below), I took an analog-to-digital converter (ADC) measurement and compared it to a threshold value. If it was above the threshold, I had a hit.
 
-In order to turn this into a time measurement, and eventually a beats-per-minute (bpm) rate, I used the polling loop counter $$H$$. I calibrated the loop time off line by feeding my software a fake heartbeat signal from a function generator that simulated a range of heartbeats from 30 bpm to 200 bpm, and figured out the calibration constant corresponding to one pass through the loop. The polling loop was 1.61 ms long, so it would be 1245 polling loops between heartbeats for a heart rate of 30bpm and ~ 185 polling loops between heartbeats for 200 bpm. If you read the code, that is where the factor 37,312 comes from.
+In order to turn this into a time measurement, and eventually a beats-per-minute (bpm) rate, I used the polling loop counter $$H$$. I calibrated the loop time off-line by feeding my software a fake heartbeat signal from a function generator that simulated a range of heartbeats from 30 bpm to 200 bpm, and figured out the calibration constant corresponding to one pass through the loop. The polling loop was 1.61 ms long, so it would be 1245 polling loops between heartbeats for a heart rate of 30bpm and ~ 185 polling loops between heartbeats for 200 bpm. If you read the code, that is where the factor 37312 comes from.
 
 So how did I get such a long polling loop time? And, more importantly, since the loop time acts basically as a master timer,how to make it repeatable from loop to loop? More on this later.
 
@@ -151,7 +151,7 @@ So how did I get such a long polling loop time? And, more importantly, since the
 
 There were actually a number of practical issues to deal with to make this thing robust. I'll explain how I dealt with them one by one, but it is probably best to start with a timing diagram/sketch.
 
-![]({{ site.url }}/assets/images/timing.png)
+![]({{ site.url }}/assets/images/projects/HRM/timing.png)
 *Details about how the code is structured to be robust*
 
 > Make sure I didn't get "double counts" from the heartbeat waveform, which as we already saw is very "bursty"
@@ -160,13 +160,13 @@ I used a dead zone of $$M$$ polling loop counts long right after the first detec
 
 > Make sure an appropriate threshold was set to know that I had a real heartbeat
 
-I kept track of highest ADC value we got the last time through the loop (remember, it is measured every polling loop) and right before the dead zone ends ($$G = 1$) and we're ready to start detecting again, I reset the threshold to half of that value. Basically makes the assumption that heartbeat to heartbeat the environment isn't changing much.
+I kept track of highest ADC value we got the last time through the loop (remember, it is measured every polling loop) and right before the dead zone ends ($$G = 1$$) and we're ready to start detecting again, I reset the threshold to half of that value. Basically makes the assumption that heartbeat to heartbeat the environment isn't changing much.
 
 > Handle a "loss of lock" on the heart rate & recover it
 
 Ok, so I'm riding on my regular route on a bike path and I notice a drop-out at one particular place. Here is a google map view .. do you see the issue?
 
-![]({{ site.url }}/assets/images/power_lines.png)
+![]({{ site.url }}/assets/images/projects/HRM/power_lines.png)
 *Not a friend, an enEMI*
 
 Yeah, overhead or underground power lines, especially those running somewhat parallel to my route, carry a current that generates a magnetic field that induces more currents in my receiver that swamp the receiver. Even though its not resonant, it causes large enough noise to wreak havoc. So how to recover the heartbeat in a case like this, especially in an extreme case where my heartbeat changes alot during this interval?
@@ -236,7 +236,7 @@ $$
 \end{align*}
 $$
 
-which gives us the update factor $$f$$ to use at every single step, given $$K$$. Finally, every step, we know $$K$$ from the previous step, we measure $$J$$ and we apply an update
+which gives us the update factor $$f$$ to use at every single step, given $$K$$. Finally, we can put it all together: with every heartbeat we measure a new value for $$J$$ and we know $$K$$ from the previous step ... so we can apply the update rule:
 
 $$
 \begin{align*}
@@ -244,9 +244,9 @@ K = K +f(J-K)= K + (1-e^{\frac{60\ln(0.05)}{8K}})(J-K)
 \end{align*}
 $$
 
-Below is a screenshots of a model of how this algorithm settles.
+Below is a screenshot of a numerical model of how this algorithm settles.
 
-![]({{ site.url }}/assets/images/simulation.png)
+![]({{ site.url }}/assets/images/projects/HRM/simulation.png)
 *Following the telltale heart*
 
 This algorithm guarantees a nice display that follows the heartbeat changes well. There is one hill around our house where I can go from 130 bpm to 185 bpm in about 15 seconds - & my monitor follows it well. The only technical issue in implementation is that I had to use real precision math, but that could always be changed to integer math at some point.

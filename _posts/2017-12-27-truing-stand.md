@@ -14,20 +14,20 @@ tags:
   - layout
 ---
 
-![]({{ site.url }}/assets/images/ian-cyclocross.png){:width="420px"}
+![]({{ site.url }}/assets/images/blog/truing/ian-cyclocross.png){:width="420px"}
 *Nah ... no bike repairs needed after this race, right Ian?*
 
 ### A really cool Christmas present
 
 
-After many years of bike mechani*cry*, with *cry* being the operative word, 
+After many years of bike mechani*cry*, with *cry* being the operative word,
 I was paid back in spades with this really cool homemade bicycle wheel truing stand. My son (pictured above
 at 2017 cyclocross nationals in Hartford) was the brainchild here - he built it all himself
 from scratch with the sawdust flying until late on Christmas Eve.
 
-![]({{ site.url }}/assets/images/truing-stand.jpg)
+![]({{ site.url }}/assets/images/blog/truing/truing-stand.jpg)
 *Standing true*
 
-Pretty cool, eh? Now maybe I can learn how to expertly true a wheel ... I've got a basement full of 'em. 
+Pretty cool, eh? Now maybe I can learn how to expertly true a wheel ... I've got a basement full of 'em.
 
-Check back for updates on progress. 
+Check back for updates on progress.

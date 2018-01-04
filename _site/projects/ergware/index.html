@@ -67,12 +67,12 @@
 
 
 
-  <meta property="og:image" content="http://localhost:4000/assets/images/site-logo.png">
+  <meta property="og:image" content="http://localhost:4000/assets/images/front/site-logo.png">
 
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-01-01T13:42:00-05:00">
+  <meta property="article:published_time" content="2018-01-04T15:44:21-05:00">
 
 
 
@@ -84,7 +84,7 @@
       "@context": "http://schema.org",
       "@type": "Organization",
       "url": "http://localhost:4000",
-      "logo": "http://localhost:4000/assets/images/site-logo.png"
+      "logo": "http://localhost:4000/assets/images/front/site-logo.png"
     }
   </script>
 
@@ -221,7 +221,7 @@
       
         
         <a href="https://dvernooy.github.io">
-          <img src="http://localhost:4000/assets/images/dave-vernooy-cropped.jpg" alt="Dave Vernooy" itemprop="image">
+          <img src="http://localhost:4000/assets/images/front/dave-vernooy-cropped.jpg" alt="Dave Vernooy" itemprop="image">
         </a>
       
     </div>
@@ -327,7 +327,7 @@
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     <meta itemprop="headline" content="Ergware">
     <meta itemprop="description" content="Open source software for an open source ergometer">
-    <meta itemprop="datePublished" content="January 01, 2018">
+    <meta itemprop="datePublished" content="January 04, 2018">
     <meta itemprop="dateModified" content="February 20, 2017">
 
     <div class="page__inner-wrap">
@@ -342,7 +342,7 @@
 
 
 
-  2 minute read
+  14 minute read
 </p>
           
         </header>
@@ -355,28 +355,75 @@
               <header><h4 class="nav__title"><i class="fa fa-file-text"></i> On This Page</h4></header>
               <ul class="toc__menu">
   <li><a href="#project-overview">Project overview</a></li>
-  <li><a href="#hardware">Hardware</a></li>
-  <li><a href="#software">Software</a></li>
+  <li><a href="#hardware">Hardware</a>
+    <ul>
+      <li><a href="#the-erg">The erg</a></li>
+      <li><a href="#measuring-rotation">Measuring rotation</a></li>
+      <li><a href="#circuit-diagram--component-choices">Circuit diagram &amp; component choices</a></li>
+      <li><a href="#mounting-to-the-erg">Mounting to the erg</a></li>
+    </ul>
+  </li>
+  <li><a href="#model">Model</a>
+    <ul>
+      <li><a href="#math">Math</a></li>
+      <li><a href="#getting-the-right-model-parameters">Getting the right model parameters</a></li>
+      <li><a href="#converging-the-model">converging the model</a></li>
+    </ul>
+  </li>
+  <li><a href="#ergware-v10">ErgWare v1.0</a>
+    <ul>
+      <li><a href="#display">display</a></li>
+      <li><a href="#structure">structure</a></li>
+      <li><a href="#some-interesting-data">some interesting data</a></li>
+      <li><a href="#good-rowers-vs-crappy-rowers">good rowers vs. crappy rowers</a></li>
+    </ul>
+  </li>
+  <li><a href="#ergware-v20">ErgWare v2.0</a>
+    <ul>
+      <li><a href="#user-feedback">User feedback</a></li>
+      <li><a href="#enter-the-rtos">Enter the RTOS</a></li>
+      <li><a href="#which-one">Which one?</a></li>
+      <li><a href="#menu-structure">Menu structure</a></li>
+      <li><a href="#pushbutton-responsivity">Pushbutton responsivity</a></li>
+      <li><a href="#rtos-structure">RTOS structure</a></li>
+    </ul>
+  </li>
+  <li><a href="#some-things-i-learned-doing-v20">Some things I learned doing v2.0</a>
+    <ul>
+      <li><a href="#code-for-low-overhead">Code for low overhead</a></li>
+      <li><a href="#use-the-message-passing--signalling-structures-of-the-rtos">Use the message passing &amp; signalling structures of the RTOS.</a></li>
+      <li><a href="#write-lightweight-usage-services">Write lightweight usage services</a></li>
+    </ul>
+  </li>
+  <li><a href="#in-summary">In Summary</a></li>
 </ul>
             </nav>
           </aside>
         
-        <p><img src="http://localhost:4000/assets/images/erg-full.jpg" alt="" />
+        <script type="text/javascript" async="" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<p><img src="http://localhost:4000/assets/images/projects/erg/erg-full.jpg" alt="" />
 <em>Our DIY ergometer … with its new “brain”</em></p>
 
 <h2 id="project-overview">Project overview</h2>
-<p>Hey all, Dave Vernooy  here. I’m assuming you stumbled across this site after reading about DIY rowing machines, aka ergometers.</p>
+<p>Hey all, Dave Vernooy here with another project. I’m assuming you stumbled across this site after reading about DIY rowing machines, aka ergometers.</p>
 
-<p>This is just a simple website to answer questions about the ErgWare software, which is a project I undertook to add a digital interface to the excellent <a href="http://openergo.webs.com">openergo</a> project. You can see the erg we built above using the original project documentation as a guide. It was a present for my daughter, which my dad &amp; I pulled off in a month. He focused on the woodcraft, and I chipped in with the mechanical stuff, the electronics and the software.</p>
+<p>This will document all aspects of ErgWare software development, a project I undertook to add a digital interface to the excellent <a href="http://openergo.webs.com">openergo</a> project. You can see the erg we built above using the original project documentation as a guide. It was a present for my daughter, which my dad &amp; I pulled off in a month. He focused on the woodcraft, and I chipped in with the mechanical stuff, the electronics and the software.</p>
 
-<p>It was great fun to build, and is even more fun to use.</p>
+<p>It was great fun to build, and is even more fun to use. Here’s a video of it in action</p>
+
+<blockquote>
+  <p>Video</p>
+</blockquote>
 
 <p>After noodling on the original design, we decided it would be neat to add the software &amp; display so the rower could get real-time feedback on the basic things a rower would want to know. We were able to get good estimates of stroke rate, power output, effective 500m split pace, distance rowed, fraction of time spent in power phase of stroke, etc..  Here is a close-in screenshot of the current version (you can see this display in the main picture above attached to the pvc tubing).</p>
 
-<p><img src="http://localhost:4000/assets/images/erg-interface.jpg" alt="" />
+<p><img src="http://localhost:4000/assets/images/projects/erg/erg-interface.jpg" alt="" />
 <em>Screenshot of the software interface</em></p>
 
-<p>The whole idea worked out pretty well, so I thought it would be good to add it back to the community as an open project. The source code and all documentation is hosted <a href="https://www.github.com/dvernooy/ergware/">here</a> and available for free to download, use &amp; modify. The documentation package includes 3 things:</p>
+<p>The whole idea worked out pretty well, so I thought it would be good to add it back to the community as an open project. The source code and all documentation is <a href="https://www.github.com/dvernooy/ergware/">here</a> and available for free to download, use &amp; modify. The documentation package includes 3 things:</p>
+
 <blockquote>
   <ol>
     <li>A pdf document with circuit diagram, some rudimentary construction notes and links to useful web sources I used in the project.</li>
@@ -385,12 +432,275 @@
   </ol>
 </blockquote>
 
-<p>The main purpose of this website is to answer questions about the software for those who have them &amp; update on any new progress we may (or may not) make. I don’t have immediate plans to do much more on this project, but you never know. I’ll do my best to respond to any posted comments.</p>
+<p>The main purpose of this website is to give some more detailed explanations &amp; answer questions about the software for those who have them …&amp; update on any new progress we may (or may not) make.</p>
+
+<p>I’ll take you through the build &amp; verification process, but for me it was first important to understand the basic workings of an ergometer. I have never actually done any rowing, so I needed some intuition to guide me. For that, I found a really great <a href="http://home.hccnet.nl/m.holst/Ergo.pdf">physical model</a>. I built up my own numerical version of this which is posted in the excel spreadsheet … more on that soon.</p>
+
+<p>The main thing I discovered is that you can use the “recovery” phase - when the rower is done pulling and the flywheel is just spinning under its own inertia as the rower returns to the initial catch position - to estimate the damping constant of the machine. With that piece of knowledge, you can make tremendous headway on the calculations everyone wants to know about … things like how much raw power you’re putting out.</p>
+
+<p>And all you really need to do is measure the rotation rate of the wheel, so lets start there.</p>
 
 <h2 id="hardware">Hardware</h2>
+<h3 id="the-erg">The erg</h3>
+<p>I’ll ignore the (awesome) build of the main wooden structure of the erg, though my favorite part of the whole thing is the seat .. thank you you Joe Van Ruyven!!!. The flywheel is just an old 26” disc-brake mountain bike wheel drilled to accommodate the plastic inserts which act as dampers. The chain that the rower pulls on to move the flywheel sits on the 11 tooth cog.</p>
 
-<h2 id="software">Software</h2>
+<p><img src="http://localhost:4000/assets/images/projects/erg/flywheel.jpg" alt="" />
+<em>Modified mountain bike wheel … ready for the water</em></p>
 
+<h3 id="measuring-rotation">Measuring rotation</h3>
+
+<p>Rotation rates of wheels can be measured a bunch of different ways … on my old-school Sigma bike computer they do it with an electromagnetic relay which opens every time a magnet attached to the wheel passes by. That works well, but I didn’t have a spare one lying around. What I did have was one of these:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/erg/OPB-switch.png" alt="" />
+<em>Optical switch used for reading the chopper wheel</em></p>
+
+<p>An infrared optical transmitter-receiver pair. And a bunch of old CD’s. And a spare bolt hole pattern from the (removed) disk brake on the bike. And tape. And a way to open up the ID of the CD to fit over the hub (hint: use a soldering iron as a plastic-melter). And a few hours to kill. And so I made this chopper wheel:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/erg/chopper_wheel.jpg" alt="" />
+<em>This CD has a new lease on life</em></p>
+
+<p>The idea is the infrared light does not transmit through the black toner of the laser printer (of course I checked this diligently prior to killing those two hours … NOT!). So every time the black part of the chopper pattern goes between the optical switch, it interrupts the light, which is really easy to detect electronically. You can find the 8-wedge pattern I used in the documentation. Here is what it looks like in its final attachment on the wheel, with the chopper slotted into the gap in the switch, ready to interrupt the light path and create a signal synched to the wheel rotation.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/erg/chopper_mounted.jpg" alt="" />
+<em>Ready to do its thing</em></p>
+
+<p>I chose the 8-pattern originally thinking that I’d have 8 measurements per revolution by timing consecutive edges in the chopper timing pattern … &amp; so have a great estimate of instantaneous speed. I soon realized that unless I cut it perfectly (I didn’t) there are bias errors all over the place. Instead, what’s very accurate is to time one edge vs. <em>the same edge</em> but now one revolution earlier. Its still possible to get 8 measurements per revolution, but there’s a bit more inaccuracy in this method … fine for what we need nevertheless.</p>
+
+<p>With a little bit of signal conditioning, you now have a nice little signal that, with a bit of computation, gives the rotational speed and acceleration of the wheel, exactly what our model is looking for.</p>
+
+<p>Soooo … about that signal conditioning.</p>
+
+<h3 id="circuit-diagram--component-choices">Circuit diagram &amp; component choices</h3>
+<p>Here’s the circuit diagram for the build.</p>
+
+<p><a href="http://localhost:4000/assets/images/projects/erg/erg_circuit.png"><img src="http://localhost:4000/assets/images/projects/erg/erg_circuit.png" alt="" /></a>
+<em>Circuit diagram for the Ergware firmware</em></p>
+
+<p>The phototransistor-based optocoupler does all the action … I chose the resistor and then buffered it a couple of times before sending it directly into one of the digital inputs of the microcontroller (which makes the software detection and triggering via an interrupt really easy.)</p>
+
+<p>I also used different supply voltages for the analog and digital parts, mainly because the LCD wants to work off of 3.3V and the optocoupler is spec’d for 5V.</p>
+
+<p>I went with the ATMega328 microcontroller and a Nokia5110 LCD, because I had a bunch of code for both of these already written. The other thing I discovered is that the backlight to the LCD is a useful thing to have in this application.</p>
+
+<p>The final piece is the power supply. I went with a super cheapo I had lying around and had a bunch of noise issues I traced to it (I had not had any problems with my benchtop supply). Simply swapping to a slightly better one did the trick.</p>
+
+<p>Here is a close-up of my handiwork.</p>
+
+<blockquote>
+  <p>picture of circuit</p>
+</blockquote>
+
+<h3 id="mounting-to-the-erg">Mounting to the erg</h3>
+<p>I used 1/8” pvc tubing as struts to hold the display in a convenient spot, make it possible for the rower to tweak the orientation, and also as a way to route the sensor signal and power supply cord. I made a little box for the circuit using foam board cut and glued to custom fit.</p>
+
+<h2 id="model">Model</h2>
+<p>Before diving into the software, here is more about the numerical model and how you can infer power, distance rowed and a bunch of other interesting things. I found this really important to understand before I sat down to do the software.</p>
+
+<h3 id="math">Math</h3>
+<p>Just a couple of equations to get you warmed up. From Physics 101, the torque <script type="math/tex">\tau</script> the rower applies to the flywheel via the chain mechanism is related to rotational acceleration <script type="math/tex">\dot{\omega}</script> by the moment of inertia <script type="math/tex">J</script></p>
+
+<script type="math/tex; mode=display">\begin{align*}
+J\dot{\omega} = \tau
+\end{align*}</script>
+
+<p>However, the flywheel slows down because of those plastic things I put on there. Most things that move through air experience a loss proportional to the square of their speed, so a better equation is</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+J\dot{\omega} = \tau - k\omega^2
+\end{align*}</script>
+
+<p>where <script type="math/tex">k</script> is a damping constant. Once the oar (or chain for an erg) reaches the end of the stroke, the rower stops applying the torque and the chain returns (aided by something stretchy). During this phase of the stroke, the rower rests and the flywheel slows down, because its new equation is</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+J\dot{\omega} = - k\omega^2
+\end{align*}</script>
+
+<p>So here’s that cool thing I was talking about before … in this equation, we know <script type="math/tex">J</script> (see below), we know <script type="math/tex">\omega</script> and <script type="math/tex">\dot{\omega}</script> (we’ll calculate these from the chopper signal), so now we know <script type="math/tex">k</script>. Since instantaneous power <script type="math/tex">P(t)</script> is equal to <script type="math/tex">\tau\omega</script>, we get</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+P(t) = J\dot{\omega}\omega + k\omega^3
+\end{align*}</script>
+
+<p>or, time averaging over one stroke time <script type="math/tex">T</script> you get the time-averaged Power \overline{P} which is what people care about</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+\overline{P} =\frac{1}{T}\int_{0}^{T} (J\dot{\omega}\omega + k\omega^3)dt
+\end{align*}</script>
+
+<p>Two interesting ways to further simplify.</p>
+<blockquote>
+  <p>there’s <strong>no</strong> torque during the recovery part of the stroke</p>
+</blockquote>
+
+<p>So defining <script type="math/tex">T_s</script> as the time for the power part of the stroke</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+\overline{P} =\frac{1}{T}\int_{0}^{T_s} (J\dot{\omega}\omega + k\omega^3)dt
+\end{align*}</script>
+
+<p>(This is the exact equation I implemented in the code).</p>
+
+<blockquote>
+  <p>the first term in the integral is close to zero because acceleration almost balances the deceleration over a stroke</p>
+</blockquote>
+
+<p>So we if we define the average rotational speed of the flywheel over the stroke as <script type="math/tex">\overline{\omega}</script> then</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+\overline{P} = k{\overline{\omega}}^3
+\end{align*}</script>
+
+<p>The first simplification above takes no shortcuts and is accurate within the limitations of the model. The second one is a nice simple equation, but has about 5% inaccuracy. It is a similar looking equation to the power <em>generated</em> by a wind turbine, for example, as a function of wind speed.</p>
+
+<h3 id="getting-the-right-model-parameters">Getting the right model parameters</h3>
+
+<p>I cooked up a little spreadsheet to play with this model. It is posted with the code. Like any model, it needs a bunch of parameters. I’ll talk about them one by one, and how to go about measuring or setting them.</p>
+
+<blockquote>
+  <p>simple stuff</p>
+</blockquote>
+
+<p>Rower’s mass <script type="math/tex">m</script>, distance of erg chain <script type="math/tex">r</script> relative to flywheel axle … just put those in.</p>
+
+<blockquote>
+  <p>rower applied force</p>
+</blockquote>
+
+<p>There is an assumption of a sinusoidal force applied by the rower. The amplitude and shape of that force are inputs.</p>
+
+<blockquote>
+  <p>flywheel moment of inertia <script type="math/tex">J</script></p>
+</blockquote>
+
+<p>Its possible to calculate the moment of inertia <script type="math/tex">J</script> of the flywheel by accounting for all of the piece parts and their contribution. That’s what I did.</p>
+
+<blockquote>
+  <p>insert table here</p>
+</blockquote>
+
+<p>Its just an estimate and sort of the lazy way out, but probably good within 10 or 15%. I’ll address it at some point with a measurement, just like <a href="https://www.analyticcycling.com/WheelsInertia_Page.html">this procedure</a> outlines.</p>
+
+<blockquote>
+  <p>damping constant <script type="math/tex">k</script></p>
+</blockquote>
+
+<p>You can measure <script type="math/tex">k</script> by just looking at the decay of the stroke after the rower has finished the power part of the stroke. But how do you know when that is? Well, looking at the curves, you can see that <script type="math/tex">omega</script> decays almost linearly during the recovery. So <script type="math/tex">\dot{\omega}</script> is almost a constant, and <script type="math/tex">\ddot{\omega}</script> is close to zero. So I set “screening criteria” on the absolute value of both of these parameters and use that to detect the stroke recovery phase. Then during this phase I can estimate <script type="math/tex">k</script>. Clear enough? Here’s a picture to illustrate:</p>
+
+<blockquote>
+  <p>magic factor</p>
+</blockquote>
+
+<p>The other thing a rower wants to know is how far they’ve rowed. (well it turns out, not very far in an erg unless you have some special power). However, assuming that there is a similar damping effect in the rower’s speed <script type="math/tex">v</script> on the water, the damping losses</p>
+
+<p>\begin{align<em>}
+k{\overline{\omega}}^3 = cv^3
+\end{align</em>}
+$$</p>
+
+<p>The magic factor here is c. Most erg’s spit out a distance rowed, and you can see that we can transform total rotations of the flywheel to distance rowed with <script type="math/tex">s = {\frac{k}{c}}^{1/3}\theta</script>. I used a magic factor of c = 2.8 just like [here]http://eodg.atm.ox.ac.uk/user/dudhia/rowing/physics/ergometer.html#section9.</p>
+
+<h3 id="converging-the-model">converging the model</h3>
+
+<p>Having set all of these things in the model, there is one free parameter. I have chosen it to be the total stroke rate (which sets the overall stroke time). Once that is set, you need to “goal seek” the initial rotational frequency so that the initial and final match (as they would in steady state). This will give a converged model.</p>
+
+<p>Finally, it predicts a certain shape for the time dependence of the rotational frequency. Here’s some plots -</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>plot of rotational frequency</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>plot of kpowr, Jpowr, total power</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Wonder if that’s what we’ll see when we get this sucker built? [foreshadowing].</p>
+
+<h2 id="ergware-v10">ErgWare v1.0</h2>
+<h3 id="display">display</h3>
+<p>In the first rev, I couldn’t really ask for any advice from my “users” since the thing was supposed to be a surprise. So I just made a best guess as to what the screen should look like.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/erg/rev1_screen.jpg" alt="" />
+<em>Cramming info onto the screen in v1.0 … will they like it?</em></p>
+
+<h3 id="structure">structure</h3>
+<p>To get this stuff to the screen, we are timing the wheel rotation, calculating the various derivatives and then numerically integrating the model I described above.</p>
+
+<p>The whole software is wrapped in one big loop, constantly keeping track of where in stroke cycle we are .. using interrupts &amp; timers to do most of the work &amp; then periodically refreshing the display or checking whether the buttons have been pressed.</p>
+
+<p>Interrupts and timers are important - I interrupted the processor every time the chopper wheel triggered. Despite my 8-slice pattern, I ended up using only a once-per-rev signal from the chopper. I used a built in 10-bit timer to get accurate flywheel rotational timing.</p>
+
+<p>I also needed a second timer for the rowing stroke timing .. stroke rate is something the rowers care about besides their speed and power output. Typical stroke rates might be 25 - 35 strokes per minute.</p>
+
+<p>I then applied the screening criteria I talked about earlier to determine what part of the stroke cycle I was in &amp; based on that, did the appropriate calculations to get average power over the cycle, get an estimate of rowing distance, increment stroke cycle counters and look at the various timers.</p>
+
+<p>In most cases, I opted to do a straight average of 4 measurements to reduce any noise. More sophisticated filters are obviously possible.</p>
+
+<p>The buttons have limited functionality in this first rev … they can basically just reset the timers and/or the display of distance traveled. I had big plans for them, though.</p>
+
+<h3 id="some-interesting-data">some interesting data</h3>
+<p>I wrote a piece of code during the development phase to write out to the EEPROM the rotational speed vs. time. Here is how it compares to the model … pretty well! When I saw this, I charged forward full throttle with some confidence in the approach.</p>
+
+<blockquote>
+  <p>model vs. data comparison</p>
+</blockquote>
+
+<h3 id="good-rowers-vs-crappy-rowers">good rowers vs. crappy rowers</h3>
+<p>So my daughter had been rowing for about 9 months when I had her take this thing for a spin. I recorded her power output vs. #of strokes at startup in the EEPROM. Then I did the same for myself, who had been rowing for all of 9 m-m-m-minutes. Guess who’s the NOOB?</p>
+
+<blockquote>
+  <p>Sarah vs. dad</p>
+</blockquote>
+
+<h2 id="ergware-v20">ErgWare v2.0</h2>
+<p>v1.0 was in place for about 6 months, &amp; then I made the mistake of asking “what else?”</p>
+
+<h3 id="user-feedback">User feedback</h3>
+<p>Wanna see more stuff. A countdown timer, calories burned, parameter setup. Bigger fonts. More, more, more. Ok, I listen to my users.</p>
+
+<h3 id="enter-the-rtos">Enter the RTOS</h3>
+<p>Having learned my lesson on another project, it was time for a different approach to accommodate multiple screens that would be responsive to a user (an exhausted rower who probably has little patience for crappy embedded software).</p>
+
+<p>I needed a menu, and I needed a scheduler … in short, I needed a lightweight RTOS for an 8 bit microcontroller. Virtually impossible to do what they wanted without one … to see why, Here is a gallery of the screens I implemented in V2.0 -</p>
+
+<blockquote>
+  <p>insert screenshots</p>
+</blockquote>
+
+<p>Writing the code for these goodies was very straightforward since I had almost all of the information readily available. Other than the RTOS diagnostics (more below) the only really new thing was the calorie counter.</p>
+
+<h3 id="which-one">Which one?</h3>
+
+<p>Choices, choices … there are lots - even for my 8-bit AVR ATMega328. FreeRTOS, NuTTX, AtomThreads, ChiBIOS, RiOS, roll-your-own. After a bunch of investigation, I settled on NilRTOS, which is a lightweight variant of ChiBIOS that is still very flexible and pretty easy to incorporate. And I gotta say, I’m very impressed with [Gianni] &amp; his team’s work - there is a bunch of documentation around to help.</p>
+
+<h3 id="menu-structure">Menu structure</h3>
+<p>I have a very simple menu structure that allows for nested sub-menus. All of the memory is pre-allocated, and could probably be done even more efficiently, but I’m pretty happy with it. Here’s the code:</p>
+
+<h3 id="pushbutton-responsivity">Pushbutton responsivity</h3>
+<p>One of the bigger questions I had was whether the buttons would be capable of interrupting the system with many threads running … giving the user a responsive interface.</p>
+
+<h3 id="rtos-structure">RTOS structure</h3>
+<p>I was able to do the whole thing with 8 threads, including a thread for monitoring the RTOS overhead itself.</p>
+
+<h2 id="some-things-i-learned-doing-v20">Some things I learned doing v2.0</h2>
+<h3 id="code-for-low-overhead">Code for low overhead</h3>
+<p>I knew I’d be up against limits of the chip: 32K Flash, 2K SRAM, 1K EEPROM. Here is how I dealt with it.</p>
+
+<h3 id="use-the-message-passing--signalling-structures-of-the-rtos">Use the message passing &amp; signalling structures of the RTOS.</h3>
+<p>That’s what they’re there for.</p>
+
+<h3 id="write-lightweight-usage-services">Write lightweight usage services</h3>
+<p>Essential to ensuring optimal memory allocation. Here’s a screenshot of the usage statistics for each of the threads after a workout.</p>
+
+<h2 id="in-summary">In Summary</h2>
+<p>Time to go back and re-read “The Boys in the Boat”.</p>
 
         
       </section>

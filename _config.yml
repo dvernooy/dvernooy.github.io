@@ -18,7 +18,7 @@ description              : &description "A website with a blog and various proje
 url                      : https://dvernooy.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : #"/minimal-mistakes" # the subpath of your site, e.g. "/blog"
 repository               : "dvernooy/dvernooy.github.io" #"mmistakes/minimal-mistakes"
-teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
+teaser                   : # path of fallback teaser image, e.g. "/assets/images/front/500x300.png"
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
 comments:
@@ -70,7 +70,7 @@ facebook:
   username               : #&facebook "michaelrose"
   app_id                 :
   publisher              :
-og_image                 : "/assets/images/site-logo.png" # Open Graph/Twitter default site image
+og_image                 : "/assets/images/front/site-logo.png" # Open Graph/Twitter default site image
 # For specifying social profiles, used in _includes/seo.html
 # - https://developers.google.com/structured-data/customize/social-profiles
 social:
@@ -90,7 +90,7 @@ analytics:
 # Site Author
 author:
   name             : *name # *name is a YAML reference pointing to the &anchor earlier
-  avatar           : "/assets/images/dave-vernooy-cropped.jpg"
+  avatar           : "/assets/images/front/dave-vernooy-cropped.jpg"
   bio              : "Learning by (re)doing"
   location         : "Niskayuna, NY"
   email            :

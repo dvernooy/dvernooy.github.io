@@ -12,7 +12,7 @@ var idx = lunr(function () {
   
     idx.add({
       title: "Ergware",
-      excerpt: "Our DIY ergometer … with its new “brain” Project overview Hey all, Dave Vernooy here. I’m assuming you stumbled across...",
+      excerpt: "Our DIY ergometer … with its new “brain” Project overview Hey all, Dave Vernooy here with another project. I’m assuming...",
       categories: [],
       tags: [],
       id: 0
@@ -71,7 +71,7 @@ var store = [
       {
         "title": "Ergware",
         "url": "http://localhost:4000/projects/ergware/",
-        "excerpt": "Our DIY ergometer … with its new “brain” Project overview Hey all, Dave Vernooy here. I’m assuming you stumbled across...",
+        "excerpt": "Our DIY ergometer … with its new “brain” Project overview Hey all, Dave Vernooy here with another project. I’m assuming...",
         "teaser":
           
             null
