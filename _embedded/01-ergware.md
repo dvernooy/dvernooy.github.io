@@ -114,7 +114,7 @@ $$
 \begin{align*}
 J\dot{\omega} = \tau - k\omega^2
 \tag{1}
-\label{power}
+\label{power_stroke}
 \end{align*}
 $$
 
@@ -124,7 +124,7 @@ $$
 \begin{align*}
 J\dot{\omega} = - k\omega^2
 \tag{2}
-\label{recovery}
+\label{recovery_stroke}
 \end{align*}
 $$
 
@@ -201,7 +201,7 @@ You can measure $$k$$ by just looking at the decay of the stroke after the rower
 ![]({{ site.url }}/assets/images/projects/erg/decay.png)
 *Highlighting rotational frequency vs. time during the recovery phase*
 
-Another way to see it is by doing a little math. In this region, Equation $$\ref{recovery}$$ is the important one:
+Another way to see it is by doing a little math. In this region, Equation $$\ref{recovery_stroke}$$ is the important one:
 
 $$
 \begin{align*}

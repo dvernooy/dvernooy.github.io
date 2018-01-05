@@ -72,7 +72,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-01-04T21:31:01-05:00">
+  <meta property="article:published_time" content="2018-01-04T21:41:51-05:00">
 
 
 
@@ -510,7 +510,7 @@ J\dot{\omega} = \tau
 <script type="math/tex; mode=display">\begin{align*}
 J\dot{\omega} = \tau - k\omega^2
 \tag{1}
-\label{power}
+\label{power_stroke}
 \end{align*}</script>
 
 <p>where <script type="math/tex">k</script> is a damping constant. Once the oar (or chain for an erg) reaches the end of the stroke, the rower stops applying the torque and the chain returns (aided by something stretchy). During this phase of the stroke, the rower rests and the flywheel slows down, because its new equation is</p>
@@ -518,7 +518,7 @@ J\dot{\omega} = \tau - k\omega^2
 <script type="math/tex; mode=display">\begin{align*}
 J\dot{\omega} = - k\omega^2
 \tag{2}
-\label{recovery}
+\label{recovery_stroke}
 \end{align*}</script>
 
 <p>So here’s that cool thing I was talking about before … in this equation, we know <script type="math/tex">J</script> (see below), we know <script type="math/tex">\omega</script> and <script type="math/tex">\dot{\omega}</script> (we’ll calculate these from the chopper signal), so now we know <script type="math/tex">k</script>. Since instantaneous power <script type="math/tex">P(t)</script> is equal to <script type="math/tex">\tau\omega</script>, we get</p>
@@ -545,7 +545,7 @@ P(t) = J\dot{\omega}\omega + k\omega^3
 <script type="math/tex; mode=display">\begin{align*}
 \overline{P} =\frac{1}{T}\int_{0}^{T_s} (J\dot{\omega}\omega + k\omega^3)dt
 \tag{4}
-\label{power}
+\label{power2}
 \end{align*}</script>
 
 <p>(This is the exact equation I implemented in the code).</p>
@@ -598,7 +598,7 @@ P(t) = J\dot{\omega}\omega + k\omega^3
 <p><img src="http://localhost:4000/assets/images/projects/erg/decay.png" alt="" />
 <em>Highlighting rotational frequency vs. time during the recovery phase</em></p>
 
-<p>Another way to see it is by doing a little math. In this region, Equation <script type="math/tex">\ref{recovery}</script> is the important one:</p>
+<p>Another way to see it is by doing a little math. In this region, Equation <script type="math/tex">\ref{recovery_stroke}</script> is the important one:</p>
 
 <script type="math/tex; mode=display">\begin{align*}
 J\dot{\omega} = - k\omega^2
