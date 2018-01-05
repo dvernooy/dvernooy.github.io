@@ -113,6 +113,8 @@ However, the flywheel slows down because of those plastic things I put on there.
 $$
 \begin{align*}
 J\dot{\omega} = \tau - k\omega^2
+\tag{1}
+\label{power}
 \end{align*}
 $$
 
@@ -121,6 +123,8 @@ where $$k$$ is a damping constant. Once the oar (or chain for an erg) reaches th
 $$
 \begin{align*}
 J\dot{\omega} = - k\omega^2
+\tag{2}
+\label{recovery}
 \end{align*}
 $$
 
@@ -137,6 +141,8 @@ or, time averaging over one stroke time $$T$$ you get the time-averaged Power $$
 $$
 \begin{align*}
 \overline{P} =\frac{1}{T}\int_{0}^{T} (J\dot{\omega}\omega + k\omega^3)dt
+\tag{3}
+\label{power}
 \end{align*}
 $$
 
@@ -148,6 +154,8 @@ So defining $$T_s$$ as the time for the power part of the stroke
 $$
 \begin{align*}
 \overline{P} =\frac{1}{T}\int_{0}^{T_s} (J\dot{\omega}\omega + k\omega^3)dt
+\tag{4}
+\label{power}
 \end{align*}
 $$
 
@@ -193,7 +201,7 @@ You can measure $$k$$ by just looking at the decay of the stroke after the rower
 ![]({{ site.url }}/assets/images/projects/erg/decay.png)
 *Highlighting rotational frequency vs. time during the recovery phase*
 
-Another way to see it is by doing a little math. In this region, the equation is
+Another way to see it is by doing a little math. In this region, Equation $$\ref{recovery}$$ is the important one:
 
 $$
 \begin{align*}
@@ -230,7 +238,7 @@ k{\overline{\omega}}^3 = cv^3
 \end{align*}
 $$
 
-The magic factor here is c. Most erg's spit out a distance rowed, and you can see that we can transform total rotations of the flywheel to distance rowed with $$s = {(\frac{k}{c})}^{1/3}\theta$$. I used a magic factor of $$c = 2.8$$ just like [here](http://eodg.atm.ox.ac.uk/user/dudhia/rowing/physics/ergometer.html#section9).
+The magic factor here is $$c$$. Most erg's spit out a distance rowed, and you can see that we can transform total rotations of the flywheel to distance rowed with $$s = {(\frac{k}{c})}^{1/3}\theta$$. I used a magic factor of $$c = 2.8$$ just like [here](http://eodg.atm.ox.ac.uk/user/dudhia/rowing/physics/ergometer.html#section9).
 
 ### converging the model
 
@@ -315,6 +323,39 @@ One of the bigger questions I had was whether the buttons would be capable of in
 
 ### RTOS structure
 I was able to do the whole thing with 8 threads, including a thread for monitoring the RTOS overhead itself.
+
+```c
+/*********************************************************************************
+Thread Table -   Remember to change threadcount in nilconf.h
+Notes:
+1. Use the stack tracer to optimize stack sizes
+2. Priorities - look at order in Thread table
+********************************************************************************/
+
+THD_WORKING_AREA(waThread1, 16);
+THD_WORKING_AREA(waThread2, 90);
+THD_WORKING_AREA(waThread3, 90);
+THD_WORKING_AREA(waThread4, 100);
+THD_WORKING_AREA(waThread5, 96);
+THD_WORKING_AREA(waThread6, 110);
+THD_WORKING_AREA(waThread7, 80);
+THD_WORKING_AREA(waThread8, 80);
+//THD_WORKING_AREA(waTimer, 20); /*just for completeness, commented out here because defined in time.c
+
+
+THD_TABLE_BEGIN  
+  THD_TABLE_ENTRY(waThread1, NULL, Thread1, NULL) //Button Press Handler
+  THD_TABLE_ENTRY(waThread7, NULL, Thread7, NULL) //Chopper Calculations
+  THD_TABLE_ENTRY(waThread2, NULL, Thread2, NULL) //Menu Navigation Handler
+  THD_TABLE_ENTRY(waThread6, NULL, Thread6, NULL) //Stack Output via LCD
+  THD_TABLE_ENTRY(waThread8, NULL, Thread8, NULL) //Stack Output via USART
+  THD_TABLE_ENTRY(waThread4, NULL, Thread4, NULL) //Time, Dist & Calories
+  THD_TABLE_ENTRY(waThread5, NULL, Thread5, NULL) //LCD navigation
+  THD_TABLE_ENTRY(waThread3, NULL, Thread3, NULL) //LCD ergo
+  THD_TABLE_ENTRY(waTimer, NULL, timer, NULL) //declared in time.c, run at lowest priority
+THD_TABLE_END
+```
+
 
 ## Some things I learned doing v2.0
 ### Code for low overhead

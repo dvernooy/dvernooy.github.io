@@ -245,6 +245,8 @@ which gives us the update factor $$f$$ to use at every single step, given $$K$$.
 $$
 \begin{align*}
 K = K +f(J-K)= K + (1-e^{\frac{60\ln(0.05)}{8K}})(J-K)
+\tag{1}
+\label{master}
 \end{align*}
 $$
 
@@ -253,7 +255,7 @@ Below is a screenshot of a numerical model of how this algorithm settles.
 ![]({{ site.url }}/assets/images/projects/HRM/simulation.png)
 *Following the telltale heart*
 
-This algorithm guarantees a nice display that follows the heartbeat changes well. There is one hill around our house where I can go from 130 bpm to 185 bpm in about 15 seconds - & my monitor follows it well. The only technical issue in implementation is that I had to use real precision math, but that could always be changed to integer math at some point.
+This algorithm in equation $$\eqref{master}$$ guarantees a nice display that follows the heartbeat changes well. There is one hill around our house where I can go from 130 bpm to 185 bpm in about 15 seconds - & my monitor follows it well. The only technical issue in implementation is that I had to use real precision math, but that could always be changed to integer math at some point.
 
 ### Last thoughts
 

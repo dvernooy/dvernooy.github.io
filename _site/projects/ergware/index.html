@@ -72,7 +72,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-01-04T20:41:08-05:00">
+  <meta property="article:published_time" content="2018-01-04T21:31:01-05:00">
 
 
 
@@ -342,7 +342,7 @@
 
 
 
-  15 minute read
+  16 minute read
 </p>
           
         </header>
@@ -509,12 +509,16 @@ J\dot{\omega} = \tau
 
 <script type="math/tex; mode=display">\begin{align*}
 J\dot{\omega} = \tau - k\omega^2
+\tag{1}
+\label{power}
 \end{align*}</script>
 
 <p>where <script type="math/tex">k</script> is a damping constant. Once the oar (or chain for an erg) reaches the end of the stroke, the rower stops applying the torque and the chain returns (aided by something stretchy). During this phase of the stroke, the rower rests and the flywheel slows down, because its new equation is</p>
 
 <script type="math/tex; mode=display">\begin{align*}
 J\dot{\omega} = - k\omega^2
+\tag{2}
+\label{recovery}
 \end{align*}</script>
 
 <p>So here’s that cool thing I was talking about before … in this equation, we know <script type="math/tex">J</script> (see below), we know <script type="math/tex">\omega</script> and <script type="math/tex">\dot{\omega}</script> (we’ll calculate these from the chopper signal), so now we know <script type="math/tex">k</script>. Since instantaneous power <script type="math/tex">P(t)</script> is equal to <script type="math/tex">\tau\omega</script>, we get</p>
@@ -527,6 +531,8 @@ P(t) = J\dot{\omega}\omega + k\omega^3
 
 <script type="math/tex; mode=display">\begin{align*}
 \overline{P} =\frac{1}{T}\int_{0}^{T} (J\dot{\omega}\omega + k\omega^3)dt
+\tag{3}
+\label{power}
 \end{align*}</script>
 
 <p>Two interesting ways to further simplify.</p>
@@ -538,6 +544,8 @@ P(t) = J\dot{\omega}\omega + k\omega^3
 
 <script type="math/tex; mode=display">\begin{align*}
 \overline{P} =\frac{1}{T}\int_{0}^{T_s} (J\dot{\omega}\omega + k\omega^3)dt
+\tag{4}
+\label{power}
 \end{align*}</script>
 
 <p>(This is the exact equation I implemented in the code).</p>
@@ -590,7 +598,7 @@ P(t) = J\dot{\omega}\omega + k\omega^3
 <p><img src="http://localhost:4000/assets/images/projects/erg/decay.png" alt="" />
 <em>Highlighting rotational frequency vs. time during the recovery phase</em></p>
 
-<p>Another way to see it is by doing a little math. In this region, the equation is</p>
+<p>Another way to see it is by doing a little math. In this region, Equation <script type="math/tex">\ref{recovery}</script> is the important one:</p>
 
 <script type="math/tex; mode=display">\begin{align*}
 J\dot{\omega} = - k\omega^2
@@ -620,7 +628,7 @@ J\dot{\omega} = - k\omega^2
 k{\overline{\omega}}^3 = cv^3
 \end{align*}</script>
 
-<p>The magic factor here is c. Most erg’s spit out a distance rowed, and you can see that we can transform total rotations of the flywheel to distance rowed with <script type="math/tex">s = {(\frac{k}{c})}^{1/3}\theta</script>. I used a magic factor of <script type="math/tex">c = 2.8</script> just like <a href="http://eodg.atm.ox.ac.uk/user/dudhia/rowing/physics/ergometer.html#section9">here</a>.</p>
+<p>The magic factor here is <script type="math/tex">c</script>. Most erg’s spit out a distance rowed, and you can see that we can transform total rotations of the flywheel to distance rowed with <script type="math/tex">s = {(\frac{k}{c})}^{1/3}\theta</script>. I used a magic factor of <script type="math/tex">c = 2.8</script> just like <a href="http://eodg.atm.ox.ac.uk/user/dudhia/rowing/physics/ergometer.html#section9">here</a>.</p>
 
 <h3 id="converging-the-model">converging the model</h3>
 
@@ -704,6 +712,37 @@ k{\overline{\omega}}^3 = cv^3
 
 <h3 id="rtos-structure">RTOS structure</h3>
 <p>I was able to do the whole thing with 8 threads, including a thread for monitoring the RTOS overhead itself.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*********************************************************************************
+Thread Table -   Remember to change threadcount in nilconf.h
+Notes:
+1. Use the stack tracer to optimize stack sizes
+2. Priorities - look at order in Thread table
+********************************************************************************/</span>
+
+<span class="n">THD_WORKING_AREA</span><span class="p">(</span><span class="n">waThread1</span><span class="p">,</span> <span class="mi">16</span><span class="p">);</span>
+<span class="n">THD_WORKING_AREA</span><span class="p">(</span><span class="n">waThread2</span><span class="p">,</span> <span class="mi">90</span><span class="p">);</span>
+<span class="n">THD_WORKING_AREA</span><span class="p">(</span><span class="n">waThread3</span><span class="p">,</span> <span class="mi">90</span><span class="p">);</span>
+<span class="n">THD_WORKING_AREA</span><span class="p">(</span><span class="n">waThread4</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+<span class="n">THD_WORKING_AREA</span><span class="p">(</span><span class="n">waThread5</span><span class="p">,</span> <span class="mi">96</span><span class="p">);</span>
+<span class="n">THD_WORKING_AREA</span><span class="p">(</span><span class="n">waThread6</span><span class="p">,</span> <span class="mi">110</span><span class="p">);</span>
+<span class="n">THD_WORKING_AREA</span><span class="p">(</span><span class="n">waThread7</span><span class="p">,</span> <span class="mi">80</span><span class="p">);</span>
+<span class="n">THD_WORKING_AREA</span><span class="p">(</span><span class="n">waThread8</span><span class="p">,</span> <span class="mi">80</span><span class="p">);</span>
+<span class="c1">//THD_WORKING_AREA(waTimer, 20); /*just for completeness, commented out here because defined in time.c
+</span>
+
+<span class="n">THD_TABLE_BEGIN</span>  
+  <span class="n">THD_TABLE_ENTRY</span><span class="p">(</span><span class="n">waThread1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">Thread1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)</span> <span class="c1">//Button Press Handler
+</span>  <span class="n">THD_TABLE_ENTRY</span><span class="p">(</span><span class="n">waThread7</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">Thread7</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)</span> <span class="c1">//Chopper Calculations
+</span>  <span class="n">THD_TABLE_ENTRY</span><span class="p">(</span><span class="n">waThread2</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">Thread2</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)</span> <span class="c1">//Menu Navigation Handler
+</span>  <span class="n">THD_TABLE_ENTRY</span><span class="p">(</span><span class="n">waThread6</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">Thread6</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)</span> <span class="c1">//Stack Output via LCD
+</span>  <span class="n">THD_TABLE_ENTRY</span><span class="p">(</span><span class="n">waThread8</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">Thread8</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)</span> <span class="c1">//Stack Output via USART
+</span>  <span class="n">THD_TABLE_ENTRY</span><span class="p">(</span><span class="n">waThread4</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">Thread4</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)</span> <span class="c1">//Time, Dist &amp; Calories
+</span>  <span class="n">THD_TABLE_ENTRY</span><span class="p">(</span><span class="n">waThread5</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">Thread5</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)</span> <span class="c1">//LCD navigation
+</span>  <span class="n">THD_TABLE_ENTRY</span><span class="p">(</span><span class="n">waThread3</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">Thread3</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)</span> <span class="c1">//LCD ergo
+</span>  <span class="n">THD_TABLE_ENTRY</span><span class="p">(</span><span class="n">waTimer</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">timer</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)</span> <span class="c1">//declared in time.c, run at lowest priority
+</span><span class="n">THD_TABLE_END</span>
+</code></pre></div></div>
 
 <h2 id="some-things-i-learned-doing-v20">Some things I learned doing v2.0</h2>
 <h3 id="code-for-low-overhead">Code for low overhead</h3>
