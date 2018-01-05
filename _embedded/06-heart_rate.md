@@ -255,6 +255,23 @@ Below is a screenshot of a numerical model of how this algorithm settles.
 ![]({{ site.url }}/assets/images/projects/HRM/simulation.png)
 *Following the telltale heart*
 
+Wheew .. long explanation for something that ends up only being a few lines of code:
+
+```c
+//ADJUST HB with a partial step to current value
+if ((J>0.5*K) && (J< 2*K)){
+  coeff = 1 - exp(log(tolerance)/(seconds_to_lock*Keff/60)) ;
+    if (coeff > attack_max) coeff = attack_max ;
+}
+else coeff = 0.05;
+if (K > J) {
+  K = K - coeff*(K-J);
+}
+if (K < J) {
+  K = K + coeff*(J-K);
+}
+```
+
 This algorithm in equation $$\eqref{master}$$ guarantees a nice display that follows the heartbeat changes well. There is one hill around our house where I can go from 130 bpm to 185 bpm in about 15 seconds - & my monitor follows it well. The only technical issue in implementation is that I had to use real precision math, but that could always be changed to integer math at some point.
 
 ### Last thoughts

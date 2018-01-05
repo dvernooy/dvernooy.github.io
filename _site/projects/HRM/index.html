@@ -72,7 +72,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-01-04T21:41:51-05:00">
+  <meta property="article:published_time" content="2018-01-04T22:34:00-05:00">
 
 
 
@@ -637,6 +637,22 @@ K = K +f(J-K)= K + (1-e^{\frac{60\ln(0.05)}{8K}})(J-K)
 
 <p><img src="http://localhost:4000/assets/images/projects/HRM/simulation.png" alt="" />
 <em>Following the telltale heart</em></p>
+
+<p>Wheew .. long explanation for something that ends up only being a few lines of code:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//ADJUST HB with a partial step to current value
+</span><span class="k">if</span> <span class="p">((</span><span class="n">J</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="o">*</span><span class="n">K</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">J</span><span class="o">&lt;</span> <span class="mi">2</span><span class="o">*</span><span class="n">K</span><span class="p">)){</span>
+  <span class="n">coeff</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">exp</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">tolerance</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">seconds_to_lock</span><span class="o">*</span><span class="n">Keff</span><span class="o">/</span><span class="mi">60</span><span class="p">))</span> <span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">coeff</span> <span class="o">&gt;</span> <span class="n">attack_max</span><span class="p">)</span> <span class="n">coeff</span> <span class="o">=</span> <span class="n">attack_max</span> <span class="p">;</span>
+<span class="p">}</span>
+<span class="k">else</span> <span class="n">coeff</span> <span class="o">=</span> <span class="mi">0</span><span class="p">.</span><span class="mo">05</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">K</span> <span class="o">&gt;</span> <span class="n">J</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">K</span> <span class="o">=</span> <span class="n">K</span> <span class="o">-</span> <span class="n">coeff</span><span class="o">*</span><span class="p">(</span><span class="n">K</span><span class="o">-</span><span class="n">J</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">K</span> <span class="o">&lt;</span> <span class="n">J</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">K</span> <span class="o">=</span> <span class="n">K</span> <span class="o">+</span> <span class="n">coeff</span><span class="o">*</span><span class="p">(</span><span class="n">J</span><span class="o">-</span><span class="n">K</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>This algorithm in equation <script type="math/tex">\eqref{master}</script> guarantees a nice display that follows the heartbeat changes well. There is one hill around our house where I can go from 130 bpm to 185 bpm in about 15 seconds - &amp; my monitor follows it well. The only technical issue in implementation is that I had to use real precision math, but that could always be changed to integer math at some point.</p>
 

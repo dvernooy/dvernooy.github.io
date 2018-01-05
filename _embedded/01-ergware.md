@@ -149,11 +149,11 @@ $$
 Two interesting ways to further simplify.
 > there's **no** torque during the recovery part of the stroke
 
-So defining $$T_s$$ as the time for the power part of the stroke
+So defining $$T_p$$ as the time for the power part of the stroke and $$T_{rec}$$ as the recovery part, so that $$T_p + T_{rec} = T$$, then
 
 $$
 \begin{align*}
-\overline{P} =\frac{1}{T}\int_{0}^{T_s} (J\dot{\omega}\omega + k\omega^3)dt
+\overline{P} =\frac{1}{T}\int_{0}^{T_p} (J\dot{\omega}\omega + k\omega^3)dt
 \tag{4}
 \label{power2}
 \end{align*}
@@ -163,7 +163,7 @@ $$
 
 > the first term in the integral is close to zero because acceleration almost balances the deceleration over a stroke
 
-So we if we define the average rotational speed of the flywheel over the stroke as $$\overline{\omega}$$ then
+So we if we define the average rotational speed of the flywheel over the *total* stroke time $$T$$ as $$\overline{\omega}$$ then
 
 $$
 \begin{align*}
@@ -196,7 +196,7 @@ Its just an estimate and sort of the lazy way out, but probably good within 10 o
 
 > damping constant $$k$$
 
-You can measure $$k$$ by just looking at the decay of the stroke after the rower has finished the power part of the stroke. But how do you know when that is? Well, looking at the curves, you can see that $$omega$$ decays almost linearly during the recovery. Here's a picture of the rotational velocity vs. time for 4 strokes - the linear decay is highlighted in yellow - we can use the fact that the second derivative of the curve in this region is basically zero to "mask" it off in the software
+You can measure $$k$$ by just looking at the decay of the stroke after the rower has finished the power part of the stroke. But how do you know when that is? Well, looking at the curves, you can see that $$\omega$$ decays almost linearly during the recovery. Here's a picture of the rotational velocity vs. time for 4 strokes - the linear decay is highlighted in yellow - we can use the fact that the second derivative of the curve in this region is basically zero to "mask" it off in the software
 
 ![]({{ site.url }}/assets/images/projects/erg/decay.png)
 *Highlighting rotational frequency vs. time during the recovery phase*
@@ -209,7 +209,7 @@ J\dot{\omega} = - k\omega^2
 \end{align*}
 $$
 
-Setting the omega at the start of this period as $$\omega_i$$, you can solve this to get
+Setting the $$\omega = \omega_i$$ at the start of the decay (recovery) period, you can solve this to get
 
 $$
 \begin{align*}
@@ -316,7 +316,7 @@ Writing the code for these goodies was very straightforward since I had almost a
 Choices, choices ... there are lots - even for my 8-bit AVR ATMega328. FreeRTOS, NuTTX, AtomThreads, ChiBIOS, RiOS, roll-your-own. After a bunch of investigation, I settled on NilRTOS, which is a lightweight variant of ChiBIOS that is still very flexible and pretty easy to incorporate. And I gotta say, I'm very impressed with [Gianni] & his team's work - there is a bunch of documentation around to help.
 
 ### Menu structure
-I have a very simple menu structure that allows for nested sub-menus. All of the memory is pre-allocated, and could probably be done even more efficiently, but I'm pretty happy with it. Here's the code:
+I have a very simple menu structure that allows for nested sub-menus. All of the memory is pre-allocated, and could probably be done even more efficiently, but I'm pretty happy with it.
 
 ### Pushbutton responsivity
 One of the bigger questions I had was whether the buttons would be capable of interrupting the system with many threads running ... giving the user a responsive interface.
@@ -342,7 +342,6 @@ THD_WORKING_AREA(waThread7, 80);
 THD_WORKING_AREA(waThread8, 80);
 //THD_WORKING_AREA(waTimer, 20); /*just for completeness, commented out here because defined in time.c
 
-
 THD_TABLE_BEGIN  
   THD_TABLE_ENTRY(waThread1, NULL, Thread1, NULL) //Button Press Handler
   THD_TABLE_ENTRY(waThread7, NULL, Thread7, NULL) //Chopper Calculations
@@ -356,8 +355,7 @@ THD_TABLE_BEGIN
 THD_TABLE_END
 ```
 
-
-## Some things I learned doing v2.0
+## Some things I learned implementing an RTOS in v0.2
 ### Code for low overhead
 I knew I'd be up against limits of the chip: 32K Flash, 2K SRAM, 1K EEPROM. Here is how I dealt with it.
 
@@ -365,7 +363,7 @@ I knew I'd be up against limits of the chip: 32K Flash, 2K SRAM, 1K EEPROM. Here
 That's what they're there for.
 
 ### Write lightweight usage services
-Essential to ensuring optimal memory allocation. There's a screenshot of the usage statistics for each of the threads after a workout.
+Essential to ensuring optimal memory allocation. There's a screenshot above of the usage statistics for each of the threads after a workout.
 
 
 ## In Summary

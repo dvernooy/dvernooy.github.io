@@ -72,7 +72,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-01-04T21:41:51-05:00">
+  <meta property="article:published_time" content="2018-01-04T22:34:00-05:00">
 
 
 
@@ -388,7 +388,7 @@
       <li><a href="#rtos-structure">RTOS structure</a></li>
     </ul>
   </li>
-  <li><a href="#some-things-i-learned-doing-v20">Some things I learned doing v2.0</a>
+  <li><a href="#some-things-i-learned-implementing-an-rtos-in-v02">Some things I learned implementing an RTOS in v0.2</a>
     <ul>
       <li><a href="#code-for-low-overhead">Code for low overhead</a></li>
       <li><a href="#use-the-message-passing--signalling-structures-of-the-rtos">Use the message passing &amp; signalling structures of the RTOS</a></li>
@@ -540,10 +540,10 @@ P(t) = J\dot{\omega}\omega + k\omega^3
   <p>there’s <strong>no</strong> torque during the recovery part of the stroke</p>
 </blockquote>
 
-<p>So defining <script type="math/tex">T_s</script> as the time for the power part of the stroke</p>
+<p>So defining <script type="math/tex">T_p</script> as the time for the power part of the stroke and <script type="math/tex">T_{rec}</script> as the recovery part, so that <script type="math/tex">T_p + T_{rec} = T</script>, then</p>
 
 <script type="math/tex; mode=display">\begin{align*}
-\overline{P} =\frac{1}{T}\int_{0}^{T_s} (J\dot{\omega}\omega + k\omega^3)dt
+\overline{P} =\frac{1}{T}\int_{0}^{T_p} (J\dot{\omega}\omega + k\omega^3)dt
 \tag{4}
 \label{power2}
 \end{align*}</script>
@@ -554,7 +554,7 @@ P(t) = J\dot{\omega}\omega + k\omega^3
   <p>the first term in the integral is close to zero because acceleration almost balances the deceleration over a stroke</p>
 </blockquote>
 
-<p>So we if we define the average rotational speed of the flywheel over the stroke as <script type="math/tex">\overline{\omega}</script> then</p>
+<p>So we if we define the average rotational speed of the flywheel over the <em>total</em> stroke time <script type="math/tex">T</script> as <script type="math/tex">\overline{\omega}</script> then</p>
 
 <script type="math/tex; mode=display">\begin{align*}
 \overline{P} = k{\overline{\omega}}^3
@@ -593,7 +593,7 @@ P(t) = J\dot{\omega}\omega + k\omega^3
   <p>damping constant <script type="math/tex">k</script></p>
 </blockquote>
 
-<p>You can measure <script type="math/tex">k</script> by just looking at the decay of the stroke after the rower has finished the power part of the stroke. But how do you know when that is? Well, looking at the curves, you can see that <script type="math/tex">omega</script> decays almost linearly during the recovery. Here’s a picture of the rotational velocity vs. time for 4 strokes - the linear decay is highlighted in yellow - we can use the fact that the second derivative of the curve in this region is basically zero to “mask” it off in the software</p>
+<p>You can measure <script type="math/tex">k</script> by just looking at the decay of the stroke after the rower has finished the power part of the stroke. But how do you know when that is? Well, looking at the curves, you can see that <script type="math/tex">\omega</script> decays almost linearly during the recovery. Here’s a picture of the rotational velocity vs. time for 4 strokes - the linear decay is highlighted in yellow - we can use the fact that the second derivative of the curve in this region is basically zero to “mask” it off in the software</p>
 
 <p><img src="http://localhost:4000/assets/images/projects/erg/decay.png" alt="" />
 <em>Highlighting rotational frequency vs. time during the recovery phase</em></p>
@@ -604,7 +604,7 @@ P(t) = J\dot{\omega}\omega + k\omega^3
 J\dot{\omega} = - k\omega^2
 \end{align*}</script>
 
-<p>Setting the omega at the start of this period as <script type="math/tex">\omega_i</script>, you can solve this to get</p>
+<p>Setting the <script type="math/tex">\omega = \omega_i</script> at the start of the decay (recovery) period, you can solve this to get</p>
 
 <script type="math/tex; mode=display">\begin{align*}
 \frac{\omega}{\omega_i} = \frac{1}{1+{\epsilon}t}
@@ -705,7 +705,7 @@ k{\overline{\omega}}^3 = cv^3
 <p>Choices, choices … there are lots - even for my 8-bit AVR ATMega328. FreeRTOS, NuTTX, AtomThreads, ChiBIOS, RiOS, roll-your-own. After a bunch of investigation, I settled on NilRTOS, which is a lightweight variant of ChiBIOS that is still very flexible and pretty easy to incorporate. And I gotta say, I’m very impressed with [Gianni] &amp; his team’s work - there is a bunch of documentation around to help.</p>
 
 <h3 id="menu-structure">Menu structure</h3>
-<p>I have a very simple menu structure that allows for nested sub-menus. All of the memory is pre-allocated, and could probably be done even more efficiently, but I’m pretty happy with it. Here’s the code:</p>
+<p>I have a very simple menu structure that allows for nested sub-menus. All of the memory is pre-allocated, and could probably be done even more efficiently, but I’m pretty happy with it.</p>
 
 <h3 id="pushbutton-responsivity">Pushbutton responsivity</h3>
 <p>One of the bigger questions I had was whether the buttons would be capable of interrupting the system with many threads running … giving the user a responsive interface.</p>
@@ -730,7 +730,6 @@ Notes:
 <span class="n">THD_WORKING_AREA</span><span class="p">(</span><span class="n">waThread8</span><span class="p">,</span> <span class="mi">80</span><span class="p">);</span>
 <span class="c1">//THD_WORKING_AREA(waTimer, 20); /*just for completeness, commented out here because defined in time.c
 </span>
-
 <span class="n">THD_TABLE_BEGIN</span>  
   <span class="n">THD_TABLE_ENTRY</span><span class="p">(</span><span class="n">waThread1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">Thread1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)</span> <span class="c1">//Button Press Handler
 </span>  <span class="n">THD_TABLE_ENTRY</span><span class="p">(</span><span class="n">waThread7</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">Thread7</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)</span> <span class="c1">//Chopper Calculations
@@ -744,7 +743,7 @@ Notes:
 </span><span class="n">THD_TABLE_END</span>
 </code></pre></div></div>
 
-<h2 id="some-things-i-learned-doing-v20">Some things I learned doing v2.0</h2>
+<h2 id="some-things-i-learned-implementing-an-rtos-in-v02">Some things I learned implementing an RTOS in v0.2</h2>
 <h3 id="code-for-low-overhead">Code for low overhead</h3>
 <p>I knew I’d be up against limits of the chip: 32K Flash, 2K SRAM, 1K EEPROM. Here is how I dealt with it.</p>
 
@@ -752,7 +751,7 @@ Notes:
 <p>That’s what they’re there for.</p>
 
 <h3 id="write-lightweight-usage-services">Write lightweight usage services</h3>
-<p>Essential to ensuring optimal memory allocation. There’s a screenshot of the usage statistics for each of the threads after a workout.</p>
+<p>Essential to ensuring optimal memory allocation. There’s a screenshot above of the usage statistics for each of the threads after a workout.</p>
 
 <h2 id="in-summary">In Summary</h2>
 <p>Time to go back and re-read “The Boys in the Boat”.</p>
