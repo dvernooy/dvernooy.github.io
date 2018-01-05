@@ -132,7 +132,7 @@ P(t) = J\dot{\omega}\omega + k\omega^3
 \end{align*}
 $$
 
-or, time averaging over one stroke time $$T$$ you get the time-averaged Power \overline{P} which is what people care about
+or, time averaging over one stroke time $$T$$ you get the time-averaged Power $$\overline{P}$$ which is what people care about
 
 $$
 \begin{align*}
