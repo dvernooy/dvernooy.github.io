@@ -1,9 +1,0 @@
-_id: 64b4c1b0-eab4-11e7-a44f-935f90061bb7
-_parent: 'http://localhost:4000/blog/comments'
-message: 'ok, understood'
-name: dave v2
-email: ede06cd37b8286ef7f82dd4802fcbda2
-url: ''
-replying_to: ''
-hidden: ''
-date: '2017-12-27T03:16:56.680Z'
