@@ -90,7 +90,8 @@ The final piece is the power supply. I went with a super cheapo I had lying arou
 
 Here is a close-up of my handiwork.
 
-> picture of circuit
+![]({{ site.url }}/assets/images/projects/erg/layout.png)
+*Perfectly reproducible (should be the theme of this blog)*
 
 ### Mounting to the erg
 I used 1/8" pvc tubing as struts to hold the display in a convenient spot, make it possible for the rower to tweak the orientation, and also as a way to route the sensor signal and power supply cord. I made a little box for the circuit using foam board cut and glued to custom fit.
@@ -180,43 +181,78 @@ There is an assumption of a sinusoidal force applied by the rower. The amplitude
 
 Its possible to calculate the moment of inertia $$J$$ of the flywheel by accounting for all of the piece parts and their contribution. That's what I did.
 
->insert table here
+![]({{ site.url }}/assets/images/projects/erg/moment_inertia.png)
+*Estimate of flywheel moment of inertia $$J = 0.11$$ $$kgm^2$$*
 
 Its just an estimate and sort of the lazy way out, but probably good within 10 or 15%. I'll address it at some point with a measurement, just like [this procedure](https://www.analyticcycling.com/WheelsInertia_Page.html) outlines.
 
 > damping constant $$k$$
 
-You can measure $$k$$ by just looking at the decay of the stroke after the rower has finished the power part of the stroke. But how do you know when that is? Well, looking at the curves, you can see that $$omega$$ decays almost linearly during the recovery. So $$\dot{\omega}$$ is almost a constant, and $$\ddot{\omega}$$ is close to zero. So I set "screening criteria" on the absolute value of both of these parameters and use that to detect the stroke recovery phase. Then during this phase I can estimate $$k$$. Clear enough? Here's a picture to illustrate:
+You can measure $$k$$ by just looking at the decay of the stroke after the rower has finished the power part of the stroke. But how do you know when that is? Well, looking at the curves, you can see that $$omega$$ decays almost linearly during the recovery. Here's a picture of the rotational velocity vs. time for 4 strokes - the linear decay is highlighted in yellow - we can use the fact that the second derivative of the curve in this region is basically zero to "mask" it off in the software
+
+![]({{ site.url }}/assets/images/projects/erg/decay.png)
+*Highlighting rotational frequency vs. time during the recovery phase*
+
+Another way to see it is by doing a little math. In this region, the equation is
+
+$$
+\begin{align*}
+J\dot{\omega} = - k\omega^2
+\end{align*}
+$$
+
+Setting the omega at the start of this period as $$\omega_i$$, you can solve this to get
+
+$$
+\begin{align*}
+\frac{\omega}{\omega_i} = \frac{1}{1+{\epsilon}t}
+\end{align*}
+$$
+
+where $$\epsilon = \frac{k\omega_i}{J}$$. For $$J = 0.11$$ $$Nm^2$$, $$k = 0.0003$$ $$Nm^2/rad^2$$ and $$\omega_i = 70$$ $$rad/s$$ - we find out $$\epsilon = 0.2$$ $$s^{-1}$$. This is small enough that we can simplify
+
+$$
+\begin{align*}
+\frac{\omega}{\omega_i} = {1-{\epsilon}t}
+\end{align*}
+$$
+
+whose second derivative $$\ddot{\omega}$$ is indeed very close to zero. So I set "screening criteria" on the absolute value of both of these parameters and use that to detect the stroke recovery phase. Then during this phase I can estimate $$k$$. Clear enough?
 
 
 > magic factor
 
 The other thing a rower wants to know is how far they've rowed. (well it turns out, not very far in an erg unless you have some special power). However, assuming that there is a similar damping effect in the rower's speed $$v$$ on the water, the damping losses
 
+$$
 \begin{align*}
 k{\overline{\omega}}^3 = cv^3
 \end{align*}
 $$
 
-The magic factor here is c. Most erg's spit out a distance rowed, and you can see that we can transform total rotations of the flywheel to distance rowed with $$s = {\frac{k}{c}}^{1/3}\theta$$. I used a magic factor of c = 2.8 just like [here]http://eodg.atm.ox.ac.uk/user/dudhia/rowing/physics/ergometer.html#section9.
+The magic factor here is c. Most erg's spit out a distance rowed, and you can see that we can transform total rotations of the flywheel to distance rowed with $$s = {(\frac{k}{c})}^{1/3}\theta$$. I used a magic factor of $$c = 2.8$$ just like [here](http://eodg.atm.ox.ac.uk/user/dudhia/rowing/physics/ergometer.html#section9).
 
 ### converging the model
 
 Having set all of these things in the model, there is one free parameter. I have chosen it to be the total stroke rate (which sets the overall stroke time). Once that is set, you need to "goal seek" the initial rotational frequency so that the initial and final match (as they would in steady state). This will give a converged model.
 
-Finally, it predicts a certain shape for the time dependence of the rotational frequency. Here's some plots -
+Finally, it predicts a certain shape for the time dependence of the rotational frequency. Here's what it should look like -
 
-|plot of rotational frequency
+![]({{ site.url }}/assets/images/projects/erg/model-stroke.png)
+*Model prediction of what the rotation rate looks like vs. time during the stroke*
 
-|plot of kpowr, Jpowr, total power
+and another prediction from the model is the power output
+
+![]({{ site.url }}/assets/images/projects/erg/model-power.png)
+*Model prediction of instantaneous power profiles, and the two components that make it up*
 
 Wonder if that's what we'll see when we get this sucker built? \[foreshadowing\].
 
-## ErgWare v1.0
+## ErgWare v0.1
 ### display
 In the first rev, I couldn't really ask for any advice from my "users" since the thing was supposed to be a surprise. So I just made a best guess as to what the screen should look like.
 
-![]({{ site.url }}/assets/images/projects/erg/rev1_screen.jpg)
+![]({{ site.url }}/assets/images/projects/erg/rev1_screen.png)
 *Cramming info onto the screen in v1.0 ... will they like it?*
 
 ### structure
@@ -237,15 +273,17 @@ The buttons have limited functionality in this first rev ... they can basically 
 ### some interesting data
 I wrote a piece of code during the development phase to write out to the EEPROM the rotational speed vs. time. Here is how it compares to the model ... pretty well! When I saw this, I charged forward full throttle with some confidence in the approach.
 
->model vs. data comparison
+![]({{ site.url }}/assets/images/projects/erg/model-v-actual.png)
+*How the model stacks up against actual data ... pretty darn close*
 
 ### good rowers vs. crappy rowers
 So my daughter had been rowing for about 9 months when I had her take this thing for a spin. I recorded her power output vs. #of strokes at startup in the EEPROM. Then I did the same for myself, who had been rowing for all of 9 m-m-m-minutes. Guess who's the NOOB?
 
->Sarah vs. dad
+![]({{ site.url }}/assets/images/projects/erg/comparison.png)
+*Am I actually any good at rowing?*
 
-## ErgWare v2.0
-v1.0 was in place for about 6 months, & then I made the mistake of asking "what else?"
+## ErgWare v0.2
+v0.1 was in place for about 6 months, & then I made the mistake of asking "what else?"
 
 ### User feedback
 Wanna see more stuff. A countdown timer, calories burned, parameter setup. Bigger fonts. More, more, more. Ok, I listen to my users.
@@ -255,7 +293,13 @@ Having learned my lesson on another project, it was time for a different approac
 
 I needed a menu, and I needed a scheduler ... in short, I needed a lightweight RTOS for an 8 bit microcontroller. Virtually impossible to do what they wanted without one ... to see why, Here is a gallery of the screens I implemented in V2.0 -
 
-> insert screenshots
+![]({{ site.url }}/assets/images/projects/erg/screen_flow_one.png)
+
+![]({{ site.url }}/assets/images/projects/erg/screen_flow_two.png)
+
+![]({{ site.url }}/assets/images/projects/erg/screen_flow_three.png)
+*Screenshots of Ergware v0.2 ... more things to occupy your mind while rowing*
+
 
 Writing the code for these goodies was very straightforward since I had almost all of the information readily available. Other than the RTOS diagnostics (more below) the only really new thing was the calorie counter.
 
@@ -276,7 +320,7 @@ I was able to do the whole thing with 8 threads, including a thread for monitori
 ### Code for low overhead
 I knew I'd be up against limits of the chip: 32K Flash, 2K SRAM, 1K EEPROM. Here is how I dealt with it.
 
-### Use the message passing & signalling structures of the RTOS.
+### Use the message passing & signalling structures of the RTOS
 That's what they're there for.
 
 ### Write lightweight usage services
