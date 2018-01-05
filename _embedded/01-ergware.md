@@ -155,7 +155,7 @@ $$
 \begin{align*}
 \overline{P} =\frac{1}{T}\int_{0}^{T_s} (J\dot{\omega}\omega + k\omega^3)dt
 \tag{4}
-\label{power}
+\label{power2}
 \end{align*}
 $$
 
