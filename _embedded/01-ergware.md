@@ -23,7 +23,7 @@ This will document all aspects of ErgWare software development, a project I unde
 
 It was great fun to build, and is even more fun to use. Here's a video of it in action
 
->Video
+{% include video id="SZTBec9r7-A" provider="youtube" %}
 
 After noodling on the original design, we decided it would be neat to add the software & display so the rower could get real-time feedback on the basic things a rower would want to know. We were able to get good estimates of stroke rate, power output, effective 500m split pace, distance rowed, fraction of time spent in power phase of stroke, etc..  Here is a close-in screenshot of the current version (you can see this display in the main picture above attached to the pvc tubing).
 
@@ -324,7 +324,7 @@ I knew I'd be up against limits of the chip: 32K Flash, 2K SRAM, 1K EEPROM. Here
 That's what they're there for.
 
 ### Write lightweight usage services
-Essential to ensuring optimal memory allocation. Here's a screenshot of the usage statistics for each of the threads after a workout.
+Essential to ensuring optimal memory allocation. There's a screenshot of the usage statistics for each of the threads after a workout.
 
 
 ## In Summary

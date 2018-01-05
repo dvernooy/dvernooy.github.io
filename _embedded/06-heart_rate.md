@@ -147,6 +147,10 @@ In order to turn this into a time measurement, and eventually a beats-per-minute
 
 So how did I get such a long polling loop time? And, more importantly, since the loop time acts basically as a master timer,how to make it repeatable from loop to loop? More on this later.
 
+For now, here is a little video of everything put together, demonstrating the stand-off detectability of the receiver, and the importance of keeping the transmitter and receiver coils roughly aligned. You can see that as I rotate my body with the chest strap relative to the receiver, the signal loses lock.
+
+{% include video id="I6V4WGxrC0A" provider="youtube" %}
+
 ### Tricky bits
 
 There were actually a number of practical issues to deal with to make this thing robust. I'll explain how I dealt with them one by one, but it is probably best to start with a timing diagram/sketch.

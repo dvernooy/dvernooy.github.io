@@ -72,7 +72,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-01-04T19:30:39-05:00">
+  <meta property="article:published_time" content="2018-01-04T20:41:08-05:00">
 
 
 
@@ -342,7 +342,7 @@
 
 
 
-  15 minute read
+  16 minute read
 </p>
           
         </header>
@@ -522,6 +522,15 @@
 <p>In order to turn this into a time measurement, and eventually a beats-per-minute (bpm) rate, I used the polling loop counter <script type="math/tex">H</script>. I calibrated the loop time off-line by feeding my software a fake heartbeat signal from a function generator that simulated a range of heartbeats from 30 bpm to 200 bpm, and figured out the calibration constant corresponding to one pass through the loop. The polling loop was 1.61 ms long, so it would be 1245 polling loops between heartbeats for a heart rate of 30bpm and ~ 185 polling loops between heartbeats for 200 bpm. If you read the code, that is where the factor 37312 comes from.</p>
 
 <p>So how did I get such a long polling loop time? And, more importantly, since the loop time acts basically as a master timer,how to make it repeatable from loop to loop? More on this later.</p>
+
+<p>For now, here is a little video of everything put together, demonstrating the stand-off detectability of the receiver, and the importance of keeping the transmitter and receiver coils roughly aligned. You can see that as I rotate my body with the chest strap relative to the receiver, the signal loses lock.</p>
+
+<!-- Courtesy of embedresponsively.com //-->
+<div class="responsive-video-container">
+
+  <iframe src="https://www.youtube.com/embed/I6V4WGxrC0A" frameborder="0" allowfullscreen=""></iframe>
+
+</div>
 
 <h3 id="tricky-bits">Tricky bits</h3>
 

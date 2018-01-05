@@ -460,128 +460,18 @@ var idx = lunr(function () {
   this.pipeline.add(greekStemmer)
   this.pipeline.remove(lunr.stemmer)
 
-  
-  
-    
-    
-      this.add({
-          title: "Ergware",
-          excerpt: "Our DIY ergometer … with its new “brain” Project overview Hey all, Dave Vernooy here with another project. I’m assuming...",
-          categories: [],
-          tags: [],
-          id: 0
-      })
-      
-    
-      this.add({
-          title: "Heart Rate Monitor",
-          excerpt: "MacGyver … eat your heart out Project overview Welcome to my heart rate monitor project. These things have been around...",
-          categories: [],
-          tags: [],
-          id: 1
-      })
-      
-    
-  
-    
-    
-      this.add({
-          title: "Pinewood Derby",
-          excerpt: "Thumbs way up for the Pinewood Derby The master equation OK. If you are going for speed (uuh .. you...",
-          categories: [],
-          tags: [],
-          id: 2
-      })
-      
-    
-      this.add({
-          title: "Berry Picking",
-          excerpt: "Summer is here How long is the berry season, anyways? The date is Sunday, June 29th 2014. For some reason,...",
-          categories: [],
-          tags: [],
-          id: 3
-      })
-      
-    
-      this.add({
-          title: "Christmas payback",
-          excerpt: "Nah … no bike repairs needed after this race, right Ian? A really cool Christmas present After many years of...",
-          categories: ["Layout","Uncategorized"],
-          tags: ["comments","layout"],
-          id: 4
-      })
-      
-    
-  
+  for (var item in store) {
+    this.add({
+      title: store[item].title,
+      excerpt: store[item].excerpt,
+      categories: store[item].categories,
+      tags: store[item].tags,
+      id: item
+    })
+  }
 });
 
 console.log( jQuery.type(idx) );
-
-var store = [
-  
-    
-    
-    
-      
-      {
-        "title": "Ergware",
-        "url": "http://localhost:4000/projects/ergware/",
-        "excerpt": "Our DIY ergometer … with its new “brain” Project overview Hey all, Dave Vernooy here with another project. I’m assuming...",
-        "teaser":
-          
-            null
-          
-      },
-    
-      
-      {
-        "title": "Heart Rate Monitor",
-        "url": "http://localhost:4000/projects/HRM/",
-        "excerpt": "MacGyver … eat your heart out Project overview Welcome to my heart rate monitor project. These things have been around...",
-        "teaser":
-          
-            null
-          
-      },
-    
-  
-    
-    
-    
-      
-      {
-        "title": "Pinewood Derby",
-        "url": "http://localhost:4000/blog/derby",
-        "excerpt": "Thumbs way up for the Pinewood Derby The master equation OK. If you are going for speed (uuh .. you...",
-        "teaser":
-          
-            null
-          
-      },
-    
-      
-      {
-        "title": "Berry Picking",
-        "url": "http://localhost:4000/blog/berry",
-        "excerpt": "Summer is here How long is the berry season, anyways? The date is Sunday, June 29th 2014. For some reason,...",
-        "teaser":
-          
-            null
-          
-      },
-    
-      
-      {
-        "title": "Christmas payback",
-        "url": "http://localhost:4000/blog/truing",
-        "excerpt": "Nah … no bike repairs needed after this race, right Ian? A really cool Christmas present After many years of...",
-        "teaser":
-          
-            null
-          
-      }
-    
-  ]
 
 $(document).ready(function() {
   $('input#search').on('keyup', function () {
@@ -613,7 +503,7 @@ $(document).ready(function() {
               '<div class="archive__item-teaser">'+
                 '<img src="'+store[ref].teaser+'" alt="">'+
               '</div>'+
-              '<p class="archive__item-excerpt" itemprop="description">'+store[ref].excerpt+'</p>'+
+              '<p class="archive__item-excerpt" itemprop="description">'+store[ref].excerpt.split(" ").splice(0,20).join(" ")+'...</p>'+
             '</article>'+
           '</div>';
       }
@@ -624,7 +514,7 @@ $(document).ready(function() {
               '<h2 class="archive__item-title" itemprop="headline">'+
                 '<a href="'+store[ref].url+'" rel="permalink">'+store[ref].title+'</a>'+
               '</h2>'+
-              '<p class="archive__item-excerpt" itemprop="description">'+store[ref].excerpt+'</p>'+
+              '<p class="archive__item-excerpt" itemprop="description">'+store[ref].excerpt.split(" ").splice(0,20).join(" ")+'...</p>'+
             '</article>'+
           '</div>';
       }
