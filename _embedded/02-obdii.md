@@ -33,23 +33,21 @@ Have you ever seen that poster of the grizzly bear with the salmon in its mouth,
 
 > Video of me getting rid of the check engine light.
 
-
-## Technical
-### What I was working with - Toyotas
+## S.T.E.M.
+### Raw materials - What I was working with - Toyotas
 
 ### The basics - MAF, MAP, etc...
 
-
-## Introduction to OBD2
+### Introduction to OBD2
 On Board diagnostics
-### OBD2 connector
+#### OBD2 connector
 > picture of OBD2 pinout and connector in car
 
-### OBD2 protocols, timing and handshaking
+#### OBD2 protocols, timing and handshaking
 > timing flow
-### CEL codes
+#### CEL codes
 >list of codes
-### OBD2 PIDs (parameter IDs)
+#### OBD2 PIDs (parameter IDs)
 
 ## Hardware - circuit diagram
 

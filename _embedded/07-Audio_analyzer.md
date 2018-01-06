@@ -9,11 +9,25 @@ redirect_from:
   - /theme-setup/
 toc: true
 ---
+> video of it pumping to a beat
 
-### Project overview
-
-
-### Hardware
+## Project overview
 
 
-### Software
+## S.T.E.M.
+
+### The FFT
+
+## Hardware
+
+### Microphone
+
+## Software
+
+### Assembler algorithm
+
+### Filtering
+
+### Parameter choices
+
+### Visualization
