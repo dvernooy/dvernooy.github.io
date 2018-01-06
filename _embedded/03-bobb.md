@@ -9,11 +9,42 @@ redirect_from:
   - /theme-setup/
 toc: true
 ---
+> video of Bobby doing his thing
 
-### Project overview
+## Project overview
+### Segway, beam on cart, ball on beam
+### Why are they hard?
 
+## S.T.E.M.
+### Equations
+### Position
+### Controllers & Digital Control
+#### Comparison
+#### Human
+> response
+#### PID
+> excel
+#### Kalman Filter
+> matlab
+> excel
 
-### Hardware
+## Hardware
+### Sensor
+### feedback servo
+### circuit diagram
+### beam
 
+## Software
+### main loop
 
-### Software
+### discretization
+
+### filtering
+
+### interrupts
+
+### ADC
+
+### Learning by re-doing
+#### Neural Network
+> up next?

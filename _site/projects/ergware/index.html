@@ -72,7 +72,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-01-05T19:59:46-05:00">
+  <meta property="article:published_time" content="2018-01-06T09:45:40-05:00">
 
 
 
@@ -322,7 +322,7 @@
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     <meta itemprop="headline" content="Ergware">
     <meta itemprop="description" content="Open source software for an open source ergometer">
-    <meta itemprop="datePublished" content="January 05, 2018">
+    <meta itemprop="datePublished" content="January 06, 2018">
     <meta itemprop="dateModified" content="February 20, 2017">
 
     <div class="page__inner-wrap">
@@ -350,6 +350,11 @@
               <header><h4 class="nav__title"><i class="fa fa-file-text"></i> On This Page</h4></header>
               <ul class="toc__menu">
   <li><a href="#project-overview">Project overview</a></li>
+  <li><a href="#stem">S.T.E.M.</a>
+    <ul>
+      <li><a href="#model">Model</a></li>
+    </ul>
+  </li>
   <li><a href="#hardware">Hardware</a>
     <ul>
       <li><a href="#the-erg">The erg</a></li>
@@ -358,19 +363,12 @@
       <li><a href="#mounting-to-the-erg">Mounting to the erg</a></li>
     </ul>
   </li>
-  <li><a href="#model">Model</a>
-    <ul>
-      <li><a href="#math">Math</a></li>
-      <li><a href="#getting-the-right-model-parameters">Getting the right model parameters</a></li>
-      <li><a href="#converging-the-model">converging the model</a></li>
-    </ul>
-  </li>
   <li><a href="#ergware-v01">ErgWare v0.1</a>
     <ul>
-      <li><a href="#display">display</a></li>
-      <li><a href="#structure">structure</a></li>
-      <li><a href="#some-interesting-data">some interesting data</a></li>
-      <li><a href="#good-rowers-vs-crappy-rowers">good rowers vs. crappy rowers</a></li>
+      <li><a href="#display">Display</a></li>
+      <li><a href="#structure">Structure</a></li>
+      <li><a href="#some-interesting-data">Some interesting data</a></li>
+      <li><a href="#good-rowers-vs-crappy-rowers">Good rowers vs. crappy rowers</a></li>
     </ul>
   </li>
   <li><a href="#ergware-v02">ErgWare v0.2</a>
@@ -386,7 +384,7 @@
   <li><a href="#some-things-i-learned-implementing-an-rtos-in-v02">Some things I learned implementing an RTOS in v0.2</a>
     <ul>
       <li><a href="#code-for-low-overhead">Code for low overhead</a></li>
-      <li><a href="#use-the-message-passing--signalling-structures-of-the-rtos">Use the message passing &amp; signalling structures of the RTOS</a></li>
+      <li><a href="#use-the-message-passing--signaling-structures-of-the-rtos">Use the message passing &amp; signaling structures of the RTOS</a></li>
       <li><a href="#write-lightweight-usage-services">Write lightweight usage services</a></li>
     </ul>
   </li>
@@ -425,7 +423,7 @@
 <blockquote>
   <ol>
     <li>A pdf document with circuit diagram, some rudimentary construction notes and links to useful web sources I used in the project.</li>
-    <li>An excel spreadsheet with a numerical model I built just so I could make sense of what is going on in an erg. [I am not a rower, but made some good progress with this approach. It was cool to see data from the erg match the model really closely … so I think the numbers all make reasonable sense. We’ll continue to learn as we put it through its paces].</li>
+    <li>An excel spreadsheet with a numerical model I built just so I could make sense of what is going on in an erg. [I am not a rower, but made some good progress with this approach. It was cool to see data from the erg match the model really closely … so I think the numbers all make reasonable sense].</li>
     <li>All of the source code, designed for the Atmega328 microcontroller (Atmel AVR series).</li>
   </ol>
 </blockquote>
@@ -434,13 +432,170 @@
 
 <p>I’ll take you through the build &amp; verification process, but for me it was first important to understand the basic workings of an ergometer. I have never actually done any rowing, so I needed some intuition to guide me. For that, I found a really great <a href="http://home.hccnet.nl/m.holst/Ergo.pdf">physical model</a>. I built up my own numerical version of this which is posted in the excel spreadsheet … more on that soon.</p>
 
-<p>The main thing I discovered is that you can use the “recovery” phase - when the rower is done pulling and the flywheel is just spinning under its own inertia as the rower returns to the initial catch position - to estimate the damping constant of the machine. With that piece of knowledge, you can make tremendous headway on the calculations everyone wants to know about … things like how much raw power you’re putting out.</p>
+<h2 id="stem">S.T.E.M.</h2>
 
-<p>And all you really need to do is measure the rotation rate of the wheel, so lets start there.</p>
+<p>Rowing is about energy conversion - from the rower into either the movement of the boat on the water, or the flywheel on the erg. For the erg, all you really need to do is accurately measure the instantaneous rotation rate of the flywheel and keep track of it. Intuitively obvious? If so, skip the model … otherwise, here’s some background</p>
+
+<h3 id="model">Model</h3>
+<p>Before diving into the software, here is more about the numerical model and how you can infer power, distance rowed and a bunch of other interesting things. I found this really important to understand before I sat down to do the software.</p>
+
+<h4 id="math">Math</h4>
+<p>Just a couple of equations to get you warmed up. From Physics 101, the torque <script type="math/tex">\tau</script> the rower applies to the flywheel via the chain mechanism is related to rotational acceleration <script type="math/tex">\dot{\omega}</script> by the moment of inertia <script type="math/tex">J</script></p>
+
+<script type="math/tex; mode=display">\begin{align*}
+J\dot{\omega} = \tau
+\end{align*}</script>
+
+<p>However, the flywheel slows down because of those plastic things I put on there. Most things that move through air experience a loss proportional to the square of their speed, so a better equation is</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+J\dot{\omega} = \tau - k\omega^2
+\tag{1}
+\label{power_stroke}
+\end{align*}</script>
+
+<p>where <script type="math/tex">k</script> is a damping constant. This is really just Newton’s law applied to a rotating object (the flywheel) - and the equation comes from the free body diagram of that object.</p>
+
+<p>Once the oar (or chain for an erg) reaches the end of the stroke, the rower stops applying the torque and the chain returns (aided by something stretchy). During this phase of the stroke, the rower rests and the flywheel slows down, because its new equation is</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+J\dot{\omega} = - k\omega^2
+\tag{2}
+\label{recovery_stroke}
+\end{align*}</script>
+
+<p>So here’s something interesting: in this equation, we know <script type="math/tex">J</script> (see below), and we’ll know <script type="math/tex">\omega</script> and <script type="math/tex">\dot{\omega}</script> from the flywheel rotation, so we can calculate <script type="math/tex">k</script> <em>if we can isolate this phase of the stroke</em> (more on that soon).</p>
+
+<p>Since instantaneous power <script type="math/tex">P(t)</script> is equal to <script type="math/tex">\tau\omega</script>, we get</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+P(t) = J\dot{\omega}\omega + k\omega^3
+\end{align*}</script>
+
+<p>or, time averaging over one stroke time <script type="math/tex">T</script> you get the time-averaged Power <script type="math/tex">\overline{P}</script>. Now we can start to keep track of something everyone wants to know about …how much raw power you’re putting out.</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+\overline{P} =\frac{1}{T}\int_{0}^{T} (J\dot{\omega}\omega + k\omega^3)dt
+\tag{3}
+\label{power}
+\end{align*}</script>
+
+<p>Two interesting ways to further simplify Equation <script type="math/tex">\ref{power}</script></p>
+<blockquote>
+  <p>Remember, there’s <strong>no</strong> torque during the recovery part of the stroke</p>
+</blockquote>
+
+<p>So defining <script type="math/tex">T_p</script> as the time for the power part of the stroke and <script type="math/tex">T_{rec}</script> as the recovery part, so that <script type="math/tex">T_p + T_{rec} = T</script>, then</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+\overline{P} =\frac{1}{T}\int_{0}^{T_p} (J\dot{\omega}\omega + k\omega^3)dt
+\tag{4}
+\label{power2}
+\end{align*}</script>
+
+<p>(This is the exact equation I implemented in the code).</p>
+
+<blockquote>
+  <p>The first term in the integral of Equation <script type="math/tex">\ref{power}</script> is close to zero because acceleration almost balances the deceleration over a complete stroke</p>
+</blockquote>
+
+<p>So we if we define the average rotational speed of the flywheel over the <em>total</em> stroke time <script type="math/tex">T</script> as <script type="math/tex">\overline{\omega}</script> then</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+\overline{P} = k{\overline{\omega}}^3
+\end{align*}</script>
+
+<p>The first simplification above takes no shortcuts and is accurate within the limitations of the model. The second one is a nice simple equation, but has about 5% inaccuracy. It is a similar looking equation to the power <em>generated</em> by a wind turbine, for example, as a function of wind speed.</p>
+
+<h4 id="getting-the-right-model-parameters">Getting the right model parameters</h4>
+
+<p>I cooked up a little spreadsheet to play with this model. It is posted with the code. Like any model, it needs a bunch of parameters. I’ll talk about them one by one, and how to go about measuring or setting them.</p>
+
+<blockquote>
+  <p>Simple stuff</p>
+</blockquote>
+
+<p>Rower’s mass <script type="math/tex">m</script>, distance of erg chain <script type="math/tex">r</script> relative to flywheel axle … just put those in.</p>
+
+<blockquote>
+  <p>Rower applied force</p>
+</blockquote>
+
+<p>There is an assumption of a sinusoidal force applied by the rower. The amplitude and shape of that force are inputs.</p>
+
+<blockquote>
+  <p>Flywheel moment of inertia <script type="math/tex">J</script></p>
+</blockquote>
+
+<p>Its possible to calculate the moment of inertia <script type="math/tex">J</script> of the flywheel by accounting for all of the piece parts and their contribution. That’s what I did.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/erg/moment_inertia.png" alt="" />
+<em>Estimate of flywheel moment of inertia <script type="math/tex">J = 0.16</script> <script type="math/tex">kgm^2</script></em></p>
+
+<p>Its just an estimate and sort of the lazy way out, but probably good within 10 or 15%. I’ll address it at some point with a measurement, just like <a href="https://www.analyticcycling.com/WheelsInertia_Page.html">this procedure</a> outlines.</p>
+
+<blockquote>
+  <p>Damping constant <script type="math/tex">k</script> &amp; “stroke detection”</p>
+</blockquote>
+
+<p>The main thing I discovered is that you can use the decay of the flywheel rotation during the “recovery” phase to measure the damping constant <script type="math/tex">k</script>. (Remember, the recovery phase is when the rower is done pulling and the flywheel is just spinning under its own inertia as the rower returns to the initial catch position).</p>
+
+<p>But how do you know when that is? Well, looking at the plots you can see that <script type="math/tex">\omega</script> decays almost linearly during the recovery. Here’s a picture of the rotational velocity <script type="math/tex">\omega</script> vs. time for 4 strokes. The linear decay is highlighted in yellow.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/erg/decay.png" alt="" />
+<em>Highlighting rotational frequency vs. time during the recovery phase</em></p>
+
+<p>We can use the fact that the second derivative of the curve in this region is basically zero to set a threshold to detect it, and then “mask” it off in the software. Another way to see it is by doing a little math. In this region, Equation <script type="math/tex">\ref{recovery_stroke}</script> is the important one:</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+J\dot{\omega} = - k\omega^2
+\end{align*}</script>
+
+<p>Setting the <script type="math/tex">\omega = \omega_i</script> at the start of the decay (recovery) period, you can solve this to get</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+\frac{\omega}{\omega_i} = \frac{1}{1+{\epsilon}t}
+\end{align*}</script>
+
+<p>where <script type="math/tex">\epsilon = \frac{k\omega_i}{J}</script>. For <script type="math/tex">J = 0.16</script> <script type="math/tex">Nm^2</script>, <script type="math/tex">k = 0.0003</script> <script type="math/tex">Nm^2/rad^2</script> and <script type="math/tex">\omega_i = 70</script> <script type="math/tex">rad/s</script> - we find out <script type="math/tex">\epsilon = 0.2</script> <script type="math/tex">s^{-1}</script>. This is small enough that we can simplify</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+\frac{\omega}{\omega_i} = {1-{\epsilon}t + {\epsilon}^2t^2}
+\end{align*}</script>
+
+<p>whose second derivative <script type="math/tex">\ddot{\omega} = 2{\omega_i}{\epsilon}^2</script> is indeed very close to zero when <script type="math/tex">\epsilon</script> is small. So I set “screening criteria” on the absolute value of both of these parameters and use that to “detect” the stroke recovery phase. I can use this to count strokes, and I can use it to isolate the region in which I estimate <script type="math/tex">k</script>. Clear enough?</p>
+
+<blockquote>
+  <p>Magic factor</p>
+</blockquote>
+
+<p>The other thing a rower wants to know is how far they’ve rowed. (well it turns out, not very far in an erg unless you have some special power). However, assuming that there is a similar damping effect in the rower’s speed <script type="math/tex">v</script> on the water, the damping losses</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+k{\overline{\omega}}^3 = cv^3
+\end{align*}</script>
+
+<p>The magic factor here is <script type="math/tex">c</script>. Most erg’s spit out a distance rowed, and you can see that we can transform total rotations of the flywheel to distance rowed with <script type="math/tex">s = {(\frac{k}{c})}^{1/3}\theta</script>. I used a magic factor of <script type="math/tex">c = 2.8</script> just like <a href="http://eodg.atm.ox.ac.uk/user/dudhia/rowing/physics/ergometer.html#section9">here</a>.</p>
+
+<h4 id="converging-the-model">Converging the model</h4>
+
+<p>Having set all of these things in the model, there is one free parameter. I have chosen it to be the total stroke rate (which sets the overall stroke time). Once that is set, you need to “goal seek” the initial rotational frequency so that the initial and final match (as they would in steady state). This will give a converged model.</p>
+
+<p>Finally, it predicts a certain shape for the time dependence of the rotational frequency. Here’s what it should look like -</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/erg/model-stroke.png" alt="" />
+<em>Model prediction of what the rotation rate looks like vs. time during the stroke</em></p>
+
+<p>and another prediction from the model is the power output</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/erg/model-power.png" alt="" />
+<em>Model prediction of instantaneous power profiles, and the two components that make it up</em></p>
+
+<p>Wonder if that’s what we’ll see when we get this sucker built? [foreshadowing].</p>
 
 <h2 id="hardware">Hardware</h2>
 <h3 id="the-erg">The erg</h3>
-<p>I’ll ignore the (awesome) build of the main wooden structure of the erg, though my favorite part of the whole thing is the seat .. thank you you Joe Van Ruyven!!!. The flywheel is just an old 26” disc-brake mountain bike wheel drilled to accommodate the plastic inserts which act as dampers. The chain that the rower pulls on to move the flywheel sits on the 11 tooth cog.</p>
+<p>I’ll ignore the (awesome) build of the main wooden structure of the erg, though my favorite part of the whole thing is the seat .. thank you Joe Van Ruyven!!!. The flywheel is just an old 26” disc-brake mountain bike wheel drilled to accommodate the plastic inserts which act as dampers. The chain that the rower pulls on to move the flywheel sits on the 11 tooth cog.</p>
 
 <p><img src="http://localhost:4000/assets/images/projects/erg/flywheel.jpg" alt="" />
 <em>Modified mountain bike wheel … ready for the water</em></p>
@@ -490,170 +645,38 @@
 <h3 id="mounting-to-the-erg">Mounting to the erg</h3>
 <p>I used 1/8” pvc tubing as struts to hold the display in a convenient spot, make it possible for the rower to tweak the orientation, and also as a way to route the sensor signal and power supply cord. I made a little box for the circuit using foam board cut and glued to custom fit.</p>
 
-<h2 id="model">Model</h2>
-<p>Before diving into the software, here is more about the numerical model and how you can infer power, distance rowed and a bunch of other interesting things. I found this really important to understand before I sat down to do the software.</p>
-
-<h3 id="math">Math</h3>
-<p>Just a couple of equations to get you warmed up. From Physics 101, the torque <script type="math/tex">\tau</script> the rower applies to the flywheel via the chain mechanism is related to rotational acceleration <script type="math/tex">\dot{\omega}</script> by the moment of inertia <script type="math/tex">J</script></p>
-
-<script type="math/tex; mode=display">\begin{align*}
-J\dot{\omega} = \tau
-\end{align*}</script>
-
-<p>However, the flywheel slows down because of those plastic things I put on there. Most things that move through air experience a loss proportional to the square of their speed, so a better equation is</p>
-
-<script type="math/tex; mode=display">\begin{align*}
-J\dot{\omega} = \tau - k\omega^2
-\tag{1}
-\label{power_stroke}
-\end{align*}</script>
-
-<p>where <script type="math/tex">k</script> is a damping constant. Once the oar (or chain for an erg) reaches the end of the stroke, the rower stops applying the torque and the chain returns (aided by something stretchy). During this phase of the stroke, the rower rests and the flywheel slows down, because its new equation is</p>
-
-<script type="math/tex; mode=display">\begin{align*}
-J\dot{\omega} = - k\omega^2
-\tag{2}
-\label{recovery_stroke}
-\end{align*}</script>
-
-<p>So here’s that cool thing I was talking about before … in this equation, we know <script type="math/tex">J</script> (see below), we know <script type="math/tex">\omega</script> and <script type="math/tex">\dot{\omega}</script> (we’ll calculate these from the chopper signal), so now we know <script type="math/tex">k</script>. Since instantaneous power <script type="math/tex">P(t)</script> is equal to <script type="math/tex">\tau\omega</script>, we get</p>
-
-<script type="math/tex; mode=display">\begin{align*}
-P(t) = J\dot{\omega}\omega + k\omega^3
-\end{align*}</script>
-
-<p>or, time averaging over one stroke time <script type="math/tex">T</script> you get the time-averaged Power <script type="math/tex">\overline{P}</script> which is what people care about</p>
-
-<script type="math/tex; mode=display">\begin{align*}
-\overline{P} =\frac{1}{T}\int_{0}^{T} (J\dot{\omega}\omega + k\omega^3)dt
-\tag{3}
-\label{power}
-\end{align*}</script>
-
-<p>Two interesting ways to further simplify.</p>
-<blockquote>
-  <p>there’s <strong>no</strong> torque during the recovery part of the stroke</p>
-</blockquote>
-
-<p>So defining <script type="math/tex">T_p</script> as the time for the power part of the stroke and <script type="math/tex">T_{rec}</script> as the recovery part, so that <script type="math/tex">T_p + T_{rec} = T</script>, then</p>
-
-<script type="math/tex; mode=display">\begin{align*}
-\overline{P} =\frac{1}{T}\int_{0}^{T_p} (J\dot{\omega}\omega + k\omega^3)dt
-\tag{4}
-\label{power2}
-\end{align*}</script>
-
-<p>(This is the exact equation I implemented in the code).</p>
-
-<blockquote>
-  <p>the first term in the integral is close to zero because acceleration almost balances the deceleration over a stroke</p>
-</blockquote>
-
-<p>So we if we define the average rotational speed of the flywheel over the <em>total</em> stroke time <script type="math/tex">T</script> as <script type="math/tex">\overline{\omega}</script> then</p>
-
-<script type="math/tex; mode=display">\begin{align*}
-\overline{P} = k{\overline{\omega}}^3
-\end{align*}</script>
-
-<p>The first simplification above takes no shortcuts and is accurate within the limitations of the model. The second one is a nice simple equation, but has about 5% inaccuracy. It is a similar looking equation to the power <em>generated</em> by a wind turbine, for example, as a function of wind speed.</p>
-
-<h3 id="getting-the-right-model-parameters">Getting the right model parameters</h3>
-
-<p>I cooked up a little spreadsheet to play with this model. It is posted with the code. Like any model, it needs a bunch of parameters. I’ll talk about them one by one, and how to go about measuring or setting them.</p>
-
-<blockquote>
-  <p>simple stuff</p>
-</blockquote>
-
-<p>Rower’s mass <script type="math/tex">m</script>, distance of erg chain <script type="math/tex">r</script> relative to flywheel axle … just put those in.</p>
-
-<blockquote>
-  <p>rower applied force</p>
-</blockquote>
-
-<p>There is an assumption of a sinusoidal force applied by the rower. The amplitude and shape of that force are inputs.</p>
-
-<blockquote>
-  <p>flywheel moment of inertia <script type="math/tex">J</script></p>
-</blockquote>
-
-<p>Its possible to calculate the moment of inertia <script type="math/tex">J</script> of the flywheel by accounting for all of the piece parts and their contribution. That’s what I did.</p>
-
-<p><img src="http://localhost:4000/assets/images/projects/erg/moment_inertia.png" alt="" />
-<em>Estimate of flywheel moment of inertia <script type="math/tex">J = 0.11</script> <script type="math/tex">kgm^2</script></em></p>
-
-<p>Its just an estimate and sort of the lazy way out, but probably good within 10 or 15%. I’ll address it at some point with a measurement, just like <a href="https://www.analyticcycling.com/WheelsInertia_Page.html">this procedure</a> outlines.</p>
-
-<blockquote>
-  <p>damping constant <script type="math/tex">k</script></p>
-</blockquote>
-
-<p>You can measure <script type="math/tex">k</script> by just looking at the decay of the stroke after the rower has finished the power part of the stroke. But how do you know when that is? Well, looking at the curves, you can see that <script type="math/tex">\omega</script> decays almost linearly during the recovery. Here’s a picture of the rotational velocity vs. time for 4 strokes - the linear decay is highlighted in yellow - we can use the fact that the second derivative of the curve in this region is basically zero to “mask” it off in the software</p>
-
-<p><img src="http://localhost:4000/assets/images/projects/erg/decay.png" alt="" />
-<em>Highlighting rotational frequency vs. time during the recovery phase</em></p>
-
-<p>Another way to see it is by doing a little math. In this region, Equation <script type="math/tex">\ref{recovery_stroke}</script> is the important one:</p>
-
-<script type="math/tex; mode=display">\begin{align*}
-J\dot{\omega} = - k\omega^2
-\end{align*}</script>
-
-<p>Setting the <script type="math/tex">\omega = \omega_i</script> at the start of the decay (recovery) period, you can solve this to get</p>
-
-<script type="math/tex; mode=display">\begin{align*}
-\frac{\omega}{\omega_i} = \frac{1}{1+{\epsilon}t}
-\end{align*}</script>
-
-<p>where <script type="math/tex">\epsilon = \frac{k\omega_i}{J}</script>. For <script type="math/tex">J = 0.11</script> <script type="math/tex">Nm^2</script>, <script type="math/tex">k = 0.0003</script> <script type="math/tex">Nm^2/rad^2</script> and <script type="math/tex">\omega_i = 70</script> <script type="math/tex">rad/s</script> - we find out <script type="math/tex">\epsilon = 0.2</script> <script type="math/tex">s^{-1}</script>. This is small enough that we can simplify</p>
-
-<script type="math/tex; mode=display">\begin{align*}
-\frac{\omega}{\omega_i} = {1-{\epsilon}t}
-\end{align*}</script>
-
-<p>whose second derivative <script type="math/tex">\ddot{\omega}</script> is indeed very close to zero. So I set “screening criteria” on the absolute value of both of these parameters and use that to detect the stroke recovery phase. Then during this phase I can estimate <script type="math/tex">k</script>. Clear enough?</p>
-
-<blockquote>
-  <p>magic factor</p>
-</blockquote>
-
-<p>The other thing a rower wants to know is how far they’ve rowed. (well it turns out, not very far in an erg unless you have some special power). However, assuming that there is a similar damping effect in the rower’s speed <script type="math/tex">v</script> on the water, the damping losses</p>
-
-<script type="math/tex; mode=display">\begin{align*}
-k{\overline{\omega}}^3 = cv^3
-\end{align*}</script>
-
-<p>The magic factor here is <script type="math/tex">c</script>. Most erg’s spit out a distance rowed, and you can see that we can transform total rotations of the flywheel to distance rowed with <script type="math/tex">s = {(\frac{k}{c})}^{1/3}\theta</script>. I used a magic factor of <script type="math/tex">c = 2.8</script> just like <a href="http://eodg.atm.ox.ac.uk/user/dudhia/rowing/physics/ergometer.html#section9">here</a>.</p>
-
-<h3 id="converging-the-model">converging the model</h3>
-
-<p>Having set all of these things in the model, there is one free parameter. I have chosen it to be the total stroke rate (which sets the overall stroke time). Once that is set, you need to “goal seek” the initial rotational frequency so that the initial and final match (as they would in steady state). This will give a converged model.</p>
-
-<p>Finally, it predicts a certain shape for the time dependence of the rotational frequency. Here’s what it should look like -</p>
-
-<p><img src="http://localhost:4000/assets/images/projects/erg/model-stroke.png" alt="" />
-<em>Model prediction of what the rotation rate looks like vs. time during the stroke</em></p>
-
-<p>and another prediction from the model is the power output</p>
-
-<p><img src="http://localhost:4000/assets/images/projects/erg/model-power.png" alt="" />
-<em>Model prediction of instantaneous power profiles, and the two components that make it up</em></p>
-
-<p>Wonder if that’s what we’ll see when we get this sucker built? [foreshadowing].</p>
-
 <h2 id="ergware-v01">ErgWare v0.1</h2>
-<h3 id="display">display</h3>
-<p>In the first rev, I couldn’t really ask for any advice from my “users” since the thing was supposed to be a surprise. So I just made a best guess as to what the screen should look like.</p>
+<h3 id="display">Display</h3>
+<p>In the first version, I couldn’t really ask for any advice from my “users” since the whole thing was supposed to be a surprise. So I just made a best guess as to what the screen should look like.</p>
 
 <p><img src="http://localhost:4000/assets/images/projects/erg/rev1_screen.png" alt="" />
 <em>Cramming info onto the screen in v1.0 … will they like it?</em></p>
 
-<h3 id="structure">structure</h3>
+<h3 id="structure">Structure</h3>
 <p>To get this stuff to the screen, we are timing the wheel rotation, calculating the various derivatives and then numerically integrating the model I described above.</p>
 
-<p>The whole software is wrapped in one big loop, constantly keeping track of where in stroke cycle we are .. using interrupts &amp; timers to do most of the work &amp; then periodically refreshing the display or checking whether the buttons have been pressed.</p>
+<p>The whole software is wrapped in one big loop, constantly keeping track of where in the stroke cycle we are .. using interrupts &amp; timers to do most of the work &amp; then periodically refreshing the display or checking whether the buttons have been pressed.</p>
 
-<p>Interrupts and timers are important - I interrupted the processor every time the chopper wheel triggered. Despite my 8-slice pattern, I ended up using only a once-per-rev signal from the chopper. I used a built in 10-bit timer to get accurate flywheel rotational timing.</p>
+<p>Interrupts and timers are important - I interrupted the processor every time the chopper wheel triggered. Despite my 8-slice pattern, I ended up using only a once-per-rev signal from the chopper as you can see from the <code class="highlighter-rouge">(chop_ticks % 8 )</code> in the interrupt snippet below.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ISR</span><span class="p">(</span><span class="n">INT0_vect</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">cli</span><span class="p">();</span>
+  <span class="n">chop_ticks</span><span class="o">++</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">((</span><span class="n">chop_ticks</span> <span class="o">%</span> <span class="mi">8</span> <span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">chop_ticks</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="n">chop_counter</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">chop_counter</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+	<span class="n">chop_counter</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">TCNT1</span><span class="p">;</span>
+	<span class="n">TCNT1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="n">distance_rowed</span> <span class="o">+=</span> <span class="n">cal_factor</span><span class="p">;</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">locked</span> <span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="n">locked</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">//used for stroke count
+</span>  <span class="p">}</span>
+  <span class="n">sei</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>I used the built in 16-bit timer 1 (TCNT1) to get accurate flywheel rotational timing.</p>
 
 <p>I also needed a second timer for the rowing stroke timing .. stroke rate is something the rowers care about besides their speed and power output. Typical stroke rates might be 25 - 35 strokes per minute.</p>
 
@@ -663,13 +686,13 @@ k{\overline{\omega}}^3 = cv^3
 
 <p>The buttons have limited functionality in this first rev … they can basically just reset the timers and/or the display of distance traveled. I had big plans for them, though.</p>
 
-<h3 id="some-interesting-data">some interesting data</h3>
+<h3 id="some-interesting-data">Some interesting data</h3>
 <p>I wrote a piece of code during the development phase to write out to the EEPROM the rotational speed vs. time. Here is how it compares to the model … pretty well! When I saw this, I charged forward full throttle with some confidence in the approach.</p>
 
 <p><img src="http://localhost:4000/assets/images/projects/erg/model-v-actual.png" alt="" />
 <em>How the model stacks up against actual data … pretty darn close</em></p>
 
-<h3 id="good-rowers-vs-crappy-rowers">good rowers vs. crappy rowers</h3>
+<h3 id="good-rowers-vs-crappy-rowers">Good rowers vs. crappy rowers</h3>
 <p>So my daughter had been rowing for about 9 months when I had her take this thing for a spin. I recorded her power output vs. #of strokes at startup in the EEPROM. Then I did the same for myself, who had been rowing for all of 9 m-m-m-minutes. Guess who’s the NOOB?</p>
 
 <p><img src="http://localhost:4000/assets/images/projects/erg/comparison.png" alt="" />
@@ -742,7 +765,7 @@ Notes:
 <h3 id="code-for-low-overhead">Code for low overhead</h3>
 <p>I knew I’d be up against limits of the chip: 32K Flash, 2K SRAM, 1K EEPROM. Here is how I dealt with it.</p>
 
-<h3 id="use-the-message-passing--signalling-structures-of-the-rtos">Use the message passing &amp; signalling structures of the RTOS</h3>
+<h3 id="use-the-message-passing--signaling-structures-of-the-rtos">Use the message passing &amp; signaling structures of the RTOS</h3>
 <p>That’s what they’re there for.</p>
 
 <h3 id="write-lightweight-usage-services">Write lightweight usage services</h3>

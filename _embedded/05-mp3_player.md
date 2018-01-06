@@ -9,11 +9,31 @@ redirect_from:
   - /theme-setup/
 toc: true
 ---
+> pic
 
-### Project overview
+## Project overview
+> always 15 years behind ... suspend your disbelief
+## S.T.E.M.
+### MP3's - spec
+### File systems
 
+## Hardware
+### Circuit diagram
+### Codec VS1333
+### SD cards & interfaces
+### Battery Charger
+### Buttons
+### Packaging
 
-### Hardware
+## Software
+### User Interface
+### Embedded file system - FatFS
+### Digital signal processing
+### MP3 file parsing
+### Multiple items on SPI bus, actually using it
+### Organizing songs, ordering them alphabetically
+### Random function
 
-
-### Software
+## Stuff I learned
+### Binary mode of FTP
+### Buffer sizes & overflows

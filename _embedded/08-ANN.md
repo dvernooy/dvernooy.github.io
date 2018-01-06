@@ -10,10 +10,18 @@ redirect_from:
 toc: true
 ---
 
-### Project overview
+## Project overview
 
+## S.T.E.M.
+### Real vs. Integer Math
 
-### Hardware
+## Hardware
+### De-minimus
 
+## Software
+### Neural network - backpropagation
+### Benchmark
+### Speed-up tricks
+### Super speed hacks for 8 bit
 
-### Software
+## Do something with it

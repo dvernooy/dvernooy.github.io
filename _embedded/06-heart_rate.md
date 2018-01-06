@@ -34,7 +34,7 @@ Here are a couple of charts of my heart rate vs. time for a 1.5 hour bike ride n
 
 So here we go ... time for some fun.
 
-## Hardware
+## S.T.E.M.
 Here's how I built up my understanding, piece by piece.
 
 ### Polar T6, talk to me
@@ -72,7 +72,9 @@ A couple of things I noticed in my experiments:
 
 >As I rotated the inductor 90 degrees, it was pretty easy to kill the signal altogether ... a clue that the (electro)magnetic field orientation was important.
 
-Well, the current the transmitter drives through its inductor creates a time-varying magnetic field. If I could interrupt those magnetic field lines with another inductor (just like I did in my experiment), I can detect that burst. However, I want it to work a few meters away .. and the only way to do that was to "tune" the receiver circuit to the exact transmitter frequency of 5.3 kHz, while keeping the inductor $$L$$ as large as practically possible. The way to do this is with an $$LC$$ tank circuit, whose resonant frequency is
+Well, the current the transmitter drives through its inductor creates a time-varying magnetic field. If I could interrupt those magnetic field lines with another inductor (just like I did in my experiment), I can detect that burst.
+
+But, just one more thing - I want it to work a few meters away. The only way to do that was to "tune" the receiver circuit to the exact transmitter frequency of 5.3 kHz, while keeping the inductor $$L$$ as large as practically possible. The way to do this is with an $$LC$$ tank circuit, whose resonant frequency is
 
 $$
 \begin{align*}
@@ -89,7 +91,12 @@ $$
 \end{align*}
 $$
 
-where $$N$$ is the number of turns, $$A$$ is the area, $$l$$ is the length and $$\mu$$ is the relative permeability. So the number of turns are a big deal. I had a ferrite core about an inch long, with a permeability multiplier of about 16, which meant for 1000 turns of coil I should expect 24 mH. The one I built measured 19 mH, which required a 47 nF capacitor to resonate at 5.3 kHz. I used the frequency sweep on my benchtop function generator to do fine tuning to 5.3 kHz using trial and error on the capacitance. Putting the two in parallel, I could now sense the signal from more than a meter away, which was a very good start! Time to build the rest of the receiver.
+where $$N$$ is the number of turns, $$A$$ is the area, $$l$$ is the length and $$\mu$$ is the relative permeability. So the number of turns are a big deal. Enough already ... time to build some hardware.
+
+## Hardware
+
+### Main inductor sensor
+I had a ferrite core about an inch long, with a permeability multiplier of about 16, which meant for 1000 turns of coil I should expect 24 mH. The one I built measured 19 mH, which required a 47 nF capacitor to resonate at 5.3 kHz. I used the frequency sweep on my benchtop function generator to do fine tuning to 5.3 kHz using trial and error on the capacitance. Putting the two in parallel, I could now sense the signal from more than a meter away, which was a very good start! Time to build the rest of the receiver.
 
 ### Analog receiver & overall circuit diagram
 Here is the circuit I built-
@@ -103,7 +110,7 @@ The main idea is to amplify & filter the ac signal with two op-amp stages, follo
 
 I know there are many things I could improve, but this project was not about style, which is actually my style. I didn't spend any time laying out a board, but did it all "dead bug" on a  piece of copper clad board. Not pretty, but fast to build and it works well.
 
- If I get time, I'll add a few images of the analog part of the circuit and receiver waveform output, but now I had something a digital circuit could deal with.
+If I get time, I'll add a few images of the analog part of the circuit and receiver waveform output, but now I had something a digital circuit could deal with.
 
 ### Nokia 2115i LCD
 After a huge amount of googling, I found out that the Nokia 2115i's mono LCD had the same pinout as those in the 1100/1200/1600. It had a special Hirose DF23-10 connector that I needed an adapter for
@@ -272,8 +279,8 @@ if (K < J) {
 }
 ```
 
-This algorithm in equation $$\eqref{master}$$ guarantees a nice display that follows the heartbeat changes well. There is one hill around our house where I can go from 130 bpm to 185 bpm in about 15 seconds - & my monitor follows it well. The only technical issue in implementation is that I had to use real precision math, but that could always be changed to integer math at some point.
+This algorithm in equation $$\eqref{master}$$ guarantees a nice display that follows the heartbeat changes in a sensible way. There is one hill around our house where I can go from 130 bpm to 185 bpm in about 15 seconds - & my monitor follows it well. The only technical issue in implementation is that I had to use real precision math, but that could always be changed to integer math at some point.
 
 ### Last thoughts
 
-I am thinking about making major changes - learn by (re)doing & all that - to the packaging & code at some point ... or maybe I'll buy a fitbit. It has 10X the functionality at 1/10th the hassle. All of the code & spreadsheets are posted [here](https://www.github.com/dvernooy/heart_rate_monitor/). Enjoy.
+I am thinking about making major changes - learn by (re)doing & all that - to the packaging (no room for improvement there) & code (who needs a menu) at some point ... or maybe I'll buy a fitbit. It has 10X the functionality at 1/10th the hassle. All of the code & spreadsheets are posted.  [here](https://www.github.com/dvernooy/heart_rate_monitor/). Enjoy.

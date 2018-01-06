@@ -9,11 +9,31 @@ redirect_from:
   - /theme-setup/
 toc: true
 ---
+> screenshot of home energy consumption dashboard
+## Project overview
+>> how much energy are we using?
+### Bill & Ted's excellent adventure
 
-### Project overview
+## S.T.E.M.
+### Heat ... + gas
+### Electricity in the house
+### Current detection
+### AC math
+### Gas Meters & gas usage
+### Internet serving
 
+## Hardware
+### Circuit diagram
+### Gas detection - lasers & filters
+### Electricity - Current clamps
+### ATMega1284
+### Ethernet board
 
-### Hardware
-
-
-### Software
+## Software
+### Gas detection software
+### Electrical algorithms - speed
+### Embedded Web serving
+### Internet Visualization
+### SQL database
+### R, Python, Visual Basic
+### Disaggregation algorithm
