@@ -1,0 +1,930 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.8.0 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+
+
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>OBD2 4u - Ab hinc</title>
+
+
+
+
+<meta name="description" content="Hacking my car">
+
+
+
+
+<meta name="author" content="Dave Vernooy">
+
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Ab hinc">
+<meta property="og:title" content="OBD2 4u">
+
+
+  <link rel="canonical" href="http://localhost:4000/projects/obd-ii/">
+  <meta property="og:url" content="http://localhost:4000/projects/obd-ii/">
+
+
+
+  <meta property="og:description" content="Hacking my car">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/front/site-logo.png">
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2018-01-07T17:15:30-05:00">
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "http://localhost:4000",
+      "logo": "http://localhost:4000/assets/images/front/site-logo.png"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Dave Vernooy",
+      "url" : "http://localhost:4000",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Ab hinc Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
+  </head>
+
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="http://localhost:4000/">Ab hinc</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/projects/" >Projects</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/blog/" >Blog</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about/" >About</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        
+        <a href="https://dvernooy.github.io">
+          <img src="http://localhost:4000/assets/images/front/dave-vernooy-cropped.jpg" alt="Dave Vernooy" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <a href="https://dvernooy.github.io"><h3 class="author__name" itemprop="name">Dave Vernooy</h3></a>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Learning by (re)doing
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Niskayuna, NY</span>
+        </li>
+      
+
+      
+        <li>
+          <a href="https://dvernooy.github.io" itemprop="url">
+            <i class="fa fa-fw fa-chain" aria-hidden="true"></i> Website
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/dvernooy" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="OBD2 4u">
+    <meta itemprop="description" content="Hacking my car">
+    <meta itemprop="datePublished" content="January 07, 2018">
+    <meta itemprop="dateModified" content="February 01, 2012">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">OBD2 4u
+</h1>
+          <h4 class="page__related-title">The journey of 1000 miles</h4> 
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  12 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fa fa-file-text"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#project-overview">Project overview</a></li>
+  <li><a href="#stem">S.T.E.M.</a>
+    <ul>
+      <li><a href="#raw-materials">Raw materials</a></li>
+      <li><a href="#the-basics---maf-map-etc">The basics - MAF, MAP, etc…</a></li>
+      <li><a href="#introduction-to-obd2">Introduction to OBD2</a></li>
+    </ul>
+  </li>
+  <li><a href="#hardware---circuit-diagram">Hardware - circuit diagram</a>
+    <ul>
+      <li><a href="#lcd--buttons">LCD &amp; buttons</a></li>
+      <li><a href="#serial-interface">Serial interface</a></li>
+      <li><a href="#circuit--package">Circuit &amp; package</a></li>
+      <li><a href="#j-line-and-k-line">J line and K line</a></li>
+      <li><a href="#testing--success-0x55">Testing … success (0x55)</a></li>
+    </ul>
+  </li>
+  <li><a href="#software">Software</a>
+    <ul>
+      <li><a href="#mother-of-all-loops--polling-v-interrupts">Mother of all loops … polling v. interrupts</a></li>
+      <li><a href="#averaging-stuff">Averaging stuff</a></li>
+      <li><a href="#menu-implementation">Menu implementation</a></li>
+      <li><a href="#settings--eeprom">Settings &amp; EEPROM</a></li>
+      <li><a href="#talking-to-the-pc">Talking to the PC</a></li>
+      <li><a href="#code-flashing--updating---isp-stk500">Code flashing &amp; updating - ISP, STK500</a></li>
+    </ul>
+  </li>
+  <li><a href="#final-thoughts">Final thoughts</a>
+    <ul>
+      <li><a href="#can-bus">CAN bus</a></li>
+    </ul>
+  </li>
+</ul>
+            </nav>
+          </aside>
+        
+        <script type="text/javascript" async="" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/obd_finished.png" alt="" />
+<em>The finished build</em></p>
+
+<h2 id="project-overview">Project overview</h2>
+
+<p>Have you ever seen that poster of the grizzly bear with the salmon in its mouth, subcaptioned “Sometimes the journey of 1000 miles ends very, very badly”? Well [spoiler alert], this is one of those journeys. The OBD2 interface (ISO-9141-2) that I spent about 10 months hacking - relatively successfully - is no longer really used in newer cars. So if you want to skip this one, feel free. Otherwise, I’ll take you on my journey to hack the car. A few things I wanted to see happen from the outset:</p>
+
+<blockquote>
+  <p>An easy-to-read display of the accumulated fuel costs while driving. Like this:</p>
+</blockquote>
+
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/costs_closeup.jpg" alt="" />
+<em>The only thing that really matters</em></p>
+
+<blockquote>
+  <p>Typical gas mileage for our car &amp; minivan</p>
+</blockquote>
+
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/mpg-camry.png" alt="" />
+<em>And the answer is …. 59.7 mph</em></p>
+
+<blockquote>
+  <p>Some real-time output telemetry from the car while we were driving</p>
+</blockquote>
+
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/while_driving.jpg" alt="" />
+<em>Give me the stats</em></p>
+
+<blockquote>
+  <p>And, of course, the check engine light (CEL or MIL) … and more to the point, my desire to figure out which code was causing it, &amp; then douse it.</p>
+</blockquote>
+
+<p>I’ll get a video loaded here of that, but for now here’s one of the system booting up and me checking out the identity of the vehicle and what information I can see. My hands were freezing, it was -25C that day.</p>
+
+<!-- Courtesy of embedresponsively.com //-->
+<div class="responsive-video-container">
+
+  <iframe src="https://www.youtube.com/embed/z_7kp_Pfc5Q" frameborder="0" allowfullscreen=""></iframe>
+
+</div>
+
+<p>For inspiration, there is some great information out there. In particular, I’d mention <a href="http://www.lightner.net/lightner/bruce.html">Bruce Lightner’s</a> project … an <em>AVR-based fuel consumption gauge</em>. You can see it mentioned near the bottom of his homepage, among all the other great things referenced there.</p>
+
+<h2 id="stem">S.T.E.M.</h2>
+<h3 id="raw-materials">Raw materials</h3>
+<p>A ‘98 Camry and ‘05 Sienna were what I had to work with. As I found out during this project, Toyota stayed close to the ISO-9141-2 specs on these vehicles, so I actually didn’t have alot of problems “talking” to my cars once I actually understood the spec &amp; the bugs were all flushed out (that took some time).</p>
+
+<h3 id="the-basics---maf-map-etc">The basics - MAF, MAP, etc…</h3>
+
+<p>The fuel efficiency of an internal combustion engine can be estimated by … wait for it … <em>chemistry</em>. Knowing how much air is flowing into the engine, and knowing the ratio of air to fuel burned in the engine allows fuel consumption to be estimated. Some typical ratios are:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/fuel_ratios.png" alt="" />
+<em>Fuel ratios .. I used 14.7:1 in the code</em></p>
+
+<p>MAP stands for “manifold absolute pressure” and MAF stands for “mass air flow” - your car’s engine control unit will report one of these two. My ‘98 Camry only reports MAF and my ‘05 Sienna only reports MAP - go figure. Here’s the math to go from MAF to MPG.</p>
+
+<h4 id="mpg-given-a-maf-value">MPG given a MAF value</h4>
+<p><script type="math/tex">\begin{align*}
+\text{MFF[g/s]} = \frac{\text{MAF[g/s]} }{\text{AFR}}\\
+\text{MFF[gallons/s]} = \frac{\text{MFF[g/s]}}{\text{2799[g/gallon]} }\\
+\text{MPG} = \frac{\text{v[mph]/3600} } {\text{MFF[gallons/s]}}
+\tag{1}
+\label{MAF}
+\end{align*}</script></p>
+
+<p>where MFF is mass fuel flow, AFR is air-fuel ratio and 2799 g/gallon is the density of gasoline. If given a MAP value, first convert it to MAF,</p>
+
+<h4 id="mpg-given-a-map-value">MPG given a MAP value</h4>
+<p><script type="math/tex">\begin{align*}
+\text{MAF} = \frac{\text{RPM/60} * \text{MAP[kPa]} }{\text{(IAT[K]/2)} } * \text{VE[%]} * \\ \text{displacement[L]} * \frac{\text{28.97[g/mol]} }{\text{8.3[J/molK]} }
+\tag{2}
+\label{MAP}
+\end{align*}</script></p>
+
+<p>&amp; then use Equation <script type="math/tex">\ref{MAF}</script> above to get to MPG. Here is a little spreadsheet to get a feel for the numbers. In this example, its set to highway cruising -</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/MAF-MAP.png" alt="" />
+<em>A bunch of math gets me to what I want … I want my MPG</em></p>
+
+<h3 id="introduction-to-obd2">Introduction to OBD2</h3>
+<p>OBD2 stands for “On Board Diagnostics” - it was introduced in 1996 &amp; has gone through several iterations. It turns out, that the current protocol (based on CAN) was mandated for any automobile year ‘08 or later. Both of mine are earlier than ’08s, so they use the older protocol I used here. OK, that just means another project at some point.</p>
+
+<h4 id="obd2-connector">OBD2 connector</h4>
+
+<p>Below is a picture of the OBD2 connector in my vehicles, the mating connector on my scanner, and the pinout of OBD2.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/obd2_connector.png" alt="" />
+<em>Connector &amp; pinout</em></p>
+
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/under_dash.png" alt="" />
+<em>The mating plug on our minivan</em></p>
+
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/hooked_up.png" alt="" />
+<em>In place and connected</em></p>
+
+<h4 id="obd2-protocols-timing-and-handshaking">OBD2 protocols, timing and handshaking</h4>
+<p>OBD2 has several flavors - the variant I used is ISO-9141-2 which works with the Toyota spec. Another flavor (J1939) works with many older GM cars.</p>
+
+<p>The initial “handshaking” has a timing process that looks like the following:</p>
+<ol>
+  <li>Send 0x55 on K <strong>&amp; J</strong> lines at 5 bits/sec (bps)</li>
+  <li>Switch communications to 10400 bps</li>
+  <li>Receive Ox08 0x08 at 10400 bps</li>
+  <li>Send 0xF7 at 10400 bps</li>
+  <li>Receive 0xCC at 10400 bps</li>
+</ol>
+
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/9141-setup.png" alt="" />
+<em>Initial communication protocol</em></p>
+
+<p>Here is the initialization code:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">ISO_init_comm</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="n">show</span><span class="p">)</span> <span class="p">{</span>
+   <span class="n">lcd_clear</span><span class="p">();</span>
+   <span class="n">lcd_goto_xy</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+   <span class="n">fprintf_P</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcd_out</span><span class="p">,</span> <span class="n">PSTR</span><span class="p">(</span><span class="s">"INIT"</span><span class="p">));</span>
+<span class="c1">// send 33, resp str should contain 55
+</span>	<span class="n">connect_put</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mh">0x33</span><span class="p">;</span>
+<span class="c1">//  switch_lcd_wait();
+</span>	<span class="n">iso_5baud_putc</span><span class="p">(</span><span class="n">connect_put</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+	 <span class="p">{</span><span class="n">temp</span> <span class="o">=</span> <span class="n">iso_getb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">connect_get</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="mi">1</span><span class="p">,</span> <span class="n">ISO_W1_MAX</span><span class="o">*</span><span class="mi">2</span><span class="p">);}</span>
+	<span class="n">connect_put</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">~</span><span class="n">connect_get</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+	<span class="n">temp</span> <span class="o">=</span> <span class="n">iso_putb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">connect_put</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="mi">1</span><span class="p">,</span> <span class="n">ISO_W4_MIN</span><span class="p">);</span>
+	<span class="n">temp</span> <span class="o">=</span> <span class="n">iso_getb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">connect_get</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="mi">1</span><span class="p">,</span> <span class="n">ISO_W4_MAX</span><span class="o">*</span><span class="mi">2</span><span class="p">);</span>
+
+	<span class="k">if</span><span class="p">(</span><span class="n">show</span> <span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">lcd_clear</span><span class="p">();</span>
+		<span class="n">lcd_goto_xy</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+		<span class="n">fprintf_P</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcd_out</span><span class="p">,</span><span class="n">PSTR</span><span class="p">(</span><span class="s">"INIT"</span><span class="p">),</span> <span class="n">connect_put</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+		<span class="n">lcd_goto_xy</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+		<span class="n">fprintf_P</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcd_out</span><span class="p">,</span><span class="n">PSTR</span><span class="p">(</span><span class="s">"0x%x"</span><span class="p">),</span> <span class="n">connect_put</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+		<span class="n">lcd_goto_xy</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
+		<span class="n">fprintf_P</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcd_out</span><span class="p">,</span><span class="n">PSTR</span><span class="p">(</span><span class="s">"%x..%x %x"</span><span class="p">),</span> <span class="n">connect_get</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">connect_get</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">connect_get</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+		<span class="n">lcd_goto_xy</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span>
+		<span class="n">fprintf_P</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcd_out</span><span class="p">,</span><span class="n">PSTR</span><span class="p">(</span><span class="s">"%x..%x"</span><span class="p">),</span> <span class="n">connect_put</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">connect_get</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+		<span class="n">clean_exit_partial</span><span class="p">();</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>And here is a picture of how my software responds to the initialization</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/got_55.jpg" alt="" />
+<em>Oh Bee Dee, Oh Bee Dah, Life goes on, yeah!!! …. got 55, Its alive</em></p>
+
+<h4 id="obd2-pids-parameter-ids">OBD2 PIDs (parameter IDs)</h4>
+<p>You can read about parameter IDs (PIDs) &amp; diagnostic trouble codes (DTCs) in a number of places. <a href="https://en.wikipedia.org/wiki/OBD-II_PIDs">Wikipedia</a> has a list of many of the PIDs. The documentation is good, so I won’t regurgitate much of it here.</p>
+
+<p>One interesting code to send, though, is</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mh">0x68</span> <span class="mh">0x6A</span> <span class="mh">0xF1</span> <span class="mh">0x01</span> <span class="mh">0x00</span> <span class="mh">0xC4</span>
+</code></pre></div></div>
+<p>This tells you which codes are actually readable on your vehicle. In the case of our Sienna, the response is:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/supported_pids.png" alt="" />
+<em>So what will Toyota actually give me access to????</em></p>
+
+<p>Four hex bytes:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mh">0xBF</span> <span class="mh">0x9F</span> <span class="mh">0xA8</span> <span class="mh">0x91</span>
+</code></pre></div></div>
+
+<p>Reading the code for Mode 01, PID 01 (which is what we sent … 0x68 0x6A 0xF1 <strong>0x01 0x00</strong> 0xC4), the response, based on Wikipedia is [A7 … D0] = [$PID $01 … PID $20], so converting the response to binary in this format, we get</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">0</span><span class="n">b</span> <span class="mi">1011</span> <span class="mi">1111</span> <span class="mi">1001</span> <span class="mi">1111</span> <span class="mi">1101</span> <span class="mi">1000</span> <span class="mi">1001</span> <span class="mo">0001</span>
+</code></pre></div></div>
+
+<p>Which I then matched up to the Wikipedia list (alongside the same response from our car)</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/matching_PIDs.png" alt="" />
+<em>Now I know what we’re working with</em></p>
+
+<p>In order to read the value of one of these PIDs that are available, you have to send the message in the format</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mh">0x68</span> <span class="mh">0x6A</span> <span class="mh">0xF1</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">A</span><span class="p">]</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">B</span><span class="p">]</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">CSUM</span><span class="p">]</span>
+</code></pre></div></div>
+<p>Where A = 01 for PID code set “mode 1” and B represents the actual code you want. CSUM represents a checksum, which is implemented like this:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/checksum.png" alt="" />
+<em>How to implement the CSUM checksum byte</em></p>
+
+<p>The car’s ECU will send a message back in the format</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mh">0x48</span> <span class="mh">0x6B</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">ADDR</span><span class="p">]</span> <span class="mh">0x41</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">A</span><span class="p">]</span> <span class="p">{</span><span class="n">optional</span><span class="o">:</span><span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">B</span><span class="p">]</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">C</span><span class="p">]</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">D</span><span class="p">]}</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">CSUM</span><span class="p">]</span>
+</code></pre></div></div>
+<p>where A, B, C, D, etc.. are data bits you can do something with. Here is a screenshot of a little utility I wrote called “PING” that I could use from a laptop connected to my scanner … this allowed me to explore all of these different PIDs.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/PING.png" alt="" />
+<em>DIY hacking interface</em></p>
+
+<h4 id="cel-codes">CEL codes</h4>
+<p>If your check engine light (CEL) .. also known as the malfunction indicator lamp (MIL) … is on, you can see how many codes are set:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mh">0x68</span> <span class="mh">0x6A</span> <span class="mh">0xF1</span> <span class="mh">0x01</span> <span class="mh">0x01</span> <span class="mh">0xC5</span>
+</code></pre></div></div>
+
+<p>Currently, I’m good:
+<img src="http://localhost:4000/assets/images/projects/OBD2/codes_set.png" alt="" />
+<em>OK, so for once I’m on the right side of things with old MILlie-CELlie</em></p>
+
+<p>In order to get CEL codes (also known as diagnostic trouble codes DTC), you need to send</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mh">0x68</span> <span class="mh">0x6A</span> <span class="mh">0xF1</span> <span class="mh">0x03</span> <span class="mh">0xC6</span>
+</code></pre></div></div>
+
+<p>which gets you a response:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mh">0x48</span> <span class="mh">0x6B</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">ADDR</span><span class="p">]</span> <span class="mh">0x43</span> <span class="p">{</span><span class="n">repeated</span> <span class="n">n</span> <span class="n">times</span><span class="o">:</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">A</span><span class="p">]</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">B</span><span class="p">]</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">C</span><span class="p">]</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">D</span><span class="p">]</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">E</span><span class="p">]</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">F</span><span class="p">]}</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">CSUM</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>You can now interpret AB CD EF as diagnostic trouble codes. Here are a few codes I’ve seen on my Camry:</p>
+
+<blockquote>
+  <p>list of codes</p>
+</blockquote>
+
+<p>Of course, I almost always get P0136, the oxygens sensor code. Didn’t even need to build this thing - its always that same stupid code.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/trouble-codes.png" alt="" />
+<em>I’ll bet you 50 bucks its the dreaded “oxygen sensor” code</em></p>
+
+<p>And of course, sending</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mh">0x68</span> <span class="mh">0x6A</span> <span class="mh">0xF1</span> <span class="mh">0x04</span> <span class="mh">0xC7</span>
+</code></pre></div></div>
+
+<p>is magic, especially just prior to your annual safety check.</p>
+
+<p>So, really, this entire setup is a communications protocol with the car. Lets dive into the hardware prior to coming back to some of the things you can do with it in software.</p>
+
+<h2 id="hardware---circuit-diagram">Hardware - circuit diagram</h2>
+<p>Below is a circuit diagram of the entire setup.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/obd2_circuit.png" alt="" />
+<em>Circuit diagram for OBD2 project–</em></p>
+
+<h3 id="lcd--buttons">LCD &amp; buttons</h3>
+<p>I used the Nokia 5110 LCD &amp; driver plus a couple of pushbuttons to navigate around on the menu. Nothing really special there. More about the menu later.</p>
+
+<h3 id="serial-interface">Serial interface</h3>
+<p>I decided I might like to drive around and record what was happening on a laptop as I drove, among other things. So I put in a serial interface using a MAX232 chip … it requires a few bypass capacitors, but can take its input from the __ output of the ATMega328. Also, in order to push up to 19200 baud and higher, you really have to start to pay attention to timing. There are some (really cool) software UARTs out there, but I didn’t use them on this project.</p>
+
+<p>On the PC side, I used Excel on the PC side to collect the information and also to ping the car. You may cringe, but VBA was a simple solution. I’ll add more documentation to this over time.</p>
+
+<h3 id="circuit--package">Circuit &amp; package</h3>
+<p>Here are a few close ups of the circuit, front and back sides.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/obd_build.png" alt="" />
+<em>Front and back of circuit board</em></p>
+
+<p>Not really much of a package to speak of. I just mounted the circuit board with a couple of standoffs to a piece of wood. I also put a bunch of shoe-goo around the connector once I had it completed - that stuff is solid.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/shoo_goo.png" alt="" />
+<em>Keeping the OBD2 connector connected</em></p>
+
+<h3 id="j-line-and-k-line">J line and K line</h3>
+<p>The J-line is only needed for 1-direction (reader-to-car only), but the K-Line is a bidirectional line. I used separate ICs - the L9637 for both of these lines. It is a line driver with a bunch of protection circuitry built in. All you need on the output lines is a 5K pullup to the battery voltage of 12V.</p>
+
+<h3 id="testing--success-0x55">Testing … success (0x55)</h3>
+<p>Once the hardware was built, I had to test it - and it was a bit of a pain running back and forth from the car every time I wanted to try something new. I got stuck for almost two weeks getting my car to say anything at all. I went through the hardware and software with a fine tooth comb, until I realized I had only connected the K-Line and not the J-line. It turns out, Toyota is looking for the J-Line as well for the initial communications.</p>
+
+<p>At last, I got 0x55 in response to the pings … off and running now! 0x55 is a pattern 0b01010101, whose pattern adequately represents the ups and downs of those 2 weeks!</p>
+
+<h2 id="software">Software</h2>
+<h3 id="mother-of-all-loops--polling-v-interrupts">Mother of all loops … polling v. interrupts</h3>
+<p>OK, so this is the project where I learned my lesson - but I implemented the code with one monster loop. It actually worked very well, except for one <em>MAJOR</em> problem that would really be a non-starter for anything <em>PRO</em>: once I was in a subroutine for a given menu item, it could be really hard to discontinue/break out of it back to the main menu. The only real solution to this is to use an RTOS, which I did on one of my future projects.</p>
+
+<h3 id="averaging-stuff">Averaging stuff</h3>
+<p>Most of the math here is very simple - you can see the formulas above for MPG. In some cases I wanted instantaneous values and in others I wanted running averages. For the running (time) averages like average speed, it was important to have a good master clock to always pick from to update. I did everything with floating point math, so there were no issues there.</p>
+
+<h3 id="menu-implementation">Menu implementation</h3>
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/its_alive.jpg" alt="" />
+<em>Menu structure upon power-up</em></p>
+
+<p>The menu was a simple 2D array that held elements for submenus. Each element of the array linked to a code block that I could execute. At any moment in time, the code keeps track of where the user has navigated to and uses a simple UI feature (a “&gt;”) to give the user a visual cue. The interface is a 2-button implementation, with the left button navigating up and down, and the right button selecting. These buttons are context sensitive and do different things in the submenu.</p>
+
+<p>In order not to get lost, I kept a little spreadsheet to remind me of the navigation path.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/UI-layout.png" alt="" />
+<em>Menu structure</em></p>
+
+<p>And here are all of the different screens in their glory … yes, its quite a few.</p>
+<blockquote>
+  <p>user screens</p>
+</blockquote>
+
+<p>Not sure this is the most code-friendly solution, but it worked for me.</p>
+
+<h3 id="settings--eeprom">Settings &amp; EEPROM</h3>
+
+<p>I decided to use the EEPROM to full effect in this project. Here is the layout of what I used it for:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/EEPROM-organization.png" alt="" />
+<em>EEPROM layout</em></p>
+
+<p>Mainly to hold averaged data that I could read out later (I did not implement any SD-card memory), plus a few of user-defined constants. There were a couple screens that allowed the user to change these constants. That was kind of a fun thing to implement with just the two pushbuttons available.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">set_gas_price</span> <span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+<span class="n">_delay_ms</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+<span class="n">lcd_clear</span><span class="p">();</span>
+<span class="n">eeprom_address</span> <span class="o">=</span> <span class="mi">460</span><span class="p">;</span>
+<span class="n">eeprom_read_block</span><span class="p">(</span><span class="o">&amp;</span><span class="n">gas_price</span><span class="p">,</span> <span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="n">eeprom_address</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+<span class="n">lcd_goto_xy</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">fprintf_P</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcd_out</span><span class="p">,</span> <span class="n">PSTR</span><span class="p">(</span><span class="s">"Current:"</span><span class="p">));</span>
+<span class="n">lcd_goto_xy</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">fprintf_P</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcd_out</span><span class="p">,</span> <span class="n">PSTR</span><span class="p">(</span><span class="s">"$%5.2f"</span><span class="p">),</span> <span class="n">gas_price</span><span class="p">);</span>
+
+<span class="kt">uint8_t</span> <span class="n">d1</span><span class="o">=</span><span class="mi">3</span><span class="p">;</span>
+<span class="kt">uint8_t</span> <span class="n">d2</span><span class="o">=</span><span class="mi">5</span><span class="p">;</span>
+<span class="kt">uint8_t</span> <span class="n">d3</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="kt">uint8_t</span> <span class="n">cur_item</span><span class="o">=</span><span class="mi">3</span><span class="p">;</span>
+<span class="kt">uint8_t</span> <span class="n">done</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">done</span> <span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+<span class="n">lcd_goto_xy</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
+<span class="n">fprintf_P</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcd_out</span><span class="p">,</span> <span class="n">PSTR</span><span class="p">(</span><span class="s">" %d"</span><span class="p">),</span> <span class="n">d1</span><span class="p">);</span>
+<span class="n">lcd_goto_xy</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span>
+<span class="n">fprintf_P</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcd_out</span><span class="p">,</span> <span class="n">PSTR</span><span class="p">(</span><span class="s">" %d"</span><span class="p">),</span> <span class="n">d2</span><span class="p">);</span>
+<span class="n">lcd_goto_xy</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">);</span>
+<span class="n">fprintf_P</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcd_out</span><span class="p">,</span> <span class="n">PSTR</span><span class="p">(</span><span class="s">" %d"</span><span class="p">),</span> <span class="n">d3</span><span class="p">);</span>
+<span class="n">lcd_goto_xy</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">);</span>
+<span class="n">fprintf_P</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcd_out</span><span class="p">,</span> <span class="n">PSTR</span><span class="p">(</span><span class="s">" OK"</span><span class="p">));</span>
+
+<span class="n">lcd_goto_xy</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">cur_item</span><span class="p">);</span>
+<span class="n">fprintf_P</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcd_out</span><span class="p">,</span> <span class="n">PSTR</span><span class="p">(</span><span class="s">"&gt;"</span><span class="p">));</span>
+<span class="n">_delay_ms</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+<span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>		
+<span class="k">if</span> <span class="p">(</span><span class="n">switch_is_pressed</span><span class="p">(</span><span class="o">&amp;</span><span class="n">switchtype</span><span class="p">))</span> <span class="p">{</span>
+ <span class="k">if</span> <span class="p">(</span><span class="n">switchtype</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//we are scrolling
+</span> <span class="n">_delay_ms</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+ <span class="n">cur_item</span><span class="o">++</span><span class="p">;</span>
+ <span class="k">if</span> <span class="p">(</span><span class="n">cur_item</span> <span class="o">==</span> <span class="mi">7</span><span class="p">)</span> <span class="n">cur_item</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+ <span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>  <span class="c1">//switchtype1
+</span> <span class="k">if</span> <span class="p">(</span><span class="n">switchtype</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//we incrementing
+</span>   <span class="n">_delay_ms</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">cur_item</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">d1</span><span class="o">++</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">d1</span><span class="o">==</span><span class="mi">10</span><span class="p">)</span> <span class="n">d1</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">cur_item</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">d2</span><span class="o">++</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">d2</span> <span class="o">==</span><span class="mi">10</span><span class="p">)</span> <span class="n">d2</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">cur_item</span> <span class="o">==</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">d3</span><span class="o">++</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">d3</span> <span class="o">==</span><span class="mi">10</span><span class="p">)</span> <span class="n">d3</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">cur_item</span> <span class="o">==</span> <span class="mi">6</span><span class="p">)</span> <span class="n">done</span> <span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+  <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span><span class="c1">//switchtype2
+</span><span class="p">}</span><span class="c1">//switchpressed
+</span><span class="p">}</span><span class="c1">//INNER WHILE
+</span>
+<span class="p">}</span> <span class="c1">//OUTER while
+</span><span class="n">_delay_ms</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+<span class="n">gas_price</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)(</span><span class="mi">100</span><span class="p">.</span><span class="mi">0</span><span class="o">*</span><span class="n">d1</span><span class="o">+</span><span class="mi">10</span><span class="p">.</span><span class="mi">0</span><span class="o">*</span><span class="n">d2</span><span class="o">+</span><span class="n">d3</span><span class="p">)</span><span class="o">/</span><span class="mi">100</span><span class="p">;</span>
+<span class="n">eeprom_address</span> <span class="o">=</span> <span class="mi">460</span><span class="p">;</span>
+<span class="n">eeprom_update_block</span><span class="p">(</span><span class="o">&amp;</span><span class="n">gas_price</span><span class="p">,</span> <span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="n">eeprom_address</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+<span class="n">lcd_clear</span><span class="p">();</span>
+<span class="n">clean_start</span><span class="p">();</span>
+<span class="n">eeprom_read_block</span><span class="p">(</span><span class="o">&amp;</span><span class="n">gas_price</span><span class="p">,</span> <span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="n">eeprom_address</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+<span class="n">fprintf_P</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcd_out</span><span class="p">,</span> <span class="n">PSTR</span><span class="p">(</span><span class="s">"$%5.2f"</span><span class="p">),</span> <span class="n">gas_price</span><span class="p">);</span>
+<span class="n">clean_exit_partial</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="talking-to-the-pc">Talking to the PC</h3>
+<p>I used the built in USART to talk to the PC - the code is pretty standard. The only trick was implementing the stream capability to minimize use of Flash memory.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/********************************************************************************
+Global Variables
+********************************************************************************/
+static FILE usart_out = FDEV_SETUP_STREAM(usart_putchar_printf, usart_getchar_printf, _FDEV_SETUP_RW);
+static FILE lcd_out = FDEV_SETUP_STREAM(lcd_chr_printf, NULL, _FDEV_SETUP_WRITE);
+</code></pre></div></div>
+
+<p>So there are 3 functions I wrote that work over serial to a PC: PIPE2XL, EEPROM2XL and PING. EEPROM2XL allowed me to read the EEPROM at any point in time, which was useful since I sometimes saved data there. PING was already described above, and could be used to send arbitrary commands to the car to see how it responded.</p>
+
+<p>PIPE2XL allowed me to ask the car to stream real-time data. Here is an example of my speed on a road near our house ending in a traffic light, check back as I’ll try to get some cooler stuff.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/pipe2xl_example.png" alt="" />
+<em>Kinda boring … but analyzing a bunch of these might be interesting</em></p>
+
+<h3 id="code-flashing--updating---isp-stk500">Code flashing &amp; updating - ISP, STK500</h3>
+<p>I also implemented an ISP programming interface on this project. Simple to implement … I have an STK500 that is my workhorse, and I just program using that. It sure beats removing the chip to program it (nope, never done that kind of thing before. Never re-inserted the chip backwards <em>after</em> having done that kind of thing before. Never.)</p>
+
+<h2 id="final-thoughts">Final thoughts</h2>
+<h3 id="can-bus">CAN bus</h3>
+<p>I actually got a bunch of use out of this project, and will probably make a CAN version at some point. If I do, I’ll probably go for an RTOS and design it so it can be mounted and unmounted in the car. Will have to start to go hunting for all of the CAN specs and protocols.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2012-02-01">February 01, 2012</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=OBD2+4u%20http%3A%2F%2Flocalhost%3A4000%2Fprojects%2Fobd-ii%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fprojects%2Fobd-ii%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=http%3A%2F%2Flocalhost%3A4000%2Fprojects%2Fobd-ii%2F" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fprojects%2Fobd-ii%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="http://localhost:4000/projects/ergware/" class="pagination--pager" title="Ergware
+">Previous</a>
+    
+    
+      <a href="http://localhost:4000/projects/HRM/" class="pagination--pager" title="Heart Rate Monitor
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <!-- <script src="http://localhost:4000/assets/js/comments.js"></script> -->
+      <!-- <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a Comment</h4>
+      <section id="disqus_thread"></section>
+    
+</div> -->
+    <div id="disqus_thread"></div>
+    <a href="single.html#disqus_thread" data-disqus-identifier=""></a>
+
+    <script>
+      // var disqus_developer = 1;
+      var disqus_config = function () {
+      this.page.url = "/projects/obd-ii/";
+      this.page.identifier = "/projects/obd-ii/";
+      };
+
+      (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://dvernooy-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      <script id="dsq-count-scr" src="//dvernooy-github-io.disqus.com/count.js" async></script>
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+  <input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  <div id="results" class="results"></div>
+</div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+      <li><a href="https://github.com/dvernooy"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="http://localhost:4000/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2018 Dave Vernooy. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="http://localhost:4000/assets/js/main.min.js"></script>
+
+
+
+  <script src="http://localhost:4000/assets/js/lunr.min.js"></script>
+  <script src="http://localhost:4000/assets/js/lunr-en.js"></script>
+
+
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://localhost:4000/projects/obd-ii/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/projects/02-obdii"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://dvernooy.github.io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+  </body>
+</html>

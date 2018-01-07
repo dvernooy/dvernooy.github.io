@@ -20,11 +20,20 @@ var idx = lunr(function () {
     
   
     idx.add({
+      title: "OBD2 4u",
+      excerpt: "The finished build Project overview Have you ever seen that poster of the grizzly bear with the salmon in its...",
+      categories: [],
+      tags: [],
+      id: 1
+    });
+    
+  
+    idx.add({
       title: "Heart Rate Monitor",
       excerpt: "MacGyver … eat your heart out Project overview Welcome to my heart rate monitor project. These things have been around...",
       categories: [],
       tags: [],
-      id: 1
+      id: 2
     });
     
   
@@ -36,7 +45,7 @@ var idx = lunr(function () {
       excerpt: "Thumbs way up for the Pinewood Derby The master equation OK. If you are going for speed (uuh .. you...",
       categories: [],
       tags: [],
-      id: 2
+      id: 3
     });
     
   
@@ -45,7 +54,7 @@ var idx = lunr(function () {
       excerpt: "Summer is here How long is the berry season, anyways? The date is Sunday, June 29th 2014. For some reason,...",
       categories: [],
       tags: [],
-      id: 3
+      id: 4
     });
     
   
@@ -54,7 +63,7 @@ var idx = lunr(function () {
       excerpt: "Nah … no bike repairs needed after this race, right Ian? A really cool Christmas present After many years of...",
       categories: ["Layout","Uncategorized"],
       tags: ["comments","layout"],
-      id: 4
+      id: 5
     });
     
   
@@ -72,6 +81,17 @@ var store = [
         "title": "Ergware",
         "url": "http://localhost:4000/projects/ergware/",
         "excerpt": "Our DIY ergometer … with its new “brain” Project overview Hey all, Dave Vernooy here with another project. I’m assuming...",
+        "teaser":
+          
+            null
+          
+      },
+    
+      
+      {
+        "title": "OBD2 4u",
+        "url": "http://localhost:4000/projects/obd-ii/",
+        "excerpt": "The finished build Project overview Have you ever seen that poster of the grizzly bear with the salmon in its...",
         "teaser":
           
             null

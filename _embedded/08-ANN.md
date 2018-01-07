@@ -13,15 +13,21 @@ toc: true
 ## Project overview
 
 ## S.T.E.M.
+
 ### Real vs. Integer Math
 
 ## Hardware
+
 ### De-minimus
 
 ## Software
+
 ### Neural network - backpropagation
+
 ### Benchmark
+
 ### Speed-up tricks
+
 ### Super speed hacks for 8 bit
 
 ## Do something with it
