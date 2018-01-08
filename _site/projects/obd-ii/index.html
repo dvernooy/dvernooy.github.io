@@ -72,7 +72,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-01-07T17:15:30-05:00">
+  <meta property="article:published_time" content="2018-01-07T19:55:19-05:00">
 
 
 
@@ -337,7 +337,7 @@
 
 
 
-  12 minute read
+  14 minute read
 </p>
           
         </header>
@@ -490,7 +490,7 @@
 <ol>
   <li>Send 0x55 on K <strong>&amp; J</strong> lines at 5 bits/sec (bps)</li>
   <li>Switch communications to 10400 bps</li>
-  <li>Receive Ox08 0x08 at 10400 bps</li>
+  <li>Receive 0x08 0x08 at 10400 bps</li>
   <li>Send 0xF7 at 10400 bps</li>
   <li>Receive 0xCC at 10400 bps</li>
 </ol>
@@ -627,7 +627,7 @@
 <p>I used the Nokia 5110 LCD &amp; driver plus a couple of pushbuttons to navigate around on the menu. Nothing really special there. More about the menu later.</p>
 
 <h3 id="serial-interface">Serial interface</h3>
-<p>I decided I might like to drive around and record what was happening on a laptop as I drove, among other things. So I put in a serial interface using a MAX232 chip … it requires a few bypass capacitors, but can take its input from the __ output of the ATMega328. Also, in order to push up to 19200 baud and higher, you really have to start to pay attention to timing. There are some (really cool) software UARTs out there, but I didn’t use them on this project.</p>
+<p>I decided I might like to drive around and record what was happening on a laptop as I drove, among other things. So I put in a serial interface using a MAX232 chip … it requires a few capacitors and takes its input/output from the PD0/PD1 pins of the ATMega328. Also, in order to push up to 19200 baud and higher, you really have to start to pay attention to timing. There are some (really cool) software UARTs out there, but I didn’t use them on this project.</p>
 
 <p>On the PC side, I used Excel on the PC side to collect the information and also to ping the car. You may cringe, but VBA was a simple solution. I’ll add more documentation to this over time.</p>
 
@@ -669,11 +669,92 @@
 <em>Menu structure</em></p>
 
 <p>And here are all of the different screens in their glory … yes, its quite a few.</p>
-<blockquote>
-  <p>user screens</p>
-</blockquote>
 
-<p>Not sure this is the most code-friendly solution, but it worked for me.</p>
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/screen1.png" alt="" /></p>
+
+<hr />
+
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/screen2.png" alt="" /></p>
+
+<hr />
+
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/screen3.png" alt="" /></p>
+
+<hr />
+
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/screen4.png" alt="" /></p>
+
+<hr />
+
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/screen5.png" alt="" />
+<em>OBD2 menu navigation</em></p>
+
+<p>Below is the code to do the reset of the cursor position. Not sure this is the most efficient solution, but it worked for me.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="n">switch_is_pressed</span><span class="p">(</span><span class="o">&amp;</span><span class="n">switchtype</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">switchtype</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//we are scrolling
+</span><span class="n">curItem</span><span class="o">++</span><span class="p">;</span> <span class="c1">// add one to curr item
+</span>        <span class="n">cursorCount</span><span class="o">++</span><span class="p">;</span>
+           <span class="k">if</span> <span class="p">(</span><span class="n">menuitem</span><span class="p">[</span><span class="n">curMenu</span><span class="p">][</span><span class="n">curItem</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sc">'\0'</span><span class="p">)</span> <span class="p">{</span>
+   <span class="n">curItem</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+   <span class="n">pageScroll</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+   <span class="n">cursorCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+   <span class="p">}</span>
+           <span class="k">if</span> <span class="p">(</span><span class="n">cursorCount</span> <span class="o">&gt;=</span> <span class="n">pageSize</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// we have scrolled past this page, go to next
+</span>            <span class="c1">// remember, we check if we have scrolled off the MENU under clicks.  This is off the PAGE.
+</span>            <span class="n">pageScroll</span><span class="o">++</span><span class="p">;</span>  <span class="c1">// next "page"
+</span>            <span class="n">cursorCount</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="c1">// reset cursor location
+</span>            <span class="p">}</span>
+            <span class="n">menuCount</span> <span class="o">=</span> <span class="n">pageScroll</span><span class="o">*</span><span class="n">pageSize</span><span class="p">;</span>
+  <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">switchtype</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//we are selecting
+</span>  <span class="c1">// handle user input
+</span>  <span class="k">if</span> <span class="p">(</span><span class="n">menuactn</span><span class="p">[</span><span class="n">curMenu</span><span class="p">][</span><span class="n">curItem</span><span class="p">])</span> <span class="p">{</span>
+    <span class="c1">// has an action
+</span>    <span class="k">switch</span> <span class="p">(</span><span class="n">menuactn</span><span class="p">[</span><span class="n">curMenu</span><span class="p">][</span><span class="n">curItem</span><span class="p">])</span> <span class="p">{</span>
+      <span class="k">case</span> <span class="mi">1</span><span class="p">:</span> <span class="c1">//run MPG - DONE
+</span>        <span class="n">get_MPG</span><span class="p">();</span>
+        <span class="k">break</span><span class="p">;</span>
+      <span class="k">case</span> <span class="mi">2</span><span class="p">:</span> <span class="c1">//screen 1 of data - DONE
+</span>        <span class="n">get_data_set1</span><span class="p">();</span>
+        <span class="k">break</span><span class="p">;</span>
+      <span class="k">case</span> <span class="mi">3</span><span class="p">:</span> <span class="c1">//screen 2 of data - DONE
+</span>        <span class="n">get_data_set2</span><span class="p">();</span>
+        <span class="k">break</span><span class="p">;</span>
+      <span class="k">case</span> <span class="mi">4</span><span class="p">:</span> <span class="c1">//PIDS supported - DONE
+</span>        <span class="n">get_supported_PIDs</span><span class="p">();</span>
+        <span class="k">break</span><span class="p">;</span>
+      <span class="c1">// lots of other cases here  
+</span>      <span class="k">case</span> <span class="mi">999</span><span class="p">:</span> <span class="c1">//RETURN TO MAIN
+</span>        <span class="n">curMenu</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// return to main menu
+</span>        <span class="n">curItem</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// reset menu item to which cursor point
+</span>        <span class="n">pageScroll</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// reset menu page scroll
+</span>        <span class="n">cursorCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// reset menu location of page
+</span>        <span class="c1">//menuCount = pageScroll*pageSize; // reprint from first line of this page
+</span>          <span class="k">break</span><span class="p">;</span>
+      <span class="p">}</span><span class="c1">//switch
+</span>    <span class="n">menuCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">break</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="k">else</span> <span class="c1">//GO TO A SUB-MENU
+</span>    <span class="p">{</span>
+    <span class="n">curMenu</span> <span class="o">=</span> <span class="n">menulink</span><span class="p">[</span><span class="n">curMenu</span><span class="p">][</span><span class="n">curItem</span><span class="p">];</span>  <span class="c1">// set to menu selected by cursor
+</span>    <span class="n">curItem</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// reset menu item to which cursor point
+</span>    <span class="n">pageScroll</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// reset menu page scroll
+</span>    <span class="n">cursorCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// reset menu location of page
+</span>    <span class="n">menuCount</span> <span class="o">=</span> <span class="n">pageScroll</span><span class="o">*</span><span class="n">pageSize</span><span class="p">;</span> <span class="c1">// reprint from first line of this page
+</span>    <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span><span class="c1">//end if action
+</span>    <span class="n">updateFlag</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// we have updated the menu.  Flag is used to delay user input
+</span>  <span class="p">}</span> <span class="c1">// end we are selecting
+</span><span class="p">}</span> <span class="c1">// end switch is pressed
+</span><span class="p">}</span> <span class="c1">// end while (1)
+</span></code></pre></div></div>
 
 <h3 id="settings--eeprom">Settings &amp; EEPROM</h3>
 

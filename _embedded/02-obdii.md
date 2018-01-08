@@ -106,7 +106,7 @@ OBD2 has several flavors - the variant I used is ISO-9141-2 which works with the
 The initial "handshaking" has a timing process that looks like the following:
 1. Send 0x55 on K **& J** lines at 5 bits/sec (bps)
 2. Switch communications to 10400 bps
-2. Receive Ox08 0x08 at 10400 bps
+2. Receive 0x08 0x08 at 10400 bps
 3. Send 0xF7 at 10400 bps
 4. Receive 0xCC at 10400 bps
 
@@ -250,7 +250,7 @@ Below is a circuit diagram of the entire setup.
 I used the Nokia 5110 LCD & driver plus a couple of pushbuttons to navigate around on the menu. Nothing really special there. More about the menu later.
 
 ### Serial interface
-I decided I might like to drive around and record what was happening on a laptop as I drove, among other things. So I put in a serial interface using a MAX232 chip ... it requires a few bypass capacitors, but can take its input from the __ output of the ATMega328. Also, in order to push up to 19200 baud and higher, you really have to start to pay attention to timing. There are some (really cool) software UARTs out there, but I didn't use them on this project.
+I decided I might like to drive around and record what was happening on a laptop as I drove, among other things. So I put in a serial interface using a MAX232 chip ... it requires a few capacitors and takes its input/output from the PD0/PD1 pins of the ATMega328. Also, in order to push up to 19200 baud and higher, you really have to start to pay attention to timing. There are some (really cool) software UARTs out there, but I didn't use them on this project.
 
 On the PC side, I used Excel on the PC side to collect the information and also to ping the car. You may cringe, but VBA was a simple solution. I'll add more documentation to this over time.
 
@@ -293,9 +293,93 @@ In order not to get lost, I kept a little spreadsheet to remind me of the naviga
 *Menu structure*
 
 And here are all of the different screens in their glory ... yes, its quite a few.
-> user screens
 
-Not sure this is the most code-friendly solution, but it worked for me.
+![]({{ site.url }}/assets/images/projects/OBD2/screen1.png)
+
+---
+
+![]({{ site.url }}/assets/images/projects/OBD2/screen2.png)
+
+---
+
+![]({{ site.url }}/assets/images/projects/OBD2/screen3.png)
+
+---
+
+![]({{ site.url }}/assets/images/projects/OBD2/screen4.png)
+
+---
+
+![]({{ site.url }}/assets/images/projects/OBD2/screen5.png)
+*OBD2 menu navigation*
+
+Below is the code to do the reset of the cursor position. Not sure this is the most efficient solution, but it worked for me.
+
+```c
+while(1) {
+
+      if (switch_is_pressed(&switchtype)) {
+        if (switchtype == 1) { //we are scrolling
+curItem++; // add one to curr item
+        cursorCount++;
+           if (menuitem[curMenu][curItem][0] == '\0') {
+   curItem = 0;
+   pageScroll = 0;
+   cursorCount = 0;
+   }
+           if (cursorCount >= pageSize) {
+            // we have scrolled past this page, go to next
+            // remember, we check if we have scrolled off the MENU under clicks.  This is off the PAGE.
+            pageScroll++;  // next "page"
+            cursorCount=0; // reset cursor location
+            }
+            menuCount = pageScroll*pageSize;
+  break;
+        }
+
+if (switchtype == 2) { //we are selecting
+  // handle user input
+  if (menuactn[curMenu][curItem]) {
+    // has an action
+    switch (menuactn[curMenu][curItem]) {
+      case 1: //run MPG - DONE
+        get_MPG();
+        break;
+      case 2: //screen 1 of data - DONE
+        get_data_set1();
+        break;
+      case 3: //screen 2 of data - DONE
+        get_data_set2();
+        break;
+      case 4: //PIDS supported - DONE
+        get_supported_PIDs();
+        break;
+      // lots of other cases here  
+      case 999: //RETURN TO MAIN
+        curMenu = 0; // return to main menu
+        curItem = 0; // reset menu item to which cursor point
+        pageScroll = 0; // reset menu page scroll
+        cursorCount = 0; // reset menu location of page
+        //menuCount = pageScroll*pageSize; // reprint from first line of this page
+          break;
+      }//switch
+    menuCount = 0;
+    break;
+      }
+    else //GO TO A SUB-MENU
+    {
+    curMenu = menulink[curMenu][curItem];  // set to menu selected by cursor
+    curItem = 0; // reset menu item to which cursor point
+    pageScroll = 0; // reset menu page scroll
+    cursorCount = 0; // reset menu location of page
+    menuCount = pageScroll*pageSize; // reprint from first line of this page
+    break;
+    }//end if action
+    updateFlag = 1; // we have updated the menu.  Flag is used to delay user input
+  } // end we are selecting
+} // end switch is pressed
+} // end while (1)
+```
 
 ### Settings & EEPROM
 
