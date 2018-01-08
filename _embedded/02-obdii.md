@@ -25,7 +25,7 @@ Have you ever seen that poster of the grizzly bear with the salmon in its mouth,
 ![]({{ site.url }}/assets/images/projects/OBD2/costs_closeup.jpg)
 *The only thing that really matters*
 
-> Typical gas mileage for our car & minivan
+> Typical gas mileage for our car & minivan, including a sense of at what speed you get the optimum bang for your buck -
 
 ![]({{ site.url }}/assets/images/projects/OBD2/mpg-camry.png)
 *And the answer is .... 59.7 mph*
@@ -41,7 +41,7 @@ I'll get a video loaded here of that, but for now here's one of the system booti
 
 {% include video id="z_7kp_Pfc5Q" provider="youtube" %}
 
-For inspiration, there is some great information out there. In particular, I'd mention [Bruce Lightner's](http://www.lightner.net/lightner/bruce.html) project ... an *AVR-based fuel consumption gauge*. You can see it mentioned near the bottom of his homepage, among all the other great things referenced there.
+For inspiration, there is some great information out there. In particular, I'd mention [Bruce Lightner's](http://www.lightner.net/lightner/bruce.html) project ... an **AVR-based fuel consumption gauge**. You can see it mentioned near the bottom of his homepage, among all the other great things referenced there.
 
 ## S.T.E.M.
 ### Raw materials
