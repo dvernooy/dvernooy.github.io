@@ -72,7 +72,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-01-07T20:16:40-05:00">
+  <meta property="article:published_time" content="2018-01-08T21:00:13-05:00">
 
 
 
@@ -322,7 +322,7 @@
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     <meta itemprop="headline" content="OBD2 4u">
     <meta itemprop="description" content="Hacking my car">
-    <meta itemprop="datePublished" content="January 07, 2018">
+    <meta itemprop="datePublished" content="January 08, 2018">
     <meta itemprop="dateModified" content="February 01, 2012">
 
     <div class="page__inner-wrap">
@@ -337,7 +337,7 @@
 
 
 
-  14 minute read
+  15 minute read
 </p>
           
         </header>
@@ -362,7 +362,7 @@
       <li><a href="#lcd--buttons">LCD &amp; buttons</a></li>
       <li><a href="#serial-interface">Serial interface</a></li>
       <li><a href="#circuit--package">Circuit &amp; package</a></li>
-      <li><a href="#j-line-and-k-line">J line and K line</a></li>
+      <li><a href="#l-line-and-k-line">L-line and K-line</a></li>
       <li><a href="#testing--success-0x55">Testing … success (0x55)</a></li>
     </ul>
   </li>
@@ -420,7 +420,7 @@
   <p>And, of course, the check engine light (CEL or MIL) … and more to the point, my desire to figure out which code was causing it, &amp; then douse it.</p>
 </blockquote>
 
-<p>I’ll get a video loaded here of that, but for now here’s one of the system booting up and me checking out the identity of the vehicle and what information I can see. My hands were freezing, it was -25C that day.</p>
+<p>I’ll get a video loaded here of that, but for now here’s one of the system booting up and me checking out the identity of the vehicle and what information I can see. My hands were freezing, it was -25C that day … &amp; you gotta love the music that was playing on the radio-</p>
 
 <!-- Courtesy of embedresponsively.com //-->
 <div class="responsive-video-container">
@@ -433,7 +433,7 @@
 
 <h2 id="stem">S.T.E.M.</h2>
 <h3 id="raw-materials">Raw materials</h3>
-<p>A ‘98 Camry and ‘05 Sienna were what I had to work with. As I found out during this project, Toyota stayed close to the ISO-9141-2 specs on these vehicles, so I actually didn’t have alot of problems “talking” to my cars once I actually understood the spec &amp; the bugs were all flushed out (that took some time).</p>
+<p>A ‘98 Camry and ‘05 Sienna were what I had to work with. As I found out during this project, Toyota stayed close to the ISO-9141-2 specs on these vehicles, so I actually didn’t have a lot of problems “talking” to my cars once I actually understood the spec &amp; the bugs were all flushed out (that took some time).</p>
 
 <h3 id="the-basics---maf-map-etc">The basics - MAF, MAP, etc…</h3>
 
@@ -462,16 +462,15 @@
 \label{MAP}
 \end{align*}</script></p>
 
-<p>&amp; then use Equation <script type="math/tex">\ref{MAF}</script> above to get to MPG. Here is a little spreadsheet to get a feel for the numbers. In this example, its set to highway cruising -</p>
+<p>&amp; then use Equation <script type="math/tex">\ref{MAF}</script> above to get to MPG. Here is a little spreadsheet to get a feel for the numbers. In this example, most of the assumptions are relevant to highway cruising -</p>
 
 <p><img src="http://localhost:4000/assets/images/projects/OBD2/MAF-MAP.png" alt="" />
 <em>A bunch of math gets me to what I want … I want my MPG</em></p>
 
 <h3 id="introduction-to-obd2">Introduction to OBD2</h3>
-<p>OBD2 stands for “On Board Diagnostics” - it was introduced in 1996 &amp; has gone through several iterations. It turns out, that the current protocol (based on CAN) was mandated for any automobile year ‘08 or later. Both of mine are earlier than ’08s, so they use the older protocol I used here. OK, that just means another project at some point.</p>
+<p>OBD2 stands for “On Board Diagnostics” - it was introduced in 1996 &amp; has gone through several iterations. It turns out, that the current protocol (based on the CAN bus protocol) was mandated for any automobile year ‘08 or later. Both of mine are earlier than ’08s, so they use the older protocol I needed to implement here. OK, that just means another project at some point.</p>
 
 <h4 id="obd2-connector">OBD2 connector</h4>
-
 <p>Below is a picture of the OBD2 connector in my vehicles, the mating connector on my scanner, and the pinout of OBD2.</p>
 
 <p><img src="http://localhost:4000/assets/images/projects/OBD2/obd2_connector.png" alt="" />
@@ -488,7 +487,7 @@
 
 <p>The initial “handshaking” has a timing process that looks like the following:</p>
 <ol>
-  <li>Send 0x55 on K <strong>&amp; J</strong> lines at 5 bits/sec (bps)</li>
+  <li>Send 0x55 on K- <strong>&amp; L-</strong> lines at 5 bits/sec (bps)</li>
   <li>Switch communications to 10400 bps</li>
   <li>Receive 0x08 0x08 at 10400 bps</li>
   <li>Send 0xF7 at 10400 bps</li>
@@ -532,7 +531,7 @@
 <p>And here is a picture of how my software responds to the initialization</p>
 
 <p><img src="http://localhost:4000/assets/images/projects/OBD2/got_55.jpg" alt="" />
-<em>Oh Bee Dee, Oh Bee Dah, Life goes on, yeah!!! …. got 55, Its alive</em></p>
+<em>Oh Bee Dee, Oh Bee Dah, Life goes on, yeah!!! …. got Hex 55, Its alive</em></p>
 
 <h4 id="obd2-pids-parameter-ids">OBD2 PIDs (parameter IDs)</h4>
 <p>You can read about parameter IDs (PIDs) &amp; diagnostic trouble codes (DTCs) in a number of places. <a href="https://en.wikipedia.org/wiki/OBD-II_PIDs">Wikipedia</a> has a list of many of the PIDs. The documentation is good, so I won’t regurgitate much of it here.</p>
@@ -541,26 +540,27 @@
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mh">0x68</span> <span class="mh">0x6A</span> <span class="mh">0xF1</span> <span class="mh">0x01</span> <span class="mh">0x00</span> <span class="mh">0xC4</span>
 </code></pre></div></div>
-<p>This tells you which codes are actually readable on your vehicle. In the case of our Sienna, the response is:</p>
+<p>This tells you which of the PID codes are actually readable on your particular vehicle. In the case of our Sienna, the response is:</p>
 
 <p><img src="http://localhost:4000/assets/images/projects/OBD2/supported_pids.png" alt="" />
 <em>So what will Toyota actually give me access to????</em></p>
 
-<p>Four hex bytes:</p>
+<p>So it was these four hex bytes:</p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mh">0xBF</span> <span class="mh">0x9F</span> <span class="mh">0xA8</span> <span class="mh">0x91</span>
 </code></pre></div></div>
 
-<p>Reading the code for Mode 01, PID 01 (which is what we sent … 0x68 0x6A 0xF1 <strong>0x01 0x00</strong> 0xC4), the response, based on Wikipedia is [A7 … D0] = [$PID $01 … PID $20], so converting the response to binary in this format, we get</p>
+<p>What the heck does that mean? Well, we asked the van to respond to the code for Mode 01, PID 01. That’s what the two <strong>bold</strong> hex numbers are in the command we sent:0x68 0x6A 0xF1 <strong>0x01 0x00</strong> 0xC4. The response we should expect, based on the Wikipedia page is 4 Bytes A B C D (or 32 bits). For us A = 0xBF, B = 0x9F, C= 0xA8 and D = 0x91. The meaning of those bytes [A7 … D0] = [$PID $01 … PID $20] tells us whether that particular PID is implemented. So I first converted those 4 bytes to binary</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">0</span><span class="n">b</span> <span class="mi">1011</span> <span class="mi">1111</span> <span class="mi">1001</span> <span class="mi">1111</span> <span class="mi">1101</span> <span class="mi">1000</span> <span class="mi">1001</span> <span class="mo">0001</span>
 </code></pre></div></div>
 
-<p>Which I then matched up to the Wikipedia list (alongside the same response from our car)</p>
+<p>and then I matched them up to the Wikipedia list. I had previously done the same for our car, and you can see them both lined up on this cheat sheet:</p>
 
 <p><img src="http://localhost:4000/assets/images/projects/OBD2/matching_PIDs.png" alt="" />
 <em>Now I know what we’re working with</em></p>
 
 <p>In order to read the value of one of these PIDs that are available, you have to send the message in the format</p>
+
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mh">0x68</span> <span class="mh">0x6A</span> <span class="mh">0xF1</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">A</span><span class="p">]</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">B</span><span class="p">]</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">CSUM</span><span class="p">]</span>
 </code></pre></div></div>
 <p>Where A = 01 for PID code set “mode 1” and B represents the actual code you want. CSUM represents a checksum, which is implemented like this:</p>
@@ -603,7 +603,7 @@
   <p>list of codes</p>
 </blockquote>
 
-<p>Of course, I almost always get P0136, the oxygens sensor code. Didn’t even need to build this thing - its always that same stupid code.</p>
+<p>Of course, I almost always get P0136, the oxygen sensor code. Didn’t even need to build this thing - its always that same stupid code.</p>
 
 <p><img src="http://localhost:4000/assets/images/projects/OBD2/trouble-codes.png" alt="" />
 <em>I’ll bet you 50 bucks its the dreaded “oxygen sensor” code</em></p>
@@ -620,7 +620,7 @@
 <h2 id="hardware---circuit-diagram">Hardware - circuit diagram</h2>
 <p>Below is a circuit diagram of the entire setup.</p>
 
-<p><img src="http://localhost:4000/assets/images/projects/OBD2/obd2_circuit.png" alt="" />
+<p><a href="http://localhost:4000/assets/images/projects/OBD2/obd2_circuit.png"><img src="http://localhost:4000/assets/images/projects/OBD2/obd2_circuit.png" alt="" /></a>
 <em>Circuit diagram for OBD2 project–</em></p>
 
 <h3 id="lcd--buttons">LCD &amp; buttons</h3>
@@ -629,7 +629,7 @@
 <h3 id="serial-interface">Serial interface</h3>
 <p>I decided I might like to drive around and record what was happening on a laptop as I drove, among other things. So I put in a serial interface using a MAX232 chip … it requires a few capacitors and takes its input/output from the PD0/PD1 pins of the ATMega328. Also, in order to push up to 19200 baud and higher, you really have to start to pay attention to timing. There are some (really cool) software UARTs out there, but I didn’t use them on this project.</p>
 
-<p>On the PC side, I used Excel on the PC side to collect the information and also to ping the car. You may cringe, but VBA was a simple solution. I’ll add more documentation to this over time.</p>
+<p>On the PC side, I used Excel to collect the information and also to ping the car. You may cringe, but VBA was a simple solution. I’ll add more documentation to this over time.</p>
 
 <h3 id="circuit--package">Circuit &amp; package</h3>
 <p>Here are a few close ups of the circuit, front and back sides.</p>
@@ -642,11 +642,11 @@
 <p><img src="http://localhost:4000/assets/images/projects/OBD2/shoo_goo.png" alt="" />
 <em>Keeping the OBD2 connector connected</em></p>
 
-<h3 id="j-line-and-k-line">J line and K line</h3>
-<p>The J-line is only needed for 1-direction (reader-to-car only), but the K-Line is a bidirectional line. I used separate ICs - the L9637 for both of these lines. It is a line driver with a bunch of protection circuitry built in. All you need on the output lines is a 5K pullup to the battery voltage of 12V.</p>
+<h3 id="l-line-and-k-line">L-line and K-line</h3>
+<p>The L-line is only needed for 1-direction (reader-to-car only), but the K-Line is a bidirectional line. I used separate ICs - the L9637 - for both of these lines. It is a line driver with a bunch of protection circuitry built in. All you need on the output lines is a 5K pullup to the battery voltage of 12V.</p>
 
 <h3 id="testing--success-0x55">Testing … success (0x55)</h3>
-<p>Once the hardware was built, I had to test it - and it was a bit of a pain running back and forth from the car every time I wanted to try something new. I got stuck for almost two weeks getting my car to say anything at all. I went through the hardware and software with a fine tooth comb, until I realized I had only connected the K-Line and not the J-line. It turns out, Toyota is looking for the J-Line as well for the initial communications.</p>
+<p>Once the hardware was built, I had to test it - and it was a bit of a pain running back and forth from the car every time I wanted to try something new. I got stuck for almost two weeks getting my car to say anything at all. I went through the hardware and software with a fine tooth comb, until I realized I had only connected the K-Line and not the L-line. It turns out, Toyota is looking for the L-Line as well for the initial communications.</p>
 
 <p>At last, I got 0x55 in response to the pings … off and running now! 0x55 is a pattern 0b01010101, whose pattern adequately represents the ups and downs of those 2 weeks!</p>
 
@@ -655,11 +655,21 @@
 <p>OK, so this is the project where I learned my lesson - but I implemented the code with one monster loop. It actually worked very well, except for one <em>MAJOR</em> problem that would really be a non-starter for anything <em>PRO</em>: once I was in a subroutine for a given menu item, it could be really hard to discontinue/break out of it back to the main menu. The only real solution to this is to use an RTOS, which I did on one of my future projects.</p>
 
 <h3 id="averaging-stuff">Averaging stuff</h3>
-<p>Most of the math here is very simple - you can see the formulas above for MPG. In some cases I wanted instantaneous values and in others I wanted running averages. For the running (time) averages like average speed, it was important to have a good master clock to always pick from to update. I did everything with floating point math, so there were no issues there.</p>
+<p>Most of the math here is very simple - you can see the formulas above for MPG. In some cases I wanted instantaneous values and in others I wanted running averages. For the running (time) averages like average speed, it was important to have a good master clock to always pick from to update &amp; you just need to think about the definitions of averages.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">running_time</span> <span class="o">=</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span> <span class="p">(</span><span class="n">running_time</span> <span class="o">+</span><span class="n">dt_seconds</span><span class="p">);</span>
+<span class="n">MPG_temp</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span> <span class="p">(</span><span class="mi">7</span><span class="p">.</span><span class="mi">101</span><span class="o">*</span><span class="n">VSS_temp</span><span class="o">/</span><span class="n">MAF_temp</span><span class="p">);</span>
+<span class="n">running_dist</span> <span class="o">=</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span> <span class="p">(</span><span class="n">running_dist</span><span class="o">+</span><span class="mi">0</span><span class="p">.</span><span class="mi">6214</span><span class="o">*</span><span class="n">VSS_temp</span><span class="o">*</span><span class="n">dt_seconds</span><span class="o">/</span><span class="mi">3600</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+<span class="n">running_gallons</span> <span class="o">=</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span> <span class="p">(</span><span class="n">running_gallons</span><span class="o">+</span><span class="mf">2.4307e-5</span><span class="o">*</span><span class="n">MAF_temp</span><span class="o">*</span><span class="n">dt_seconds</span><span class="p">);</span>
+<span class="n">MPG_ave</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span> <span class="p">(</span><span class="n">running_dist</span><span class="o">/</span><span class="n">running_gallons</span><span class="p">);</span>
+<span class="n">speed_ave</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span> <span class="p">(</span><span class="mi">3600</span><span class="p">.</span><span class="mi">0</span><span class="o">*</span><span class="n">running_dist</span><span class="o">/</span><span class="n">running_time</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>I did everything with floating point math, so there were no issues there.</p>
 
 <h3 id="menu-implementation">Menu implementation</h3>
 <p><img src="http://localhost:4000/assets/images/projects/OBD2/its_alive.jpg" alt="" />
-<em>Menu structure upon power-up</em></p>
+<em>Powered-up &amp; waiting for input</em></p>
 
 <p>The menu was a simple 2D array that held elements for submenus. Each element of the array linked to a code block that I could execute. At any moment in time, the code keeps track of where the user has navigated to and uses a simple UI feature (a “&gt;”) to give the user a visual cue. The interface is a 2-button implementation, with the left button navigating up and down, and the right button selecting. These buttons are context sensitive and do different things in the submenu.</p>
 

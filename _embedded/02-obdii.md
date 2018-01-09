@@ -37,7 +37,7 @@ Have you ever seen that poster of the grizzly bear with the salmon in its mouth,
 
 > And, of course, the check engine light (CEL or MIL) ... and more to the point, my desire to figure out which code was causing it, & then douse it.
 
-I'll get a video loaded here of that, but for now here's one of the system booting up and me checking out the identity of the vehicle and what information I can see. My hands were freezing, it was -25C that day.
+I'll get a video loaded here of that, but for now here's one of the system booting up and me checking out the identity of the vehicle and what information I can see. My hands were freezing, it was -25C that day ... & you gotta love the music that was playing on the radio-
 
 {% include video id="z_7kp_Pfc5Q" provider="youtube" %}
 
@@ -45,7 +45,7 @@ For inspiration, there is some great information out there. In particular, I'd m
 
 ## S.T.E.M.
 ### Raw materials
-A '98 Camry and '05 Sienna were what I had to work with. As I found out during this project, Toyota stayed close to the ISO-9141-2 specs on these vehicles, so I actually didn't have alot of problems "talking" to my cars once I actually understood the spec & the bugs were all flushed out (that took some time).
+A '98 Camry and '05 Sienna were what I had to work with. As I found out during this project, Toyota stayed close to the ISO-9141-2 specs on these vehicles, so I actually didn't have a lot of problems "talking" to my cars once I actually understood the spec & the bugs were all flushed out (that took some time).
 
 ### The basics - MAF, MAP, etc...
 
@@ -78,18 +78,16 @@ $$
 \end{align*}
 $$
 
-& then use Equation $$\ref{MAF}$$ above to get to MPG. Here is a little spreadsheet to get a feel for the numbers. In this example, its set to highway cruising -
+& then use Equation $$\ref{MAF}$$ above to get to MPG. Here is a little spreadsheet to get a feel for the numbers. In this example, most of the assumptions are relevant to highway cruising -
 
 ![]({{ site.url }}/assets/images/projects/OBD2/MAF-MAP.png)
 *A bunch of math gets me to what I want ... I want my MPG*
 
 ### Introduction to OBD2
-OBD2 stands for "On Board Diagnostics" - it was introduced in 1996 & has gone through several iterations. It turns out, that the current protocol (based on CAN) was mandated for any automobile year '08 or later. Both of mine are earlier than '08s, so they use the older protocol I used here. OK, that just means another project at some point.
+OBD2 stands for "On Board Diagnostics" - it was introduced in 1996 & has gone through several iterations. It turns out, that the current protocol (based on the CAN bus protocol) was mandated for any automobile year '08 or later. Both of mine are earlier than '08s, so they use the older protocol I needed to implement here. OK, that just means another project at some point.
 
 #### OBD2 connector
-
 Below is a picture of the OBD2 connector in my vehicles, the mating connector on my scanner, and the pinout of OBD2.
-
 
 ![]({{ site.url }}/assets/images/projects/OBD2/obd2_connector.png)
 *Connector & pinout*
@@ -104,7 +102,7 @@ Below is a picture of the OBD2 connector in my vehicles, the mating connector on
 OBD2 has several flavors - the variant I used is ISO-9141-2 which works with the Toyota spec. Another flavor (J1939) works with many older GM cars.
 
 The initial "handshaking" has a timing process that looks like the following:
-1. Send 0x55 on K **& J** lines at 5 bits/sec (bps)
+1. Send 0x55 on K- **& L-** lines at 5 bits/sec (bps)
 2. Switch communications to 10400 bps
 2. Receive 0x08 0x08 at 10400 bps
 3. Send 0xF7 at 10400 bps
@@ -148,7 +146,7 @@ void ISO_init_comm(uint8_t show) {
 And here is a picture of how my software responds to the initialization
 
 ![]({{ site.url }}/assets/images/projects/OBD2/got_55.jpg)
-*Oh Bee Dee, Oh Bee Dah, Life goes on, yeah!!! .... got 55, Its alive*
+*Oh Bee Dee, Oh Bee Dah, Life goes on, yeah!!! .... got Hex 55, Its alive*
 
 #### OBD2 PIDs (parameter IDs)
 You can read about parameter IDs (PIDs) & diagnostic trouble codes (DTCs) in a number of places. [Wikipedia](https://en.wikipedia.org/wiki/OBD-II_PIDs) has a list of many of the PIDs. The documentation is good, so I won't regurgitate much of it here.
@@ -158,28 +156,29 @@ One interesting code to send, though, is
 ```c
 0x68 0x6A 0xF1 0x01 0x00 0xC4
 ```
-This tells you which codes are actually readable on your vehicle. In the case of our Sienna, the response is:
+This tells you which of the PID codes are actually readable on your particular vehicle. In the case of our Sienna, the response is:
 
 ![]({{ site.url }}/assets/images/projects/OBD2/supported_pids.png)
 *So what will Toyota actually give me access to????*
 
-Four hex bytes:
+So it was these four hex bytes:
 ```c
 0xBF 0x9F 0xA8 0x91
 ```
 
-Reading the code for Mode 01, PID 01 (which is what we sent ... 0x68 0x6A 0xF1 **0x01 0x00** 0xC4), the response, based on Wikipedia is [A7 ... D0] = [$PID $01 ... PID $20], so converting the response to binary in this format, we get
+What the heck does that mean? Well, we asked the van to respond to the code for Mode 01, PID 01. That's what the two **bold** hex numbers are in the command we sent:0x68 0x6A 0xF1 **0x01 0x00** 0xC4. The response we should expect, based on the Wikipedia page is 4 Bytes A B C D (or 32 bits). For us A = 0xBF, B = 0x9F, C= 0xA8 and D = 0x91. The meaning of those bytes [A7 ... D0] = [$PID $01 ... PID $20] tells us whether that particular PID is implemented. So I first converted those 4 bytes to binary
 
 ```c
 0b 1011 1111 1001 1111 1101 1000 1001 0001
 ```
 
-Which I then matched up to the Wikipedia list (alongside the same response from our car)
+and then I matched them up to the Wikipedia list. I had previously done the same for our car, and you can see them both lined up on this cheat sheet:
 
 ![]({{ site.url }}/assets/images/projects/OBD2/matching_PIDs.png)
 *Now I know what we're working with*
 
 In order to read the value of one of these PIDs that are available, you have to send the message in the format
+
 ```c
 0x68 0x6A 0xF1 0x[A] 0x[B] 0x[CSUM]
 ```
@@ -225,7 +224,7 @@ You can now interpret AB CD EF as diagnostic trouble codes. Here are a few codes
 
 >list of codes
 
-Of course, I almost always get P0136, the oxygens sensor code. Didn't even need to build this thing - its always that same stupid code.
+Of course, I almost always get P0136, the oxygen sensor code. Didn't even need to build this thing - its always that same stupid code.
 
 ![]({{ site.url }}/assets/images/projects/OBD2/trouble-codes.png)
 *I'll bet you 50 bucks its the dreaded "oxygen sensor" code*
@@ -243,7 +242,7 @@ So, really, this entire setup is a communications protocol with the car. Lets di
 ## Hardware - circuit diagram
 Below is a circuit diagram of the entire setup.
 
-![]({{ site.url }}/assets/images/projects/OBD2/obd2_circuit.png)
+[![]({{ site.url }}/assets/images/projects/OBD2/obd2_circuit.png)]({{ site.url}}/assets/images/projects/OBD2/obd2_circuit.png)
 *Circuit diagram for OBD2 project--*
 
 ### LCD & buttons
@@ -252,7 +251,7 @@ I used the Nokia 5110 LCD & driver plus a couple of pushbuttons to navigate arou
 ### Serial interface
 I decided I might like to drive around and record what was happening on a laptop as I drove, among other things. So I put in a serial interface using a MAX232 chip ... it requires a few capacitors and takes its input/output from the PD0/PD1 pins of the ATMega328. Also, in order to push up to 19200 baud and higher, you really have to start to pay attention to timing. There are some (really cool) software UARTs out there, but I didn't use them on this project.
 
-On the PC side, I used Excel on the PC side to collect the information and also to ping the car. You may cringe, but VBA was a simple solution. I'll add more documentation to this over time.
+On the PC side, I used Excel to collect the information and also to ping the car. You may cringe, but VBA was a simple solution. I'll add more documentation to this over time.
 
 ### Circuit & package
 Here are a few close ups of the circuit, front and back sides.
@@ -266,11 +265,11 @@ Not really much of a package to speak of. I just mounted the circuit board with 
 *Keeping the OBD2 connector connected*
 
 
-### J line and K line
-The J-line is only needed for 1-direction (reader-to-car only), but the K-Line is a bidirectional line. I used separate ICs - the L9637 for both of these lines. It is a line driver with a bunch of protection circuitry built in. All you need on the output lines is a 5K pullup to the battery voltage of 12V.
+### L-line and K-line
+The L-line is only needed for 1-direction (reader-to-car only), but the K-Line is a bidirectional line. I used separate ICs - the L9637 - for both of these lines. It is a line driver with a bunch of protection circuitry built in. All you need on the output lines is a 5K pullup to the battery voltage of 12V.
 
 ### Testing ... success (0x55)
-Once the hardware was built, I had to test it - and it was a bit of a pain running back and forth from the car every time I wanted to try something new. I got stuck for almost two weeks getting my car to say anything at all. I went through the hardware and software with a fine tooth comb, until I realized I had only connected the K-Line and not the J-line. It turns out, Toyota is looking for the J-Line as well for the initial communications.
+Once the hardware was built, I had to test it - and it was a bit of a pain running back and forth from the car every time I wanted to try something new. I got stuck for almost two weeks getting my car to say anything at all. I went through the hardware and software with a fine tooth comb, until I realized I had only connected the K-Line and not the L-line. It turns out, Toyota is looking for the L-Line as well for the initial communications.
 
 At last, I got 0x55 in response to the pings ... off and running now! 0x55 is a pattern 0b01010101, whose pattern adequately represents the ups and downs of those 2 weeks!
 
@@ -279,11 +278,22 @@ At last, I got 0x55 in response to the pings ... off and running now! 0x55 is a 
 OK, so this is the project where I learned my lesson - but I implemented the code with one monster loop. It actually worked very well, except for one *MAJOR* problem that would really be a non-starter for anything *PRO*: once I was in a subroutine for a given menu item, it could be really hard to discontinue/break out of it back to the main menu. The only real solution to this is to use an RTOS, which I did on one of my future projects.
 
 ### Averaging stuff
-Most of the math here is very simple - you can see the formulas above for MPG. In some cases I wanted instantaneous values and in others I wanted running averages. For the running (time) averages like average speed, it was important to have a good master clock to always pick from to update. I did everything with floating point math, so there were no issues there.
+Most of the math here is very simple - you can see the formulas above for MPG. In some cases I wanted instantaneous values and in others I wanted running averages. For the running (time) averages like average speed, it was important to have a good master clock to always pick from to update & you just need to think about the definitions of averages.
+
+```c
+running_time =(double) (running_time +dt_seconds);
+MPG_temp = (double) (7.101*VSS_temp/MAF_temp);
+running_dist =(double) (running_dist+0.6214*VSS_temp*dt_seconds/3600.0);
+running_gallons =(double) (running_gallons+2.4307e-5*MAF_temp*dt_seconds);
+MPG_ave = (double) (running_dist/running_gallons);
+speed_ave = (double) (3600.0*running_dist/running_time);
+```
+
+I did everything with floating point math, so there were no issues there.
 
 ### Menu implementation
 ![]({{ site.url }}/assets/images/projects/OBD2/its_alive.jpg)
-*Menu structure upon power-up*
+*Powered-up & waiting for input*
 
 The menu was a simple 2D array that held elements for submenus. Each element of the array linked to a code block that I could execute. At any moment in time, the code keeps track of where the user has navigated to and uses a simple UI feature (a ">") to give the user a visual cue. The interface is a 2-button implementation, with the left button navigating up and down, and the right button selecting. These buttons are context sensitive and do different things in the submenu.
 
