@@ -57,6 +57,7 @@ The fuel efficiency of an internal combustion engine can be estimated by ... wai
 MAP stands for "manifold absolute pressure" and MAF stands for "mass air flow" - your car's engine control unit will report one of these two. My '98 Camry only reports MAF and my '05 Sienna only reports MAP - go figure. Here's the math to go from MAF to MPG.
 
 #### MPG given a MAF value
+
 $$
 \begin{align*}
 \text{MFF[g/s]} = \frac{\text{MAF[g/s]} }{\text{AFR}}\\
@@ -275,7 +276,7 @@ At last, I got 0x55 in response to the pings ... off and running now! 0x55 is a 
 
 ## Software
 ### Mother of all loops ... polling v. interrupts
-OK, so this is the project where I learned my lesson - but I implemented the code with one monster loop. It actually worked very well, except for one *MAJOR* problem that would really be a non-starter for anything *PRO*: once I was in a subroutine for a given menu item, it could be really hard to discontinue/break out of it back to the main menu. The only real solution to this is to use an RTOS, which I did on one of my future projects.
+OK, so this is the project where I learned my lesson - but I implemented the code with one monster loop. It actually worked very well, except for one *MAJOR* problem that would really be a non-starter for anything *PRO*: the button-press recognition was all done by polling. This meant that sometimes it is unresponsive to a user's button push, depending on the load of the processor. The only real solution to this is to use an RTOS, which I did on one of my future projects.
 
 ### Averaging stuff
 Most of the math here is very simple - you can see the formulas above for MPG. In some cases I wanted instantaneous values and in others I wanted running averages. For the running (time) averages like average speed, it was important to have a good master clock to always pick from to update & you just need to think about the definitions of averages.
@@ -473,7 +474,7 @@ clean_exit_partial();
 ```
 
 ### Talking to the PC
-I used the built in USART to talk to the PC - the code is pretty standard. The only trick was implementing the stream capability to minimize use of Flash memory.
+I used the built in USART to talk to the PC - the code on the microcontroller side is pretty standard. The only trick was implementing the stream capability to minimize use the use of RAM by storing as much as possible in flash (program) memory - the chip has 32K of Flash but only 2K of RAM.
 
 ```
 /********************************************************************************
@@ -489,9 +490,6 @@ PIPE2XL allowed me to ask the car to stream real-time data. Here is an example o
 
 ![]({{ site.url }}/assets/images/projects/OBD2/pipe2xl_example.png)
 *Kinda boring ... but analyzing a bunch of these might be interesting*
-
-### Code flashing & updating - ISP, STK500
-I also implemented an ISP programming interface on this project. Simple to implement ... I have an STK500 that is my workhorse, and I just program using that. It sure beats removing the chip to program it (nope, never done that kind of thing before. Never re-inserted the chip backwards *after* having done that kind of thing before. Never.)
 
 ## Final thoughts
 ### CAN bus
