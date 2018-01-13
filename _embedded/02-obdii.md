@@ -276,13 +276,13 @@ At last, I got 0x55 in response to the pings ... off and running now! 0x55 is a 
 
 ## Software
 
-It's no badge of honor, but the size of code is 32kB, right at the limit of the Atmega328. Basically means I need to learn more compact coding skills.
+It's no badge of honor, but the size of code is 32kB, right at the limit of the Atmega328. Basically means I need to learn more compact coding skills. All of the code is posted [at my repo](https://github.com/dvernooy/obd-2).
 
 ### Mother of all loops ... polling v. interrupts
 OK, so this is the project where I learned my lesson - but I implemented the code with one monster loop. It actually worked very well, except for one *MAJOR* problem that would really be a non-starter for anything *PRO*: the button-press recognition was all done by polling. This meant that sometimes it is unresponsive to a user's button push, depending on the load of the processor. This happens rarely, but when it happens it is bad. The only real solution to this is to use an interrupts and an RTOS with a high priority handler thread for button presses, which I did on [one of my future projects](https://dvernooy.githubio/projects/ergware). In fact, it was exactly this problem that led me to investigate RTOS's in the first place, but that's another story. Learn by (re)doing.
 
 ### Getting information from the car
-A few more details associated with getting information from the car. Sometimes I knew exactly how the car responds, and could send a compact request like this ... in this case for the throttle position
+A few more details associated with getting information from the car. Sometimes I knew exactly how the car would respond & and could send a compact request  ... in this case for the throttle position:
 
 ```c
 temp = iso_putb(&thrott_put[0],1, ISO_P3_MIN);
@@ -295,7 +295,7 @@ for (i =1; i<7; i++)
 
 serial_data = 0.3922*thrott_get[5];
 ```
-In other cases, I did not know when the message would end, and would then compare the received byte with the running calculated checksum to dictate the end. (Yup, there's a slight chance of making an error here, but we're hacking folks).
+In other cases, I did not know when the message would end, and would then have to compare the received byte with the running calculated checksum to determine the end of the message. (Yup, there's a slight chance of making an error here, but we're hacking folks).
 
 ```c
 ISO_init_comm(0);
@@ -315,7 +315,7 @@ while(1) {
   ping_length++;
 }//end while
 ```
-You'll notice in each `iso_putb` and `iso_getb` function call variables like `ISO_P3_MIN`, `ISO_P2_MAX_2`, etc... These are timing windows for each of the commands and responses. The best explanation of this I've seen is [Trampas Stern's](http://sterntech.com/obdii_protocols_iso.php) website - there are a couple of informative tables there. I'm sure there is official documentation somewhere. These variables can be used to mask the timing windows and handle errors in the communication timings. I did very little error handling. Yes, I know ... bad, bad, bad.
+You'll notice in each function call to `iso_putb` and `iso_getb` there are variables like `ISO_P3_MIN`, `ISO_P2_MAX_2`, etc... These are timing windows for each of the commands and responses. The best explanation of this I've seen is [Trampas Stern's](http://sterntech.com/obdii_protocols_iso.php) website - there are a couple of informative tables there. I'm sure there is official documentation somewhere on the dark web. These variables can be used to mask the timing windows and handle errors in the communication timings should they arise. I did very little error handling. Yes, I know ... bad, bad, bad.
 
 ### Averaging stuff
 Most of the math here is very simple - you can see the formulas above for MPG. In some cases I wanted instantaneous values and in others I wanted running averages. For the running (time) averages like average speed, it was important to have a good master clock to always pick from to update & you just need to think about the definitions of averages.

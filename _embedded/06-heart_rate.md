@@ -32,10 +32,10 @@ Here are a couple of charts of my heart rate vs. time for a 1.5 hour bike ride n
 ![]({{ site.url }}/assets/images/projects/HRM/correlation.png)
 *Pretty good match between hills & workout ... duh, whaddya expect?*
 
-and here is the average of a few rides on the same route. I did a bit of stitching to account for a flat tire break on one of the rides.
+And here is the average of a few rides on one of my usual 1.5 hr routes. I did a bit of stitching to account for a flat tire pit stop on one of the rides. Not sure its particularly interesting for any given year, but it will be interesting to look at how it changes over 5 or 10 yrs.
 
 ![]({{ site.url }}/assets/images/projects/HRM/aggregate.png)
-*Not sure if averages teach much, need to investigate further*
+*Pretty consistent ride-to-ride*
 
 So here we go ... time for some fun.
 
@@ -138,9 +138,9 @@ I used a spreadsheet to build my own character bitmap set for the LCD, along wit
 And the rest of the circuit is based on the Atmel ATmega88 microcontroller. I used the built-in an 8MHz clock and a couple of AA batteries (3.2V) to power the digital part separately from the analog. I also included the ability for remote programming via an SPI header. All of the details are in the circuit diagram above.
 
 There are a bunch of things I learned building this:
-> Filter the reset pin with 10K and 10nF
+> Filter the reset pin with 10K and 10nF when enabling ISP programming
 
-> There are many ways to reference the ADC
+> There are many ways to reference the ADC voltage ... pick one and go with it
 
 > Make sure the fuse settings enable the EEPROM to be saved during reboots & write the software so you can read it out
 
@@ -155,9 +155,9 @@ To measure the timing between heartbeats, I had a choice of whether to do an int
 
 Every time through the master polling loop (more details and a diagram just below), I took an analog-to-digital converter (ADC) measurement and compared it to a threshold value. If it was above the threshold, I had a hit.
 
-In order to turn this into a time measurement, and eventually a beats-per-minute (bpm) rate, I used the polling loop counter $$H$$. I calibrated the loop time off-line by feeding my software a fake heartbeat signal from a function generator that simulated a range of heartbeats from 30 bpm to 200 bpm, and figured out the calibration constant corresponding to one pass through the loop. The polling loop was 1.61 ms long, so it would be 1245 polling loops between heartbeats for a heart rate of 30bpm and ~ 185 polling loops between heartbeats for 200 bpm. If you read the code, that is where the factor 37312 comes from.
+In order to turn this into a time measurement, and eventually a beats-per-minute (bpm) rate, I used the polling loop counter $$H$$. I calibrated the loop time off-line by feeding my software a fake heartbeat signal from a function generator that simulated a range of heartbeats from 30 bpm to 200 bpm with a square wave of variable duty cycle. I used this to do timing measurements to figure out the calibration constant corresponding to one pass through the loop. The polling loop was 1.61 ms long, so it would be 1245 polling loops between heartbeats for a heart rate of 30bpm and ~ 185 polling loops between heartbeats for 200 bpm. If you read the code, that is where the factor 37312 comes from ... it would be 37312 loops through the code every second.
 
-So how did I get such a long polling loop time? And, more importantly, since the loop time acts basically as a master timer,how to make it repeatable from loop to loop? More on this later.
+So how did I get such a long polling loop time? And, more importantly, since the loop time acts basically as a master timer, how to make it repeatable from loop to loop? More on this later.
 
 For now, here is a little video of everything put together, demonstrating the stand-off detectability of the receiver, and the importance of keeping the transmitter and receiver coils roughly aligned. You can see that as I rotate my body with the chest strap relative to the receiver, the signal loses lock.
 
@@ -201,7 +201,7 @@ A nit point, but because of the way I wired things up, I made sure the EEPROM is
 
 > Make sure everything worked for the dynamic range of heart rates from 30 bpm to 200 bpm
 
-I used my offline signal generator to test out the algorithm across this large range. That worked well, rather than me having to work up a sweat every time I tweaked something.
+I used my offline signal generator to test out the algorithm across this large range. That worked well, rather than me having to work up a sweat every time I tweaked something in the code.
 
 > Make sure that as my heart rate changed during exercise, the monitor could follow it robustly
 
