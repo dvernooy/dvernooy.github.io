@@ -32,6 +32,11 @@ Here are a couple of charts of my heart rate vs. time for a 1.5 hour bike ride n
 ![]({{ site.url }}/assets/images/projects/HRM/correlation.png)
 *Pretty good match between hills & workout ... duh, whaddya expect?*
 
+and here is the average of a few rides on the same route. I did a bit of stitching to account for a flat tire break on one of the rides.
+
+![]({{ site.url }}/assets/images/projects/HRM/aggregate.png)
+*Not sure if averages teach much, need to investigate further*
+
 So here we go ... time for some fun.
 
 ## S.T.E.M.

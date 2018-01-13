@@ -27,8 +27,8 @@ Have you ever seen that poster of the grizzly bear with the salmon in its mouth,
 
 > Typical gas mileage for our car & minivan, including a sense of at what speed you get the optimum bang for your buck -
 
-![]({{ site.url }}/assets/images/projects/OBD2/mpg-camry.png)
-*And the answer is .... 59.7 mph*
+![]({{ site.url }}/assets/images/projects/OBD2/mpg_camry_sienna.png)
+*And the answer is .... 61 miles/hr for the car & 53 miles/hr for the van*
 
 > Some real-time output telemetry from the car while we were driving
 
@@ -41,7 +41,7 @@ I'll get a video loaded here of that, but for now here's one of the system booti
 
 {% include video id="z_7kp_Pfc5Q" provider="youtube" %}
 
-For inspiration, there is some great information out there. In particular, I'd mention [Bruce Lightner's](http://www.lightner.net/lightner/bruce.html) project ... an **AVR-based fuel consumption gauge**. You can see it mentioned near the bottom of his homepage, among all the other great things referenced there.
+For inspiration, there is some great information out there. In particular, I'd mention [Bruce Lightner's](http://www.lightner.net/lightner/bruce.html) project ... an **AVR-based fuel consumption gauge**. You can see it mentioned near the bottom of his homepage, among all the other great things referenced there. I'd also mention [Trampas Stern's](http://sterntech.com/obdii_protocols.php) very informative website. There are a few pieces of code  - in particular the ISO timing protocols - that I used from his google code repository (which no longer looks to be available?). Both of these folks are awesome.
 
 ## S.T.E.M.
 ### Raw materials
@@ -193,7 +193,7 @@ The car's ECU will send a message back in the format
 ```c
 0x48 0x6B 0x[ADDR] 0x41 0x[A] {optional:0x[B] 0x[C] 0x[D]} 0x[CSUM]
 ```
-where A, B, C, D, etc.. are data bits you can do something with. Here is a screenshot of a little utility I wrote called "PING" that I could use from a laptop connected to my scanner ... this allowed me to explore all of these different PIDs.
+where A, B, C, D, etc.. are data bits you can do something with. Here is a screenshot of a little utility I wrote in Excel/VBA called "PING" that I could use from a laptop connected to my scanner ... this allowed me to "explore" all of these different PIDs .. basically a hacking tool.
 
 ![]({{ site.url }}/assets/images/projects/OBD2/PING.png)
 *DIY hacking interface*
@@ -221,11 +221,11 @@ which gets you a response:
 0x48 0x6B 0x[ADDR] 0x43 {repeated n times: 0x[A] 0x[B] 0x[C] 0x[D] 0x[E] 0x[F]} 0x[CSUM]
 ```
 
-You can now interpret AB CD EF as diagnostic trouble codes. Here are a few codes I've seen on my Camry:
+You can now interpret AB CD EF as diagnostic trouble codes. A typical response I get on my Camry is
 
->list of codes
+> A = 01, B = 36, C = 0, D = 0, E = 0, F = 0
 
-Of course, I almost always get P0136, the oxygen sensor code. Didn't even need to build this thing - its always that same stupid code.
+... yes I (like you) almost always get P0136, the oxygen sensor code. Didn't even need to build this thing - its always that same stupid code. Maybe I'll do something about it next time.
 
 ![]({{ site.url }}/assets/images/projects/OBD2/trouble-codes.png)
 *I'll bet you 50 bucks its the dreaded "oxygen sensor" code*
@@ -275,8 +275,47 @@ Once the hardware was built, I had to test it - and it was a bit of a pain runni
 At last, I got 0x55 in response to the pings ... off and running now! 0x55 is a pattern 0b01010101, whose pattern adequately represents the ups and downs of those 2 weeks!
 
 ## Software
+
+It's no badge of honor, but the size of code is 32kB, right at the limit of the Atmega328. Basically means I need to learn more compact coding skills.
+
 ### Mother of all loops ... polling v. interrupts
-OK, so this is the project where I learned my lesson - but I implemented the code with one monster loop. It actually worked very well, except for one *MAJOR* problem that would really be a non-starter for anything *PRO*: the button-press recognition was all done by polling. This meant that sometimes it is unresponsive to a user's button push, depending on the load of the processor. The only real solution to this is to use an RTOS, which I did on one of my future projects.
+OK, so this is the project where I learned my lesson - but I implemented the code with one monster loop. It actually worked very well, except for one *MAJOR* problem that would really be a non-starter for anything *PRO*: the button-press recognition was all done by polling. This meant that sometimes it is unresponsive to a user's button push, depending on the load of the processor. This happens rarely, but when it happens it is bad. The only real solution to this is to use an interrupts and an RTOS with a high priority handler thread for button presses, which I did on [one of my future projects](https://dvernooy.githubio/projects/ergware). In fact, it was exactly this problem that led me to investigate RTOS's in the first place, but that's another story. Learn by (re)doing.
+
+### Getting information from the car
+A few more details associated with getting information from the car. Sometimes I knew exactly how the car responds, and could send a compact request like this ... in this case for the throttle position
+
+```c
+temp = iso_putb(&thrott_put[0],1, ISO_P3_MIN);
+for (i =1; i<6; i++)
+ {temp = iso_putb(&thrott_put[i],1, ISO_P4_MIN);}
+
+temp = iso_getb(&thrott_get[0],1, ISO_P2_MAX*2);
+for (i =1; i<7; i++)
+{temp = iso_getb(&thrott_get[i],1, ISO_W2_MAX*2);}
+
+serial_data = 0.3922*thrott_get[5];
+```
+In other cases, I did not know when the message would end, and would then compare the received byte with the running calculated checksum to dictate the end. (Yup, there's a slight chance of making an error here, but we're hacking folks).
+
+```c
+ISO_init_comm(0);
+temp = iso_putb(&ping_put[0],1, ISO_P3_MIN);
+for (i =1; i<ping_length; i++) {
+  temp = iso_putb(&ping_put[i],1, ISO_P4_MIN);
+}
+ping_length = 1;
+temp = iso_getb(&ping_get[0],1, ISO_P2_MAX*2);
+ping_sum = ping_get[0];
+while(1) {
+  temp = iso_getb(&ping_get[ping_length],1, ISO_W2_MAX*2);
+  if ((ping_length>3) && (ping_get[ping_length] == (UBYTE) ping_sum)) {
+    break; //checksum ... last bit
+  } //end if
+  ping_sum += ping_get[ping_length];
+  ping_length++;
+}//end while
+```
+You'll notice in each `iso_putb` and `iso_getb` function call variables like `ISO_P3_MIN`, `ISO_P2_MAX_2`, etc... These are timing windows for each of the commands and responses. The best explanation of this I've seen is [Trampas Stern's](http://sterntech.com/obdii_protocols_iso.php) website - there are a couple of informative tables there. I'm sure there is official documentation somewhere. These variables can be used to mask the timing windows and handle errors in the communication timings. I did very little error handling. Yes, I know ... bad, bad, bad.
 
 ### Averaging stuff
 Most of the math here is very simple - you can see the formulas above for MPG. In some cases I wanted instantaneous values and in others I wanted running averages. For the running (time) averages like average speed, it was important to have a good master clock to always pick from to update & you just need to think about the definitions of averages.
@@ -474,7 +513,7 @@ clean_exit_partial();
 ```
 
 ### Talking to the PC
-I used the built in USART to talk to the PC - the code on the microcontroller side is pretty standard. The only trick was implementing the stream capability to minimize use the use of RAM by storing as much as possible in flash (program) memory - the chip has 32K of Flash but only 2K of RAM.
+I used the built in USART to talk to the PC - the code on the microcontroller side has a few twists. The first trick was implementing the stream capability to minimize use the use of RAM by storing as much as possible in flash (program) memory - the chip has 32K of Flash but only 2K of RAM.
 
 ```
 /********************************************************************************
@@ -483,13 +522,104 @@ Global Variables
 static FILE usart_out = FDEV_SETUP_STREAM(usart_putchar_printf, usart_getchar_printf, _FDEV_SETUP_RW);
 static FILE lcd_out = FDEV_SETUP_STREAM(lcd_chr_printf, NULL, _FDEV_SETUP_WRITE);
 ```
+Next, to talk to the PC over serial, I used Visual Basic for Applications (VBA) within Excel. It is flexible, and can usually do the job if you are in a hurry. I posted the spreadsheet with the code, and also broke out the module macros individually. I used a set of serial communications routines (Modcomm) written by David M. Hitchner, with two modifications:
 
-So there are 3 functions I wrote that work over serial to a PC: PIPE2XL, EEPROM2XL and PING. EEPROM2XL allowed me to read the EEPROM at any point in time, which was useful since I sometimes saved data there. PING was already described above, and could be used to send arbitrary commands to the car to see how it responded.
+1. Every system function declaration needs to add `PtrSafe` for 64 bit operation
 
-PIPE2XL allowed me to ask the car to stream real-time data. Here is an example of my speed on a road near our house ending in a traffic light, check back as I'll try to get some cooler stuff.
+    ```vb
+    '-------------------------------------------------------------------------------
+    ' System Functions
+    '-------------------------------------------------------------------------------
+    Declare PtrSafe Sub AppSleep Lib "kernel32" Alias "Sleep" (ByVal dwMilliseconds As Long)
+    ```
+
+2. I forced Commread to **only** return the number of bytes `lngSize` that were called so I could just read one byte at a time ... this worked really well
+
+    ```vb
+    '-------------------------------------------------------------------------------
+    ' CommRead - Read serial port input buffer.
+    '
+    ' Parameters:
+    '   intPortID   - Port ID used when port was opened.
+    '   strData     - Data buffer.
+    '   lngSize     - Maximum number of bytes to be read.
+    '
+    ' Returns:
+    '   Error Code  - 0 = No Error.
+    '-------------------------------------------------------------------------------
+        If udtCommStat.cbInQue > 0 Then
+            'If udtCommStat.cbInQue > lngSize Then
+            '    lngRdSize = udtCommStat.cbInQue
+            'Else
+                lngRdSize = lngSize
+            'End If
+        Else
+            lngRdSize = 0
+        End If
+    ```
+
+So there are 4 macros I wrote that work over serial to a PC: PIPE2XL, PIPE2XL2, EEPROM2XL and PING.
+
+![]({{ site.url }}/assets/images/projects/OBD2/xl_app.png)
+*Clickety clack ... Cartalk*
+
+EEPROM2XL allowed me to read the EEPROM at any point in time, which was useful since I saved data there. PING - the hacker tool - was already described above, and could be used to send arbitrary commands to the car to see how it responded. Here it is again in action:
+
+![]({{ site.url }}/assets/images/projects/OBD2/hacking_setup.png)
+*PING ... doing its thing*
+
+PIPE2XL and PIPE2XL2 allowed me to ask the car to stream real-time data. Here is a video of the rpms streaming to a laptop:
+
+{% include video id="cGMPyMdfBHI" provider="youtube" %}
+
+& here is an example of my speed on a road near our house ending in a traffic light, check back as I'll try to post some cooler stuff.
 
 ![]({{ site.url }}/assets/images/projects/OBD2/pipe2xl_example.png)
 *Kinda boring ... but analyzing a bunch of these might be interesting*
+
+All of them used the same VBA code snippet to ensure receiving good data from the microcontroller
+
+```vb
+Do While (still_going = 1)
+  end_of_string = 0
+  buf = ""
+    Do While (end_of_string = 0) 'not yet end of string
+        'read one byte at a time into a buffer
+         strData = ""
+         Do While (strData = "") 'nothing in buffer
+              lngStatus = CommRead(intPortID, strData, 1)
+         Loop 'nothing in buffer
+         If ((strData <> Chr(13)) And (strData <> Chr(10))) Then
+              buf = buf + strData
+         Else
+             If strData = Chr(10) Then 'we read the string, flush buffer
+                  Call CommFlush(intPortID)
+                  end_of_string = 1
+              End If
+         End If
+    Loop 'end of string
+    total_count = total_count + 1
+    response_count = response_count + 1        
+    If Val(buf) = 999 Then
+        still_going = 0
+    Else
+        Worksheets("PING").Cells(j + 2, response_count + 1).Value = Hex(Val(buf))
+    End If
+Loop 'still_going
+```
+
+In the microcontroller, I escaped each byte with ```\r\n```
+
+```c
+fprintf_P(&usart_out,PSTR("%08.2f\r\n"), serial_data);
+```
+
+and in this particular case I also finish the overall transmission with ```999``` to make the VBA serial link end cleanly
+
+```c
+fprintf_P(&usart_out,PSTR("%06d\r\n"),999);
+
+```
 
 ## Final thoughts
 ### CAN bus

@@ -72,7 +72,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-01-10T06:13:15-05:00">
+  <meta property="article:published_time" content="2018-01-13T13:06:07-05:00">
 
 
 
@@ -322,7 +322,7 @@
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     <meta itemprop="headline" content="OBD2 4u">
     <meta itemprop="description" content="Hacking my car">
-    <meta itemprop="datePublished" content="January 10, 2018">
+    <meta itemprop="datePublished" content="January 13, 2018">
     <meta itemprop="dateModified" content="February 01, 2012">
 
     <div class="page__inner-wrap">
@@ -337,7 +337,7 @@
 
 
 
-  15 minute read
+  18 minute read
 </p>
           
         </header>
@@ -369,11 +369,11 @@
   <li><a href="#software">Software</a>
     <ul>
       <li><a href="#mother-of-all-loops--polling-v-interrupts">Mother of all loops … polling v. interrupts</a></li>
+      <li><a href="#getting-information-from-the-car">Getting information from the car</a></li>
       <li><a href="#averaging-stuff">Averaging stuff</a></li>
       <li><a href="#menu-implementation">Menu implementation</a></li>
       <li><a href="#settings--eeprom">Settings &amp; EEPROM</a></li>
       <li><a href="#talking-to-the-pc">Talking to the PC</a></li>
-      <li><a href="#code-flashing--updating---isp-stk500">Code flashing &amp; updating - ISP, STK500</a></li>
     </ul>
   </li>
   <li><a href="#final-thoughts">Final thoughts</a>
@@ -406,8 +406,8 @@
   <p>Typical gas mileage for our car &amp; minivan, including a sense of at what speed you get the optimum bang for your buck -</p>
 </blockquote>
 
-<p><img src="http://localhost:4000/assets/images/projects/OBD2/mpg-camry.png" alt="" />
-<em>And the answer is …. 59.7 mph</em></p>
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/mpg_camry_sienna.png" alt="" />
+<em>And the answer is …. 61 miles/hr for the car &amp; 53 miles/hr for the van</em></p>
 
 <blockquote>
   <p>Some real-time output telemetry from the car while we were driving</p>
@@ -429,7 +429,7 @@
 
 </div>
 
-<p>For inspiration, there is some great information out there. In particular, I’d mention <a href="http://www.lightner.net/lightner/bruce.html">Bruce Lightner’s</a> project … an <strong>AVR-based fuel consumption gauge</strong>. You can see it mentioned near the bottom of his homepage, among all the other great things referenced there.</p>
+<p>For inspiration, there is some great information out there. In particular, I’d mention <a href="http://www.lightner.net/lightner/bruce.html">Bruce Lightner’s</a> project … an <strong>AVR-based fuel consumption gauge</strong>. You can see it mentioned near the bottom of his homepage, among all the other great things referenced there. I’d also mention <a href="http://sterntech.com/obdii_protocols.php">Trampas Stern’s</a> very informative website. There are a few pieces of code  - in particular the ISO timing protocols - that I used from his google code repository (which no longer looks to be available?). Both of these folks are awesome.</p>
 
 <h2 id="stem">S.T.E.M.</h2>
 <h3 id="raw-materials">Raw materials</h3>
@@ -445,13 +445,14 @@
 <p>MAP stands for “manifold absolute pressure” and MAF stands for “mass air flow” - your car’s engine control unit will report one of these two. My ‘98 Camry only reports MAF and my ‘05 Sienna only reports MAP - go figure. Here’s the math to go from MAF to MPG.</p>
 
 <h4 id="mpg-given-a-maf-value">MPG given a MAF value</h4>
-<p><script type="math/tex">\begin{align*}
+
+<script type="math/tex; mode=display">\begin{align*}
 \text{MFF[g/s]} = \frac{\text{MAF[g/s]} }{\text{AFR}}\\
 \text{MFF[gallons/s]} = \frac{\text{MFF[g/s]}}{\text{2799[g/gallon]} }\\
 \text{MPG} = \frac{\text{v[mph]/3600} } {\text{MFF[gallons/s]}}
 \tag{1}
 \label{MAF}
-\end{align*}</script></p>
+\end{align*}</script>
 
 <p>where MFF is mass fuel flow, AFR is air-fuel ratio and 2799 g/gallon is the density of gasoline. If given a MAP value, first convert it to MAF,</p>
 
@@ -572,7 +573,7 @@
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mh">0x48</span> <span class="mh">0x6B</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">ADDR</span><span class="p">]</span> <span class="mh">0x41</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">A</span><span class="p">]</span> <span class="p">{</span><span class="n">optional</span><span class="o">:</span><span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">B</span><span class="p">]</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">C</span><span class="p">]</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">D</span><span class="p">]}</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">CSUM</span><span class="p">]</span>
 </code></pre></div></div>
-<p>where A, B, C, D, etc.. are data bits you can do something with. Here is a screenshot of a little utility I wrote called “PING” that I could use from a laptop connected to my scanner … this allowed me to explore all of these different PIDs.</p>
+<p>where A, B, C, D, etc.. are data bits you can do something with. Here is a screenshot of a little utility I wrote in Excel/VBA called “PING” that I could use from a laptop connected to my scanner … this allowed me to “explore” all of these different PIDs .. basically a hacking tool.</p>
 
 <p><img src="http://localhost:4000/assets/images/projects/OBD2/PING.png" alt="" />
 <em>DIY hacking interface</em></p>
@@ -597,13 +598,13 @@
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mh">0x48</span> <span class="mh">0x6B</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">ADDR</span><span class="p">]</span> <span class="mh">0x43</span> <span class="p">{</span><span class="n">repeated</span> <span class="n">n</span> <span class="n">times</span><span class="o">:</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">A</span><span class="p">]</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">B</span><span class="p">]</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">C</span><span class="p">]</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">D</span><span class="p">]</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">E</span><span class="p">]</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">F</span><span class="p">]}</span> <span class="mi">0</span><span class="n">x</span><span class="p">[</span><span class="n">CSUM</span><span class="p">]</span>
 </code></pre></div></div>
 
-<p>You can now interpret AB CD EF as diagnostic trouble codes. Here are a few codes I’ve seen on my Camry:</p>
+<p>You can now interpret AB CD EF as diagnostic trouble codes. A typical response I get on my Camry is</p>
 
 <blockquote>
-  <p>list of codes</p>
+  <p>A = 01, B = 36, C = 0, D = 0, E = 0, F = 0</p>
 </blockquote>
 
-<p>Of course, I almost always get P0136, the oxygen sensor code. Didn’t even need to build this thing - its always that same stupid code.</p>
+<p>… yes I (like you) almost always get P0136, the oxygen sensor code. Didn’t even need to build this thing - its always that same stupid code. Maybe I’ll do something about it next time.</p>
 
 <p><img src="http://localhost:4000/assets/images/projects/OBD2/trouble-codes.png" alt="" />
 <em>I’ll bet you 50 bucks its the dreaded “oxygen sensor” code</em></p>
@@ -651,8 +652,45 @@
 <p>At last, I got 0x55 in response to the pings … off and running now! 0x55 is a pattern 0b01010101, whose pattern adequately represents the ups and downs of those 2 weeks!</p>
 
 <h2 id="software">Software</h2>
+
+<p>It’s no badge of honor, but the size of code is 32kB, right at the limit of the Atmega328. Basically means I need to learn more compact coding skills.</p>
+
 <h3 id="mother-of-all-loops--polling-v-interrupts">Mother of all loops … polling v. interrupts</h3>
-<p>OK, so this is the project where I learned my lesson - but I implemented the code with one monster loop. It actually worked very well, except for one <em>MAJOR</em> problem that would really be a non-starter for anything <em>PRO</em>: once I was in a subroutine for a given menu item, it could be really hard to discontinue/break out of it back to the main menu. The only real solution to this is to use an RTOS, which I did on one of my future projects.</p>
+<p>OK, so this is the project where I learned my lesson - but I implemented the code with one monster loop. It actually worked very well, except for one <em>MAJOR</em> problem that would really be a non-starter for anything <em>PRO</em>: the button-press recognition was all done by polling. This meant that sometimes it is unresponsive to a user’s button push, depending on the load of the processor. This happens rarely, but when it happens it is bad. The only real solution to this is to use an interrupts and an RTOS with a high priority handler thread for button presses, which I did on <a href="https://dvernooy.githubio/projects/ergware">one of my future projects</a>. In fact, it was exactly this problem that led me to investigate RTOS’s in the first place, but that’s another story. Learn by (re)doing.</p>
+
+<h3 id="getting-information-from-the-car">Getting information from the car</h3>
+<p>A few more details associated with getting information from the car. Sometimes I knew exactly how the car responds, and could send a compact request like this … in this case for the throttle position</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">temp</span> <span class="o">=</span> <span class="n">iso_putb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">thrott_put</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">,</span> <span class="n">ISO_P3_MIN</span><span class="p">);</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">6</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+ <span class="p">{</span><span class="n">temp</span> <span class="o">=</span> <span class="n">iso_putb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">thrott_put</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="mi">1</span><span class="p">,</span> <span class="n">ISO_P4_MIN</span><span class="p">);}</span>
+
+<span class="n">temp</span> <span class="o">=</span> <span class="n">iso_getb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">thrott_get</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">,</span> <span class="n">ISO_P2_MAX</span><span class="o">*</span><span class="mi">2</span><span class="p">);</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">7</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="p">{</span><span class="n">temp</span> <span class="o">=</span> <span class="n">iso_getb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">thrott_get</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="mi">1</span><span class="p">,</span> <span class="n">ISO_W2_MAX</span><span class="o">*</span><span class="mi">2</span><span class="p">);}</span>
+
+<span class="n">serial_data</span> <span class="o">=</span> <span class="mi">0</span><span class="p">.</span><span class="mi">3922</span><span class="o">*</span><span class="n">thrott_get</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+</code></pre></div></div>
+<p>In other cases, I did not know when the message would end, and would then compare the received byte with the running calculated checksum to dictate the end. (Yup, there’s a slight chance of making an error here, but we’re hacking folks).</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ISO_init_comm</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">iso_putb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ping_put</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">,</span> <span class="n">ISO_P3_MIN</span><span class="p">);</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">ping_length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">temp</span> <span class="o">=</span> <span class="n">iso_putb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ping_put</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="mi">1</span><span class="p">,</span> <span class="n">ISO_P4_MIN</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">ping_length</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">iso_getb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ping_get</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">,</span> <span class="n">ISO_P2_MAX</span><span class="o">*</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">ping_sum</span> <span class="o">=</span> <span class="n">ping_get</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">temp</span> <span class="o">=</span> <span class="n">iso_getb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ping_get</span><span class="p">[</span><span class="n">ping_length</span><span class="p">],</span><span class="mi">1</span><span class="p">,</span> <span class="n">ISO_W2_MAX</span><span class="o">*</span><span class="mi">2</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">((</span><span class="n">ping_length</span><span class="o">&gt;</span><span class="mi">3</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">ping_get</span><span class="p">[</span><span class="n">ping_length</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="n">UBYTE</span><span class="p">)</span> <span class="n">ping_sum</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">break</span><span class="p">;</span> <span class="c1">//checksum ... last bit
+</span>  <span class="p">}</span> <span class="c1">//end if
+</span>  <span class="n">ping_sum</span> <span class="o">+=</span> <span class="n">ping_get</span><span class="p">[</span><span class="n">ping_length</span><span class="p">];</span>
+  <span class="n">ping_length</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span><span class="c1">//end while
+</span></code></pre></div></div>
+<p>You’ll notice in each <code class="highlighter-rouge">iso_putb</code> and <code class="highlighter-rouge">iso_getb</code> function call variables like <code class="highlighter-rouge">ISO_P3_MIN</code>, <code class="highlighter-rouge">ISO_P2_MAX_2</code>, etc… These are timing windows for each of the commands and responses. The best explanation of this I’ve seen is <a href="http://sterntech.com/obdii_protocols_iso.php">Trampas Stern’s</a> website - there are a couple of informative tables there. I’m sure there is official documentation somewhere. These variables can be used to mask the timing windows and handle errors in the communication timings. I did very little error handling. Yes, I know … bad, bad, bad.</p>
 
 <h3 id="averaging-stuff">Averaging stuff</h3>
 <p>Most of the math here is very simple - you can see the formulas above for MPG. In some cases I wanted instantaneous values and in others I wanted running averages. For the running (time) averages like average speed, it was important to have a good master clock to always pick from to update &amp; you just need to think about the definitions of averages.</p>
@@ -847,7 +885,7 @@
 </code></pre></div></div>
 
 <h3 id="talking-to-the-pc">Talking to the PC</h3>
-<p>I used the built in USART to talk to the PC - the code is pretty standard. The only trick was implementing the stream capability to minimize use of Flash memory.</p>
+<p>I used the built in USART to talk to the PC - the code on the microcontroller side has a few twists. The first trick was implementing the stream capability to minimize use the use of RAM by storing as much as possible in flash (program) memory - the chip has 32K of Flash but only 2K of RAM.</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/********************************************************************************
 Global Variables
@@ -855,16 +893,102 @@ Global Variables
 static FILE usart_out = FDEV_SETUP_STREAM(usart_putchar_printf, usart_getchar_printf, _FDEV_SETUP_RW);
 static FILE lcd_out = FDEV_SETUP_STREAM(lcd_chr_printf, NULL, _FDEV_SETUP_WRITE);
 </code></pre></div></div>
+<p>Next, to talk to the PC over serial, I used Visual Basic for Applications (VBA) within Excel. It is flexible, and can usually do the job if you are in a hurry. I posted the spreadsheet with the code, and also broke out the module macros individually. I used a set of serial communications routines (Modcomm) written by David M. Hitchner, with two modifications:</p>
 
-<p>So there are 3 functions I wrote that work over serial to a PC: PIPE2XL, EEPROM2XL and PING. EEPROM2XL allowed me to read the EEPROM at any point in time, which was useful since I sometimes saved data there. PING was already described above, and could be used to send arbitrary commands to the car to see how it responded.</p>
+<ol>
+  <li>
+    <p>Every system function declaration needs to add <code class="highlighter-rouge">PtrSafe</code> for 64 bit operation</p>
 
-<p>PIPE2XL allowed me to ask the car to stream real-time data. Here is an example of my speed on a road near our house ending in a traffic light, check back as I’ll try to get some cooler stuff.</p>
+    <div class="language-vb highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">'-------------------------------------------------------------------------------</span>
+ <span class="c1">' System Functions</span>
+ <span class="c1">'-------------------------------------------------------------------------------</span>
+ <span class="k">Declare</span> <span class="n">PtrSafe</span> <span class="k">Sub</span> <span class="nf">AppSleep</span> <span class="k">Lib</span> <span class="s">"kernel32"</span> <span class="k">Alias</span> <span class="s">"Sleep"</span> <span class="p">(</span><span class="k">ByVal</span> <span class="n">dwMilliseconds</span> <span class="ow">As</span> <span class="kt">Long</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>I forced Commread to <strong>only</strong> return the number of bytes <code class="highlighter-rouge">lngSize</code> that were called so I could just read one byte at a time … this worked really well</p>
+
+    <div class="language-vb highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">'-------------------------------------------------------------------------------</span>
+ <span class="c1">' CommRead - Read serial port input buffer.</span>
+ <span class="c1">'</span>
+ <span class="c1">' Parameters:</span>
+ <span class="c1">'   intPortID   - Port ID used when port was opened.</span>
+ <span class="c1">'   strData     - Data buffer.</span>
+ <span class="c1">'   lngSize     - Maximum number of bytes to be read.</span>
+ <span class="c1">'</span>
+ <span class="c1">' Returns:</span>
+ <span class="c1">'   Error Code  - 0 = No Error.</span>
+ <span class="c1">'-------------------------------------------------------------------------------</span>
+     <span class="k">If</span> <span class="n">udtCommStat</span><span class="p">.</span><span class="n">cbInQue</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">Then</span>
+         <span class="c1">'If udtCommStat.cbInQue &gt; lngSize Then</span>
+         <span class="c1">'    lngRdSize = udtCommStat.cbInQue</span>
+         <span class="c1">'Else</span>
+             <span class="n">lngRdSize</span> <span class="o">=</span> <span class="n">lngSize</span>
+         <span class="c1">'End If</span>
+     <span class="k">Else</span>
+         <span class="n">lngRdSize</span> <span class="o">=</span> <span class="mi">0</span>
+     <span class="k">End</span> <span class="k">If</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>So there are 4 macros I wrote that work over serial to a PC: PIPE2XL, PIPE2XL2, EEPROM2XL and PING.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/xl_app.png" alt="" />
+<em>Clickety clack … Cartalk</em></p>
+
+<p>EEPROM2XL allowed me to read the EEPROM at any point in time, which was useful since I saved data there. PING - the hacker tool - was already described above, and could be used to send arbitrary commands to the car to see how it responded. Here it is again in action:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/OBD2/hacking_setup.png" alt="" />
+<em>PING … doing its thing</em></p>
+
+<p>PIPE2XL and PIPE2XL2 allowed me to ask the car to stream real-time data. Here is a</p>
+
+<p>Here is an example of my speed on a road near our house ending in a traffic light, check back as I’ll try to get some cooler stuff.</p>
 
 <p><img src="http://localhost:4000/assets/images/projects/OBD2/pipe2xl_example.png" alt="" />
 <em>Kinda boring … but analyzing a bunch of these might be interesting</em></p>
 
-<h3 id="code-flashing--updating---isp-stk500">Code flashing &amp; updating - ISP, STK500</h3>
-<p>I also implemented an ISP programming interface on this project. Simple to implement … I have an STK500 that is my workhorse, and I just program using that. It sure beats removing the chip to program it (nope, never done that kind of thing before. Never re-inserted the chip backwards <em>after</em> having done that kind of thing before. Never.)</p>
+<p>All of them used the same VBA code snippet to ensure receiving good data from the microcontroller</p>
+
+<div class="language-vb highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">Do</span> <span class="k">While</span> <span class="p">(</span><span class="n">still_going</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="n">end_of_string</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">buf</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="k">Do</span> <span class="k">While</span> <span class="p">(</span><span class="n">end_of_string</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">'not yet end of string</span>
+        <span class="c1">'read one byte at a time into a buffer</span>
+         <span class="n">strData</span> <span class="o">=</span> <span class="s">""</span>
+         <span class="k">Do</span> <span class="k">While</span> <span class="p">(</span><span class="n">strData</span> <span class="o">=</span> <span class="s">""</span><span class="p">)</span> <span class="c1">'nothing in buffer</span>
+              <span class="n">lngStatus</span> <span class="o">=</span> <span class="n">CommRead</span><span class="p">(</span><span class="n">intPortID</span><span class="p">,</span> <span class="n">strData</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+         <span class="k">Loop</span> <span class="c1">'nothing in buffer</span>
+         <span class="k">If</span> <span class="p">((</span><span class="n">strData</span> <span class="o">&lt;&gt;</span> <span class="n">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">))</span> <span class="ow">And</span> <span class="p">(</span><span class="n">strData</span> <span class="o">&lt;&gt;</span> <span class="n">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">)))</span> <span class="k">Then</span>
+              <span class="n">buf</span> <span class="o">=</span> <span class="n">buf</span> <span class="o">+</span> <span class="n">strData</span>
+         <span class="k">Else</span>
+             <span class="k">If</span> <span class="n">strData</span> <span class="o">=</span> <span class="n">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">Then</span> <span class="c1">'we read the string, flush buffer</span>
+                  <span class="k">Call</span> <span class="n">CommFlush</span><span class="p">(</span><span class="n">intPortID</span><span class="p">)</span>
+                  <span class="n">end_of_string</span> <span class="o">=</span> <span class="mi">1</span>
+              <span class="k">End</span> <span class="k">If</span>
+         <span class="k">End</span> <span class="k">If</span>
+    <span class="k">Loop</span> <span class="c1">'end of string</span>
+    <span class="n">total_count</span> <span class="o">=</span> <span class="n">total_count</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">response_count</span> <span class="o">=</span> <span class="n">response_count</span> <span class="o">+</span> <span class="mi">1</span>        
+    <span class="k">If</span> <span class="n">Val</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span> <span class="o">=</span> <span class="mi">999</span> <span class="k">Then</span>
+        <span class="n">still_going</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">Else</span>
+        <span class="n">Worksheets</span><span class="p">(</span><span class="s">"PING"</span><span class="p">).</span><span class="n">Cells</span><span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">response_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">).</span><span class="n">Value</span> <span class="o">=</span> <span class="n">Hex</span><span class="p">(</span><span class="n">Val</span><span class="p">(</span><span class="n">buf</span><span class="p">))</span>
+    <span class="k">End</span> <span class="k">If</span>
+<span class="k">Loop</span> <span class="c1">'still_going</span>
+</code></pre></div></div>
+
+<p>In the microcontroller, I escaped each byte with <code class="highlighter-rouge">\r\n</code></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fprintf_P</span><span class="p">(</span><span class="o">&amp;</span><span class="n">usart_out</span><span class="p">,</span><span class="n">PSTR</span><span class="p">(</span><span class="s">"%08.2f</span><span class="se">\r\n</span><span class="s">"</span><span class="p">),</span> <span class="n">serial_data</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>and in this particular case I also finish the overall transmission with <code class="highlighter-rouge">999</code> to make the VBA serial link end cleanly</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fprintf_P</span><span class="p">(</span><span class="o">&amp;</span><span class="n">usart_out</span><span class="p">,</span><span class="n">PSTR</span><span class="p">(</span><span class="s">"%06d</span><span class="se">\r\n</span><span class="s">"</span><span class="p">),</span><span class="mi">999</span><span class="p">);</span>
+
+</code></pre></div></div>
 
 <h2 id="final-thoughts">Final thoughts</h2>
 <h3 id="can-bus">CAN bus</h3>
