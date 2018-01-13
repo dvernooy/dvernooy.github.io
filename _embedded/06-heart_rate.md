@@ -15,12 +15,12 @@ toc: true
 </script>
 
 ![]({{ site.url }}/assets/images/projects/HRM/screenshot.png)
-*MacGyver ... eat your heart out*
+*MacGyver, eat your heart out*
 
 ## Project overview
 Welcome to my heart rate monitor project. These things have been around for a long time & you can buy them now for about $15 bundled with all kinds of software. So if you want to start measuring your heart rate, stop reading this, go buy one and have fun! Otherwise, stay tuned for all of the trials and tribulations of DIY'ing a heart rate monitor.
 
-It started as a shotgun marriage between a dead Nokia 2115i cellphone and a chest strap for an old Polar T6 heart rate monitor - both of which were lying around. What better way to kill a couple of Saturdays then try to build my own receiver using the LCD out of the cell phone? Little did I know the long & winding road ... and if you're still with me, you'll know that navigating that road is where the real fun is!!!
+It started as a shotgun marriage between a dead Nokia 2115i cellphone and a chest strap for an old Polar T6 heart rate monitor - both of which were lying around. What better way to kill a couple of Saturdays then try to build my own receiver using the LCD out of the cell phone? Little did I know the long & winding road. If you're still with me, you'll know that navigating that road is where the real fun is!!!
 
 The end result was not super pretty looking, but it was such a fun project I thought I'd take you through it in detail. If you're already laughing at me for doing this (i.e., hey, dude, Polar has been making these things since the early '80s, where have you been & by the way, ever heard of Fitbit?), you'll laugh harder when you see the pictures of the receiver attached to my bike with some modified pvc tubing:
 
@@ -30,20 +30,20 @@ The end result was not super pretty looking, but it was such a fun project I tho
 Here are a couple of charts of my heart rate vs. time for a 1.5 hour bike ride near my house, along with a screenshot of the elevation changes - pretty good correlation between the two. I used to be a decent hill climber.
 
 ![]({{ site.url }}/assets/images/projects/HRM/correlation.png)
-*Pretty good match between hills & workout ... duh, whaddya expect?*
+*Pretty good match between hills & workout. Duh, whaddya expect?*
 
 And here is the average of a few rides on one of my usual 1.5 hr routes. I did a bit of stitching to account for a flat tire pit stop on one of the rides. Not sure its particularly interesting for any given year, but it will be interesting to look at how it changes over 5 or 10 yrs.
 
 ![]({{ site.url }}/assets/images/projects/HRM/aggregate.png)
 *Pretty consistent ride-to-ride*
 
-So here we go ... time for some fun.
+So here we go. Time for some fun.
 
 ## S.T.E.M.
 Here's how I built up my understanding, piece by piece.
 
 ### Polar T6, talk to me
-I had no idea what the old Polar T6 transmitter did or how it worked, so I opened it up - I don't have an actual picture of the inside handy, but this "x-ray" picture (the second image of the two below) that I found on the web is pretty similar to what I saw inside. The key feature here is that inductor/coil on the bottom ... especially the magnetic field pattern that it creates (dashed lines):
+I had no idea what the old Polar T6 transmitter did or how it worked, so I opened it up - I don't have an actual picture of the inside handy, but this "x-ray" picture (the second image of the two below) that I found on the web is pretty similar to what I saw inside. The key feature here is that inductor/coil on the bottom, and more specifically the magnetic field pattern that it creates (dashed lines):
 
 ![]({{ site.url }}/assets/images/projects/HRM/transmitter.png)
 *Heart rate monitor transmitter*
@@ -61,7 +61,7 @@ The first step was to directly wire this other old coil I had lying around into 
 I held this second coil over top of the transmitter piece as it was attached to my chest. Here is what I saw on the scope:
 
 ![]({{ site.url }}/assets/images/projects/HRM/zoom0.jpg)
-*My heart be still! ... I'm alive*
+*My heart be still! I'm alive!*
 
 Heartbeats! ... spaced about 1 second apart. Here's what the waveform looked like on successively zooming in from 100 ms to 5 ms to 1 ms to 100 $$\mu$$s (you can see the time scales on the scope images):
 
@@ -96,7 +96,7 @@ $$
 \end{align*}
 $$
 
-where $$N$$ is the number of turns, $$A$$ is the area, $$l$$ is the length and $$\mu$$ is the relative permeability. So the number of turns are a big deal. Enough already ... time to build some hardware.
+where $$N$$ is the number of turns, $$A$$ is the area, $$l$$ is the length and $$\mu$$ is the relative permeability. So the number of turns are a big deal. Enough already. Time to build some hardware.
 
 ## Hardware
 
@@ -121,18 +121,18 @@ If I get time, I'll add a few images of the analog part of the circuit and recei
 After a huge amount of googling, I found out that the Nokia 2115i's mono LCD had the same pinout as those in the 1100/1200/1600. It had a special Hirose DF23-10 connector that I needed an adapter for
 
 ![]({{ site.url }}/assets/images/projects/HRM/lcd_pinout.png)
-*Essential to avoiding smoke ... pinout for LCD*
+*Pinout for the LCD. Essential to avoiding smoke*
 
 and, most importantly, I found out it used the Philips PCF8814 96x65 pixel LCD driver. The spec sheet for this driver was indispensable - I was able to use it to bit-bang the SPI interface. The spec is posted with the code.
 
 ![]({{ site.url }}/assets/images/projects/HRM/PCF8814.png)
-*pages 26-29 of PCF8814 spec ... dog-eared at the end of this project*
+*pages 26-29 of PCF8814 spec were dog-eared by the end of this project*
 
 ### Supporting character set
 I used a spreadsheet to build my own character bitmap set for the LCD, along with a few custom "graphics" ... a bike and a heart that you can see on the LCD. I've also included this spreadsheet with the code.
 
 ![]({{ site.url }}/assets/images/projects/HRM/icon_bitmap.png)
-*From raw material to finished product ... WYSIWYG*
+*From raw material to finished product: WYSIWYG*
 
 ### Microcontroller
 And the rest of the circuit is based on the Atmel ATmega88 microcontroller. I used the built-in an 8MHz clock and a couple of AA batteries (3.2V) to power the digital part separately from the analog. I also included the ability for remote programming via an SPI header. All of the details are in the circuit diagram above.
@@ -146,7 +146,7 @@ There are a bunch of things I learned building this:
 
 ## Software
 ### Code
-All the code is posted [here](https://www.github.com/dvernooy/heart_rate_monitor/). It is actually just one C file. You can call it ugly (it is), you can call it unreadable (it is) ... and I know there are a bunch of typos in the comments which I'll try to fix up at some point. But it works, & very robustly. If you actually do read it, all the action is in a single main() loop. Here is my thought process ...
+All the code is posted [here](https://www.github.com/dvernooy/heart_rate_monitor/). It is actually just one C file. You can call it ugly (it is), you can call it unreadable (it is) & I know there are a bunch of typos in the comments which I'll try to fix up at some point. But it works, & very robustly. If you actually do read it, all the action is in a single main() loop. Here is my thought process ...
 
 ### Detecting a beat
 My starting point now was the analog signal (masquerading basically as a digital signal at this point due to the speed and gain of my receiver) that rose and saturated very quickly when a 5.3 kHz burst was detected. The saturated voltage is about 4.7V at the upper rail of the last stage op-amp (I used a 5V regulated supply for the analog portion). I fed this waveform into the analog-to-digital converter of the Atmega88 and compared it to a software threshold that I set to determine whether it was a real heart beat signal.

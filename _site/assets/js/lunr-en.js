@@ -12,7 +12,7 @@ var idx = lunr(function () {
   
     idx.add({
       title: "Ergware",
-      excerpt: "Our DIY ergometer … with its new “brain” Project overview Hey all, Dave Vernooy here with another project. I’m assuming...",
+      excerpt: "Our DIY ergometer with its new “brain” Project overview Hey all, Dave Vernooy here with another project. I’m assuming you...",
       categories: [],
       tags: [],
       id: 0
@@ -30,7 +30,7 @@ var idx = lunr(function () {
   
     idx.add({
       title: "Heart Rate Monitor",
-      excerpt: "MacGyver … eat your heart out Project overview Welcome to my heart rate monitor project. These things have been around...",
+      excerpt: "MacGyver, eat your heart out Project overview Welcome to my heart rate monitor project. These things have been around for...",
       categories: [],
       tags: [],
       id: 2
@@ -80,7 +80,7 @@ var store = [
       {
         "title": "Ergware",
         "url": "http://localhost:4000/projects/ergware/",
-        "excerpt": "Our DIY ergometer … with its new “brain” Project overview Hey all, Dave Vernooy here with another project. I’m assuming...",
+        "excerpt": "Our DIY ergometer with its new “brain” Project overview Hey all, Dave Vernooy here with another project. I’m assuming you...",
         "teaser":
           
             null
@@ -102,7 +102,7 @@ var store = [
       {
         "title": "Heart Rate Monitor",
         "url": "http://localhost:4000/projects/HRM/",
-        "excerpt": "MacGyver … eat your heart out Project overview Welcome to my heart rate monitor project. These things have been around...",
+        "excerpt": "MacGyver, eat your heart out Project overview Welcome to my heart rate monitor project. These things have been around for...",
         "teaser":
           
             null

@@ -28,7 +28,7 @@ Have you ever seen that poster of the grizzly bear with the salmon in its mouth,
 > Typical gas mileage for our car & minivan, including a sense of at what speed you get the optimum bang for your buck -
 
 ![]({{ site.url }}/assets/images/projects/OBD2/mpg_camry_sienna.png)
-*And the answer is .... 61 miles/hr for the car & 53 miles/hr for the van*
+*And the answer is: 61 miles/hr for the car & 53 miles/hr for the van*
 
 > Some real-time output telemetry from the car while we were driving
 
@@ -37,11 +37,11 @@ Have you ever seen that poster of the grizzly bear with the salmon in its mouth,
 
 > And, of course, the check engine light (CEL or MIL) ... and more to the point, my desire to figure out which code was causing it, & then douse it.
 
-I'll get a video loaded here of that, but for now here's one of the system booting up and me checking out the identity of the vehicle and what information I can see. My hands were freezing, it was -25C that day ... & you gotta love the music that was playing on the radio-
+I'll get a video loaded here of that, but for now here's one of the system booting up and me checking out the identity of the vehicle and what information I can see. My hands were freezing (it was -25C that day) & you gotta love the music that was playing on the radio-
 
 {% include video id="z_7kp_Pfc5Q" provider="youtube" %}
 
-For inspiration, there is some great information out there. In particular, I'd mention [Bruce Lightner's](http://www.lightner.net/lightner/bruce.html) project ... an **AVR-based fuel consumption gauge**. You can see it mentioned near the bottom of his homepage, among all the other great things referenced there. I'd also mention [Trampas Stern's](http://sterntech.com/obdii_protocols.php) very informative website. There are a few pieces of code  - in particular the ISO timing protocols - that I used from his google code repository (which no longer looks to be available?). Both of these folks are awesome.
+For inspiration, there is some great information out there. In particular, I'd mention [Bruce Lightner's](http://www.lightner.net/lightner/bruce.html) project: an **AVR-based fuel consumption gauge**. You can see it mentioned near the bottom of his homepage, among all the other great things referenced there. I'd also mention [Trampas Stern's](http://sterntech.com/obdii_protocols.php) very informative website. There are a few pieces of code  - in particular the ISO timing protocols - that I used from his google code repository (which no longer looks to be available?). Both of these folks are awesome.
 
 ## S.T.E.M.
 ### Raw materials
@@ -82,7 +82,7 @@ $$
 & then use Equation $$\ref{MAF}$$ above to get to MPG. Here is a little spreadsheet to get a feel for the numbers. In this example, most of the assumptions are relevant to highway cruising -
 
 ![]({{ site.url }}/assets/images/projects/OBD2/MAF-MAP.png)
-*A bunch of math gets me to what I want ... I want my MPG*
+*A bunch of math gets me to what I want. And I want my MPG*
 
 ### Introduction to OBD2
 OBD2 stands for "On Board Diagnostics" - it was introduced in 1996 & has gone through several iterations. It turns out, that the current protocol (based on the CAN bus protocol) was mandated for any automobile year '08 or later. Both of mine are earlier than '08s, so they use the older protocol I needed to implement here. OK, that just means another project at some point.
@@ -147,7 +147,7 @@ void ISO_init_comm(uint8_t show) {
 And here is a picture of how my software responds to the initialization
 
 ![]({{ site.url }}/assets/images/projects/OBD2/got_55.jpg)
-*Oh Bee Dee, Oh Bee Dah, Life goes on, yeah!!! .... got Hex 55, Its alive*
+*Oh Bee Dee, Oh Bee Dah, Life goes on, yeah!!! Got Hex 55, its alive*
 
 #### OBD2 PIDs (parameter IDs)
 You can read about parameter IDs (PIDs) & diagnostic trouble codes (DTCs) in a number of places. [Wikipedia](https://en.wikipedia.org/wiki/OBD-II_PIDs) has a list of many of the PIDs. The documentation is good, so I won't regurgitate much of it here.
@@ -193,13 +193,13 @@ The car's ECU will send a message back in the format
 ```c
 0x48 0x6B 0x[ADDR] 0x41 0x[A] {optional:0x[B] 0x[C] 0x[D]} 0x[CSUM]
 ```
-where A, B, C, D, etc.. are data bits you can do something with. Here is a screenshot of a little utility I wrote in Excel/VBA called "PING" that I could use from a laptop connected to my scanner ... this allowed me to "explore" all of these different PIDs .. basically a hacking tool.
+where A, B, C, D, etc.. are data bits you can do something with. Here is a screenshot of a little utility I wrote in Excel/VBA called "PING" that I could use from a laptop connected to my scanner. This allowed me to "explore" all of these different PIDs .. basically a hacking tool.
 
 ![]({{ site.url }}/assets/images/projects/OBD2/PING.png)
 *DIY hacking interface*
 
 #### CEL codes
-If your check engine light (CEL) .. also known as the malfunction indicator lamp (MIL) ... is on, you can see how many codes are set:
+If your check engine light (CEL) - also known as the malfunction indicator lamp (MIL) - is on, you can see how many codes are set:
 
 ```c
 0x68 0x6A 0xF1 0x01 0x01 0xC5
@@ -250,7 +250,7 @@ Below is a circuit diagram of the entire setup.
 I used the Nokia 5110 LCD & driver plus a couple of pushbuttons to navigate around on the menu. Nothing really special there. More about the menu later.
 
 ### Serial interface
-I decided I might like to drive around and record what was happening on a laptop as I drove, among other things. So I put in a serial interface using a MAX232 chip ... it requires a few capacitors and takes its input/output from the PD0/PD1 pins of the ATMega328. Also, in order to push up to 19200 baud and higher, you really have to start to pay attention to timing. There are some (really cool) software UARTs out there, but I didn't use them on this project.
+I decided I might like to drive around and record what was happening on a laptop as I drove, among other things. So I put in a serial interface using a MAX232 chip. It requires a few capacitors and takes its input/output from the PD0/PD1 pins of the ATMega328. Also, in order to push up to 19200 baud and higher, you really have to start to pay attention to timing. There are some (really cool) software UARTs out there, but I didn't use them on this project.
 
 On the PC side, I used Excel to collect the information and also to ping the car. You may cringe, but VBA was a simple solution. I'll add more documentation to this over time.
 
@@ -269,20 +269,20 @@ Not really much of a package to speak of. I just mounted the circuit board with 
 ### L-line and K-line
 The L-line is only needed for 1-direction (reader-to-car only), but the K-Line is a bidirectional line. I used separate ICs - the L9637 - for both of these lines. It is a line driver with a bunch of protection circuitry built in. All you need on the output lines is a 5K pullup to the battery voltage of 12V.
 
-### Testing ... success (0x55)
+### Testing, more testing, & finally success (0x55)
 Once the hardware was built, I had to test it - and it was a bit of a pain running back and forth from the car every time I wanted to try something new. I got stuck for almost two weeks getting my car to say anything at all. I went through the hardware and software with a fine tooth comb, until I realized I had only connected the K-Line and not the L-line. It turns out, Toyota is looking for the L-Line as well for the initial communications.
 
-At last, I got 0x55 in response to the pings ... off and running now! 0x55 is a pattern 0b01010101, whose pattern adequately represents the ups and downs of those 2 weeks!
+At last, I got 0x55 in response to the pings. I was off and running now! 0x55 is a pattern 0b01010101, whose pattern adequately represents the ups and downs of those 2 weeks!
 
 ## Software
 
 It's no badge of honor, but the size of code is 32kB, right at the limit of the Atmega328. Basically means I need to learn more compact coding skills. All of the code is posted [at my repo](https://github.com/dvernooy/obd-2).
 
-### Mother of all loops ... polling v. interrupts
+### Mother of all loops: polling v. interrupts
 OK, so this is the project where I learned my lesson - but I implemented the code with one monster loop. It actually worked very well, except for one *MAJOR* problem that would really be a non-starter for anything *PRO*: the button-press recognition was all done by polling. This meant that sometimes it is unresponsive to a user's button push, depending on the load of the processor. This happens rarely, but when it happens it is bad. The only real solution to this is to use an interrupts and an RTOS with a high priority handler thread for button presses, which I did on [one of my future projects](https://dvernooy.githubio/projects/ergware). In fact, it was exactly this problem that led me to investigate RTOS's in the first place, but that's another story. Learn by (re)doing.
 
 ### Getting information from the car
-A few more details associated with getting information from the car. Sometimes I knew exactly how the car would respond & and could send a compact request  ... in this case for the throttle position:
+A few more details associated with getting information from the car. Sometimes I knew exactly how the car would respond & and could send a compact request (in this case for the throttle position):
 
 ```c
 temp = iso_putb(&thrott_put[0],1, ISO_P3_MIN);
@@ -315,10 +315,10 @@ while(1) {
   ping_length++;
 }//end while
 ```
-You'll notice in each function call to `iso_putb` and `iso_getb` there are variables like `ISO_P3_MIN`, `ISO_P2_MAX_2`, etc... These are timing windows for each of the commands and responses. The best explanation of this I've seen is [Trampas Stern's](http://sterntech.com/obdii_protocols_iso.php) website - there are a couple of informative tables there. I'm sure there is official documentation somewhere on the dark web. These variables can be used to mask the timing windows and handle errors in the communication timings should they arise. I did very little error handling. Yes, I know ... bad, bad, bad.
+You'll notice in each function call to `iso_putb` and `iso_getb` there are variables like `ISO_P3_MIN`, `ISO_P2_MAX_2`, etc... These are timing windows for each of the commands and responses. The best explanation of this I've seen is [Trampas Stern's](http://sterntech.com/obdii_protocols_iso.php) website - there are a couple of informative tables there. I'm sure there is official documentation somewhere on the dark web. These variables can be used to mask the timing windows and handle errors in the communication timings should they arise. I did very little error handling. Yes, I know - bad, bad, bad.
 
 ### Averaging stuff
-Most of the math here is very simple - you can see the formulas above for MPG. In some cases I wanted instantaneous values and in others I wanted running averages. For the running (time) averages like average speed, it was important to have a good master clock to always pick from to update & you just need to think about the definitions of averages.
+Most of the math here is very simple. You can see the formulas above for MPG. In some cases I wanted instantaneous values and in others I wanted running averages. For the running (time) averages like average speed, it was important to have a good master clock to always pick from to update & you just need to think about the definitions of averages.
 
 ```c
 running_time =(double) (running_time +dt_seconds);
@@ -533,7 +533,7 @@ Next, to talk to the PC over serial, I used Visual Basic for Applications (VBA) 
     Declare PtrSafe Sub AppSleep Lib "kernel32" Alias "Sleep" (ByVal dwMilliseconds As Long)
     ```
 
-2. I forced Commread to **only** return the number of bytes `lngSize` that were called so I could just read one byte at a time ... this worked really well
+2. I forced Commread to **only** return the number of bytes `lngSize` that were called so I could just read one byte at a time. This worked really well for the read rates I was using.
 
     ```vb
     '-------------------------------------------------------------------------------

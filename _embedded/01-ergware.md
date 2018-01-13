@@ -14,7 +14,7 @@ toc: true
 </script>
 
 ![]({{ site.url }}/assets/images/projects/erg/erg-full.jpg)
-*Our DIY ergometer ... with its new "brain"*
+*Our DIY ergometer with its new "brain"*
 
 ## Project overview
 Hey all, Dave Vernooy here with another project. I’m assuming you stumbled across this site after reading about DIY rowing machines, aka ergometers.
@@ -25,7 +25,7 @@ It was great fun to build, and is even more fun to use. Here's a video of it in 
 
 {% include video id="SZTBec9r7-A" provider="youtube" %}
 
-After noodling on the original design, we decided it would be neat to add the software & display so the rower could get real-time feedback on the basic things a rower would want to know. We were able to get good estimates of stroke rate, power output, effective 500m split pace, distance rowed, fraction of time spent in power phase of stroke, etc..  Here is a close-in screenshot of the current version (you can see this display in the main picture above attached to the pvc tubing).
+After noodling on the original design, we decided it would be neat to add the software & display so the rower could get real-time feedback on the basic things a rower would want to know. We were able to get good estimates of stroke rate, power output, effective 500m split pace, distance rowed and fraction of time spent in power phase of stroke. Here is a close-in screenshot of the current version (you can see this display in the main picture above attached to the pvc tubing).
 
 ![]({{ site.url }}/assets/images/projects/erg/erg-interface.jpg)
 *Screenshot of the software interface*
@@ -38,11 +38,11 @@ The whole idea worked out pretty well, so I thought it would be good to add it b
 
 The main purpose of this website is to give some more detailed explanations & answer questions about the software for those who have them ...& update on any new progress we may (or may not) make.
 
-I'll take you through the build & verification process, but for me it was first important to understand the basic workings of an ergometer. I have never actually done any rowing, so I needed some intuition to guide me. For that, I found a really great [physical model](http://home.hccnet.nl/m.holst/Ergo.pdf). I built up my own numerical version of this which is posted in the excel spreadsheet ... more on that soon.
+I'll take you through the build & verification process, but for me it was first important to understand the basic workings of an ergometer. I have never actually done any rowing, so I needed some intuition to guide me. For that, I found a really great [physical model](http://home.hccnet.nl/m.holst/Ergo.pdf). I built up my own numerical version of this which is posted in the excel spreadsheet, but more on that soon.
 
 ## S.T.E.M.
 
-Rowing is about energy conversion - from the rower into either the movement of the boat on the water, or the flywheel on the erg. For the erg, all you really need to do is accurately measure the instantaneous rotation rate of the flywheel and keep track of it. Intuitively obvious? If so, skip the model ... otherwise, here's some background
+Rowing is about energy conversion - from the rower into either the movement of the boat on the water, or the flywheel on the erg. For the erg, all you really need to do is accurately measure the instantaneous rotation rate of the flywheel and keep track of it. Intuitively obvious? If so, skip the model. Otherwise, here's some background
 
 ### Model
 Before diving into the software, here is more about the numerical model and how you can infer power, distance rowed and a bunch of other interesting things. I found this really important to understand before I sat down to do the software.
@@ -88,7 +88,7 @@ P(t) = J\dot{\omega}\omega + k\omega^3
 \end{align*}
 $$
 
-or, time averaging over one stroke time $$T$$ you get the time-averaged Power $$\overline{P}$$. Now we can start to keep track of something everyone wants to know about ...how much raw power you're putting out.
+or, time averaging over one stroke time $$T$$ you get the time-averaged Power $$\overline{P}$$. Now we can start to keep track of something everyone wants to know about: how much raw power you're putting out.
 
 $$
 \begin{align*}
@@ -131,7 +131,7 @@ I cooked up a little spreadsheet to play with this model. It is posted with the 
 
 > Simple stuff
 
-Rower's mass $$m$$, distance of erg chain $$r$$ relative to flywheel axle ... just put those in.
+Two parameters, the rower's mass $$m$$ & distance of erg chain $$r$$ relative to flywheel axle can just be estimated or measured and entered.
 
 > Rower applied force
 
@@ -216,11 +216,11 @@ Wonder if that's what we'll see when we get this sucker built? \[foreshadowing\]
 I'll ignore the (awesome) build of the main wooden structure of the erg, though my favorite part of the whole thing is the seat .. thank you Joe Van Ruyven!!!. The flywheel is just an old 26" disc-brake mountain bike wheel drilled to accommodate the plastic inserts which act as dampers. The chain that the rower pulls on to move the flywheel sits on the 11 tooth cog.
 
 ![]({{ site.url }}/assets/images/projects/erg/flywheel.jpg)
-*Modified mountain bike wheel ... ready for the water*
+*The modified mountain bike wheel is now ready for the water*
 
 ### Measuring rotation
 
-Rotation rates of wheels can be measured a bunch of different ways ... on my old-school Sigma bike computer they do it with an electromagnetic relay which opens every time a magnet attached to the wheel passes by. That works well, but I didn't have a spare one lying around. What I did have was one of these:
+Rotation rates of wheels can be measured a bunch of different ways. On my old-school Sigma bike computer they do it with an electromagnetic relay which opens every time a magnet attached to the wheel passes by. That works well, but I didn't have a spare one lying around. What I did have was one of these:
 
 ![]({{ site.url }}/assets/images/projects/erg/OPB-switch.png)
 *Optical switch used for reading the chopper wheel*
@@ -235,7 +235,7 @@ The idea is the infrared light does not transmit through the black toner of the 
 ![]({{ site.url }}/assets/images/projects/erg/chopper_mounted.jpg)
 *Ready to do its thing*
 
-I chose the 8-pattern originally thinking that I'd have 8 measurements per revolution by timing consecutive edges in the chopper timing pattern ... & so have a great estimate of instantaneous speed. I soon realized that unless I cut it perfectly (I didn't) there are bias errors all over the place. Instead, what's very accurate is to time one edge vs. *the same edge* but now one revolution earlier. Its still possible to get 8 measurements per revolution, but there's a bit more inaccuracy in this method ... fine for what we need nevertheless.
+I chose the 8-pattern originally thinking that I'd have 8 measurements per revolution by timing consecutive edges in the chopper timing pattern. This should theoretically give a great estimate of instantaneous speed. I soon realized that unless I cut it perfectly (I didn't) there are bias errors all over the place. Instead, what's very accurate is to time one edge vs. *the same edge* but now one revolution earlier. Its still possible to get 8 measurements per revolution, but there's a bit more inaccuracy in this method. Nevertheless, its fine for what we need here.
 
 With a little bit of signal conditioning, you now have a nice little signal that, with a bit of computation, gives the rotational speed and acceleration of the wheel, exactly what our model is looking for.
 
@@ -247,7 +247,7 @@ Here's the circuit diagram for the build.
 [![]({{ site.url }}/assets/images/projects/erg/erg_circuit.png)]({{ site.url}}/assets/images/projects/erg/erg_circuit.png)
 *Circuit diagram for the Ergware firmware*
 
-The phototransistor-based optocoupler does all the action ... I chose the resistor and then buffered it a couple of times before sending it directly into one of the digital inputs of the microcontroller (which makes the software detection and triggering via an interrupt really easy.)
+The phototransistor-based optocoupler does all the action. I chose the resistor and then buffered it a couple of times before sending it directly into one of the digital inputs of the microcontroller (which makes the software detection and triggering via an interrupt really easy.)
 
 I also used different supply voltages for the analog and digital parts, mainly because the LCD wants to work off of 3.3V and the optocoupler is spec'd for 5V.
 
@@ -298,19 +298,21 @@ ISR(INT0_vect)
 
 I used the built in 16-bit timer 1 (TCNT1) to get accurate flywheel rotational timing.
 
-I also needed a second timer for the rowing stroke timing .. stroke rate is something the rowers care about besides their speed and power output. Typical stroke rates might be 25 - 35 strokes per minute.
+I also needed a second timer for the rowing stroke timing. The stroke rate is something the rowers care about besides their speed and power output. Typical stroke rates might be 25 - 35 strokes per minute.
 
 I then applied the screening criteria I talked about earlier to determine what part of the stroke cycle I was in & based on that, did the appropriate calculations to get average power over the cycle, get an estimate of rowing distance, increment stroke cycle counters and look at the various timers.
 
 In most cases, I opted to do a straight average of 4 measurements to reduce any noise. More sophisticated filters are obviously possible.
 
-The buttons have limited functionality in this first rev ... they can basically just reset the timers and/or the display of distance traveled. I had big plans for them, though.
+The buttons have limited functionality in this first revision of the code. They can basically just reset the timers and/or the display of distance traveled. I had big plans for them, though.
 
 ### Some interesting data
-I wrote a piece of code during the development phase to write out to the EEPROM the rotational speed vs. time. Here is how it compares to the model ... pretty well! When I saw this, I charged forward full throttle with some confidence in the approach.
+I wrote a piece of code during the development phase to write out to the EEPROM the rotational speed vs. time. Here is how it compares to the model.
 
 ![]({{ site.url }}/assets/images/projects/erg/model-v-actual.png)
-*How the model stacks up against actual data ... pretty darn close*
+*How the model stacks up against actual data: pretty darn close*
+
+Turns out pretty well! When I saw this, I charged forward full throttle with some confidence in the approach.
 
 ### Good rowers vs. crappy rowers
 So my daughter had been rowing for about 9 months when I had her take this thing for a spin. I recorded her power output vs. #of strokes at startup in the EEPROM. Then I did the same for myself, who had been rowing for all of 9 m-m-m-minutes. Guess who's the NOOB?
@@ -327,14 +329,14 @@ Wanna see more stuff. A countdown timer, calories burned, parameter setup. Bigge
 ### Enter the RTOS
 Having learned my lesson on another project, it was time for a different approach to accommodate multiple screens that would be responsive to a user (an exhausted rower who probably has little patience for crappy embedded software).
 
-I needed a menu, and I needed a scheduler ... in short, I needed a lightweight RTOS for an 8 bit microcontroller. Virtually impossible to do what they wanted without one ... to see why, Here is a gallery of the screens I implemented in V2.0 -
+I needed a menu, and I needed a scheduler. In short, I needed a lightweight RTOS for an 8 bit microcontroller. Virtually impossible to do what I wanted to without one. To see why, Here is a gallery of the screens I implemented in V2.0 -
 
 ![]({{ site.url }}/assets/images/projects/erg/screen_flow_one.png)
 
 ![]({{ site.url }}/assets/images/projects/erg/screen_flow_two.png)
 
 ![]({{ site.url }}/assets/images/projects/erg/screen_flow_three.png)
-*Screenshots of Ergware v0.2 ... more things to occupy your mind while rowing*
+*Screenshots of Ergware v0.2. More things to take your mind off of the lactic acid while rowing*
 
 Writing the code for these goodies was very straightforward since I had almost all of the information readily available. Other than the RTOS diagnostics (more below) the only really new thing was the calorie counter.
 
@@ -346,7 +348,7 @@ Choices, choices ... there are lots - even for my 8-bit AVR ATMega328. FreeRTOS,
 I have a very simple menu structure that allows for nested sub-menus. All of the memory is pre-allocated, and could probably be done even more efficiently, but I'm pretty happy with it.
 
 ### Pushbutton responsivity
-One of the bigger questions I had was whether the buttons would be capable of interrupting the system with many threads running ... giving the user a responsive interface.
+One of the bigger questions I had was whether the buttons would be capable of interrupting the system with many threads running in order to give the user a responsive interface.
 
 ### RTOS structure
 I was able to do the whole thing with 8 threads, including a thread for monitoring the RTOS overhead itself.
@@ -384,10 +386,33 @@ THD_TABLE_END
 
 ## Some things I learned implementing an RTOS in v0.2
 ### Code for low overhead
-I knew I'd be up against limits of the chip: 32K Flash, 2K SRAM, 1K EEPROM. Here is how I dealt with it.
+I knew I'd be up against limits of the chip: 32K Flash, 2K SRAM, 1K EEPROM. I dealt with it by using all the usual tricks for minimizing SRAM usage. I also put in a stack tracer/monitor to look at all the thread memory usages & then used an "oversize by 20%" rule. I want to go back at some point and challenge myself to reduce Flash usage by another 30 or 40%, but that's for another day.
 
 ### Use the message passing & signaling structures of the RTOS
-That's what they're there for.
+That's what they're there for. Once I learned about the binary semaphore implementation in NilRTOS, it was a nice way to restrict access to the LCD, which is an important resource.
+
+```c
+/* Declare a semaphore */
+semaphore_t lcdUSE; /*semaphore to protect the LCD*/
+```
+
+So whenever there was a taker for this resource, they would sit and wait for the semaphore to be available. For example, here is the code for a thread which needs the LCD to write out data to the screen
+
+```c
+/*********************************************************************************
+Thread 3 - LCD write out all the erg data
+********************************************************************************/
+THD_FUNCTION(Thread3, arg) {
+	(void)arg;
+	tp[0] = chThdGetSelfX(); //returns a pointer to current thread
+
+	while (true) {
+		/* it starts in off state, or gets here when turned off. Eventmask1 turns it on*/
+		chEvtWaitAnyTimeout((eventmask_t)1, TIME_INFINITE);
+		/*take control of LCD semaphore*/
+		chSemWait(&lcdUSE);
+		/*switch lcd_context to thread 4*/
+```    
 
 ### Write lightweight usage services
 Essential to ensuring optimal memory allocation. There's a screenshot above of the usage statistics for each of the threads after a workout.
