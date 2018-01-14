@@ -568,9 +568,9 @@ EEPROM2XL allowed me to read the EEPROM at any point in time, which was useful s
 ![]({{ site.url }}/assets/images/projects/OBD2/hacking_setup.png)
 *PING ... doing its thing*
 
-PIPE2XL and PIPE2XL2 allowed me to ask the car to stream real-time data. Here is a video of the rpms streaming to a laptop:
+PIPE2XL and PIPE2XL2 allowed me to ask the car to stream real-time data. Here is a video of the RPMs streaming to a laptop:
 
-{% include video id="cGMPyMdfBHI" provider="youtube" %}
+{% include video id="P7X86hUrCpg" provider="youtube" %}
 
 & here is an example of my speed on a road near our house ending in a traffic light, check back as I'll try to post some cooler stuff.
 

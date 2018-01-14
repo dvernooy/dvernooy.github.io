@@ -161,7 +161,7 @@ So how did I get such a long polling loop time? And, more importantly, since the
 
 For now, here is a little video of everything put together, demonstrating the stand-off detectability of the receiver, and the importance of keeping the transmitter and receiver coils roughly aligned. You can see that as I rotate my body with the chest strap relative to the receiver, the signal loses lock.
 
-{% include video id="I6V4WGxrC0A" provider="youtube" %}
+{% include video id="NeRcglIzrSE" provider="youtube" %}
 
 ### Tricky bits
 
