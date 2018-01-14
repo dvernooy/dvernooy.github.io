@@ -144,6 +144,17 @@ There are a bunch of things I learned building this:
 
 > Make sure the fuse settings enable the EEPROM to be saved during reboots & write the software so you can read it out
 
+### Packaging
+Look away. Now. If you are still looking, here is a picture:
+
+![]({{ site.url }}/assets/images/projects/HRM/circuit_build.png)
+*Ummm. Yeah. Alrighty then.*
+
+This kind of style is usually actually ok for analog/low noise stuff as long as wires and leads are kept very short. Not so great for debugging & finding issues. The other thing I did is just made a "snap connect" so it easily attaches to the stem of my bike ... just a piece of modified pvc with inlaid rubber for grip:
+
+![]({{ site.url }}/assets/images/projects/HRM/attach_mechanism.png)
+*Snap-on connector*
+
 ## Software
 ### Code
 All the code is posted [here](https://www.github.com/dvernooy/heart_rate_monitor/). It is actually just one C file. You can call it ugly (it is), you can call it unreadable (it is) & I know there are a bunch of typos in the comments which I'll try to fix up at some point. But it works, & very robustly. If you actually do read it, all the action is in a single main() loop. Here is my thought process ...
