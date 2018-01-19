@@ -1,0 +1,1048 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.8.0 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+
+
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Uncle BOBBy - Ab hinc</title>
+
+
+
+
+<meta name="description" content="Control system fun with a Ball on Beam Balancer (BOBB)">
+
+
+
+
+<meta name="author" content="Dave Vernooy">
+
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Ab hinc">
+<meta property="og:title" content="Uncle BOBBy">
+
+
+  <link rel="canonical" href="http://localhost:4000/projects/bobb/">
+  <meta property="og:url" content="http://localhost:4000/projects/bobb/">
+
+
+
+  <meta property="og:description" content="Control system fun with a Ball on Beam Balancer (BOBB)">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/front/site-logo.png">
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2018-01-18T22:24:05-05:00">
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "http://localhost:4000",
+      "logo": "http://localhost:4000/assets/images/front/site-logo.png"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Dave Vernooy",
+      "url" : "http://localhost:4000",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Ab hinc Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
+  </head>
+
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="http://localhost:4000/">Ab hinc</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/projects/" >Projects</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/blog/" >Blog</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about/" >About</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        
+        <a href="https://dvernooy.github.io">
+          <img src="http://localhost:4000/assets/images/front/dave-vernooy-cropped.jpg" alt="Dave Vernooy" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <a href="https://dvernooy.github.io"><h3 class="author__name" itemprop="name">Dave Vernooy</h3></a>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Learning by (re)doing
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Niskayuna, NY</span>
+        </li>
+      
+
+      
+        <li>
+          <a href="https://dvernooy.github.io" itemprop="url">
+            <i class="fa fa-fw fa-chain" aria-hidden="true"></i> Website
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/dvernooy" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Uncle BOBBy">
+    <meta itemprop="description" content="Control system fun with a Ball on Beam Balancer (BOBB)">
+    <meta itemprop="datePublished" content="January 18, 2018">
+    <meta itemprop="dateModified" content="June 10, 2016">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Uncle BOBBy
+</h1>
+          <h4 class="page__related-title">Control system fun with a Ball On Beam Balancer (BOBB)</h4> 
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  17 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fa fa-file-text"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#project-overview">Project overview</a>
+    <ul>
+      <li><a href="#ball-on-beam-balancer">Ball on beam balancer</a></li>
+    </ul>
+  </li>
+  <li><a href="#stem">S.T.E.M.</a>
+    <ul>
+      <li><a href="#equations">Equations</a></li>
+      <li><a href="#position">Position</a></li>
+      <li><a href="#control-strategies">Control strategies</a></li>
+      <li><a href="#human">Human</a></li>
+      <li><a href="#pid">PID</a></li>
+      <li><a href="#state-space-design">State space design</a></li>
+      <li><a href="#digital-control">Digital Control</a></li>
+      <li><a href="#estimators">Estimators</a></li>
+      <li><a href="#estimator-gains-with-pole-placement">Estimator gains with pole placement</a></li>
+      <li><a href="#adding-noise-models---lqr--steady-state-kalman-filter">Adding noise models - LQR &amp; (steady state) Kalman filter</a></li>
+      <li><a href="#dynamic-kalman-filters">Dynamic Kalman filters</a></li>
+      <li><a href="#summary">Summary</a></li>
+    </ul>
+  </li>
+  <li><a href="#hardware">Hardware</a>
+    <ul>
+      <li><a href="#sensor">Sensor</a></li>
+      <li><a href="#servo-motor">Servo motor</a></li>
+      <li><a href="#circuit-diagram">circuit diagram</a></li>
+      <li><a href="#circuit-pictures">circuit pictures</a></li>
+      <li><a href="#beam">beam</a></li>
+    </ul>
+  </li>
+  <li><a href="#software">Software</a>
+    <ul>
+      <li><a href="#filtering-the-inputs">filtering the inputs</a></li>
+      <li><a href="#main-loop">main loop</a></li>
+      <li><a href="#servo">servo</a></li>
+      <li><a href="#adc">ADC</a></li>
+    </ul>
+  </li>
+  <li><a href="#learning-by-re-doing">Learning by re-doing</a>
+    <ul>
+      <li><a href="#up-next-fuzzy-logic--neural-controllers">Up Next: Fuzzy logic &amp; neural controllers</a></li>
+    </ul>
+  </li>
+</ul>
+            </nav>
+          </aside>
+        
+        <script type="text/javascript" async="" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<h2 id="project-overview">Project overview</h2>
+
+<h3 id="ball-on-beam-balancer">Ball on beam balancer</h3>
+
+<p>You’ll see right away that Bobby is pretty tenacious,</p>
+
+<!-- Courtesy of embedresponsively.com //-->
+<div class="responsive-video-container">
+
+  <iframe src="https://www.youtube.com/embed/MNLuZviQmUo" frameborder="0" allowfullscreen=""></iframe>
+
+</div>
+
+<p>despite being constructed of duct tape and chewing gum.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/bobb/bobb_overview.jpg" alt="" />
+<em>Wonder what the heck this thing is?</em></p>
+
+<p>There are lots of interesting control problems. A good one is the problem of balancing a rolling ball on a beam that is free to rotate: the <strong>ball on beam balancer</strong>. Sort of like balancing a long pole vertically on your hand, or getting a Segway to balance you. We’ll get to why its an interesting problem in a minute. Its a fun one to build because there are so many strategies to perform the control. Some are super-intuitive, and some are incredibly mathematically heavy, and you can compare all of these to your own human performance on the same problem. Turns out, its really hard (impossible) for a human. Easy for the electronics, though.</p>
+
+<p>Its also used widely as an example because it is inherently unstable. For any angle of the beam that is not exactly level, the ball will just run away. Similar to solving those little puzzles where you need to navigate a little steel ball bearing through a maze.</p>
+
+<h2 id="stem">S.T.E.M.</h2>
+
+<p>As you’ve no doubt noticed from some of the other projects, I find the technology behind these things interesting. You may not. This one can be a bit more math intensive. That’s ok. You’re smart.</p>
+
+<h3 id="equations">Equations</h3>
+
+<p>We’ll start with Newton’s law. The only tweak here is that the ball is rolling, not sliding, so there is a correction factor for the ball’s moment of inertia.</p>
+
+<h3 id="position">Position</h3>
+
+<p>The physical model for the system is really simple:</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+\ddot{x} = -\frac{g}{1+\frac{2}{5}{\frac{r}{a}}^2} \alpha
+\end{align*}
+\tag{1}
+\label{ball_equation}</script>
+
+<p>where <script type="math/tex">x</script> is the position of the ball along the beam, <script type="math/tex">g</script> is the acceleration due to gravity, <script type="math/tex">r</script> is the ball radius, <script type="math/tex">a</script> is the height of the center of the ball above its contact point with the beam and <script type="math/tex">\alpha</script> is the angle of the beam with respect to the horizontal. The goal will be to control the ball position <script type="math/tex">x</script>, by controlling the angle of the beam <script type="math/tex">\alpha</script>. This problem is called a “double integrator” because of the relationship between the control variable <script type="math/tex">\alpha</script> and the variable <script type="math/tex">x</script> we want to control. More about that in a minute.</p>
+
+<p>There are much more elaborate models and background to this problem that I won’t get into. Even the bare minimum we’re using here gets complex enough.</p>
+
+<h3 id="control-strategies">Control strategies</h3>
+
+<p>There are lots of block diagrams when analyzing controls systems. Here’s a block diagram in the context of our setup.</p>
+
+<blockquote>
+  <p>picture of the setup</p>
+</blockquote>
+
+<h3 id="human">Human</h3>
+<p>So now that we know the challenge, how easy is it for a human to control the ball’s position. Gotta be easy. After all, we have everything we need. Eyes to sense the ball’s position, brain to compute where its been and where its likely to go, hands to move the beam to get it there. All of them evolved over millions of years to work together to get things done. We’ve seen balls rolling down hills before. Piece of cake. So I wired up a little test:</p>
+
+<!-- Courtesy of embedresponsively.com //-->
+<div class="responsive-video-container">
+
+  <iframe src="https://www.youtube.com/embed/wa_ptnZmnsQ" frameborder="0" allowfullscreen=""></iframe>
+
+</div>
+
+<p>Not easy. In fact, impossible. (Why, you ask? Our control loop is too slow.) So a bit more respect for this problem as we venture into the land of control systems.</p>
+
+<h3 id="pid">PID</h3>
+
+<p>The most used control system is the classic proportional-integral-derivative control. P-I-D. The feedback signal to control the beam angle is derived from where the ball <em>is right now</em> relative to <em>where we command it to be</em>.</p>
+
+<p>Ball close to the target? Tilt the beam just a bit to nudge it. Ball far away? Tilt it alot to get it back. Just tilt it in proportion to how big the error is. That’s the <strong>P</strong> for proportional control. A tilt proportional to the error. And get the tilt sign right. A minus sign. Negative feedback. Otherwise that ball’s gone.</p>
+
+<p>Ball stops nicely, but just a half-inch from where we want? Frustrating - the hard work is all done. But no. So lets tweak the angle ever so slightly until that half-inch is gone by making the amount we tweak depend on adding up our growing frustration (which grows as that half inch doesn’t change). That’s the <strong>I</strong> for integral control. A tilt proportional to the integral of the error.</p>
+
+<p>Its now stopping where we want, but it’s sluggish. It’s not crisp. So we can add a signal dependent on the derivative of the error. That’s the <strong>D</strong>.</p>
+
+<p>Sometimes you combine all 3, or just P &amp; I or P &amp; D. The relative amount of these three pieces is what matters, and that’s where the art of tuning it comes in. Here’s a screenshot of a little spreadsheet so you can throw in some numbers and see what happens as you play with it. The blue is the command signal for the ball (what we want it to do), the red is what it actually does, and the green is how the tilt of the beam behaves depending on how we set the P, I &amp; D coefficients. In this simulation, we are commanding the ball to go from position <script type="math/tex">x = 0</script> to <script type="math/tex">x = 19.5</script> cm at time <script type="math/tex">t = 0</script>.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/bobb/unoptimized-PID.png" alt="" />
+<em>This thing takes forever to settle, bouncing around. We can do better</em></p>
+
+<p>For those really into the details, I also tried to model the thing pretty closely by limiting the angle that the beam can turn based on the geometery, and modeled it all as a digital PID, with the following control law:</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+u(k) = u(k-1) + K_{1} e(k) + K_{2} e(k-1) + K_{3} e(k-2)
+\end{align*}</script>
+
+<p>where <script type="math/tex">u(k)</script> is our angle <script type="math/tex">\alpha</script> at time step <script type="math/tex">k</script>, and <script type="math/tex">e(k)= x(k)-r(k)</script>, the difference at any time step <script type="math/tex">k</script> between the ball’s position <script type="math/tex">x(k)</script> and our command <script type="math/tex">r(k)</script>. The multiplying factors are related to the PID coefficients</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+K_{p} = K,\ K_{i} = \frac{K}{T_{i}},\ K_{d} = KT_{d} \\
+\text{and}\\
+K_{1} = K_{p} + K_{i} + K_{d} \\
+K_{2} = -K_{p}-2*K_{d} \\
+K_{3} = K_{d} \\
+
+\end{align*}</script>
+
+<p>The rest of the math in the model is based on the digitized model that I describe below. None of it is used for control itself, only to make the spreadsheet model the system so you can see the effect of the control. The spreadsheet is posted. Here is a screenshot:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/bobb/excel-model-PID.png" alt="" />
+<em>Fun to play around with</em></p>
+
+<p>Back to the story: so, if you follow the variable <script type="math/tex">x</script> around the control loop, it has a phase shift of -180 already from the double integrator in the control law (two <script type="math/tex">1/j</script>’s <script type="math/tex">=-1</script> from the integrations) in equation (1). In controllers, this amount of “built in” phase shift is really bad news for stability, which is why this whole thing is known as a hard problem. The P term will add no phase shift, the D term will have a +90 degrees shift (a <script type="math/tex">j</script> from the derivative) and the I term even more negative phase shift of -90 degrees (a <script type="math/tex">1/j= -j</script> again from the integration).</p>
+
+<p>So we can almost predict that the optimum PID controller will actually be more of a PD controller, with little to no I. That’s exactly what I found when I tried to optimize the spreadsheet model by minimizing the time to get the ball to the new position. Here’s a picture of the “best” solution I could come up with in excel. You can see it took approximately 1.1s for the ball to move to the new commanded positioning, with no overshoot &amp; minimal lag.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/bobb/PID-model-best.png" alt="" />
+<em>Bang. Bang. Settles. really. fast.</em></p>
+
+<p><strong>This control has no integrator</strong> (I) in it at all. Also, you can see that the optimum strategy is to tilt the beam as hard as possible in one direction to get the ball moving, wait for “just the right time” &amp; then tilt it back as hard as possible in the other direction, then finally just feather it in a tiny bit. This is called “bang-bang” control because the control variable (here, the angle) shifts between the two limiting values. Bang. Bang. Bang-bang control is known to give a “minimum time” optimal solution.</p>
+
+<p>Here’s the relevant update code that ended up on the microcontroller:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//calculate the ball velocity in cm/s
+</span><span class="n">ball_velocity</span> <span class="o">=</span> <span class="p">(</span><span class="n">ball_position</span><span class="o">-</span><span class="n">ball_position_old</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">elapsed_ms</span><span class="o">/</span><span class="mi">1000</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">ball_velocity</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">.</span><span class="mo">001</span><span class="p">)</span> <span class="n">ball_velocity</span> <span class="o">=</span> <span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+
+<span class="c1">//start with a flat beam
+</span><span class="n">beam_target_angle</span> <span class="o">=</span> <span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+
+<span class="c1">//Proportional Term: Based on position error
+</span><span class="n">beam_target_angle</span><span class="o">=</span><span class="n">beam_target_angle</span><span class="o">+</span><span class="n">P_gain</span><span class="o">*</span><span class="mi">9</span><span class="p">.</span><span class="mi">0</span><span class="o">*</span><span class="p">((</span><span class="n">ball_position</span><span class="o">-</span><span class="n">ball_target_position</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">beam_length</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="p">));</span>
+
+<span class="c1">//Derivative Term: Based on velocity  
+</span><span class="n">beam_target_angle</span><span class="o">=</span><span class="n">beam_target_angle</span><span class="o">+</span><span class="n">D_gain</span><span class="o">*</span><span class="mi">9</span><span class="p">.</span><span class="mi">0</span><span class="o">*</span><span class="p">((</span><span class="n">ball_velocity</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">beam_length</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">));</span> <span class="c1">//normalized to traveling beam in 1s
+</span>
+<span class="c1">//tell servo to go to new setpoint
+</span> <span class="n">j</span> <span class="o">=</span> <span class="n">servo_target</span><span class="p">(</span><span class="n">beam_target_angle</span><span class="p">);</span>
+
+<span class="n">servo_set</span><span class="p">(</span><span class="n">j</span><span class="p">);</span> 	 
+</code></pre></div></div>
+<p>Like I said, no I term. And here’s what it looks like in practice. Really interesting how close it comes to the model - the ball settles in 1.17s vs. the calculation of 1.1s above. Slick.</p>
+
+<!-- Courtesy of embedresponsively.com //-->
+<div class="responsive-video-container">
+
+  <iframe src="https://www.youtube.com/embed/nL6lQztiPGs" frameborder="0" allowfullscreen=""></iframe>
+
+</div>
+
+<p>You can see the angle of the beam shift at the halfway point. The beam does not shift as sharply from slanted up to slanted down as the model says, because I didn’t build in any motor or beam dynamics into the model.</p>
+
+<h3 id="state-space-design">State space design</h3>
+<p>PID is really interesting because you really don’t have to know anything about the system at all. It helps, but you don’t need to. Another design strategy is to describe the state of the system, model the behavior of the state, and then use that model to design the control.</p>
+
+<p>The first step is to write out the system model (Equation 1) by defining the system “state” <script type="math/tex">\boldsymbol{x} = [x\ \: \dot{x}]</script>, the control variable as <script type="math/tex">u</script>, the input reference (or command) as <script type="math/tex">r</script> and the output as <script type="math/tex">y</script>. This is standard language you always see &amp; the only thing to keep in mind is our control variable <script type="math/tex">u</script> is actually the beam angle <script type="math/tex">\alpha</script>. Then you can write the system state equations in a matrix format.</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+\boldsymbol{\dot{x}} = \boldsymbol{Fx}+\boldsymbol{G} u\\
+y = \boldsymbol{Hx}+\boldsymbol{J} u\\
+u = -\boldsymbol{Kx}+\bar{N} r\\
+\end{align*}</script>
+
+<p>where</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+\boldsymbol{F} =
+\left[ {\begin{array}{cc}
+0 & 1 \\
+0 & 0 \\
+\end{array} } \right],\
+
+\boldsymbol{G} =
+\left[ {\begin{array}{c}
+0 \\
+5.4 \\
+\end{array} } \right],\
+
+\boldsymbol{H} =
+   \left[ {\begin{array}{cc}
+    1 & 0 \\
+   \end{array} } \right],\
+J = 0
+ \end{align*} %]]></script>
+
+<p>and <script type="math/tex">\bar{N} = N_u + \boldsymbol{KN_x}</script> comes from the steady state solution in which we want to follow the command signal <script type="math/tex">r</script>.</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+\left[ {\begin{array}{cc}
+\boldsymbol{F} & \boldsymbol{G} \\
+\boldsymbol{H} & \boldsymbol{N_u} \\
+\end{array} } \right]
+
+\left[ {\begin{array}{c}
+\boldsymbol{N_x} \\
+N_u \\
+\end{array} } \right]
+=
+\left[ {\begin{array}{c}
+\boldsymbol{0} \\
+1 \\
+\end{array} } \right]
+\end{align*} %]]></script>
+
+<p>So the goal here is to find the control matrix <script type="math/tex">\boldsymbol{K}</script>, but how?? Hold that thought for a minute.</p>
+
+<h3 id="digital-control">Digital Control</h3>
+<p>All of the equations above are analog equations for analog control. We will be implementing this whole thing in a digital microcontroller, which requires a few tweaks to the equations to account for sampling at discrete times <script type="math/tex">t = kT_{s}</script>. These equations look like:</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+\boldsymbol{x}(k+1) = \boldsymbol{\Phi x}(k)+\boldsymbol{\Gamma} u(k)\\
+y(k) = \boldsymbol{Hx}(k)+\boldsymbol{J} u(k)\\
+u(k) = -\boldsymbol{Kx}(k)+\bar{N}r(k)\\
+\end{align*}</script>
+
+<p>The matrices <script type="math/tex">\boldsymbol{\Phi}</script> and <script type="math/tex">\boldsymbol{\Gamma}</script> are related to <script type="math/tex">\boldsymbol{F}</script> and <script type="math/tex">\boldsymbol{G}</script> by a transformation, <script type="math/tex">\bar{N}</script> still equals <script type="math/tex">N_u + \boldsymbol{KN_x}</script>, and there is a slightly tweaked equation to calculate <script type="math/tex">N_u</script> and <script type="math/tex">\boldsymbol{N_x}</script>.</p>
+
+<p>For the case of the ball-on-beam balancer, the equations should look like:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+\boldsymbol{x}(kT_{s}+T_{s}) =
+
+\left[ {\begin{array}{cc}
+1 & T_{s} \\
+0 & 1 \\
+\end{array} } \right]
+
+\boldsymbol{x}(kT_{s}) +
+
+\left[ {\begin{array}{c}
+ -5.4 \frac{T_{s}^2}{2}\\
+-5.4 T_{s} \\
+\end{array} } \right] u(kT_s),\ \\
+
+y(kT_{s}) =
+   \left[ {\begin{array}{cc}
+    1 & 0 \\
+   \end{array} } \right]
+\boldsymbol{x}(kT_{s})   
+
+\end{align*} %]]></script>
+
+<p>Matlab has a really handy little function <code class="highlighter-rouge">c2d.m</code> to do it for you</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>F = [0 1;0 0];
+G = [0 -5.4]';
+H = [1 0];
+Ts = .001;
+sys = ss(F,G,H,[])
+sysd = c2d(sys, Ts)
+
+</code></pre></div></div>
+
+<p>For a sampling time <script type="math/tex">T_{s}</script> of 1 ms for our ball-on-beam problem, this spits out the following matrices, exactly as we expected above.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Continuous-time model.
+&gt;&gt; sysd = c2d(sys, Ts)
+
+sysd.a =
+          x1     x2
+   x1      1  0.001
+   x2      0      1
+
+sysd.b =
+             u1
+   x1  -2.7e-06
+   x2   -0.0054
+
+sysd.c =
+       x1  x2
+   y1   1   0
+
+sysd.d =
+       u1
+   y1   0
+
+Sampling time: 0.001 s
+Discrete-time model.
+</code></pre></div></div>
+
+<p>None of what we just did got us any further along the way to calculating <script type="math/tex">\boldsymbol{K}</script>, so lets pick that back up again. Well, standard control design says to choose the feedback gains <script type="math/tex">\boldsymbol{K}</script> so the poles <script type="math/tex">\text{det} [s\boldsymbol{I}-(\boldsymbol{F}-\boldsymbol{GK})]</script> are in a “good” location. Matlab functions <code class="highlighter-rouge">place.m</code> and <code class="highlighter-rouge">acker.m</code> can help with that. You feed them the model of the system, and where you want to place the poles, and they spit out the right <script type="math/tex">\boldsymbol{K}</script> to use. Here is some example Matlab/Octave code - its all included in the repo.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%generate system model
+[phi,gamma,H,J]=ssdata(sysD);
+
+% use the specified rise times &amp; overshoots
+omega_n = 1.8/control_trise;
+sigma = control_zeta*omega_n;
+omega_d = omega_n*sqrt(1-control_zeta^2);
+
+%generate the poles
+pk1 = -1*sigma-i*omega_d;
+pk2 = -1*sigma+i*omega_d;
+s_pk = [pk1 pk2];
+
+%discretize
+z_pk = exp(s_pk*T);
+
+%find K
+K = place(phi,gamma,z_pk)
+</code></pre></div></div>
+
+<p>Once we have the matrix <script type="math/tex">\boldsymbol{K}</script>, it is simply a matter of measuring <script type="math/tex">\boldsymbol{x}</script> and using the equation for <script type="math/tex">u(k)</script> to figure out what angle to set the beam to follow our commands. Easy peasy.</p>
+
+<p>Here is a video of control with no state estimator.</p>
+
+<blockquote>
+
+</blockquote>
+
+<h3 id="estimators">Estimators</h3>
+<p>A next level of control is to make an <em>estimate</em> of the state of the system, called <script type="math/tex">\boldsymbol{\hat{x}}(k)</script>. This can be used to make our measurements more robust (say, if the measurements are noisy), or even use things in the control law <script type="math/tex">\boldsymbol{u}(k)</script> that we can’t measure but can only estimate. So, when we have this estimate <script type="math/tex">\boldsymbol{\hat{x}}(k)</script>, we can first use it to determine the control law</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+u(k) = -\boldsymbol{K}\boldsymbol{\hat{x}}(k)+\bar{N}
+\end{align*}</script>
+
+<p>We can also evolve it forward to predict what the state will be at the next time step. I’ll call that prediction <script type="math/tex">\boldsymbol{\bar{x}}(k+1)</script>. So</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+\boldsymbol{\bar{x}}(k+1) = \boldsymbol{\Phi}\boldsymbol{\hat{x}}(k)+\boldsymbol{\Gamma} u(k)
+\end{align*}</script>
+
+<p>So now to get our estimate at the next timestep, we can combine this <em>prediction</em> from the last time step with a correction based on the latest measurement</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+\boldsymbol{\hat{x}}(k+1) = \boldsymbol{\bar{x}}(k+1)+\boldsymbol{L}(y(k+1)-\boldsymbol{H\bar{x}}(k+1))
+\end{align*}</script>
+
+<p>Crap. Where did that <script type="math/tex">\boldsymbol{L}</script> come from? Turns out its just another feedback gain, like  <script type="math/tex">\boldsymbol{K}</script> but this time for our estimate. This will dictate how our estimate deals with errors in measurements or models. So how do we calculate <script type="math/tex">L</script>? Some new options here.</p>
+
+<h3 id="estimator-gains-with-pole-placement">Estimator gains with pole placement</h3>
+<p>Well, we can simply pull a page out of the playbook for <script type="math/tex">\boldsymbol{K}</script></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%use the poles for K
+pk1 = -1*sigma-i*omega_d;
+pk2 = -1*sigma+i*omega_d;
+s_pk = [pk1 pk2];
+
+%make the dynamics a bit faster for L compared to K by moving L's poles a bit
+s_pl = observer_gain*s_pk;
+
+%discretize
+z_pl = exp(s_pl*T);
+
+%finally, find L
+L = place(phi', H', z_pl)'
+</code></pre></div></div>
+
+<p>Finally, we can put it all together to calculate how to position the beam with our much fancier new method. Combining the 3 equations above, we get this master bad-boy:</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+\boldsymbol{\hat{x}}(k+1) = (\boldsymbol{\Phi}-\boldsymbol{L H \Phi} - \boldsymbol{\Gamma K}+ \boldsymbol{LH\Gamma K})\boldsymbol{\hat{x}}(k)+\boldsymbol{L}y(k)+(\boldsymbol{\Gamma}-\boldsymbol{LH \Gamma})\bar{N}r(k)
+\end{align*}</script>
+
+<p>To make this a bit more tractable, I defined a couple of arbitrary matrices with names <script type="math/tex">\boldsymbol{M1}, \boldsymbol{M3}</script> and pre-calculated their values in Matlab/octave &amp; then just used that in my c code:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>N_bar = Nu + K*Nx;
+M1 = phi-gamma*K-L*H*phi+L*H*gamma*K;
+M3 = (gamma+L*H*gamma)*N_bar;
+fid = fopen('/home/dave/Data/matlab/octave/bobb/matrix1.txt', 'wt');
+fprintf(fid, 'double M1[2][2] = {{%5.3f,%5.3f},{ %5.3f,%5.3f}};\n', M1(1,1), M1(1,2), M1(2,1), M1(2,2));
+fprintf(fid, 'double L[2] = {%5.3f,%5.3f};\n', L(1), L(2));
+fprintf(fid, 'double M3[2] = {%5.3f,%5.3f};\n', M3(1), M3(2));
+fprintf(fid, 'double KK[2] = {%5.3f,%5.3f};\n', K(1), K(2));
+fprintf(fid, 'double N_bar = %5.3f;\n', N_bar);
+fclose(fid);
+</code></pre></div></div>
+<p>And here they are in the update formulas for the angle calculation which ended up in the c-code:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//implement state space controller
+</span> <span class="n">est_ball_position</span> <span class="o">=</span> <span class="n">M1</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">state_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">M1</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">state_vec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">ball_position</span><span class="o">+</span><span class="n">M3</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">ball_target_position</span><span class="p">;</span>
+<span class="n">est_ball_velocity</span> <span class="o">=</span> <span class="n">M1</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">state_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">M1</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">state_vec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">ball_position</span><span class="o">+</span><span class="n">M3</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">ball_target_position</span><span class="p">;</span>
+<span class="n">state_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">est_ball_position</span><span class="p">;</span>
+<span class="n">state_vec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">est_ball_velocity</span><span class="p">;</span>
+<span class="n">beam_target_angle</span> <span class="o">=-</span><span class="mi">1</span><span class="o">*</span><span class="n">KK</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">state_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">KK</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">state_vec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">N_bar</span><span class="o">*</span><span class="n">ball_target_position</span><span class="p">;</span>
+
+<span class="c1">//tell servo to go to new setpoint
+</span><span class="n">j</span> <span class="o">=</span> <span class="n">servo_target</span><span class="p">(</span><span class="n">beam_target_angle</span><span class="p">);</span>
+<span class="n">servo_set</span><span class="p">(</span><span class="n">j</span><span class="p">);</span> 	 
+</code></pre></div></div>
+
+<p>This works really well. Here’s a video of control with a state estimator and pole placement</p>
+
+<h3 id="adding-noise-models---lqr--steady-state-kalman-filter">Adding noise models - LQR &amp; (steady state) Kalman filter</h3>
+<p>Or we can get <em>really</em> fancy. If we actually start to model the noise by adding it to our equations.</p>
+
+<blockquote>
+  <p>add noise</p>
+</blockquote>
+
+<p>The noise terms come in as matrices <script type="math/tex">Q</script> and <script type="math/tex">R</script>. You either have to measure these or come up with some estimates of their value. The solution for <script type="math/tex">\boldsymbol{K}</script> in the presence of noise is called the linear quadratic regulator-</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>R = 1;
+Q = 1;
+Q = [Q 0;0 0];
+
+% use this for matlab
+[K_lqr,S_lqr,E_lqr] = dlqr(phi,gamma,Q,R,0);
+
+% use this in octave
+[K_lqr,S_lqr,E_lqr] = dlqr(phi,gamma,Q,R);
+</code></pre></div></div>
+
+<p>For the estimator matrix <script type="math/tex">\boldsymbol{L}</script>, the optimal solution is time-varying and is known as the Kalman filter. However, over time it settles and for now we can calculate the steady state (which is also know as the linear quadratic gaussian) filter. I’ll spare you all the details behind it since Matlab does all the heavy lifting-</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%use this in matlab
+[kalman_sys,L_kalman,P_kalman,M_kalman,Z_kalman] = kalman(sysD, kalman_Q, kalman_R);
+
+%use this is octave
+[kalman_sys,M_kalman,Z_kalman] = kalman(sysD, kalman_Q, kalman_R);
+
+% the L matrix we want is actually M_kalman here
+L = M_kalman;
+</code></pre></div></div>
+
+<p>Here is a video of a static Kalman filter for the estimator and with lqr for the main regulator.</p>
+<blockquote>
+
+</blockquote>
+
+<h3 id="dynamic-kalman-filters">Dynamic Kalman filters</h3>
+<p>I haven’t yet implemented the time varying Kalman version, but its not actually that hard to do for the limited size matrices (2x2) we have here. If you’re really interested here is an excel spreadsheet that uses a Kalman filter to estimate the position of a projectile. I like excel because its very visual and you can just punch away to see the effects. For example, what if your sensor is really noisy?</p>
+
+<blockquote>
+  <p>excel</p>
+</blockquote>
+
+<h3 id="summary">Summary</h3>
+<p>So that was a ton of math to describe the control strategies and the ideas behind them. How did it <em>actually</em> come together in hardware and software?</p>
+
+<h2 id="hardware">Hardware</h2>
+<h3 id="sensor">Sensor</h3>
+
+<p>To control something according to any of the above strategies, you need to know something about where that thing is. You can estimate it with a model. Or you can measure it. Or both.</p>
+
+<p>If you are going to measure the ball’s position on the beam, how would you do it? Use a laser? Something magnetic? Take a video and process the images? All good ideas. I went simpler. If you imagine the ball as a piece of metal, it could actually act as a “short circuit” between two wires. Depending on where it is, the resistance of the path will be longer or shorter, so you can use that to sense its position by forcing a current through the wires and measuring the voltage produced. The resistance is pretty small (a couple of ohms), so you need to force a pretty big current (about an amp) to get an appreciable voltage (a couple of volts). Its really the voltage change we’re after to determine the ball’s position.</p>
+
+<p>Like this:</p>
+
+<blockquote>
+  <p>sketch of how sensors work</p>
+</blockquote>
+
+<p>The nice thing is that you are now just measuring a voltage, which can be done with the ADC of the microcontroller. I had to filter the power supply pretty heavily, but it works pretty well. Sometimes the ball “hops”, and the copper wire sometimes gets oxidized. You could go pro and get a couple of stainless steel bars, etc.. There are actually setups you can buy [link] if you want to skip all of this messy stuff &amp; just get back to it.</p>
+
+<h3 id="servo-motor">Servo motor</h3>
+
+<p>I was on a hike with the kids one day many years ago and we found an old crashed RC airplane wing with the flap control motor (“servo motor”) still attached. Believe it or not, this entire project started one Saturday with me staring at that thing wondering what I could do with it. Well, what I did with it was use it as the mechanism to move the beam.</p>
+
+<blockquote>
+  <p>close in</p>
+</blockquote>
+
+<p>They are a geared motor with their own internal feedback control. If you supply them a pulse like this,</p>
+
+<blockquote>
+  <p>pulse diagram for servo</p>
+</blockquote>
+
+<p>they will move to an absolute position dictated by the fraction of the total pulse window you give it. The timing of the pulse is important: it has basically been standardized. They are typically <em>not</em> meant for continuous rotation, but rather to go to a set position and stay there. Just what you need for ensuring the flaps on an airplane wing are at the correct angle, for example. So yes, we really have a controls problem within a controls problem.</p>
+
+<p>They just need 5V and the correct pulse. Easy to give from a microcontroller.</p>
+
+<h3 id="circuit-diagram">circuit diagram</h3>
+
+<p>Without further ado, here’s the circuit diagram. Just added a little analog front end.</p>
+
+<h3 id="circuit-pictures">circuit pictures</h3>
+
+<p>And here are a few close-up photos of the various bits of the electronics, as well as the entire setup labeled.</p>
+
+<h3 id="beam">beam</h3>
+
+<p>Finally, the beam &amp; structure itself. A couple of strips of wood. Some tape. A nail. Some screws. Some epoxy. Some old particle board. Another old piece of something-or-other. Couple of old chopsticks. A piece of pvc. A hacksaw. A drill. And voila. I call it art. You, too can be an artist. Like me.</p>
+
+<blockquote>
+  <blockquote>
+    <p>picture of the beam</p>
+  </blockquote>
+</blockquote>
+
+<h2 id="software">Software</h2>
+
+<p>Moving on.</p>
+
+<h3 id="filtering-the-inputs">filtering the inputs</h3>
+<p>When I built this up, the position measurement was a little noisy the first time through. So I built some averaging into the code. To make it really flexible, I did all the math in loops. This meant the sample time is not “hardware-determined” but is software determined. Not a major issue for what we’re getting out of this. This was most important for velocity estimates, so for that I had a separate timer that kept track of the interval between samples.</p>
+
+<p>I may go back and do everything with a proper sample timer. That will be version 0.2 if I do it.</p>
+
+<h3 id="main-loop">main loop</h3>
+<p>Okay, so I implemented each of these strategies as different files, and posted the code under their own separate folders. Really all that’s different between them is the <code class="highlighter-rouge">main.c</code> files. All of the action also happens in the <code class="highlighter-rouge">main()</code> loop.</p>
+
+<p>One thing I want to do is implement all of the strategies in a single code base and use a menu to choose between them. Not hard to do, a project for another day. version 0.2.</p>
+
+<h3 id="servo">servo</h3>
+<p>The code for the servo is pretty simple.</p>
+
+<h3 id="adc">ADC</h3>
+
+<h2 id="learning-by-re-doing">Learning by re-doing</h2>
+
+<h3 id="up-next-fuzzy-logic--neural-controllers">Up Next: Fuzzy logic &amp; neural controllers</h3>
+<p>The next step on this project is to implement a fuzzy controller. Stay tuned.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-06-10">June 10, 2016</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Uncle+BOBBy%20http%3A%2F%2Flocalhost%3A4000%2Fprojects%2Fbobb%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fprojects%2Fbobb%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=http%3A%2F%2Flocalhost%3A4000%2Fprojects%2Fbobb%2F" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fprojects%2Fbobb%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="http://localhost:4000/projects/obd-ii/" class="pagination--pager" title="OBD2 4u
+">Previous</a>
+    
+    
+      <a href="http://localhost:4000/projects/HRM/" class="pagination--pager" title="Heart Rate Monitor
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <!-- <script src="http://localhost:4000/assets/js/comments.js"></script> -->
+      <!-- <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a Comment</h4>
+      <section id="disqus_thread"></section>
+    
+</div> -->
+    <div id="disqus_thread"></div>
+    <a href="single.html#disqus_thread" data-disqus-identifier=""></a>
+
+    <script>
+      // var disqus_developer = 1;
+      var disqus_config = function () {
+      this.page.url = "/projects/bobb/";
+      this.page.identifier = "/projects/bobb/";
+      };
+
+      (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://dvernooy-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      <script id="dsq-count-scr" src="//dvernooy-github-io.disqus.com/count.js" async></script>
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+  <input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  <div id="results" class="results"></div>
+</div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+      <li><a href="https://github.com/dvernooy"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="http://localhost:4000/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2018 Dave Vernooy. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="http://localhost:4000/assets/js/main.min.js"></script>
+
+
+
+  <script src="http://localhost:4000/assets/js/lunr.min.js"></script>
+  <script src="http://localhost:4000/assets/js/lunr-en.js"></script>
+
+
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://localhost:4000/projects/bobb/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/projects/03-bobb"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://dvernooy.github.io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+  </body>
+</html>
