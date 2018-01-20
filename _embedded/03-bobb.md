@@ -93,7 +93,7 @@ Ball stops nicely, but just a half-inch from where we want? Frustrating - the ha
 
 Its now stopping where we want, but it's sluggish. It's not crisp. So we can add a signal dependent on the derivative of the error. That's the **D**.
 
-Sometimes you combine all 3, or just P & I or P & D. The relative amount of these three pieces is what matters, and that's where the art of tuning it comes in. Here's a screenshot of a little spreadsheet so you can throw in some numbers and see what happens as you play with it. The blue is the command signal for the ball (what we want it to do), the red is what it actually does, and the green is how the tilt of the beam behaves depending on how we set the P, I & D coefficients. In this simulation, we are commanding the ball to go from position $$x = 0$$ to $$x = 19.5$$ cm at time $$t = 0$$.
+Sometimes you combine all 3, or just P & I or P & D. The relative amount of these three pieces is what matters, and that's where the art of tuning it comes in. Here's a screenshot of a little spreadsheet (posted [here](https://github.com/dvernooy/bobb) ) so you can throw in some numbers and see what happens as you play with it. The blue is the command signal for the ball (what we want it to do), the red is what it actually does, and the green is how the tilt of the beam behaves depending on how we set the P, I & D coefficients. In this simulation, we are commanding the ball to go from position $$x = 0$$ to $$x = 19.5$$ cm at time $$t = 0$$.
 
 ![]({{ site.url }}/assets/images/projects/bobb/unoptimized-PID.png)
 *This thing takes forever to settle, bouncing around. We can do better*
@@ -118,7 +118,7 @@ K_{3} &= K_{d} \\
 \end{align*}
 $$
 
-The rest of the math in the model is based on the digitized plant model that I describe below. None of that is used for control itself - its only to make the spreadsheet resemble the actual system so you can see the effect of different PID settings. You can punch in numbers for the $$K$$'s and watch how the system is supposed to respond. The spreadsheet is posted. Here is a screenshot:
+The rest of the math in the model is based on the digitized plant model that I describe below. None of that is used for control itself - its only to make the spreadsheet resemble the actual system so you can see the effect of different PID settings. You can punch in numbers for the $$K$$'s and watch how the system is supposed to respond. Here is a screenshot:
 
 ![]({{ site.url }}/assets/images/projects/bobb/excel-model-PID.png)
 *Fun to play around with*

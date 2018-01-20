@@ -72,7 +72,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-01-20T16:35:51-05:00">
+  <meta property="article:published_time" content="2018-01-20T17:46:29-05:00">
 
 
 
@@ -484,7 +484,7 @@
 
 <p>Its now stopping where we want, but it’s sluggish. It’s not crisp. So we can add a signal dependent on the derivative of the error. That’s the <strong>D</strong>.</p>
 
-<p>Sometimes you combine all 3, or just P &amp; I or P &amp; D. The relative amount of these three pieces is what matters, and that’s where the art of tuning it comes in. Here’s a screenshot of a little spreadsheet so you can throw in some numbers and see what happens as you play with it. The blue is the command signal for the ball (what we want it to do), the red is what it actually does, and the green is how the tilt of the beam behaves depending on how we set the P, I &amp; D coefficients. In this simulation, we are commanding the ball to go from position <script type="math/tex">x = 0</script> to <script type="math/tex">x = 19.5</script> cm at time <script type="math/tex">t = 0</script>.</p>
+<p>Sometimes you combine all 3, or just P &amp; I or P &amp; D. The relative amount of these three pieces is what matters, and that’s where the art of tuning it comes in. Here’s a screenshot of a little spreadsheet (posted <a href="https://github.com/dvernooy/bobb">here</a> ) so you can throw in some numbers and see what happens as you play with it. The blue is the command signal for the ball (what we want it to do), the red is what it actually does, and the green is how the tilt of the beam behaves depending on how we set the P, I &amp; D coefficients. In this simulation, we are commanding the ball to go from position <script type="math/tex">x = 0</script> to <script type="math/tex">x = 19.5</script> cm at time <script type="math/tex">t = 0</script>.</p>
 
 <p><img src="http://localhost:4000/assets/images/projects/bobb/unoptimized-PID.png" alt="" />
 <em>This thing takes forever to settle, bouncing around. We can do better</em></p>
@@ -506,7 +506,7 @@ K_{2} &= -K_{p}-2*K_{d} \\
 K_{3} &= K_{d} \\
 \end{align*} %]]></script>
 
-<p>The rest of the math in the model is based on the digitized plant model that I describe below. None of that is used for control itself - its only to make the spreadsheet resemble the actual system so you can see the effect of different PID settings. You can punch in numbers for the <script type="math/tex">K</script>’s and watch how the system is supposed to respond. The spreadsheet is posted. Here is a screenshot:</p>
+<p>The rest of the math in the model is based on the digitized plant model that I describe below. None of that is used for control itself - its only to make the spreadsheet resemble the actual system so you can see the effect of different PID settings. You can punch in numbers for the <script type="math/tex">K</script>’s and watch how the system is supposed to respond. Here is a screenshot:</p>
 
 <p><img src="http://localhost:4000/assets/images/projects/bobb/excel-model-PID.png" alt="" />
 <em>Fun to play around with</em></p>
