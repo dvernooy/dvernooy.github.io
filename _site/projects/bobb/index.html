@@ -72,7 +72,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-01-18T22:24:05-05:00">
+  <meta property="article:published_time" content="2018-01-20T16:35:51-05:00">
 
 
 
@@ -322,7 +322,7 @@
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     <meta itemprop="headline" content="Uncle BOBBy">
     <meta itemprop="description" content="Control system fun with a Ball on Beam Balancer (BOBB)">
-    <meta itemprop="datePublished" content="January 18, 2018">
+    <meta itemprop="datePublished" content="January 20, 2018">
     <meta itemprop="dateModified" content="June 10, 2016">
 
     <div class="page__inner-wrap">
@@ -337,7 +337,7 @@
 
 
 
-  17 minute read
+  20 minute read
 </p>
           
         </header>
@@ -374,17 +374,16 @@
     <ul>
       <li><a href="#sensor">Sensor</a></li>
       <li><a href="#servo-motor">Servo motor</a></li>
-      <li><a href="#circuit-diagram">circuit diagram</a></li>
-      <li><a href="#circuit-pictures">circuit pictures</a></li>
-      <li><a href="#beam">beam</a></li>
+      <li><a href="#circuit-diagram">Circuit diagram</a></li>
+      <li><a href="#circuit-pictures">Circuit pictures</a></li>
+      <li><a href="#beam">Beam</a></li>
     </ul>
   </li>
   <li><a href="#software">Software</a>
     <ul>
-      <li><a href="#filtering-the-inputs">filtering the inputs</a></li>
-      <li><a href="#main-loop">main loop</a></li>
-      <li><a href="#servo">servo</a></li>
-      <li><a href="#adc">ADC</a></li>
+      <li><a href="#adc--filtering-the-inputs">ADC &amp; filtering the inputs</a></li>
+      <li><a href="#main-loop">Main loop</a></li>
+      <li><a href="#servo">Servo</a></li>
     </ul>
   </li>
   <li><a href="#learning-by-re-doing">Learning by re-doing</a>
@@ -434,12 +433,25 @@
 <p>The physical model for the system is really simple:</p>
 
 <script type="math/tex; mode=display">\begin{align*}
-\ddot{x} = -\frac{g}{1+\frac{2}{5}{\frac{r}{a}}^2} \alpha
+\ddot{x} = -\frac{g}{1+\frac{2}{5}{(\frac{r}{a})}^2} \alpha
 \end{align*}
 \tag{1}
 \label{ball_equation}</script>
 
-<p>where <script type="math/tex">x</script> is the position of the ball along the beam, <script type="math/tex">g</script> is the acceleration due to gravity, <script type="math/tex">r</script> is the ball radius, <script type="math/tex">a</script> is the height of the center of the ball above its contact point with the beam and <script type="math/tex">\alpha</script> is the angle of the beam with respect to the horizontal. The goal will be to control the ball position <script type="math/tex">x</script>, by controlling the angle of the beam <script type="math/tex">\alpha</script>. This problem is called a “double integrator” because of the relationship between the control variable <script type="math/tex">\alpha</script> and the variable <script type="math/tex">x</script> we want to control. More about that in a minute.</p>
+<p>where <script type="math/tex">x</script> is the position of the ball along the beam, <script type="math/tex">g =</script> 9.8 m/<script type="math/tex">\text{s}^2</script> is the acceleration due to gravity, <script type="math/tex">r =</script> 5 mm is the ball radius, <script type="math/tex">a =</script> 3.5 mm is the height of the center of the ball above its contact point with the beam and <script type="math/tex">\alpha</script> is the angle of the beam with respect to the horizontal. I estimated this factor</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+\tilde{g} = \frac{g}{1+\frac{2}{5}{(\frac{r}{a})}^2} = \text{5.4}\frac{\text{m}}{\text{s}^2}
+\end{align*}</script>
+
+<p>To check, I measured the time for the ball to jump off the beam as a function of beam angle - here is the data:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/bobb/g_tilde.png" alt="" />
+<em>Newton was right.</em></p>
+
+<p>The dashed line is a fit with <script type="math/tex">\tilde{g} =</script> 5.3 m/<script type="math/tex">\text{s}^2</script>. Not bad.</p>
+
+<p>Armed with this stunning (ahem) success, the next goal was to figure out how to control the ball position <script type="math/tex">x</script>, by controlling the angle of the beam <script type="math/tex">\alpha</script>. This problem is called a “double integrator” because of the relationship between the control variable <script type="math/tex">\alpha</script> and the variable <script type="math/tex">x</script> we want to control. More about that in a minute.</p>
 
 <p>There are much more elaborate models and background to this problem that I won’t get into. Even the bare minimum we’re using here gets complex enough.</p>
 
@@ -447,12 +459,11 @@
 
 <p>There are lots of block diagrams when analyzing controls systems. Here’s a block diagram in the context of our setup.</p>
 
-<blockquote>
-  <p>picture of the setup</p>
-</blockquote>
+<p><img src="http://localhost:4000/assets/images/projects/bobb/model-control.png" alt="" />
+<em>Reference command comes from the computer program. Control from the program and servo motor to control beam angle. Process/plant is the ball on the beam. Output is ball’s position. Sensor is wires (more below) and amplifier. Whew.</em></p>
 
 <h3 id="human">Human</h3>
-<p>So now that we know the challenge, how easy is it for a human to control the ball’s position. Gotta be easy. After all, we have everything we need. Eyes to sense the ball’s position, brain to compute where its been and where its likely to go, hands to move the beam to get it there. All of them evolved over millions of years to work together to get things done. We’ve seen balls rolling down hills before. Piece of cake. So I wired up a little test:</p>
+<p>So now that we know the challenge, how easy is it for a human to control the ball’s position? Gotta be easy. After all, we have everything we need. Eyes to sense the ball’s position, brain to compute where its been and where its likely to go, hands to move the beam to get it there. All of them evolved over millions of years to work together to get things done. We’ve seen balls rolling down hills before. Piece of cake. So I wired up a little test:</p>
 
 <!-- Courtesy of embedresponsively.com //-->
 <div class="responsive-video-container">
@@ -478,7 +489,7 @@
 <p><img src="http://localhost:4000/assets/images/projects/bobb/unoptimized-PID.png" alt="" />
 <em>This thing takes forever to settle, bouncing around. We can do better</em></p>
 
-<p>For those really into the details, I also tried to model the thing pretty closely by limiting the angle that the beam can turn based on the geometery, and modeled it all as a digital PID, with the following control law:</p>
+<p>For those really into the details, I also tried to model the actual system pretty closely by limiting the angle that the beam can turn (it can only go +/- about 7 degrees). I also modeled it all as a <em>digital</em> PID, with the following control law:</p>
 
 <script type="math/tex; mode=display">\begin{align*}
 u(k) = u(k-1) + K_{1} e(k) + K_{2} e(k-1) + K_{3} e(k-2)
@@ -486,21 +497,26 @@ u(k) = u(k-1) + K_{1} e(k) + K_{2} e(k-1) + K_{3} e(k-2)
 
 <p>where <script type="math/tex">u(k)</script> is our angle <script type="math/tex">\alpha</script> at time step <script type="math/tex">k</script>, and <script type="math/tex">e(k)= x(k)-r(k)</script>, the difference at any time step <script type="math/tex">k</script> between the ball’s position <script type="math/tex">x(k)</script> and our command <script type="math/tex">r(k)</script>. The multiplying factors are related to the PID coefficients</p>
 
-<script type="math/tex; mode=display">\begin{align*}
-K_{p} = K,\ K_{i} = \frac{K}{T_{i}},\ K_{d} = KT_{d} \\
-\text{and}\\
-K_{1} = K_{p} + K_{i} + K_{d} \\
-K_{2} = -K_{p}-2*K_{d} \\
-K_{3} = K_{d} \\
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+K_{p} &= K,\ K_{i} = \frac{K}{T_{i}},\ K_{d} = KT_{d} \\
+\ \ \ \ \ &\text{and}\\
+K_{1} &= K_{p} + K_{i} + K_{d} \\
+K_{2} &= -K_{p}-2*K_{d} \\
+K_{3} &= K_{d} \\
+\end{align*} %]]></script>
 
-\end{align*}</script>
-
-<p>The rest of the math in the model is based on the digitized model that I describe below. None of it is used for control itself, only to make the spreadsheet model the system so you can see the effect of the control. The spreadsheet is posted. Here is a screenshot:</p>
+<p>The rest of the math in the model is based on the digitized plant model that I describe below. None of that is used for control itself - its only to make the spreadsheet resemble the actual system so you can see the effect of different PID settings. You can punch in numbers for the <script type="math/tex">K</script>’s and watch how the system is supposed to respond. The spreadsheet is posted. Here is a screenshot:</p>
 
 <p><img src="http://localhost:4000/assets/images/projects/bobb/excel-model-PID.png" alt="" />
 <em>Fun to play around with</em></p>
 
-<p>Back to the story: so, if you follow the variable <script type="math/tex">x</script> around the control loop, it has a phase shift of -180 already from the double integrator in the control law (two <script type="math/tex">1/j</script>’s <script type="math/tex">=-1</script> from the integrations) in equation (1). In controllers, this amount of “built in” phase shift is really bad news for stability, which is why this whole thing is known as a hard problem. The P term will add no phase shift, the D term will have a +90 degrees shift (a <script type="math/tex">j</script> from the derivative) and the I term even more negative phase shift of -90 degrees (a <script type="math/tex">1/j= -j</script> again from the integration).</p>
+<p>And here is a simple picture of the model it follows:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/bobb/PID-equations.png" alt="" />
+<em>Framework for building the excel model</em></p>
+
+<p>Back to the story: so, if you follow the variable <script type="math/tex">x</script> around the control loop, it has a phase shift of -180 already from the double integrator in the control law (two <script type="math/tex">1/j</script>’s <script type="math/tex">=-1</script> from the integrations) in equation (1). In controllers, this amount of “built in” phase shift is really bad news for stability, which is why this whole thing is known as a hard problem. The P term will add no phase shift, the D term will have a +90 degrees shift (a <script type="math/tex">+j</script> from the derivative) and the I term even more negative phase shift of -90 degrees (a <script type="math/tex">1/j= -j</script> again from the integration).</p>
 
 <p>So we can almost predict that the optimum PID controller will actually be more of a PD controller, with little to no I. That’s exactly what I found when I tried to optimize the spreadsheet model by minimizing the time to get the ball to the new position. Here’s a picture of the “best” solution I could come up with in excel. You can see it took approximately 1.1s for the ball to move to the new commanded positioning, with no overshoot &amp; minimal lag.</p>
 
@@ -545,11 +561,12 @@ K_{3} = K_{d} \\
 
 <p>The first step is to write out the system model (Equation 1) by defining the system “state” <script type="math/tex">\boldsymbol{x} = [x\ \: \dot{x}]</script>, the control variable as <script type="math/tex">u</script>, the input reference (or command) as <script type="math/tex">r</script> and the output as <script type="math/tex">y</script>. This is standard language you always see &amp; the only thing to keep in mind is our control variable <script type="math/tex">u</script> is actually the beam angle <script type="math/tex">\alpha</script>. Then you can write the system state equations in a matrix format.</p>
 
-<script type="math/tex; mode=display">\begin{align*}
-\boldsymbol{\dot{x}} = \boldsymbol{Fx}+\boldsymbol{G} u\\
-y = \boldsymbol{Hx}+\boldsymbol{J} u\\
-u = -\boldsymbol{Kx}+\bar{N} r\\
-\end{align*}</script>
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+\boldsymbol{\dot{x}} &= \boldsymbol{Fx}+\boldsymbol{G} u\\
+y &= \boldsymbol{Hx}+\boldsymbol{J} u\\
+u &= -\boldsymbol{Kx}+\bar{N} r\\
+\end{align*} %]]></script>
 
 <p>where</p>
 
@@ -564,7 +581,7 @@ u = -\boldsymbol{Kx}+\bar{N} r\\
 \boldsymbol{G} =
 \left[ {\begin{array}{c}
 0 \\
-5.4 \\
+-5.4 \\
 \end{array} } \right],\
 
 \boldsymbol{H} =
@@ -599,11 +616,12 @@ N_u \\
 <h3 id="digital-control">Digital Control</h3>
 <p>All of the equations above are analog equations for analog control. We will be implementing this whole thing in a digital microcontroller, which requires a few tweaks to the equations to account for sampling at discrete times <script type="math/tex">t = kT_{s}</script>. These equations look like:</p>
 
-<script type="math/tex; mode=display">\begin{align*}
-\boldsymbol{x}(k+1) = \boldsymbol{\Phi x}(k)+\boldsymbol{\Gamma} u(k)\\
-y(k) = \boldsymbol{Hx}(k)+\boldsymbol{J} u(k)\\
-u(k) = -\boldsymbol{Kx}(k)+\bar{N}r(k)\\
-\end{align*}</script>
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+\boldsymbol{x}(k+1) &= \boldsymbol{\Phi x}(k)+\boldsymbol{\Gamma} u(k)\\
+y(k) &= \boldsymbol{Hx}(k)+\boldsymbol{J} u(k)\\
+u(k) &= -\boldsymbol{Kx}(k)+\bar{N}r(k)\\
+\end{align*} %]]></script>
 
 <p>The matrices <script type="math/tex">\boldsymbol{\Phi}</script> and <script type="math/tex">\boldsymbol{\Gamma}</script> are related to <script type="math/tex">\boldsymbol{F}</script> and <script type="math/tex">\boldsymbol{G}</script> by a transformation, <script type="math/tex">\bar{N}</script> still equals <script type="math/tex">N_u + \boldsymbol{KN_x}</script>, and there is a slightly tweaked equation to calculate <script type="math/tex">N_u</script> and <script type="math/tex">\boldsymbol{N_x}</script>.</p>
 
@@ -611,7 +629,7 @@ u(k) = -\boldsymbol{Kx}(k)+\bar{N}r(k)\\
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{align*}
-\boldsymbol{x}(kT_{s}+T_{s}) =
+\boldsymbol{x}(kT_{s}+T_{s}) &=
 
 \left[ {\begin{array}{cc}
 1 & T_{s} \\
@@ -625,7 +643,7 @@ u(k) = -\boldsymbol{Kx}(k)+\bar{N}r(k)\\
 -5.4 T_{s} \\
 \end{array} } \right] u(kT_s),\ \\
 
-y(kT_{s}) =
+y(kT_{s}) &=
    \left[ {\begin{array}{cc}
     1 & 0 \\
    \end{array} } \right]
@@ -695,17 +713,11 @@ K = place(phi,gamma,z_pk)
 
 <p>Once we have the matrix <script type="math/tex">\boldsymbol{K}</script>, it is simply a matter of measuring <script type="math/tex">\boldsymbol{x}</script> and using the equation for <script type="math/tex">u(k)</script> to figure out what angle to set the beam to follow our commands. Easy peasy.</p>
 
-<p>Here is a video of control with no state estimator.</p>
-
-<blockquote>
-
-</blockquote>
-
 <h3 id="estimators">Estimators</h3>
 <p>A next level of control is to make an <em>estimate</em> of the state of the system, called <script type="math/tex">\boldsymbol{\hat{x}}(k)</script>. This can be used to make our measurements more robust (say, if the measurements are noisy), or even use things in the control law <script type="math/tex">\boldsymbol{u}(k)</script> that we can’t measure but can only estimate. So, when we have this estimate <script type="math/tex">\boldsymbol{\hat{x}}(k)</script>, we can first use it to determine the control law</p>
 
 <script type="math/tex; mode=display">\begin{align*}
-u(k) = -\boldsymbol{K}\boldsymbol{\hat{x}}(k)+\bar{N}
+u(k) = -\boldsymbol{K}\boldsymbol{\hat{x}}(k)+\bar{N}r(k)
 \end{align*}</script>
 
 <p>We can also evolve it forward to predict what the state will be at the next time step. I’ll call that prediction <script type="math/tex">\boldsymbol{\bar{x}}(k+1)</script>. So</p>
@@ -720,7 +732,14 @@ u(k) = -\boldsymbol{K}\boldsymbol{\hat{x}}(k)+\bar{N}
 \boldsymbol{\hat{x}}(k+1) = \boldsymbol{\bar{x}}(k+1)+\boldsymbol{L}(y(k+1)-\boldsymbol{H\bar{x}}(k+1))
 \end{align*}</script>
 
-<p>Crap. Where did that <script type="math/tex">\boldsymbol{L}</script> come from? Turns out its just another feedback gain, like  <script type="math/tex">\boldsymbol{K}</script> but this time for our estimate. This will dictate how our estimate deals with errors in measurements or models. So how do we calculate <script type="math/tex">L</script>? Some new options here.</p>
+<p>Crap. Where did that <script type="math/tex">\boldsymbol{L}</script> come from? Turns out its just another feedback gain, like  <script type="math/tex">\boldsymbol{K}</script> but this time for our estimate. This will dictate how our estimate deals with errors in measurements or models.</p>
+
+<p>A block diagram of this new system looks like this:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/bobb/estimator-block-diagram.png" alt="" />
+<em>Control strategy which now includes an estimator in the feedback loop</em></p>
+
+<p>So how do we calculate <script type="math/tex">\boldsymbol{L}</script>? Some new options here.</p>
 
 <h3 id="estimator-gains-with-pole-placement">Estimator gains with pole placement</h3>
 <p>Well, we can simply pull a page out of the playbook for <script type="math/tex">\boldsymbol{K}</script></p>
@@ -772,17 +791,26 @@ fclose(fid);
 </span><span class="n">j</span> <span class="o">=</span> <span class="n">servo_target</span><span class="p">(</span><span class="n">beam_target_angle</span><span class="p">);</span>
 <span class="n">servo_set</span><span class="p">(</span><span class="n">j</span><span class="p">);</span> 	 
 </code></pre></div></div>
+<p><strong>This works really well, which was surprising to me given the complexity.</strong> Here’s a video of control with a state estimator and pole placement.</p>
 
-<p>This works really well. Here’s a video of control with a state estimator and pole placement</p>
+<!-- Courtesy of embedresponsively.com //-->
+<div class="responsive-video-container">
+
+  <iframe src="https://www.youtube.com/embed/v2eacvoIuQ8" frameborder="0" allowfullscreen=""></iframe>
+
+</div>
 
 <h3 id="adding-noise-models---lqr--steady-state-kalman-filter">Adding noise models - LQR &amp; (steady state) Kalman filter</h3>
-<p>Or we can get <em>really</em> fancy. If we actually start to model the noise by adding it to our equations.</p>
+<p>Now we can get <em>really</em> fancy. If we actually start to model the noise by adding it to our equations.</p>
 
-<blockquote>
-  <p>add noise</p>
-</blockquote>
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+\boldsymbol{x}(k+1) &= \boldsymbol{\Phi x}(k)+\boldsymbol{\Gamma} u(k)+\boldsymbol{\Gamma_{1}}w(k)\\
+y(k) &= \boldsymbol{Hx}(k)+\boldsymbol{J} u(k)+v(k)\\
+u(k) &= -\boldsymbol{Kx}(k)+\bar{N}r(k)\\
+\end{align*} %]]></script>
 
-<p>The noise terms come in as matrices <script type="math/tex">Q</script> and <script type="math/tex">R</script>. You either have to measure these or come up with some estimates of their value. The solution for <script type="math/tex">\boldsymbol{K}</script> in the presence of noise is called the linear quadratic regulator-</p>
+<p>The expected value of the noise terms are usually called <script type="math/tex">Q=\langle w^{2}(k) \rangle</script> and <script type="math/tex">R=\langle v^{2}(k) \rangle</script>. You either have to measure these or come up with some estimates of their value. The solution for <script type="math/tex">\boldsymbol{K}</script> in the presence of noise is called the linear quadratic regulator-</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>R = 1;
 Q = 1;
@@ -795,32 +823,46 @@ Q = [Q 0;0 0];
 [K_lqr,S_lqr,E_lqr] = dlqr(phi,gamma,Q,R);
 </code></pre></div></div>
 
-<p>For the estimator matrix <script type="math/tex">\boldsymbol{L}</script>, the optimal solution is time-varying and is known as the Kalman filter. However, over time it settles and for now we can calculate the steady state (which is also know as the linear quadratic gaussian) filter. I’ll spare you all the details behind it since Matlab does all the heavy lifting-</p>
+<p>For the estimator matrix <script type="math/tex">\boldsymbol{L}</script>, the optimal solution is time-varying and is known as the Kalman filter. For now, we can calculate the steady state Kalman estimator (which is also know as the linear quadratic gaussian or linear quadratic estimator). I’ll spare you all the details behind the calculation, but looking at the equation for the estimate</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%use this in matlab
-[kalman_sys,L_kalman,P_kalman,M_kalman,Z_kalman] = kalman(sysD, kalman_Q, kalman_R);
+<script type="math/tex; mode=display">\begin{align*}
+\boldsymbol{\hat{x}}(k+1) = \boldsymbol{\bar{x}}(k+1)+\boldsymbol{L}(y(k+1)-\boldsymbol{H\bar{x}}(k+1))
+\end{align*}</script>
 
-%use this is octave
-[kalman_sys,M_kalman,Z_kalman] = kalman(sysD, kalman_Q, kalman_R);
+<p>you can see that a “small” <script type="math/tex">\boldsymbol{L}</script> means we don’t put much weight on the latest measurement and favor what the model has to say, and vice verso for large <script type="math/tex">\boldsymbol{L}</script>. It turns out that the Kalman filter always makes the optimal choice for <script type="math/tex">\boldsymbol{L}</script> to mix these two to get the lowest estimator error. <em>That, in a nutshell, is the magic of the Kalman filter</em> and <script type="math/tex">\boldsymbol{L}</script> is known as the Kalman gain. Matlab/octave does all the heavy lifting to calculate it with a function called <code class="highlighter-rouge">dlqe.m</code>. You just need to pass it the system model including an estimate of the <script type="math/tex">G</script> matrix and the variances <script type="math/tex">Q</script> and <script type="math/tex">R</script>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>% analog system model
+F=[0 1;0 0]; G= [0 -9.3]'; H = [1 0]; J = 0;
+
+%create continuous state space model
+sysC = ss(F, G, H, J); %continuous
+T = 0.008; %sample time in ms
+
+%convert to a digital model
+sysD = c2d(sysC,T,'zoh');
+
+% I set gamma_1 = [0.1 0.9]', Q = 3, R = 1 in the video below
+% dlqe does the calculations for a steady state digital Kalman estimator
+[M_kalman,P_kalman,Z_kalman, E_kalman] = dlqe(sysD.a, gamma_1, sysD.c, kalman_Q, kalman_R);
 
 % the L matrix we want is actually M_kalman here
 L = M_kalman;
 </code></pre></div></div>
 
-<p>Here is a video of a static Kalman filter for the estimator and with lqr for the main regulator.</p>
-<blockquote>
+<p>Here is a video of a static Kalman filter for the estimator and with a linear quadratic regulator for the main regulator.</p>
 
-</blockquote>
+<!-- Courtesy of embedresponsively.com //-->
+<div class="responsive-video-container">
+
+  <iframe src="https://www.youtube.com/embed/vnSU06WRw30" frameborder="0" allowfullscreen=""></iframe>
+
+</div>
 
 <h3 id="dynamic-kalman-filters">Dynamic Kalman filters</h3>
-<p>I haven’t yet implemented the time varying Kalman version, but its not actually that hard to do for the limited size matrices (2x2) we have here. If you’re really interested here is an excel spreadsheet that uses a Kalman filter to estimate the position of a projectile. I like excel because its very visual and you can just punch away to see the effects. For example, what if your sensor is really noisy?</p>
-
-<blockquote>
-  <p>excel</p>
-</blockquote>
+<p>What if your sensor has a noise that varies with time? I haven’t yet implemented the time varying Kalman version, but its not actually that hard to do for the limited size matrices (2x2) we have here. If you’re really interested <a href="https://github.com/dvernooy/bobb">here</a> is an excel spreadsheet that uses a dynamic Kalman filter to estimate the position of a projectile. I like excel because its very visual and you can just punch away to see the effects.</p>
 
 <h3 id="summary">Summary</h3>
-<p>So that was a ton of math to describe the control strategies and the ideas behind them. How did it <em>actually</em> come together in hardware and software?</p>
+<p>So that was a ton of math to describe a few of the control strategies and the ideas behind them. How did it <em>actually</em> come together in hardware and software?</p>
 
 <h2 id="hardware">Hardware</h2>
 <h3 id="sensor">Sensor</h3>
@@ -831,66 +873,116 @@ L = M_kalman;
 
 <p>Like this:</p>
 
-<blockquote>
-  <p>sketch of how sensors work</p>
-</blockquote>
+<p><img src="http://localhost:4000/assets/images/projects/bobb/bobb_overview.jpg" alt="" />
+<em>Coupla’ wires does the trick</em></p>
 
-<p>The nice thing is that you are now just measuring a voltage, which can be done with the ADC of the microcontroller. I had to filter the power supply pretty heavily, but it works pretty well. Sometimes the ball “hops”, and the copper wire sometimes gets oxidized. You could go pro and get a couple of stainless steel bars, etc.. There are actually setups you can buy [link] if you want to skip all of this messy stuff &amp; just get back to it.</p>
+<p>I also tested the voltage output as a function of ball position to make sure it was linear. It was.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/bobb/sensor-linearity.png" alt="" />
+<em>A little amplification &amp; we’re good to go</em></p>
+
+<p>The nice thing is that you are now just measuring a voltage, which can be done with the analog-to-digital converter of the microcontroller after a bit of amplification and buffering. I had to filter the power supply pretty heavily, but it works pretty well. Sometimes the ball “hops”, and the copper wire sometimes gets oxidized. You could go pro and get a couple of stainless steel bars.</p>
 
 <h3 id="servo-motor">Servo motor</h3>
 
 <p>I was on a hike with the kids one day many years ago and we found an old crashed RC airplane wing with the flap control motor (“servo motor”) still attached. Believe it or not, this entire project started one Saturday with me staring at that thing wondering what I could do with it. Well, what I did with it was use it as the mechanism to move the beam.</p>
 
-<blockquote>
-  <p>close in</p>
-</blockquote>
+<p><img src="http://localhost:4000/assets/images/projects/bobb/servo-pic.png" alt="" />
+<em>Beam actuation mechanism</em></p>
 
-<p>They are a geared motor with their own internal feedback control. If you supply them a pulse like this,</p>
+<p>They are a geared motor with their own internal feedback control. If you supply them a pulse train with a pulse separation of about 20 ms, and a pulse width between 1.0 and 2.0 ms, you can control the angle of the output shaft very precisely. Like this:</p>
 
-<blockquote>
-  <p>pulse diagram for servo</p>
-</blockquote>
+<p><img src="http://localhost:4000/assets/images/projects/bobb/pwm.jpg" alt="" />
+<em>Getting a servo motor to work</em></p>
 
-<p>they will move to an absolute position dictated by the fraction of the total pulse window you give it. The timing of the pulse is important: it has basically been standardized. They are typically <em>not</em> meant for continuous rotation, but rather to go to a set position and stay there. Just what you need for ensuring the flaps on an airplane wing are at the correct angle, for example. So yes, we really have a controls problem within a controls problem.</p>
+<p>The timing of the pulse is important: it has basically been standardized. I measured the minimum angle on my servo to be at 1.103 ms and the maximum at 1.983 ms using a separate function generator. It was pretty beat up when I started with it, so I’m not surprised.</p>
 
-<p>They just need 5V and the correct pulse. Easy to give from a microcontroller.</p>
+<p>They are typically <em>not</em> meant for continuous rotation, but rather to go to a set position and stay there. Just what you need for ensuring the flaps on an airplane wing are at the correct angle, for example. So yes, we really have a controls problem within a controls problem. In a nutshell, then, they just need 5V and the correct pulse. The pulse can be done easily with the pulse width modulation (PWM) capabilities of many microcontrollers. There is a ton of information on the web about how to do this. You can read <code class="highlighter-rouge">servo.c</code> in the repo and refer to the schematic to see how I did it.</p>
 
-<h3 id="circuit-diagram">circuit diagram</h3>
+<h3 id="circuit-diagram">Circuit diagram</h3>
 
-<p>Without further ado, here’s the circuit diagram. Just added a little analog front end.</p>
+<p>So, about that schematic. Without further ado, here’s the circuit diagram.</p>
 
-<h3 id="circuit-pictures">circuit pictures</h3>
+<p><img src="http://localhost:4000/assets/images/projects/bobb/bobb-circuit.png" alt="" />
+<em>Circuit diagram for ball-on-beam-balancer</em></p>
 
-<p>And here are a few close-up photos of the various bits of the electronics, as well as the entire setup labeled.</p>
+<h3 id="circuit-pictures">Circuit pictures</h3>
 
-<h3 id="beam">beam</h3>
+<p>And here are the obligatory close-up photos of the various bits of the electronics, as well as the entire setup labeled.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/bobb/circuit_build.png" alt="" />
+<em>Sensor amplifier board and main microcontroller board</em></p>
+
+<h3 id="beam">Beam</h3>
 
 <p>Finally, the beam &amp; structure itself. A couple of strips of wood. Some tape. A nail. Some screws. Some epoxy. Some old particle board. Another old piece of something-or-other. Couple of old chopsticks. A piece of pvc. A hacksaw. A drill. And voila. I call it art. You, too can be an artist. Like me.</p>
 
-<blockquote>
-  <blockquote>
-    <p>picture of the beam</p>
-  </blockquote>
-</blockquote>
-
-<h2 id="software">Software</h2>
+<p><img src="http://localhost:4000/assets/images/projects/bobb/pivot.jpg" alt="" />
+<em>The pivot for the beam literally was a nail through a piece of pvc</em></p>
 
 <p>Moving on.</p>
 
-<h3 id="filtering-the-inputs">filtering the inputs</h3>
-<p>When I built this up, the position measurement was a little noisy the first time through. So I built some averaging into the code. To make it really flexible, I did all the math in loops. This meant the sample time is not “hardware-determined” but is software determined. Not a major issue for what we’re getting out of this. This was most important for velocity estimates, so for that I had a separate timer that kept track of the interval between samples.</p>
+<h2 id="software">Software</h2>
+<p>The code base for this project is <a href="https://github.com/dvernooy/bobb">here</a>. It includes all the source code, plus most of the spreadsheets and octave scripts if you want to play with any of any of them.</p>
+
+<h3 id="adc--filtering-the-inputs">ADC &amp; filtering the inputs</h3>
+<p>When I built this up, the position measurement was a little noisy the first time through. So I built some averaging into the code.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">temp_sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">ADC_counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">k</span><span class="o">&lt;</span><span class="n">ADC_avg_counts</span><span class="p">;</span><span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">l</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">l</span><span class="o">&lt;</span><span class="n">ADC_delay</span><span class="p">;</span><span class="n">l</span><span class="o">++</span><span class="p">)</span> <span class="p">{}</span> <span class="c1">//delay code, seems to do the trick;
+</span>  <span class="n">read_adc</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">result</span> <span class="o">&lt;</span> <span class="mi">509</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">result</span> <span class="o">&gt;</span> <span class="mi">974</span><span class="p">))</span>
+      <span class="p">{}</span>
+    <span class="k">else</span> <span class="p">{</span>
+      <span class="n">temp_sum</span> <span class="o">+=</span> <span class="n">result</span><span class="p">;</span>
+      <span class="n">ADC_counter</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">ADC_counter</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">.</span><span class="mi">9</span><span class="o">*</span><span class="n">ADC_avg_counts</span><span class="p">)</span>
+<span class="p">{</span><span class="n">ADC_sum</span> <span class="o">=</span> <span class="n">ADC_sum_old</span><span class="p">;}</span>
+<span class="k">else</span>
+<span class="p">{</span><span class="n">ADC_sum</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span> <span class="n">temp_sum</span><span class="p">;</span>
+<span class="n">ADC_sum</span> <span class="o">=</span> <span class="n">ADC_sum</span><span class="o">/</span><span class="n">ADC_counter</span><span class="p">;</span>
+<span class="n">ADC_sum_old</span> <span class="o">=</span> <span class="n">ADC_sum</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To make it really flexible as I worked out the bugs, I did all the math in a loop. This meant the sample time is not “hardware-determined” but is software determined. Not a major issue for what we’re getting out of this. This was most important for velocity estimates, so for that I had a separate timer that kept track of the interval between samples. Typically it was 8 ms, and not that variable loop-to-loop, so I could probably use this as a poor-man’s version of a master sampler clock.</p>
 
 <p>I may go back and do everything with a proper sample timer. That will be version 0.2 if I do it.</p>
 
-<h3 id="main-loop">main loop</h3>
+<h3 id="main-loop">Main loop</h3>
 <p>Okay, so I implemented each of these strategies as different files, and posted the code under their own separate folders. Really all that’s different between them is the <code class="highlighter-rouge">main.c</code> files. All of the action also happens in the <code class="highlighter-rouge">main()</code> loop.</p>
 
 <p>One thing I want to do is implement all of the strategies in a single code base and use a menu to choose between them. Not hard to do, a project for another day. version 0.2.</p>
 
-<h3 id="servo">servo</h3>
-<p>The code for the servo is pretty simple.</p>
+<h3 id="servo">Servo</h3>
+<p>The code for the servo is pretty simple. The first thing is to translate an angle into a servo setting</p>
 
-<h3 id="adc">ADC</h3>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint16_t</span> <span class="nf">servo_target</span> <span class="p">(</span><span class="kt">double</span> <span class="n">angle</span><span class="p">)</span> <span class="p">{</span>
+<span class="kt">double</span> <span class="n">intermediate</span> <span class="o">=</span> <span class="mi">32767</span><span class="p">.</span><span class="mi">0</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">46</span><span class="p">.</span><span class="mi">2963</span><span class="o">*</span><span class="p">(</span><span class="n">angle</span> <span class="o">-</span> <span class="mi">33</span><span class="p">.</span><span class="mi">338</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span> <span class="n">servo_min</span><span class="p">)</span><span class="o">/</span><span class="p">((</span><span class="kt">double</span><span class="p">)(</span><span class="n">servo_max</span><span class="o">-</span><span class="n">servo_min</span><span class="p">));</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">intermediate</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span> <span class="n">intermediate</span> <span class="o">=</span> <span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">intermediate</span> <span class="o">&gt;</span> <span class="mi">32767</span><span class="p">)</span> <span class="n">intermediate</span> <span class="o">=</span> <span class="mi">32767</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">return</span> <span class="p">(</span><span class="kt">uint16_t</span><span class="p">)</span><span class="n">intermediate</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="err">``</span>
+<span class="n">and</span> <span class="n">the</span> <span class="n">second</span> <span class="n">is</span> <span class="n">to</span> <span class="n">set</span> <span class="n">the</span> <span class="n">pulse</span> <span class="n">width</span> <span class="n">modulation</span> <span class="n">setting</span> <span class="k">for</span> <span class="n">the</span> <span class="n">servo</span> <span class="n">output</span> <span class="n">channel</span> <span class="n">based</span> <span class="n">on</span> <span class="n">this</span> <span class="n">target</span>
+
+<span class="err">```</span><span class="n">c</span>
+<span class="kt">void</span> <span class="n">servo_set</span><span class="p">(</span><span class="kt">uint16_t</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+<span class="kt">uint16_t</span> <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">.</span><span class="mi">5</span> <span class="o">*</span> <span class="p">(</span><span class="n">servo_max</span> <span class="o">-</span> <span class="n">servo_min</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">p</span><span class="o">/</span><span class="mi">32767</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="o">*</span><span class="n">servo_min</span><span class="p">;</span>
+<span class="n">OCR1A</span> <span class="o">=</span> <span class="n">pos</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>One experiment I did to dot the i’s and cross the t’s was to measure the angle of the beam as a function of the servo setting.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/bobb/servo-linearity.png" alt="" />
+<em>Close enough for what we’re trying to do</em></p>
+
+<p>It was linear enough for this job, and this allowed me to set the “transfer function” to turn the <script type="math/tex">u(k)</script> control angle into the correct number on the servo motor.</p>
 
 <h2 id="learning-by-re-doing">Learning by re-doing</h2>
 

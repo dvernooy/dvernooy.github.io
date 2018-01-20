@@ -60,9 +60,9 @@ MAP stands for "manifold absolute pressure" and MAF stands for "mass air flow" -
 
 $$
 \begin{align*}
-\text{MFF[g/s]} = \frac{\text{MAF[g/s]} }{\text{AFR}}\\
-\text{MFF[gallons/s]} = \frac{\text{MFF[g/s]}}{\text{2799[g/gallon]} }\\
-\text{MPG} = \frac{\text{v[mph]/3600} } {\text{MFF[gallons/s]}}
+\text{MFF[g/s]} &= \frac{\text{MAF[g/s]} }{\text{AFR}}\\
+\text{MFF[gallons/s]} &= \frac{\text{MFF[g/s]}}{\text{2799[g/gallon]} }\\
+\text{MPG} &= \frac{\text{v[mph]/3600} } {\text{MFF[gallons/s]}}
 \tag{1}
 \label{MAF}
 \end{align*}

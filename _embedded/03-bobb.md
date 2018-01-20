@@ -1,6 +1,6 @@
 ---
 title: "Uncle BOBBy"
-published: false
+published: true
 subtitle: "Control system fun with a Ball On Beam Balancer (BOBB)"
 permalink: /projects/bobb/
 excerpt: "Control system fun with a Ball on Beam Balancer (BOBB)"
@@ -44,13 +44,28 @@ The physical model for the system is really simple:
 
 $$
 \begin{align*}
-\ddot{x} = -\frac{g}{1+\frac{2}{5}{\frac{r}{a}}^2} \alpha
+\ddot{x} = -\frac{g}{1+\frac{2}{5}{(\frac{r}{a})}^2} \alpha
 \end{align*}
 \tag{1}
 \label{ball_equation}
 $$
 
-where $$x$$ is the position of the ball along the beam, $$g$$ is the acceleration due to gravity, $$r$$ is the ball radius, $$a$$ is the height of the center of the ball above its contact point with the beam and $$\alpha$$ is the angle of the beam with respect to the horizontal. The goal will be to control the ball position $$x$$, by controlling the angle of the beam $$\alpha$$. This problem is called a "double integrator" because of the relationship between the control variable $$\alpha$$ and the variable $$x$$ we want to control. More about that in a minute.
+where $$x$$ is the position of the ball along the beam, $$g =$$ 9.8 m/$$\text{s}^2$$ is the acceleration due to gravity, $$r =$$ 5 mm is the ball radius, $$a =$$ 3.5 mm is the height of the center of the ball above its contact point with the beam and $$\alpha$$ is the angle of the beam with respect to the horizontal. I estimated this factor
+
+$$
+\begin{align*}
+\tilde{g} = \frac{g}{1+\frac{2}{5}{(\frac{r}{a})}^2} = \text{5.4}\frac{\text{m}}{\text{s}^2}
+\end{align*}
+$$
+
+To check, I measured the time for the ball to jump off the beam as a function of beam angle - here is the data:
+
+![]({{ site.url }}/assets/images/projects/bobb/g_tilde.png)
+*Newton was right.*
+
+The dashed line is a fit with $$\tilde{g} =$$ 5.3 m/$$\text{s}^2$$. Not bad.
+
+Armed with this stunning (ahem) success, the next goal was to figure out how to control the ball position $$x$$, by controlling the angle of the beam $$\alpha$$. This problem is called a "double integrator" because of the relationship between the control variable $$\alpha$$ and the variable $$x$$ we want to control. More about that in a minute.
 
 There are much more elaborate models and background to this problem that I won't get into. Even the bare minimum we're using here gets complex enough.
 
@@ -58,10 +73,11 @@ There are much more elaborate models and background to this problem that I won't
 
 There are lots of block diagrams when analyzing controls systems. Here's a block diagram in the context of our setup.
 
-> picture of the setup
+![]({{ site.url }}/assets/images/projects/bobb/model-control.png)
+*Reference command comes from the computer program. Control from the program and servo motor to control beam angle. Process/plant is the ball on the beam. Output is ball's position. Sensor is wires (more below) and amplifier. Whew.*
 
 ### Human
-So now that we know the challenge, how easy is it for a human to control the ball's position. Gotta be easy. After all, we have everything we need. Eyes to sense the ball's position, brain to compute where its been and where its likely to go, hands to move the beam to get it there. All of them evolved over millions of years to work together to get things done. We've seen balls rolling down hills before. Piece of cake. So I wired up a little test:
+So now that we know the challenge, how easy is it for a human to control the ball's position? Gotta be easy. After all, we have everything we need. Eyes to sense the ball's position, brain to compute where its been and where its likely to go, hands to move the beam to get it there. All of them evolved over millions of years to work together to get things done. We've seen balls rolling down hills before. Piece of cake. So I wired up a little test:
 
 {% include video id="wa_ptnZmnsQ" provider="youtube" %}
 
@@ -82,7 +98,7 @@ Sometimes you combine all 3, or just P & I or P & D. The relative amount of thes
 ![]({{ site.url }}/assets/images/projects/bobb/unoptimized-PID.png)
 *This thing takes forever to settle, bouncing around. We can do better*
 
-For those really into the details, I also tried to model the thing pretty closely by limiting the angle that the beam can turn based on the geometery, and modeled it all as a digital PID, with the following control law:
+For those really into the details, I also tried to model the actual system pretty closely by limiting the angle that the beam can turn (it can only go +/- about 7 degrees). I also modeled it all as a *digital* PID, with the following control law:
 
 $$
 \begin{align*}
@@ -94,22 +110,25 @@ where $$u(k)$$ is our angle $$\alpha$$ at time step $$k$$, and $$e(k)= x(k)-r(k)
 
 $$
 \begin{align*}
-K_{p} = K,\ K_{i} = \frac{K}{T_{i}},\ K_{d} = KT_{d} \\
-\text{and}\\
-K_{1} = K_{p} + K_{i} + K_{d} \\
-K_{2} = -K_{p}-2*K_{d} \\
-K_{3} = K_{d} \\
-
+K_{p} &= K,\ K_{i} = \frac{K}{T_{i}},\ K_{d} = KT_{d} \\
+\ \ \ \ \ &\text{and}\\
+K_{1} &= K_{p} + K_{i} + K_{d} \\
+K_{2} &= -K_{p}-2*K_{d} \\
+K_{3} &= K_{d} \\
 \end{align*}
 $$
 
-
-The rest of the math in the model is based on the digitized model that I describe below. None of it is used for control itself, only to make the spreadsheet model the system so you can see the effect of the control. The spreadsheet is posted. Here is a screenshot:
+The rest of the math in the model is based on the digitized plant model that I describe below. None of that is used for control itself - its only to make the spreadsheet resemble the actual system so you can see the effect of different PID settings. You can punch in numbers for the $$K$$'s and watch how the system is supposed to respond. The spreadsheet is posted. Here is a screenshot:
 
 ![]({{ site.url }}/assets/images/projects/bobb/excel-model-PID.png)
 *Fun to play around with*
 
-Back to the story: so, if you follow the variable $$x$$ around the control loop, it has a phase shift of -180 already from the double integrator in the control law (two $$1/j$$'s $$=-1$$ from the integrations) in equation (1). In controllers, this amount of "built in" phase shift is really bad news for stability, which is why this whole thing is known as a hard problem. The P term will add no phase shift, the D term will have a +90 degrees shift (a $$j$$ from the derivative) and the I term even more negative phase shift of -90 degrees (a $$1/j= -j$$ again from the integration).
+And here is a simple picture of the model it follows:
+
+![]({{ site.url }}/assets/images/projects/bobb/PID-equations.png)
+*Framework for building the excel model*
+
+Back to the story: so, if you follow the variable $$x$$ around the control loop, it has a phase shift of -180 already from the double integrator in the control law (two $$1/j$$'s $$=-1$$ from the integrations) in equation (1). In controllers, this amount of "built in" phase shift is really bad news for stability, which is why this whole thing is known as a hard problem. The P term will add no phase shift, the D term will have a +90 degrees shift (a $$+j$$ from the derivative) and the I term even more negative phase shift of -90 degrees (a $$1/j= -j$$ again from the integration).
 
 So we can almost predict that the optimum PID controller will actually be more of a PD controller, with little to no I. That's exactly what I found when I tried to optimize the spreadsheet model by minimizing the time to get the ball to the new position. Here's a picture of the "best" solution I could come up with in excel. You can see it took approximately 1.1s for the ball to move to the new commanded positioning, with no overshoot & minimal lag.
 
@@ -152,9 +171,9 @@ The first step is to write out the system model (Equation 1) by defining the sys
 
 $$
 \begin{align*}
-\boldsymbol{\dot{x}} = \boldsymbol{Fx}+\boldsymbol{G} u\\
-y = \boldsymbol{Hx}+\boldsymbol{J} u\\
-u = -\boldsymbol{Kx}+\bar{N} r\\
+\boldsymbol{\dot{x}} &= \boldsymbol{Fx}+\boldsymbol{G} u\\
+y &= \boldsymbol{Hx}+\boldsymbol{J} u\\
+u &= -\boldsymbol{Kx}+\bar{N} r\\
 \end{align*}
 $$
 
@@ -171,7 +190,7 @@ $$
 \boldsymbol{G} =
 \left[ {\begin{array}{c}
 0 \\
-5.4 \\
+-5.4 \\
 \end{array} } \right],\
 
 \boldsymbol{H} =
@@ -210,9 +229,9 @@ All of the equations above are analog equations for analog control. We will be i
 
 $$
 \begin{align*}
-\boldsymbol{x}(k+1) = \boldsymbol{\Phi x}(k)+\boldsymbol{\Gamma} u(k)\\
-y(k) = \boldsymbol{Hx}(k)+\boldsymbol{J} u(k)\\
-u(k) = -\boldsymbol{Kx}(k)+\bar{N}r(k)\\
+\boldsymbol{x}(k+1) &= \boldsymbol{\Phi x}(k)+\boldsymbol{\Gamma} u(k)\\
+y(k) &= \boldsymbol{Hx}(k)+\boldsymbol{J} u(k)\\
+u(k) &= -\boldsymbol{Kx}(k)+\bar{N}r(k)\\
 \end{align*}
 $$
 
@@ -222,7 +241,7 @@ For the case of the ball-on-beam balancer, the equations should look like:
 
 $$
 \begin{align*}
-\boldsymbol{x}(kT_{s}+T_{s}) =
+\boldsymbol{x}(kT_{s}+T_{s}) &=
 
 \left[ {\begin{array}{cc}
 1 & T_{s} \\
@@ -236,7 +255,7 @@ $$
 -5.4 T_{s} \\
 \end{array} } \right] u(kT_s),\ \\
 
-y(kT_{s}) =
+y(kT_{s}) &=
    \left[ {\begin{array}{cc}
     1 & 0 \\
    \end{array} } \right]
@@ -315,7 +334,7 @@ A next level of control is to make an *estimate* of the state of the system, cal
 
 $$
 \begin{align*}
-u(k) = -\boldsymbol{K}\boldsymbol{\hat{x}}(k)+\bar{N}
+u(k) = -\boldsymbol{K}\boldsymbol{\hat{x}}(k)+\bar{N}r(k)
 \end{align*}
 $$
 
@@ -335,7 +354,14 @@ $$
 \end{align*}
 $$
 
-Crap. Where did that $$\boldsymbol{L}$$ come from? Turns out its just another feedback gain, like  $$\boldsymbol{K}$$ but this time for our estimate. This will dictate how our estimate deals with errors in measurements or models. So how do we calculate $$L$$? Some new options here.
+Crap. Where did that $$\boldsymbol{L}$$ come from? Turns out its just another feedback gain, like  $$\boldsymbol{K}$$ but this time for our estimate. This will dictate how our estimate deals with errors in measurements or models.
+
+A block diagram of this new system looks like this:
+
+![]({{ site.url }}/assets/images/projects/bobb/estimator-block-diagram.png)
+*Control strategy which now includes an estimator in the feedback loop*
+
+So how do we calculate $$\boldsymbol{L}$$? Some new options here.
 
 ### Estimator gains with pole placement
 Well, we can simply pull a page out of the playbook for $$\boldsymbol{K}$$
@@ -399,9 +425,15 @@ servo_set(j);
 ### Adding noise models - LQR & (steady state) Kalman filter
 Now we can get *really* fancy. If we actually start to model the noise by adding it to our equations.
 
-> add noise
+$$
+\begin{align*}
+\boldsymbol{x}(k+1) &= \boldsymbol{\Phi x}(k)+\boldsymbol{\Gamma} u(k)+\boldsymbol{\Gamma_{1}}w(k)\\
+y(k) &= \boldsymbol{Hx}(k)+\boldsymbol{J} u(k)+v(k)\\
+u(k) &= -\boldsymbol{Kx}(k)+\bar{N}r(k)\\
+\end{align*}
+$$
 
-The noise terms come in as matrices $$Q$$ and $$R$$. You either have to measure these or come up with some estimates of their value. The solution for $$\boldsymbol{K}$$ in the presence of noise is called the linear quadratic regulator-
+The expected value of the noise terms are usually called $$Q=\langle w^{2}(k) \rangle$$ and $$R=\langle v^{2}(k) \rangle$$. You either have to measure these or come up with some estimates of their value. The solution for $$\boldsymbol{K}$$ in the presence of noise is called the linear quadratic regulator-
 
 ```
 R = 1;
@@ -415,28 +447,44 @@ Q = [Q 0;0 0];
 [K_lqr,S_lqr,E_lqr] = dlqr(phi,gamma,Q,R);
 ```
 
-For the estimator matrix $$\boldsymbol{L}$$, the optimal solution is time-varying and is known as the Kalman filter. However, over time it settles and for now we can calculate the steady state (which is also know as the linear quadratic gaussian) filter. I'll spare you all the details behind it since Matlab does all the heavy lifting-
+For the estimator matrix $$\boldsymbol{L}$$, the optimal solution is time-varying and is known as the Kalman filter. For now, we can calculate the steady state Kalman estimator (which is also know as the linear quadratic gaussian or linear quadratic estimator). I'll spare you all the details behind the calculation, but looking at the equation for the estimate
+
+$$
+\begin{align*}
+\boldsymbol{\hat{x}}(k+1) = \boldsymbol{\bar{x}}(k+1)+\boldsymbol{L}(y(k+1)-\boldsymbol{H\bar{x}}(k+1))
+\end{align*}
+$$
+
+you can see that a "small" $$\boldsymbol{L}$$ means we don't put much weight on the latest measurement and favor what the model has to say, and vice verso for large $$\boldsymbol{L}$$. It turns out that the Kalman filter always makes the optimal choice for $$\boldsymbol{L}$$ to mix these two to get the lowest estimator error. *That, in a nutshell, is the magic of the Kalman filter* and $$\boldsymbol{L}$$ is known as the Kalman gain. Matlab/octave does all the heavy lifting to calculate it with a function called `dlqe.m`. You just need to pass it the system model including an estimate of the $$G$$ matrix and the variances $$Q$$ and $$R$$.
 
 ```
-%use this in matlab
-[kalman_sys,L_kalman,P_kalman,M_kalman,Z_kalman] = kalman(sysD, kalman_Q, kalman_R);
+% analog system model
+F=[0 1;0 0]; G= [0 -9.3]'; H = [1 0]; J = 0;
 
-%use this is octave
-[kalman_sys,M_kalman,Z_kalman] = kalman(sysD, kalman_Q, kalman_R);
+%create continuous state space model
+sysC = ss(F, G, H, J); %continuous
+T = 0.008; %sample time in ms
+
+%convert to a digital model
+sysD = c2d(sysC,T,'zoh');
+
+% I set gamma_1 = [0.1 0.9]', Q = 3, R = 1 in the video below
+% dlqe does the calculations for a steady state digital Kalman estimator
+[M_kalman,P_kalman,Z_kalman, E_kalman] = dlqe(sysD.a, gamma_1, sysD.c, kalman_Q, kalman_R);
 
 % the L matrix we want is actually M_kalman here
 L = M_kalman;
 ```
 
-Here is a video of a static Kalman filter for the estimator and with lqr for the main regulator.
+Here is a video of a static Kalman filter for the estimator and with a linear quadratic regulator for the main regulator.
 
-> add video
+{% include video id="vnSU06WRw30" provider="youtube" %}
 
 ### Dynamic Kalman filters
-I haven't yet implemented the time varying Kalman version, but its not actually that hard to do for the limited size matrices (2x2) we have here. If you're really interested [here](https://github.com/dvernooy/bobb) is an excel spreadsheet that uses a dynamic Kalman filter to estimate the position of a projectile. I like excel because its very visual and you can just punch away to see the effects. For example, what if your sensor has a noise that varies with time?
+What if your sensor has a noise that varies with time? I haven't yet implemented the time varying Kalman version, but its not actually that hard to do for the limited size matrices (2x2) we have here. If you're really interested [here](https://github.com/dvernooy/bobb) is an excel spreadsheet that uses a dynamic Kalman filter to estimate the position of a projectile. I like excel because its very visual and you can just punch away to see the effects.
 
 ### Summary
-So that was a ton of math to describe the control strategies and the ideas behind them. How did it *actually* come together in hardware and software?
+So that was a ton of math to describe a few of the control strategies and the ideas behind them. How did it *actually* come together in hardware and software?
 
 ## Hardware
 ### Sensor
@@ -447,58 +495,120 @@ If you are going to measure the ball's position on the beam, how would you do it
 
 Like this:
 
-> sketch of how sensors work
+![]({{ site.url }}/assets/images/projects/bobb/bobb_overview.jpg)
+*Coupla' wires does the trick*
 
-The nice thing is that you are now just measuring a voltage, which can be done with the ADC of the microcontroller. I had to filter the power supply pretty heavily, but it works pretty well. Sometimes the ball "hops", and the copper wire sometimes gets oxidized. You could go pro and get a couple of stainless steel bars, etc.. There are actually setups you can buy [link] if you want to skip all of this messy stuff & just get back to it.
+I also tested the voltage output as a function of ball position to make sure it was linear. It was.
+
+![]({{ site.url }}/assets/images/projects/bobb/sensor-linearity.png)
+*A little amplification & we're good to go*
+
+The nice thing is that you are now just measuring a voltage, which can be done with the analog-to-digital converter of the microcontroller after a bit of amplification and buffering. I had to filter the power supply pretty heavily, but it works pretty well. Sometimes the ball "hops", and the copper wire sometimes gets oxidized. You could go pro and get a couple of stainless steel bars.
 
 ### Servo motor
 
 I was on a hike with the kids one day many years ago and we found an old crashed RC airplane wing with the flap control motor ("servo motor") still attached. Believe it or not, this entire project started one Saturday with me staring at that thing wondering what I could do with it. Well, what I did with it was use it as the mechanism to move the beam.
 
-> close in
+![]({{ site.url }}/assets/images/projects/bobb/servo-pic.png)
+*Beam actuation mechanism*
 
-They are a geared motor with their own internal feedback control. If you supply them a pulse like this,
+They are a geared motor with their own internal feedback control. If you supply them a pulse train with a pulse separation of about 20 ms, and a pulse width between 1.0 and 2.0 ms, you can control the angle of the output shaft very precisely. Like this:
 
-> pulse diagram for servo
+![]({{ site.url }}/assets/images/projects/bobb/pwm.jpg)
+*Getting a servo motor to work*
 
-they will move to an absolute position dictated by the fraction of the total pulse window you give it. The timing of the pulse is important: it has basically been standardized. They are typically *not* meant for continuous rotation, but rather to go to a set position and stay there. Just what you need for ensuring the flaps on an airplane wing are at the correct angle, for example. So yes, we really have a controls problem within a controls problem.
+The timing of the pulse is important: it has basically been standardized. I measured the minimum angle on my servo to be at 1.103 ms and the maximum at 1.983 ms using a separate function generator. It was pretty beat up when I started with it, so I'm not surprised.
 
-They just need 5V and the correct pulse. Easy to give from a microcontroller.
+They are typically *not* meant for continuous rotation, but rather to go to a set position and stay there. Just what you need for ensuring the flaps on an airplane wing are at the correct angle, for example. So yes, we really have a controls problem within a controls problem. In a nutshell, then, they just need 5V and the correct pulse. The pulse can be done easily with the pulse width modulation (PWM) capabilities of many microcontrollers. There is a ton of information on the web about how to do this. You can read `servo.c` in the repo and refer to the schematic to see how I did it.
+
 
 ### Circuit diagram
 
-Without further ado, here's the circuit diagram. Just added a little analog front end.
+So, about that schematic. Without further ado, here's the circuit diagram.
+
 ![]({{ site.url }}/assets/images/projects/bobb/bobb-circuit.png)
 *Circuit diagram for ball-on-beam-balancer*
 
 ### Circuit pictures
 
-And here are a few close-up photos of the various bits of the electronics, as well as the entire setup labeled.
+And here are the obligatory close-up photos of the various bits of the electronics, as well as the entire setup labeled.
+
+![]({{ site.url }}/assets/images/projects/bobb/circuit_build.png)
+*Sensor amplifier board and main microcontroller board*
 
 ### Beam
 
 Finally, the beam & structure itself. A couple of strips of wood. Some tape. A nail. Some screws. Some epoxy. Some old particle board. Another old piece of something-or-other. Couple of old chopsticks. A piece of pvc. A hacksaw. A drill. And voila. I call it art. You, too can be an artist. Like me.
 
->> picture of the beam
-
-## Software
+![]({{ site.url }}/assets/images/projects/bobb/pivot.jpg)
+*The pivot for the beam literally was a nail through a piece of pvc*
 
 Moving on.
 
-### filtering the inputs
-When I built this up, the position measurement was a little noisy the first time through. So I built some averaging into the code. To make it really flexible, I did all the math in loops. This meant the sample time is not "hardware-determined" but is software determined. Not a major issue for what we're getting out of this. This was most important for velocity estimates, so for that I had a separate timer that kept track of the interval between samples.
+## Software
+The code base for this project is [here](https://github.com/dvernooy/bobb). It includes all the source code, plus most of the spreadsheets and octave scripts if you want to play with any of any of them.
+
+### ADC & filtering the inputs
+When I built this up, the position measurement was a little noisy the first time through. So I built some averaging into the code.
+
+```c
+temp_sum = 0;
+  ADC_counter = 0;
+for (k = 0;k<ADC_avg_counts;k++) {
+  for (l = 0;l<ADC_delay;l++) {} //delay code, seems to do the trick;
+  read_adc();
+    if ((result < 509) || (result > 974))
+      {}
+    else {
+      temp_sum += result;
+      ADC_counter++;
+    }
+}
+if (ADC_counter < 0.9*ADC_avg_counts)
+{ADC_sum = ADC_sum_old;}
+else
+{ADC_sum = (double) temp_sum;
+ADC_sum = ADC_sum/ADC_counter;
+ADC_sum_old = ADC_sum;
+}
+```
+
+To make it really flexible as I worked out the bugs, I did all the math in a loop. This meant the sample time is not "hardware-determined" but is software determined. Not a major issue for what we're getting out of this. This was most important for velocity estimates, so for that I had a separate timer that kept track of the interval between samples. Typically it was 8 ms, and not that variable loop-to-loop, so I could probably use this as a poor-man's version of a master sampler clock.
 
 I may go back and do everything with a proper sample timer. That will be version 0.2 if I do it.
 
-### main loop
+### Main loop
 Okay, so I implemented each of these strategies as different files, and posted the code under their own separate folders. Really all that's different between them is the `main.c` files. All of the action also happens in the `main()` loop.
 
 One thing I want to do is implement all of the strategies in a single code base and use a menu to choose between them. Not hard to do, a project for another day. version 0.2.
 
-### servo
-The code for the servo is pretty simple.
+### Servo
+The code for the servo is pretty simple. The first thing is to translate an angle into a servo setting
 
-### ADC
+```c
+uint16_t servo_target (double angle) {
+double intermediate = 32767.0*(-46.2963*(angle - 33.338) - (double) servo_min)/((double)(servo_max-servo_min));
+if (intermediate < 0.0) intermediate = 0.0;
+if (intermediate > 32767) intermediate = 32767.0;
+return (uint16_t)intermediate;
+}
+
+``
+and the second is to set the pulse width modulation setting for the servo output channel based on this target
+
+```c
+void servo_set(uint16_t p) {
+uint16_t pos = 0.5 * (servo_max - servo_min) * (p/32767.0) +0.5*servo_min;
+OCR1A = pos;
+}
+```
+One experiment I did to dot the i's and cross the t's was to measure the angle of the beam as a function of the servo setting.
+
+![]({{ site.url }}/assets/images/projects/bobb/servo-linearity.png)
+*Close enough for what we're trying to do*
+
+It was linear enough for this job, and this allowed me to set the "transfer function" to turn the $$u(k)$$ control angle into the correct number on the servo motor.
+
 
 ## Learning by re-doing
 

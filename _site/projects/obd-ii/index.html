@@ -72,7 +72,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-01-18T22:24:05-05:00">
+  <meta property="article:published_time" content="2018-01-20T16:35:51-05:00">
 
 
 
@@ -322,7 +322,7 @@
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     <meta itemprop="headline" content="OBD2 4u">
     <meta itemprop="description" content="Hacking my car">
-    <meta itemprop="datePublished" content="January 18, 2018">
+    <meta itemprop="datePublished" content="January 20, 2018">
     <meta itemprop="dateModified" content="February 01, 2012">
 
     <div class="page__inner-wrap">
@@ -446,13 +446,14 @@
 
 <h4 id="mpg-given-a-maf-value">MPG given a MAF value</h4>
 
-<script type="math/tex; mode=display">\begin{align*}
-\text{MFF[g/s]} = \frac{\text{MAF[g/s]} }{\text{AFR}}\\
-\text{MFF[gallons/s]} = \frac{\text{MFF[g/s]}}{\text{2799[g/gallon]} }\\
-\text{MPG} = \frac{\text{v[mph]/3600} } {\text{MFF[gallons/s]}}
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+\text{MFF[g/s]} &= \frac{\text{MAF[g/s]} }{\text{AFR}}\\
+\text{MFF[gallons/s]} &= \frac{\text{MFF[g/s]}}{\text{2799[g/gallon]} }\\
+\text{MPG} &= \frac{\text{v[mph]/3600} } {\text{MFF[gallons/s]}}
 \tag{1}
 \label{MAF}
-\end{align*}</script>
+\end{align*} %]]></script>
 
 <p>where MFF is mass fuel flow, AFR is air-fuel ratio and 2799 g/gallon is the density of gasoline. If given a MAP value, first convert it to MAF,</p>
 
