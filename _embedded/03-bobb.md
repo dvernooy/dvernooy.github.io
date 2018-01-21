@@ -455,7 +455,7 @@ $$
 \end{align*}
 $$
 
-you can see that a "small" $$\boldsymbol{L}$$ means we don't put much weight on the latest measurement and favor what the model has to say, and vice verso for large $$\boldsymbol{L}$$. It turns out that the Kalman filter always makes the optimal choice for $$\boldsymbol{L}$$ to mix these two to get the lowest estimator error. *That, in a nutshell, is the magic of the Kalman filter* and $$\boldsymbol{L}$$ is known as the Kalman gain. Matlab/octave does all the heavy lifting to calculate it with a function called `dlqe.m`. You just need to pass it the system model including an estimate of the $$G$$ matrix and the variances $$Q$$ and $$R$$.
+you can see that a "small" $$\boldsymbol{L}$$ means we don't put much weight on the latest measurement and favor what the model has to say, and vice versa for large $$\boldsymbol{L}$$. It turns out that the Kalman filter always makes the optimal choice for $$\boldsymbol{L}$$ to mix these two to get the lowest estimator error. *That, in a nutshell, is the magic of the Kalman filter* and $$\boldsymbol{L}$$ is known as the Kalman gain. Matlab/octave does all the heavy lifting to calculate it with a function called `dlqe.m`. You just need to pass it the system model including an estimate of the $$G$$ matrix and the variances $$Q$$ and $$R$$.
 
 ```
 % analog system model
@@ -495,7 +495,7 @@ If you are going to measure the ball's position on the beam, how would you do it
 
 Like this:
 
-![]({{ site.url }}/assets/images/projects/bobb/bobb_overview.jpg)
+![]({{ site.url }}/assets/images/projects/bobb/position-sensor.png)
 *Coupla' wires does the trick*
 
 I also tested the voltage output as a function of ball position to make sure it was linear. It was.
@@ -537,7 +537,6 @@ And here are the obligatory close-up photos of the various bits of the electroni
 *Sensor amplifier board and main microcontroller board*
 
 ### Beam
-
 Finally, the beam & structure itself. A couple of strips of wood. Some tape. A nail. Some screws. Some epoxy. Some old particle board. Another old piece of something-or-other. Couple of old chopsticks. A piece of pvc. A hacksaw. A drill. And voila. I call it art. You, too can be an artist. Like me.
 
 ![]({{ site.url }}/assets/images/projects/bobb/pivot.jpg)
@@ -546,7 +545,7 @@ Finally, the beam & structure itself. A couple of strips of wood. Some tape. A n
 Moving on.
 
 ## Software
-The code base for this project is [here](https://github.com/dvernooy/bobb). It includes all the source code, plus most of the spreadsheets and octave scripts if you want to play with any of any of them.
+The code base for this project is [here](https://github.com/dvernooy/bobb). It includes all the source code, plus most of the spreadsheets and Matlab/octave scripts if you want to play with any of any of them.
 
 ### ADC & filtering the inputs
 When I built this up, the position measurement was a little noisy the first time through. So I built some averaging into the code.

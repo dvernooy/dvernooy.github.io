@@ -72,7 +72,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-01-20T17:46:29-05:00">
+  <meta property="article:published_time" content="2018-01-20T19:15:09-05:00">
 
 
 
@@ -829,7 +829,7 @@ Q = [Q 0;0 0];
 \boldsymbol{\hat{x}}(k+1) = \boldsymbol{\bar{x}}(k+1)+\boldsymbol{L}(y(k+1)-\boldsymbol{H\bar{x}}(k+1))
 \end{align*}</script>
 
-<p>you can see that a “small” <script type="math/tex">\boldsymbol{L}</script> means we don’t put much weight on the latest measurement and favor what the model has to say, and vice verso for large <script type="math/tex">\boldsymbol{L}</script>. It turns out that the Kalman filter always makes the optimal choice for <script type="math/tex">\boldsymbol{L}</script> to mix these two to get the lowest estimator error. <em>That, in a nutshell, is the magic of the Kalman filter</em> and <script type="math/tex">\boldsymbol{L}</script> is known as the Kalman gain. Matlab/octave does all the heavy lifting to calculate it with a function called <code class="highlighter-rouge">dlqe.m</code>. You just need to pass it the system model including an estimate of the <script type="math/tex">G</script> matrix and the variances <script type="math/tex">Q</script> and <script type="math/tex">R</script>.</p>
+<p>you can see that a “small” <script type="math/tex">\boldsymbol{L}</script> means we don’t put much weight on the latest measurement and favor what the model has to say, and vice versa for large <script type="math/tex">\boldsymbol{L}</script>. It turns out that the Kalman filter always makes the optimal choice for <script type="math/tex">\boldsymbol{L}</script> to mix these two to get the lowest estimator error. <em>That, in a nutshell, is the magic of the Kalman filter</em> and <script type="math/tex">\boldsymbol{L}</script> is known as the Kalman gain. Matlab/octave does all the heavy lifting to calculate it with a function called <code class="highlighter-rouge">dlqe.m</code>. You just need to pass it the system model including an estimate of the <script type="math/tex">G</script> matrix and the variances <script type="math/tex">Q</script> and <script type="math/tex">R</script>.</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>% analog system model
 F=[0 1;0 0]; G= [0 -9.3]'; H = [1 0]; J = 0;
@@ -873,7 +873,7 @@ L = M_kalman;
 
 <p>Like this:</p>
 
-<p><img src="http://localhost:4000/assets/images/projects/bobb/bobb_overview.jpg" alt="" />
+<p><img src="http://localhost:4000/assets/images/projects/bobb/position-sensor.png" alt="" />
 <em>Coupla’ wires does the trick</em></p>
 
 <p>I also tested the voltage output as a function of ball position to make sure it was linear. It was.</p>
@@ -914,7 +914,6 @@ L = M_kalman;
 <em>Sensor amplifier board and main microcontroller board</em></p>
 
 <h3 id="beam">Beam</h3>
-
 <p>Finally, the beam &amp; structure itself. A couple of strips of wood. Some tape. A nail. Some screws. Some epoxy. Some old particle board. Another old piece of something-or-other. Couple of old chopsticks. A piece of pvc. A hacksaw. A drill. And voila. I call it art. You, too can be an artist. Like me.</p>
 
 <p><img src="http://localhost:4000/assets/images/projects/bobb/pivot.jpg" alt="" />
@@ -923,7 +922,7 @@ L = M_kalman;
 <p>Moving on.</p>
 
 <h2 id="software">Software</h2>
-<p>The code base for this project is <a href="https://github.com/dvernooy/bobb">here</a>. It includes all the source code, plus most of the spreadsheets and octave scripts if you want to play with any of any of them.</p>
+<p>The code base for this project is <a href="https://github.com/dvernooy/bobb">here</a>. It includes all the source code, plus most of the spreadsheets and Matlab/octave scripts if you want to play with any of any of them.</p>
 
 <h3 id="adc--filtering-the-inputs">ADC &amp; filtering the inputs</h3>
 <p>When I built this up, the position measurement was a little noisy the first time through. So I built some averaging into the code.</p>
