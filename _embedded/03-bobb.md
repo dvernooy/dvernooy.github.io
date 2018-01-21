@@ -525,7 +525,7 @@ They are typically *not* meant for continuous rotation, but rather to go to a se
 
 So, about that schematic. Without further ado, here's the circuit diagram.
 
-[![]({{ site.url }}/assets/images/projects/bobb/bobb-circuit.png)]({{ site.url }}/assets/images/projects/bobb/bobb_circuit.png)
+[![]({{ site.url }}/assets/images/projects/bobb/bobb_circuit.png)]({{ site.url }}/assets/images/projects/bobb/bobb_circuit.png)
 *Circuit diagram for ball-on-beam-balancer*
 
 ### Circuit pictures
