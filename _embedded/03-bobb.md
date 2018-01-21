@@ -521,12 +521,11 @@ The timing of the pulse is important: it has basically been standardized. I meas
 
 They are typically *not* meant for continuous rotation, but rather to go to a set position and stay there. Just what you need for ensuring the flaps on an airplane wing are at the correct angle, for example. So yes, we really have a controls problem within a controls problem. In a nutshell, then, they just need 5V and the correct pulse. The pulse can be done easily with the pulse width modulation (PWM) capabilities of many microcontrollers. There is a ton of information on the web about how to do this. You can read `servo.c` in the repo and refer to the schematic to see how I did it.
 
-
 ### Circuit diagram
 
 So, about that schematic. Without further ado, here's the circuit diagram.
 
-![]({{ site.url }}/assets/images/projects/bobb/bobb-circuit.png)
+[![]({{ site.url }}/assets/images/projects/bobb/bobb-circuit.png)]({{ site.url }}/assets/images/projects/bobb/bobb-circuit.png)
 *Circuit diagram for ball-on-beam-balancer*
 
 ### Circuit pictures
