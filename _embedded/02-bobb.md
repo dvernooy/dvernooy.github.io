@@ -609,6 +609,5 @@ It was linear enough for this job, and this allowed me to set the "transfer func
 
 
 ## Learning by re-doing
-
 ### Up Next: Fuzzy logic & neural controllers
 The next step on this project is to implement a fuzzy controller. Stay tuned.

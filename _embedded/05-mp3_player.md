@@ -1,6 +1,6 @@
 ---
 title: "MP3 4me"
-published: false
+published: true
 subtitle: "10 years behind the iPOD"
 permalink: /projects/mp3/
 excerpt: "A homebrew MP3 player"
@@ -9,50 +9,224 @@ redirect_from:
   - /theme-setup/
 toc: true
 ---
-> pic
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+![]({{ site.url }}/assets/images/projects/mp3/project_shot.png)
+*Yet another DIY MP3 player*
 
 ## Project overview
-> always 15 years behind ... suspend your disbelief
+Suspend your disbelief. I'm once again at least 15 years behind the times with this project - a DIY MP3 player. I have always thought it would be kind of neat to see if I could hack together one of these as so many others have done. Turned out to have a few challenges on the AVR ATMega's that I always use - but nothing insurmountable. It was very software-centric, since much of the hardware work was done with one or two chips.
+
+My goal was to make it portable and small form factor, with a reasonably long battery life, an SD-card interface and a decent user interface - all with the ATMega328 8 bit microcontroller.
+
 ## S.T.E.M.
-### MP3's - spec
-### File systems
+
+There is plenty of technology I had to work my way through - battery charger circuitry, MP3 audio specification, embedded file systems and SD cards - but the most interesting thing here is that the MP3 player is a *system*. All of the stuff needs to work together really well, or the user experience is a stinker. And even if you do get it all right, it can still be a loser.
+
+And of course, the deficiencies in what I built are all the more visible since everyone else around me just uses their phone, which gets better every couple of months. So you really have to think about everything in a fair amount of detail if you want to see it through and come out with something that will last for more than 10 minutes.
+
+Turns out, software is the way to hold it all together, and this one was pretty software intensive.
+
+But I'm so far behind the state-of-the-art, lets dispense with the S.T.E.M. soapbox on this project and just build.
 
 ## Hardware
+
+### Codec VS1053B
+OK, so almost all of the hard work is actually done here by a single chip, the VLSI solutions VS1053B.
+
+![]({{ site.url }}/assets/images/projects/mp3/VS1053b.png)
+*About 80 pages. OK, we'll start with page 1*
+
+It is a decoder for many audio types, with a ton of functionality:
+
+- Ogg Vorbis
+- MP3 = MPEG 1 & 2 audio layer III (CBR+VBR+ABR)
+- MP1 & MP2 = MPEG 1 & 2 audio layers I & II optional
+- MPEG4 / 2 AAC-LC(+PNS), HE-AAC v2 (Level 3) (SBR + PS)
+- WMA4.0/4.1/7/8/9 all profiles (5-384 kbps)
+- FLAC lossless audio with software plugin (upto 24 bits, 48 kHz)
+- WAV (PCM + IMA ADPCM)
+- General MIDI 1 / SP-MIDI format 0
+
+and can also *stream*. Streaming means it can take a digital audio stream and convert it "on the fly" to analog audio.
+I bought it already integrated on a board by a company called GEETech:
+
+![]({{ site.url }}/assets/images/projects/mp3/GEEEtech.jpg)
+*You can get one of these for about 15 bucks ... some Assembly (and C) required*
+
+The feature list was good, but I hadn't really given any of this much thought at all when I started out.
+
+- SPI interface to VS1053b & the control signal lines are led out
+- A headphone and stereo output
+- A line_in input interface
+- Power indicator
+- 3.3V and 2.8V of LDO chip AMS-1117 on board, provides up to 800mA current
+- A single power supply: +5 VDC
+- 12.288 Mhz crystal
+- SD card slot
+
+except for the single **5V** power supply feature - which we'll come to in a minute. There was not much to go by, just [this website](http://www.geeetech.com/wiki/index.php/VS1053_MP3_breakout_board_with_SD_card). But it was more than enough to get me started. In fact, they had a little example Arduino project posted there, which was fun to play with and just make sure the board worked. Mine did.
+
+> arduino example picture
+
+We'll come back to this "test" project in a minute - turns out that buried inside was something I thought was pretty big, but initially ignored.
+
 ### Circuit diagram
-### Codec VS1333
+Here is the circuit diagram for the MP3 player.
+
+[![]({{ site.url }}/assets/images/projects/mp3/mp3_circuit.png)]({{ site.url }}/assets/images/projects/mp3/mp3_circuit.png)
+*No pin left behind*
+
 ### SD cards & interfaces
-### Battery Charger
-### Buttons
-### Packaging
-### Input responsiveness
-### Hardware pictures
+
+SD cards are an easy way to store the audio files. But how do you access them? Well, the mechanical interface was built into the board, so it was really a matter of figuring out how to access it. The standard pinout for an SD card for accessing with the serial peripheral interface (SPI) looks like this:
+
+![]({{ site.url }}/assets/images/projects/mp3/sd_pinout.jpg)
+*Accessing SD card with SPI.*
+
+Good news is that an SPI bus is built into the ATMega328.
+
+### Battery Charger & LiPO batteries
+
+So how do you do the power management? After staring at this thing for awhile, I realized that - except for the codec board, everything else could work off of 3.3V. And in fact, I realized that even that daughter board used 5V not because the chip needed it, but because it was using it to make 3.3V and 2.5V. Now things clicked.
+
+Why?
+
+1. I knew a 1 cell LiPO battery typically works between 3.65V (discharged) and 4.2V (fully charged)
+2. I also knew a "low drop out regulator (LDO)" for these voltage levels can stabilize an output voltage with as little as 0.2 to 0.3V overhead. And 3.3V + 0.3V = 3.6V, which is less that the lowest voltage on a 1 cell LiPO.
+
+Bottom line, we can get away with a 1 cell LiPO circuit for the entire thing, with a hack to the GEEEtech board. And that simplifies life. Game on.
+
+I found a really cool little IC (BQ2057 from TI) which is a charging IC for LiPOs.
+
+There is a also a little protection circuitry (MN1382) for the LIPO which open circuits the battery if the voltage falls below a pre-set threshold.
+
+The system is able to charge the battery even if the main power is off. The on/off switch drives a p-channel mosfet pass transistor.
+
+### Battery Management
+
+I added a little feature to measure the battery voltage and alert the user when it is getting low. As simple as comparing the battery voltage to a reference using one of the ADC inputs. I had to put a little calibration table together to make sure it was an accurate representation.
+
+### Switches
+
+3 position rotary switches just made sense here. Nice feel to them, easy to wire up and work with & form factor was right.
+
+
 ### Layout
 Believe it or not, this is one circuit layout I actually thought about & planned a little bit. Screen, DSP/codec + audio jacks, micro, buttons, battery charger & usb input, lipo battery and SD card were the real estate hogs. And I wanted it really small and thin. Here are the initial sketches I made to try to figure out nominally where stuff should go -
->> sketches
+
+![]({{ site.url }}/assets/images/projects/mp3/options.png)
+*Played around with a few ideas. End result was closer to door #2.*
+
+### Hardware pictures
 
 Here are a few pics of the final pcb build
 >> build
-### Skin - dollar tree foam board
 
+### Packaging & Skin - dollar tree foam board
 
-
+I wanted a quick and dirty way to protect the whole thing. Nothing beats foam board to get the job done in 30 min or less. Even a little mount to sit on top of an old stereo where we can feed the AUX input with the audio ouput.
 
 ## Software
+### Debug strategy & software UART
+
+I'm going to start with this, even though its something I realized I needed halfway through. Clearly, the LCD wouldn't cut it as both the main screen and a way to debug what was happening. That's where the serial port comes in. The code for the file system I ended up using (FatFS) included a really lightweight *software-defined UART*, written in assembler. Meaning all of the timing was done in software. In addition, it included some really low overhead serial print functions - so I went with all of this as my main debug path.
+
+Putting together the pieces one-by-one:
+1. Get the software UART working - suart.S & suart.h
+2. learn to work with the xprintf functions - xitoai.S
+
+> debug environment picture - STK500
+
 ### User Interface
+
+> video
+
+The way the user interacted with this was really important, starting with the response to the pushbuttons.
+
+### Input responsiveness
+
+I played with 3 different methods to get a good user response.
+1. Software polling: The first was just polling every time through the main loop. I've learned my lesson on this before. Terrible.
+2. Pure hardware interrupt: The second was having the press of a button interrupt the processor. OK, in the running.
+3. Interrupt-driven hardware polling: The third was using a dedicated hardware timer interrupt the processor and use this interrupt to manage any button presses. At first, I thought this would have a really bad impact on the audio, but after fiddling with it for an afternoon I found it was a really flexible way to do things. I never went back to method 2. Winner.
+
+So what do you need to think about, & how do you actually do it?
+
+> code
+
+### Navigation
+
+Because all the files are stored on the SD card, I used the SD card directory structure to navigate. Right now, all that's implemented is one-way - there is no escape back to a higher level directory. When it starts up, you choose this subdirectory. Right now, I have that nested only 1 subdirectory deep. Within a subdirectory, you can play or pause, go forward or backwards in order, or play the entire subdirectory at random. To go back up, you need to cycle power. A maximum of 12 subdirectories are allowed at the highest level.
+
+The current settings are all displayed on the bottom line of the user interface:
+
+>> screenshots of various settings
+
+### Volume setting
+
+The volume can be moved up or down, with feedback to the user. I implemented a little bar system in the bottom right corner to see that. The VS1053b has a built in volume control, so this can all be done in software. I chose 8 settings that I thought were across a broad enough range.
+
+>> audio setup.
+
+### Small fonts
+
+I hadn't thought about it much before this project, but the ability to support a very small font comes in handy sometimes. I went with it exclusively on this project. Especially helpful to display information about the track as well as a compact listing of the files on the MP3 player. I found a really cool 3x5 font on the web and used it.
+
 ### Embedded file system - FatFS
-Respect. That's all I can say for ELM-Chan and his file system library (among other things). It is awesome. The learning curve is pretty steep for a weekend hacker like me, and I climbed that sucker. But to have a fully featured file system available at my beck and call to deal with SD card read/writes, in an 8-bit microcontroller was really cool. Let me start from the beginning.
 
+I had no appreciation for the complexities of dealing with embedded file systems for SD cards. Still barely do. But I realize that Bill Greiman's SDFat library was powering the Arduino test code. Really cool code, but I wanted something written for many different platforms.
 
+Enter FatFS.
+
+Respect. That's all I can say about ELM-Chan. Everything he does is awesome. His FatFS file system (among other things). The learning curve is pretty steep for a weekend hacker like me, and I climbed that sucker. But to have a fully featured file system available at my beck and call to deal with SD card read/writes, in an 8-bit microcontroller was really cool. Let me start from the beginning.
+
+> Fatfs usage.
 
 ### Digital signal processing
-### MP3 file parsing
-### Multiple items on SPI bus, actually using it
-### Organizing songs, ordering them alphabetically
-### Random function
+You don't really need to think at all about what the actual codec is doing. One command & its streaming. But you need to know what you are streaming!
 
-## Stuff I learned
+### MP3 file parsing
+Periodically, I'd find a song that either abruptly ended, didn't play, or waited a serious amount of time before playing. I had already made enough compromises. I wanted it to be able to play almost all songs on demand, all the time. So I invested time in getting this right. It took some time, and I'll spend a bit of time talking about MP3 file structure, because that's what it all boils down to.
+
+So, if you are going to do any work, a hex editor and an MP3 editor/parser are pretty useful tools. Here's how I used them-
+
+### SPI bus
+First thing to know is that the codec has separate SPI enable lines for sending/receiving data (VS1053b_XDCS) or sending/receiving commands (VS1053b_XCS). The SD card has its own chip select line (SD_CS). Second is that for data and commands, the codec and the SD card share the SPI bus I/O lines (MISO/MOSI). Third, the codec has a special line in streaming mode which strobes if its buffer is full (VS1053b_DREQ) to limit further writing. Some examples-
+
+Receiving data from SD card over SPI:
+
+Writing a command to codec over SPI:
+
+Writing data to codec over SPI:
+
+### Organizing songs, ordering them alphabetically
+
+In order to ensure everything works, there are a few rules that have to be followed. I'll go through them one by one just so I have them written down, and that will make it easier for me to go after them eventually. A really frustrating thing was that I wanted songs to be ordered alphabetically on the SD card, just for simplicity.
+
+### Random function
+I implemented a random shuffle function. It first figures out the number of tracks of the current type and then randomly chooses between them.
+
+> code snippet
+
+## Learn by re-doing
+
 ### Binary mode of FTP
 Ok, so this is really stupid. But I was sending a bunch of audio files from a PC to a Mac over our home network using ftp. Why? don't ask. So I started playing them on my player and it was filled with all these snap, crackle, pops. Are you kidding me? So I spent about 2 days testing every component on the board, all kinds of test software, etc.., etc.. Nothing. Didn't think to test the files themselves. Of course, turns out that ftp sends files in ascii by default. I actually knew that but on this batch forgot to switch to binary. Awesome.
 
 ### Buffer sizes & overflows
-In order to get the smoothest playback possible, it was important to send the DSP the largest chunk of mp3 I could to playback at any given time. We're dealing with an 8-bit micro here, folks, with 2K of SRAM, so even a 500 byte buffer is large. I ended up overflowing the stack on multiple occasions, which had me scratching my head until I got smart about tracking the resource usage.
+In order to get the smoothest playback possible, it was important to send the DSP the largest chunk of mp3 I could to playback at any given time. We're dealing with an 8-bit micro here, folks, with 2KB of SRAM, so even a 500 byte buffer is large. I ended up overflowing the stack on multiple occasions, which is a hard thing to debug if you aren't aware of it.
+
+### Limitations
+So here, in one spot, is a list of all the current limitations. All of them have to do with the software.
+- doesn't show total play time & current played amount of current track
+- doesn't allow flexible navigation, especially out of a subdirectory back up
+- doesn't scroll the name of the track or author if longer than 23 characters
+- doesn't allow flexibility in play mode - e.g. no "total random" mode
+- wouldn't easily show more than 12 subdirectories - they need to be structured
+- titles of subdirectories can't be more than 12 characters
+
+I might tackle these one-by-one. But first I'll probably build up another one. Or not.

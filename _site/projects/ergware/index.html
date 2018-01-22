@@ -21,7 +21,7 @@
 
 
 
-<title>Ergware - Ab hinc</title>
+<title>ErgWare - Ab hinc</title>
 
 
 
@@ -35,7 +35,7 @@
 
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Ab hinc">
-<meta property="og:title" content="Ergware">
+<meta property="og:title" content="ErgWare">
 
 
   <link rel="canonical" href="http://localhost:4000/projects/ergware/">
@@ -72,7 +72,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-01-20T21:38:34-05:00">
+  <meta property="article:published_time" content="2018-01-21T20:16:29-05:00">
 
 
 
@@ -320,15 +320,15 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Ergware">
+    <meta itemprop="headline" content="ErgWare">
     <meta itemprop="description" content="Open source software for an open source ergometer">
-    <meta itemprop="datePublished" content="January 20, 2018">
+    <meta itemprop="datePublished" content="January 21, 2018">
     <meta itemprop="dateModified" content="February 20, 2017">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">Ergware
+          <h1 class="page__title" itemprop="headline">ErgWare
 </h1>
           <h4 class="page__related-title">Open source software for an open source ergometer</h4> 
           
@@ -388,7 +388,7 @@
       <li><a href="#write-lightweight-usage-services">Write lightweight usage services</a></li>
     </ul>
   </li>
-  <li><a href="#in-summary">In Summary</a></li>
+  <li><a href="#learning-by-re-doing">Learning by re-doing</a></li>
 </ul>
             </nav>
           </aside>
@@ -779,22 +779,25 @@ Notes:
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*********************************************************************************
 Thread 3 - LCD write out all the erg data
 ********************************************************************************/</span>
-<span class="n">THD_FUNCTION</span><span class="p">(</span><span class="n">Thread3</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
+<span class="n">THD_FUNCTION</span> <span class="p">(</span><span class="n">Thread3</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
 	<span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">arg</span><span class="p">;</span>
 	<span class="n">tp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">chThdGetSelfX</span><span class="p">();</span> <span class="c1">//returns a pointer to current thread
 </span>
-	<span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
-		<span class="cm">/* it starts in off state, or gets here when turned off. Eventmask1 turns it on*/</span>
-		<span class="n">chEvtWaitAnyTimeout</span><span class="p">((</span><span class="n">eventmask_t</span><span class="p">)</span><span class="mi">1</span><span class="p">,</span> <span class="n">TIME_INFINITE</span><span class="p">);</span>
-		<span class="cm">/*take control of LCD semaphore*/</span>
-		<span class="n">chSemWait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcdUSE</span><span class="p">);</span>
-		<span class="cm">/*switch lcd_context to thread 4*/</span>
+  <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+		<span class="c1">// it starts in off state, or gets here when turned off. Eventmask1 turns it on
+</span>		<span class="n">chEvtWaitAnyTimeout</span><span class="p">((</span><span class="n">eventmask_t</span><span class="p">)</span><span class="mi">1</span><span class="p">,</span> <span class="n">TIME_INFINITE</span><span class="p">);</span>
+		<span class="c1">// take control of LCD semaphore
+</span>		<span class="n">chSemWait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcdUSE</span><span class="p">);</span>
+		<span class="c1">// switch lcd_context to thread 4
+</span>    <span class="p">....</span>
+   <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h3 id="write-lightweight-usage-services">Write lightweight usage services</h3>
 <p>Essential to ensuring optimal memory allocation. There’s a screenshot above of the usage statistics for each of the threads after a workout.</p>
 
-<h2 id="in-summary">In Summary</h2>
+<h2 id="learning-by-re-doing">Learning by re-doing</h2>
 <p>Time to go back and re-read “The Boys in the Boat”.</p>
 
         
@@ -815,7 +818,7 @@ Thread 3 - LCD write out all the erg data
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Ergware%20http%3A%2F%2Flocalhost%3A4000%2Fprojects%2Fergware%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=ErgWare%20http%3A%2F%2Flocalhost%3A4000%2Fprojects%2Fergware%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fprojects%2Fergware%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
@@ -831,7 +834,7 @@ Thread 3 - LCD write out all the erg data
       <a href="#" class="pagination--pager disabled">Previous</a>
     
     
-      <a href="http://localhost:4000/projects/obd-ii/" class="pagination--pager" title="OBD2 4u
+      <a href="http://localhost:4000/projects/bobb/" class="pagination--pager" title="Uncle BOBBy
 ">Next</a>
     
   </nav>

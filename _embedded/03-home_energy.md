@@ -37,3 +37,5 @@ toc: true
 ### SQL database
 ### R, Python, Visual Basic
 ### Disaggregation algorithm
+
+## Learning by re-doing

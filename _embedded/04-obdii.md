@@ -621,6 +621,6 @@ fprintf_P(&usart_out,PSTR("%06d\r\n"),999);
 
 ```
 
-## Final thoughts
+## Learning by re-doing
 ### CAN bus
 I actually got a bunch of use out of this project, and will probably make a CAN version at some point. If I do, I'll probably go for an RTOS and design it so it can be mounted and unmounted in the car. Will have to start to go hunting for all of the CAN specs and protocols.

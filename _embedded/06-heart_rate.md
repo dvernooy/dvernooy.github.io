@@ -297,6 +297,5 @@ if (K < J) {
 
 This algorithm in equation $$\eqref{master}$$ guarantees a nice display that follows the heartbeat changes in a sensible way. There is one hill around our house where I can go from 130 bpm to 185 bpm in about 15 seconds - & my monitor follows it well. The only technical issue in implementation is that I had to use real precision math, but that could always be changed to integer math at some point.
 
-### Last thoughts
-
+### Learning by re-doing
 I am thinking about making major changes - learn by (re)doing & all that - to the packaging (no room for improvement there) & code (who needs a menu) at some point ... or maybe I'll buy a fitbit. It has 10X the functionality at 1/10th the hassle. All of the code & spreadsheets are posted.  [here](https://www.github.com/dvernooy/heart_rate_monitor/). Enjoy.

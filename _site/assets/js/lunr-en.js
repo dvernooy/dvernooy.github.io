@@ -11,7 +11,7 @@ var idx = lunr(function () {
   
   
     idx.add({
-      title: "Ergware",
+      title: "ErgWare",
       excerpt: "Our DIY ergometer with its new “brain” Project overview Hey all, Dave Vernooy here with another project. I’m assuming you...",
       categories: [],
       tags: [],
@@ -20,8 +20,8 @@ var idx = lunr(function () {
     
   
     idx.add({
-      title: "OBD2 4u",
-      excerpt: "The finished build Project overview Have you ever seen that poster of the grizzly bear with the salmon in its...",
+      title: "Uncle BOBBy",
+      excerpt: "Project overview Ball on beam balancer You’ll see right away that Bobby is pretty tenacious, despite being constructed of duct...",
       categories: [],
       tags: [],
       id: 1
@@ -29,11 +29,20 @@ var idx = lunr(function () {
     
   
     idx.add({
-      title: "Uncle BOBBy",
-      excerpt: "Project overview Ball on beam balancer You’ll see right away that Bobby is pretty tenacious, despite being constructed of duct...",
+      title: "OBD2 4u",
+      excerpt: "The finished build Project overview Have you ever seen that poster of the grizzly bear with the salmon in its...",
       categories: [],
       tags: [],
       id: 2
+    });
+    
+  
+    idx.add({
+      title: "MP3 4me",
+      excerpt: "Yet another DIY MP3 player Project overview Suspend your disbelief. I’m once again at least 15 years behind the times...",
+      categories: [],
+      tags: [],
+      id: 3
     });
     
   
@@ -42,7 +51,7 @@ var idx = lunr(function () {
       excerpt: "MacGyver, eat your heart out Project overview Welcome to my heart rate monitor project. These things have been around for...",
       categories: [],
       tags: [],
-      id: 3
+      id: 4
     });
     
   
@@ -54,7 +63,7 @@ var idx = lunr(function () {
       excerpt: "Thumbs way up for the Pinewood Derby The master equation OK. If you are going for speed (uuh .. you...",
       categories: [],
       tags: [],
-      id: 4
+      id: 5
     });
     
   
@@ -63,7 +72,7 @@ var idx = lunr(function () {
       excerpt: "Summer is here How long is the berry season, anyways? The date is Sunday, June 29th 2014. For some reason,...",
       categories: [],
       tags: [],
-      id: 5
+      id: 6
     });
     
   
@@ -72,7 +81,7 @@ var idx = lunr(function () {
       excerpt: "Nah … no bike repairs needed after this race, right Ian? A really cool Christmas present After many years of...",
       categories: ["Layout","Uncategorized"],
       tags: ["comments","layout"],
-      id: 6
+      id: 7
     });
     
   
@@ -87,9 +96,20 @@ var store = [
     
       
       {
-        "title": "Ergware",
+        "title": "ErgWare",
         "url": "http://localhost:4000/projects/ergware/",
         "excerpt": "Our DIY ergometer with its new “brain” Project overview Hey all, Dave Vernooy here with another project. I’m assuming you...",
+        "teaser":
+          
+            null
+          
+      },
+    
+      
+      {
+        "title": "Uncle BOBBy",
+        "url": "http://localhost:4000/projects/bobb/",
+        "excerpt": "Project overview Ball on beam balancer You’ll see right away that Bobby is pretty tenacious, despite being constructed of duct...",
         "teaser":
           
             null
@@ -109,9 +129,9 @@ var store = [
     
       
       {
-        "title": "Uncle BOBBy",
-        "url": "http://localhost:4000/projects/bobb/",
-        "excerpt": "Project overview Ball on beam balancer You’ll see right away that Bobby is pretty tenacious, despite being constructed of duct...",
+        "title": "MP3 4me",
+        "url": "http://localhost:4000/projects/mp3/",
+        "excerpt": "Yet another DIY MP3 player Project overview Suspend your disbelief. I’m once again at least 15 years behind the times...",
         "teaser":
           
             null

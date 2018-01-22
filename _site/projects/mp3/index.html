@@ -1,0 +1,797 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.8.0 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+
+
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>MP3 4me - Ab hinc</title>
+
+
+
+
+<meta name="description" content="A homebrew MP3 player">
+
+
+
+
+<meta name="author" content="Dave Vernooy">
+
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Ab hinc">
+<meta property="og:title" content="MP3 4me">
+
+
+  <link rel="canonical" href="http://localhost:4000/projects/mp3/">
+  <meta property="og:url" content="http://localhost:4000/projects/mp3/">
+
+
+
+  <meta property="og:description" content="A homebrew MP3 player">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/front/site-logo.png">
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2018-01-21T20:16:29-05:00">
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "http://localhost:4000",
+      "logo": "http://localhost:4000/assets/images/front/site-logo.png"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Dave Vernooy",
+      "url" : "http://localhost:4000",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Ab hinc Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
+  </head>
+
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="http://localhost:4000/">Ab hinc</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/projects/" >Projects</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/blog/" >Blog</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about/" >About</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        
+        <a href="https://dvernooy.github.io">
+          <img src="http://localhost:4000/assets/images/front/dave-vernooy-cropped.jpg" alt="Dave Vernooy" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <a href="https://dvernooy.github.io"><h3 class="author__name" itemprop="name">Dave Vernooy</h3></a>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Learning by (re)doing
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Niskayuna, NY</span>
+        </li>
+      
+
+      
+        <li>
+          <a href="https://dvernooy.github.io" itemprop="url">
+            <i class="fa fa-fw fa-chain" aria-hidden="true"></i> Website
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/dvernooy" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="MP3 4me">
+    <meta itemprop="description" content="A homebrew MP3 player">
+    <meta itemprop="datePublished" content="January 21, 2018">
+    <meta itemprop="dateModified" content="August 09, 2014">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">MP3 4me
+</h1>
+          <h4 class="page__related-title">10 years behind the iPOD</h4> 
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  12 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fa fa-file-text"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#project-overview">Project overview</a></li>
+  <li><a href="#stem">S.T.E.M.</a></li>
+  <li><a href="#hardware">Hardware</a>
+    <ul>
+      <li><a href="#codec-vs1053b">Codec VS1053B</a></li>
+      <li><a href="#circuit-diagram">Circuit diagram</a></li>
+      <li><a href="#sd-cards--interfaces">SD cards &amp; interfaces</a></li>
+      <li><a href="#battery-charger--lipo-batteries">Battery Charger &amp; LiPO batteries</a></li>
+      <li><a href="#battery-management">Battery Management</a></li>
+      <li><a href="#switches">Switches</a></li>
+      <li><a href="#layout">Layout</a></li>
+      <li><a href="#hardware-pictures">Hardware pictures</a></li>
+      <li><a href="#packaging--skin---dollar-tree-foam-board">Packaging &amp; Skin - dollar tree foam board</a></li>
+    </ul>
+  </li>
+  <li><a href="#software">Software</a>
+    <ul>
+      <li><a href="#debug-strategy--software-uart">Debug strategy &amp; software UART</a></li>
+      <li><a href="#user-interface">User Interface</a></li>
+      <li><a href="#input-responsiveness">Input responsiveness</a></li>
+      <li><a href="#navigation">Navigation</a></li>
+      <li><a href="#volume-setting">Volume setting</a></li>
+      <li><a href="#small-fonts">Small fonts</a></li>
+      <li><a href="#embedded-file-system---fatfs">Embedded file system - FatFS</a></li>
+      <li><a href="#digital-signal-processing">Digital signal processing</a></li>
+      <li><a href="#mp3-file-parsing">MP3 file parsing</a></li>
+      <li><a href="#spi-bus">SPI bus</a></li>
+      <li><a href="#organizing-songs-ordering-them-alphabetically">Organizing songs, ordering them alphabetically</a></li>
+      <li><a href="#random-function">Random function</a></li>
+    </ul>
+  </li>
+  <li><a href="#learn-by-re-doing">Learn by re-doing</a>
+    <ul>
+      <li><a href="#binary-mode-of-ftp">Binary mode of FTP</a></li>
+      <li><a href="#buffer-sizes--overflows">Buffer sizes &amp; overflows</a></li>
+      <li><a href="#limitations">Limitations</a></li>
+    </ul>
+  </li>
+</ul>
+            </nav>
+          </aside>
+        
+        <script type="text/javascript" async="" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<p><img src="http://localhost:4000/assets/images/projects/mp3/project_shot.png" alt="" />
+<em>Yet another DIY MP3 player</em></p>
+
+<h2 id="project-overview">Project overview</h2>
+<p>Suspend your disbelief. I’m once again at least 15 years behind the times with this project - a DIY MP3 player. I have always thought it would be kind of neat to see if I could hack together one of these as so many others have done. Turned out to have a few challenges on the AVR ATMega’s that I always use - but nothing insurmountable. It was very software-centric, since much of the hardware work was done with one or two chips.</p>
+
+<p>My goal was to make it portable and small form factor, with a reasonably long battery life, an SD-card interface and a decent user interface - all with the ATMega328 8 bit microcontroller.</p>
+
+<h2 id="stem">S.T.E.M.</h2>
+
+<p>There is plenty of technology I had to work my way through - battery charger circuitry, MP3 audio specification, embedded file systems and SD cards - but the most interesting thing here is that the MP3 player is a <em>system</em>. All of the stuff needs to work together really well, or the user experience is a stinker. And even if you do get it all right, it can still be a loser.</p>
+
+<p>And of course, the deficiencies in what I built are all the more visible since everyone else around me just uses their phone, which gets better every couple of months. So you really have to think about everything in a fair amount of detail if you want to see it through and come out with something that will last for more than 10 minutes.</p>
+
+<p>Turns out, software is the way to hold it all together, and this one was pretty software intensive.</p>
+
+<p>But I’m so far behind the state-of-the-art, lets dispense with the S.T.E.M. soapbox on this project and just build.</p>
+
+<h2 id="hardware">Hardware</h2>
+
+<h3 id="codec-vs1053b">Codec VS1053B</h3>
+<p>OK, so almost all of the hard work is actually done here by a single chip, the VLSI solutions VS1053B.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/mp3/VS1053b.png" alt="" />
+<em>About 80 pages. OK, we’ll start with page 1</em></p>
+
+<p>It is a decoder for many audio types, with a ton of functionality:</p>
+
+<ul>
+  <li>Ogg Vorbis</li>
+  <li>MP3 = MPEG 1 &amp; 2 audio layer III (CBR+VBR+ABR)</li>
+  <li>MP1 &amp; MP2 = MPEG 1 &amp; 2 audio layers I &amp; II optional</li>
+  <li>MPEG4 / 2 AAC-LC(+PNS), HE-AAC v2 (Level 3) (SBR + PS)</li>
+  <li>WMA4.0/4.1/7/8/9 all profiles (5-384 kbps)</li>
+  <li>FLAC lossless audio with software plugin (upto 24 bits, 48 kHz)</li>
+  <li>WAV (PCM + IMA ADPCM)</li>
+  <li>General MIDI 1 / SP-MIDI format 0</li>
+</ul>
+
+<p>and can also <em>stream</em>. Streaming means it can take a digital audio stream and convert it “on the fly” to analog audio.
+I bought it already integrated on a board by a company called GEETech:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/mp3/GEEEtech.jpg" alt="" />
+<em>You can get one of these for about 15 bucks … some Assembly (and C) required</em></p>
+
+<p>The feature list was good, but I hadn’t really given any of this much thought at all when I started out.</p>
+
+<ul>
+  <li>SPI interface to VS1053b &amp; the control signal lines are led out</li>
+  <li>A headphone and stereo output</li>
+  <li>A line_in input interface</li>
+  <li>Power indicator</li>
+  <li>3.3V and 2.8V of LDO chip AMS-1117 on board, provides up to 800mA current</li>
+  <li>A single power supply: +5 VDC</li>
+  <li>12.288 Mhz crystal</li>
+  <li>SD card slot</li>
+</ul>
+
+<p>except for the single <strong>5V</strong> power supply feature - which we’ll come to in a minute. There was not much to go by, just <a href="http://www.geeetech.com/wiki/index.php/VS1053_MP3_breakout_board_with_SD_card">this website</a>. But it was more than enough to get me started. In fact, they had a little example Arduino project posted there, which was fun to play with and just make sure the board worked. Mine did.</p>
+
+<blockquote>
+  <p>arduino example picture</p>
+</blockquote>
+
+<p>We’ll come back to this “test” project in a minute - turns out that buried inside was something I thought was pretty big, but initially ignored.</p>
+
+<h3 id="circuit-diagram">Circuit diagram</h3>
+<p>Here is the circuit diagram for the MP3 player.</p>
+
+<p><a href="http://localhost:4000/assets/images/projects/mp3/mp3_circuit.png"><img src="http://localhost:4000/assets/images/projects/mp3/mp3_circuit.png" alt="" /></a>
+<em>No pin left behind</em></p>
+
+<h3 id="sd-cards--interfaces">SD cards &amp; interfaces</h3>
+
+<p>SD cards are an easy way to store the audio files. But how do you access them? Well, the mechanical interface was built into the board, so it was really a matter of figuring out how to access it. The standard pinout for an SD card for accessing with the serial peripheral interface (SPI) looks like this:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/mp3/sd_pinout.jpg" alt="" />
+<em>Accessing SD card with SPI.</em></p>
+
+<p>Good news is that an SPI bus is built into the ATMega328.</p>
+
+<h3 id="battery-charger--lipo-batteries">Battery Charger &amp; LiPO batteries</h3>
+
+<p>So how do you do the power management? After staring at this thing for awhile, I realized that - except for the codec board, everything else could work off of 3.3V. And in fact, I realized that even that daughter board used 5V not because the chip needed it, but because it was using it to make 3.3V and 2.5V. Now things clicked.</p>
+
+<p>Why?</p>
+
+<ol>
+  <li>I knew a 1 cell LiPO battery typically works between 3.65V (discharged) and 4.2V (fully charged)</li>
+  <li>I also knew a “low drop out regulator (LDO)” for these voltage levels can stabilize an output voltage with as little as 0.2 to 0.3V overhead. And 3.3V + 0.3V = 3.6V, which is less that the lowest voltage on a 1 cell LiPO.</li>
+</ol>
+
+<p>Bottom line, we can get away with a 1 cell LiPO circuit for the entire thing, with a hack to the GEEEtech board. And that simplifies life. Game on.</p>
+
+<p>I found a really cool little IC (BQ2057 from TI) which is a charging IC for LiPOs.</p>
+
+<p>There is a also a little protection circuitry (MN1382) for the LIPO which open circuits the battery if the voltage falls below a pre-set threshold.</p>
+
+<p>The system is able to charge the battery even if the main power is off. The on/off switch drives a p-channel mosfet pass transistor.</p>
+
+<h3 id="battery-management">Battery Management</h3>
+
+<p>I added a little feature to measure the battery voltage and alert the user when it is getting low. As simple as comparing the battery voltage to a reference using one of the ADC inputs. I had to put a little calibration table together to make sure it was an accurate representation.</p>
+
+<h3 id="switches">Switches</h3>
+
+<p>3 position rotary switches just made sense here. Nice feel to them, easy to wire up and work with &amp; form factor was right.</p>
+
+<h3 id="layout">Layout</h3>
+<p>Believe it or not, this is one circuit layout I actually thought about &amp; planned a little bit. Screen, DSP/codec + audio jacks, micro, buttons, battery charger &amp; usb input, lipo battery and SD card were the real estate hogs. And I wanted it really small and thin. Here are the initial sketches I made to try to figure out nominally where stuff should go -</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/mp3/options.png" alt="" />
+<em>Played around with a few ideas. End result was closer to door #2.</em></p>
+
+<h3 id="hardware-pictures">Hardware pictures</h3>
+
+<p>Here are a few pics of the final pcb build</p>
+<blockquote>
+  <blockquote>
+    <p>build</p>
+  </blockquote>
+</blockquote>
+
+<h3 id="packaging--skin---dollar-tree-foam-board">Packaging &amp; Skin - dollar tree foam board</h3>
+
+<p>I wanted a quick and dirty way to protect the whole thing. Nothing beats foam board to get the job done in 30 min or less. Even a little mount to sit on top of an old stereo where we can feed the AUX input with the audio ouput.</p>
+
+<h2 id="software">Software</h2>
+<h3 id="debug-strategy--software-uart">Debug strategy &amp; software UART</h3>
+
+<p>I’m going to start with this, even though its something I realized I needed halfway through. Clearly, the LCD wouldn’t cut it as both the main screen and a way to debug what was happening. That’s where the serial port comes in. The code for the file system I ended up using (FatFS) included a really lightweight <em>software-defined UART</em>, written in assembler. Meaning all of the timing was done in software. In addition, it included some really low overhead serial print functions - so I went with all of this as my main debug path.</p>
+
+<p>Putting together the pieces one-by-one:</p>
+<ol>
+  <li>Get the software UART working - suart.S &amp; suart.h</li>
+  <li>learn to work with the xprintf functions - xitoai.S</li>
+</ol>
+
+<blockquote>
+  <p>debug environment picture - STK500</p>
+</blockquote>
+
+<h3 id="user-interface">User Interface</h3>
+
+<blockquote>
+  <p>video</p>
+</blockquote>
+
+<p>The way the user interacted with this was really important, starting with the response to the pushbuttons.</p>
+
+<h3 id="input-responsiveness">Input responsiveness</h3>
+
+<p>I played with 3 different methods to get a good user response.</p>
+<ol>
+  <li>Software polling: The first was just polling every time through the main loop. I’ve learned my lesson on this before. Terrible.</li>
+  <li>Pure hardware interrupt: The second was having the press of a button interrupt the processor. OK, in the running.</li>
+  <li>Interrupt-driven hardware polling: The third was using a dedicated hardware timer interrupt the processor and use this interrupt to manage any button presses. At first, I thought this would have a really bad impact on the audio, but after fiddling with it for an afternoon I found it was a really flexible way to do things. I never went back to method 2. Winner.</li>
+</ol>
+
+<p>So what do you need to think about, &amp; how do you actually do it?</p>
+
+<blockquote>
+  <p>code</p>
+</blockquote>
+
+<h3 id="navigation">Navigation</h3>
+
+<p>Because all the files are stored on the SD card, I used the SD card directory structure to navigate. Right now, all that’s implemented is one-way - there is no escape back to a higher level directory. When it starts up, you choose this subdirectory. Right now, I have that nested only 1 subdirectory deep. Within a subdirectory, you can play or pause, go forward or backwards in order, or play the entire subdirectory at random. To go back up, you need to cycle power. A maximum of 12 subdirectories are allowed at the highest level.</p>
+
+<p>The current settings are all displayed on the bottom line of the user interface:</p>
+
+<blockquote>
+  <blockquote>
+    <p>screenshots of various settings</p>
+  </blockquote>
+</blockquote>
+
+<h3 id="volume-setting">Volume setting</h3>
+
+<p>The volume can be moved up or down, with feedback to the user. I implemented a little bar system in the bottom right corner to see that. The VS1053b has a built in volume control, so this can all be done in software. I chose 8 settings that I thought were across a broad enough range.</p>
+
+<blockquote>
+  <blockquote>
+    <p>audio setup.</p>
+  </blockquote>
+</blockquote>
+
+<h3 id="small-fonts">Small fonts</h3>
+
+<p>I hadn’t thought about it much before this project, but the ability to support a very small font comes in handy sometimes. I went with it exclusively on this project. Especially helpful to display information about the track as well as a compact listing of the files on the MP3 player. I found a really cool 3x5 font on the web and used it.</p>
+
+<h3 id="embedded-file-system---fatfs">Embedded file system - FatFS</h3>
+
+<p>I had no appreciation for the complexities of dealing with embedded file systems for SD cards. Still barely do. But I realize that Bill Greiman’s SDFat library was powering the Arduino test code. Really cool code, but I wanted something written for many different platforms.</p>
+
+<p>Enter FatFS.</p>
+
+<p>Respect. That’s all I can say about ELM-Chan. Everything he does is awesome. His FatFS file system (among other things). The learning curve is pretty steep for a weekend hacker like me, and I climbed that sucker. But to have a fully featured file system available at my beck and call to deal with SD card read/writes, in an 8-bit microcontroller was really cool. Let me start from the beginning.</p>
+
+<blockquote>
+  <p>Fatfs usage.</p>
+</blockquote>
+
+<h3 id="digital-signal-processing">Digital signal processing</h3>
+<p>You don’t really need to think at all about what the actual codec is doing. One command &amp; its streaming. But you need to know what you are streaming!</p>
+
+<h3 id="mp3-file-parsing">MP3 file parsing</h3>
+<p>Periodically, I’d find a song that either abruptly ended, didn’t play, or waited a serious amount of time before playing. I had already made enough compromises. I wanted it to be able to play almost all songs on demand, all the time. So I invested time in getting this right. It took some time, and I’ll spend a bit of time talking about MP3 file structure, because that’s what it all boils down to.</p>
+
+<p>So, if you are going to do any work, a hex editor and an MP3 editor/parser are pretty useful tools. Here’s how I used them-</p>
+
+<h3 id="spi-bus">SPI bus</h3>
+<p>First thing to know is that the codec has separate SPI enable lines for sending/receiving data (VS1053b_XDCS) or sending/receiving commands (VS1053b_XCS). The SD card has its own chip select line (SD_CS). Second is that for data and commands, the codec and the SD card share the SPI bus I/O lines (MISO/MOSI). Third, the codec has a special line in streaming mode which strobes if its buffer is full (VS1053b_DREQ) to limit further writing. Some examples-</p>
+
+<p>Receiving data from SD card over SPI:</p>
+
+<p>Writing a command to codec over SPI:</p>
+
+<p>Writing data to codec over SPI:</p>
+
+<h3 id="organizing-songs-ordering-them-alphabetically">Organizing songs, ordering them alphabetically</h3>
+
+<p>In order to ensure everything works, there are a few rules that have to be followed. I’ll go through them one by one just so I have them written down, and that will make it easier for me to go after them eventually. A really frustrating thing was that I wanted songs to be ordered alphabetically on the SD card, just for simplicity.</p>
+
+<h3 id="random-function">Random function</h3>
+<p>I implemented a random shuffle function. It first figures out the number of tracks of the current type and then randomly chooses between them.</p>
+
+<blockquote>
+  <p>code snippet</p>
+</blockquote>
+
+<h2 id="learn-by-re-doing">Learn by re-doing</h2>
+
+<h3 id="binary-mode-of-ftp">Binary mode of FTP</h3>
+<p>Ok, so this is really stupid. But I was sending a bunch of audio files from a PC to a Mac over our home network using ftp. Why? don’t ask. So I started playing them on my player and it was filled with all these snap, crackle, pops. Are you kidding me? So I spent about 2 days testing every component on the board, all kinds of test software, etc.., etc.. Nothing. Didn’t think to test the files themselves. Of course, turns out that ftp sends files in ascii by default. I actually knew that but on this batch forgot to switch to binary. Awesome.</p>
+
+<h3 id="buffer-sizes--overflows">Buffer sizes &amp; overflows</h3>
+<p>In order to get the smoothest playback possible, it was important to send the DSP the largest chunk of mp3 I could to playback at any given time. We’re dealing with an 8-bit micro here, folks, with 2KB of SRAM, so even a 500 byte buffer is large. I ended up overflowing the stack on multiple occasions, which is a hard thing to debug if you aren’t aware of it.</p>
+
+<h3 id="limitations">Limitations</h3>
+<p>So here, in one spot, is a list of all the current limitations. All of them have to do with the software.</p>
+<ul>
+  <li>doesn’t show total play time &amp; current played amount of current track</li>
+  <li>doesn’t allow flexible navigation, especially out of a subdirectory back up</li>
+  <li>doesn’t scroll the name of the track or author if longer than 23 characters</li>
+  <li>doesn’t allow flexibility in play mode - e.g. no “total random” mode</li>
+  <li>wouldn’t easily show more than 12 subdirectories - they need to be structured</li>
+  <li>titles of subdirectories can’t be more than 12 characters</li>
+</ul>
+
+<p>I might tackle these one-by-one. But first I’ll probably build up another one. Or not.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2014-08-09">August 09, 2014</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=MP3+4me%20http%3A%2F%2Flocalhost%3A4000%2Fprojects%2Fmp3%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fprojects%2Fmp3%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=http%3A%2F%2Flocalhost%3A4000%2Fprojects%2Fmp3%2F" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fprojects%2Fmp3%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="http://localhost:4000/projects/obd-ii/" class="pagination--pager" title="OBD2 4u
+">Previous</a>
+    
+    
+      <a href="http://localhost:4000/projects/HRM/" class="pagination--pager" title="Heart Rate Monitor
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <!-- <script src="http://localhost:4000/assets/js/comments.js"></script> -->
+      <!-- <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a Comment</h4>
+      <section id="disqus_thread"></section>
+    
+</div> -->
+    <div id="disqus_thread"></div>
+    <a href="single.html#disqus_thread" data-disqus-identifier=""></a>
+
+    <script>
+      // var disqus_developer = 1;
+      var disqus_config = function () {
+      this.page.url = "/projects/mp3/";
+      this.page.identifier = "/projects/mp3/";
+      };
+
+      (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://dvernooy-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      <script id="dsq-count-scr" src="//dvernooy-github-io.disqus.com/count.js" async></script>
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+  <input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  <div id="results" class="results"></div>
+</div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+      <li><a href="https://github.com/dvernooy"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="http://localhost:4000/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2018 Dave Vernooy. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="http://localhost:4000/assets/js/main.min.js"></script>
+
+
+
+  <script src="http://localhost:4000/assets/js/lunr.min.js"></script>
+  <script src="http://localhost:4000/assets/js/lunr-en.js"></script>
+
+
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://localhost:4000/projects/mp3/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/projects/05-mp3_player"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://dvernooy.github.io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+  </body>
+</html>

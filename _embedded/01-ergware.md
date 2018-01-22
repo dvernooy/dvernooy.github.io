@@ -1,5 +1,5 @@
 ---
-title: "Ergware"
+title: "ErgWare"
 published: true
 subtitle: "Open source software for an open source ergometer"
 permalink: /projects/ergware/
@@ -402,20 +402,23 @@ So whenever there was a taker for this resource, they would sit and wait for the
 /*********************************************************************************
 Thread 3 - LCD write out all the erg data
 ********************************************************************************/
-THD_FUNCTION(Thread3, arg) {
+THD_FUNCTION (Thread3, arg) {
 	(void)arg;
 	tp[0] = chThdGetSelfX(); //returns a pointer to current thread
 
-	while (true) {
-		/* it starts in off state, or gets here when turned off. Eventmask1 turns it on*/
+  while (true) {
+		// it starts in off state, or gets here when turned off. Eventmask1 turns it on
 		chEvtWaitAnyTimeout((eventmask_t)1, TIME_INFINITE);
-		/*take control of LCD semaphore*/
+		// take control of LCD semaphore
 		chSemWait(&lcdUSE);
-		/*switch lcd_context to thread 4*/
+		// switch lcd_context to thread 4
+    ....
+   }
+}
 ```    
 
 ### Write lightweight usage services
 Essential to ensuring optimal memory allocation. There's a screenshot above of the usage statistics for each of the threads after a workout.
 
-## In Summary
+## Learning by re-doing
 Time to go back and re-read "The Boys in the Boat".
