@@ -18,9 +18,14 @@ toc: true
 *Yet another DIY MP3 player*
 
 ## Project overview
-Suspend your disbelief. I'm once again at least 15 years behind the times with this project - a DIY MP3 player. I have always thought it would be kind of neat to see if I could hack together one of these as so many others have done. Turned out to have a few challenges on the AVR ATMega's that I always use - but nothing insurmountable. It was very software-centric, since much of the hardware work was done with one or two chips.
+Suspend your disbelief. I'm once again at least 15 years behind the times with this project - a DIY MP3 player. I have always thought it would be kind of neat to see if I could hack together one of these as so many others have done.
 
-My goal was to make it portable and small form factor, with a reasonably long battery life, an SD-card interface and a decent user interface - all with the ATMega328 8 bit microcontroller.
+Turned out to have a few challenges on the AVR ATMega's that I always use - but nothing insurmountable. It was very software-centric, since much of the hardware work was done with one or two chips.
+
+My goal was to make it portable and small form factor, with a reasonably long battery life, an SD-card interface and a decent user interface - all with the ATMega328 8 bit microcontroller. I finally got there.
+
+![]({{ site.url }}/assets/images/projects/mp3/handheld.png)
+*Good, fast and cheap ... pick one? Well, it was cheap.*
 
 ## S.T.E.M.
 
@@ -70,7 +75,8 @@ The feature list was good, but I hadn't really given any of this much thought at
 
 except for the single **5V** power supply feature - which we'll come to in a minute. There was not much to go by, just [this website](http://www.geeetech.com/wiki/index.php/VS1053_MP3_breakout_board_with_SD_card). But it was more than enough to get me started. In fact, they had a little example Arduino project posted there, which was fun to play with and just make sure the board worked. Mine did.
 
-> arduino example picture
+![]({{ site.url }}/assets/images/projects/mp3/arduino_test.jpg)
+*As usual, the Arduino community has it all covered*
 
 We'll come back to this "test" project in a minute - turns out that buried inside was something I thought was pretty big, but initially ignored.
 
@@ -87,7 +93,10 @@ SD cards are an easy way to store the audio files. But how do you access them? W
 ![]({{ site.url }}/assets/images/projects/mp3/sd_pinout.jpg)
 *Accessing SD card with SPI.*
 
-Good news is that an SPI bus is built into the ATMega328.
+Good news is that an SPI bus is built into the ATMega328. Just needed to figure out how to package this so the SD card could easily be inserted, but also be out of the way. Answer? Tuck it in back.
+
+![]({{ site.url }}/assets/images/projects/mp3/SD.jpg)
+*SD slot is in the back*
 
 ### Battery Charger & LiPO batteries
 
@@ -99,6 +108,9 @@ Why?
 2. I also knew a "low drop out regulator (LDO)" for these voltage levels can stabilize an output voltage with as little as 0.2 to 0.3V overhead. And 3.3V + 0.3V = 3.6V, which is less that the lowest voltage on a 1 cell LiPO.
 
 Bottom line, we can get away with a 1 cell LiPO circuit for the entire thing, with a hack to the GEEEtech board. And that simplifies life. Game on.
+
+![]({{ site.url }}/assets/images/projects/mp3/lipo_closeup.png)
+*A 400mAh backpack*
 
 I found a really cool little IC (BQ2057 from TI) which is a charging IC for LiPOs.
 
@@ -160,10 +172,15 @@ Believe it or not, this is one circuit layout I actually thought about & planned
 
 ### Hardware pictures
 Here are a few pics of the final pcb build
->> build
+
+![]({{ site.url }}/assets/images/projects/mp3/build.png)
+*Small, thin & compact*
 
 ### Packaging & Skin - dollar tree foam board
 I wanted a quick and dirty way to protect the whole thing. Nothing beats foam board to get the job done in 30 min or less. Even a little mount to sit on top of an old stereo where we can feed the AUX input with the audio ouput.
+
+![]({{ site.url }}/assets/images/projects/mp3/skins.png)
+*Covering and mounting - dollar tree foam board & hot glue*
 
 ## Software
 ### Debug strategy & software UART
@@ -174,7 +191,8 @@ Putting together the pieces one-by-one:
 1. Get the software UART working - suart.S & suart.h
 2. learn to work with the xprintf functions - xitoai.S
 
-> debug environment picture - STK500
+![]({{ site.url }}/assets/images/projects/mp3/dev_environment.png)
+*My debug setup ... STK500 + a software UART & terminal emulator*
 
 ### User Interface
 
@@ -317,6 +335,9 @@ DisplayVolume(VolumeIndex);
 ```
 
 ### Small fonts
+
+![]({{ site.url }}/assets/images/projects/mp3/font_upclose.png)
+*3x5 font for a 3x5(x2) MP3 player*
 
 I hadn't thought about it much before this project, but the ability to support a very small font comes in handy sometimes. I went with it exclusively on this project. Especially helpful to display information about the track as well as a compact listing of the files on the MP3 player. I found a really cool 3x5 font on the web and used it - but only after I had figured out how to translate it into the format I needed to send to the LCD. These projects are full of little puzzles like this:
 
