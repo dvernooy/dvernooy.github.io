@@ -82,7 +82,7 @@ Here is the circuit diagram for the MP3 player.
 
 ### SD cards & interfaces
 
-SD cards are an easy way to store the audio files. But how do you access them? Well, the mechanical interface was built into the board, so it was really a matter of figuring out how to access it. The standard pinout for an SD card for accessing with the serial peripheral interface (SPI) looks like this:
+SD cards are an easy way to store the audio files. But how do you access them? Well, the mechanical interface was built into the board, so it was really a matter of figuring out how to access it in software. The standard pinout for an SD card for accessing with the serial peripheral interface (SPI) looks like this:
 
 ![]({{ site.url }}/assets/images/projects/mp3/sd_pinout.jpg)
 *Accessing SD card with SPI.*
@@ -106,14 +106,51 @@ There is a also a little protection circuitry (MN1382) for the LIPO which open c
 
 The system is able to charge the battery even if the main power is off. The on/off switch drives a p-channel mosfet pass transistor.
 
+I used a Mini-B USB connector as they are pretty popular in wall-warts which supply 5-ish volts.
+
+![]({{ site.url }}/assets/images/projects/mp3/USB-pinout.gif)
+*USB connector pinout*
+
 ### Battery Management
 
 I added a little feature to measure the battery voltage and alert the user when it is getting low. As simple as comparing the battery voltage to a reference using one of the ADC inputs. I had to put a little calibration table together to make sure it was an accurate representation.
 
+```c
+if (CmdVoltage ==1) {
+  AverageVoltCount++;
+  TranslateVoltage += (DWORD) MeasuredVoltage;
+  CmdVoltage =0;
+  if (AverageVoltCount > 9) {
+    TranslateVoltage = TranslateVoltage/10;
+    TranslateVoltage = (DWORD)500*TranslateVoltage;
+    TranslateVoltage = TranslateVoltage/775;
+    MeasuredVoltage = (WORD) TranslateVoltage;
+    if (MeasuredVoltage > 1000) MeasuredVoltage = 999;
+    XXX = MeasuredVoltage/100;
+    YYY = MeasuredVoltage - 100*XXX;
+    ZZZ = YYY/10;
+    AAA = YYY-10*ZZZ;
+    lcd_goto_xy(14,6);
+    fprintf_P(&lcd_out,PSTR("%d.%d%d"),XXX,ZZZ,AAA);
+    AverageVoltCount = 0;
+    TranslateVoltage = 0;
+  }
+}
+if (CmdVoltage1 ==1) {
+  invert = 1;
+  lcd_goto_xy(1,5);
+  fprintf_P(&lcd_out,PSTR("LOW BATTERY"));
+  invert = 0;
+  CmdVoltage1 =0;
+  CountVoltage = 0;
+}
+```
+
 ### Switches
+3 position navigation switches just made sense here. Nice feel to them, easy to wire up and work with & form factor was right.
 
-3 position rotary switches just made sense here. Nice feel to them, easy to wire up and work with & form factor was right.
-
+![]({{ site.url }}/assets/images/projects/mp3/nav_switch.jpg)
+*Switch works well for navigate and select*
 
 ### Layout
 Believe it or not, this is one circuit layout I actually thought about & planned a little bit. Screen, DSP/codec + audio jacks, micro, buttons, battery charger & usb input, lipo battery and SD card were the real estate hogs. And I wanted it really small and thin. Here are the initial sketches I made to try to figure out nominally where stuff should go -
@@ -122,12 +159,10 @@ Believe it or not, this is one circuit layout I actually thought about & planned
 *Played around with a few ideas. End result was closer to door #2.*
 
 ### Hardware pictures
-
 Here are a few pics of the final pcb build
 >> build
 
 ### Packaging & Skin - dollar tree foam board
-
 I wanted a quick and dirty way to protect the whole thing. Nothing beats foam board to get the job done in 30 min or less. Even a little mount to sit on top of an old stereo where we can feed the AUX input with the audio ouput.
 
 ## Software
@@ -144,7 +179,6 @@ Putting together the pieces one-by-one:
 ### User Interface
 
 > video
-
 The way the user interacted with this was really important, starting with the response to the pushbuttons.
 
 ### Input responsiveness
@@ -156,25 +190,138 @@ I played with 3 different methods to get a good user response.
 
 So what do you need to think about, & how do you actually do it?
 
-> code
+```c
+ISR(TIMER0_COMPA_vect)
+{
+	pha++;
+
+	if ((pha % (LONG) 20) == 0) {	// 16 times per second
+
+		if (squelched == 1) {
+			if (squelch_count < (UINT) 40) {
+				squelch_count++;
+			}
+			else {
+				squelch_count = 0;
+				squelched = 0;
+			}
+		}
+		if ((NEXT || PREV || PAUSE_PLAY || VOL_UP || VOL_DOWN || MODE) && (squelched == 0)) trapped++;
+
+
+		if (trapped > (UINT) 5){
+			if (NEXT) CmdPlay = K_NEXT;
+			if (PREV) CmdPlay = K_PREV;
+			if (PAUSE_PLAY) {
+				stat = 1;
+				if (Playing == 1){
+					CmdPlay = K_PAUSE;
+					Playing = 0;
+				}
+				else {
+					CmdPlay = K_PLAY;
+					Playing = 1;
+				}
+			}
+			if (VOL_UP) CmdVol = K_VOL_UP;
+			if (VOL_DOWN) CmdVol = K_VOL_DOWN;
+			if (MODE) {
+				if (CmdMode == K_RANDOM ){
+					CmdMode = K_ORDER;
+					if (frozen ==0) {
+						lcd_goto_xy(7,6);
+						fprintf_P(&lcd_out,PSTR("ORDER "));
+					}
+				}
+				else {
+					CmdMode = K_RANDOM;
+					if (frozen ==0) {
+						lcd_goto_xy(7,6);
+						fprintf_P(&lcd_out,PSTR("SHUFFL"));
+					}
+				}
+			}
+		trapped = 0;
+		squelched = 1;
+		}
+	}
+
+	if ((pha % (long) 16000) == 0) {
+		//single conversion
+		ADCSRA |= (1<<ADSC);
+		while (ADCSRA & (1<<ADSC));
+		MeasuredVoltage = ADC;
+		CmdVoltage = 1;
+		if ((MeasuredVoltage < 510) && (CountVoltage >0)) CountVoltage = 0;
+		if (MeasuredVoltage > 5100) {
+			CountVoltage++;
+			if (CountVoltage>10) {
+				CountVoltage = 10;
+				CmdVoltage1 = 1;
+			}
+		}
+	}
+
+}
+```
 
 ### Navigation
 
 Because all the files are stored on the SD card, I used the SD card directory structure to navigate. Right now, all that's implemented is one-way - there is no escape back to a higher level directory. When it starts up, you choose this subdirectory. Right now, I have that nested only 1 subdirectory deep. Within a subdirectory, you can play or pause, go forward or backwards in order, or play the entire subdirectory at random. To go back up, you need to cycle power. A maximum of 12 subdirectories are allowed at the highest level.
 
 The current settings are all displayed on the bottom line of the user interface:
-
 >> screenshots of various settings
 
 ### Volume setting
 
 The volume can be moved up or down, with feedback to the user. I implemented a little bar system in the bottom right corner to see that. The VS1053b has a built in volume control, so this can all be done in software. I chose 8 settings that I thought were across a broad enough range.
 
->> audio setup.
+```c
+if (CmdVol) {
+
+
+  if (CmdVol == K_VOL_DOWN) {
+    if (VolumeIndex == 0) {
+      VolumeIndex = 0;
+    }
+    else {
+      VolumeIndex = VolumeIndex -1;
+    }
+
+    Volume=(((WORD)VolumeArray[VolumeIndex]<<8)+(WORD)VolumeArray[VolumeIndex]);
+
+    if(Volume>=0x8D8D) Volume=0x8D8D;
+    else VS1003B_WriteCMD(0x0b,Volume);
+
+    CmdVol = 0;
+  }
+
+  if (CmdVol == K_VOL_UP) {
+    if (VolumeIndex ==15) {
+      VolumeIndex = 15;
+    }
+    else{
+      VolumeIndex = VolumeIndex +1;
+    }
+
+    Volume=(((WORD)VolumeArray[VolumeIndex]<<8)+(WORD)VolumeArray[VolumeIndex]);
+
+    if(Volume<=0x0505) Volume=0x0505;
+    else VS1003B_WriteCMD(0x0b,Volume);
+    CmdVol = 0;
+
+  }
+
+DisplayVolume(VolumeIndex);
+}
+```
 
 ### Small fonts
 
-I hadn't thought about it much before this project, but the ability to support a very small font comes in handy sometimes. I went with it exclusively on this project. Especially helpful to display information about the track as well as a compact listing of the files on the MP3 player. I found a really cool 3x5 font on the web and used it.
+I hadn't thought about it much before this project, but the ability to support a very small font comes in handy sometimes. I went with it exclusively on this project. Especially helpful to display information about the track as well as a compact listing of the files on the MP3 player. I found a really cool 3x5 font on the web and used it - but only after I had figured out how to translate it into the format I needed to send to the LCD. These projects are full of little puzzles like this:
+
+![]({{ site.url }}/assets/images/projects/mp3/translator.png)
+*Universal translator*
 
 ### Embedded file system - FatFS
 
@@ -187,21 +334,187 @@ Respect. That's all I can say about ELM-Chan. Everything he does is awesome. His
 > Fatfs usage.
 
 ### Digital signal processing
-You don't really need to think at all about what the actual codec is doing. One command & its streaming. But you need to know what you are streaming!
+You don't really need to think at all about what the actual codec is doing. One command & its streaming.
+
+```c
+for (UINT i = 0 ; i < 512 ; i++){
+  while ((VS1003B_PIN & _BV(VS1003B_DREQ))==0); //wait
+  VS1003B_WriteDAT(Buff[i]);
+}
+```
+But you need to know what you are streaming!
 
 ### MP3 file parsing
-Periodically, I'd find a song that either abruptly ended, didn't play, or waited a serious amount of time before playing. I had already made enough compromises. I wanted it to be able to play almost all songs on demand, all the time. So I invested time in getting this right. It took some time, and I'll spend a bit of time talking about MP3 file structure, because that's what it all boils down to.
+Periodically, I'd find a song that either abruptly ended, didn't play, or waited a serious amount of time before playing. I had already made enough compromises. I wanted it to be able to play almost all songs on demand, all the time. So I invested time in getting this right. It took some time, and I'll spend a bit of time talking about MP3 file structure, because that's what it all boils down to. This chunk of code for quickly parsing the header block of an MP3 took me a fair amount of time to get right:
 
-So, if you are going to do any work, a hex editor and an MP3 editor/parser are pretty useful tools. Here's how I used them-
+```c
+//try first 500 bytes for traditional MP3 or simple MP3
+res = f_read(&fil, Buff, sizeof(Buff), &br);
+
+
+for (UINT i = 0 ; i < 511 ; i++){
+  if ((Buff[i] == 0xFF) && ((Buff[i+1] == 0xFA) ||(Buff[i+1] == 0xFB)||(Buff[i+1] == 0xF3))) {
+  Startfound = 1;
+  res = f_lseek(&fil, f_tell(&fil) - i);
+  goto SF;
+  }
+}
+
+SF:	if (Startfound ==0) res = f_lseek(&fil, 0);
+
+
+while ((!cmd) && (!Startfound)) {
+  res = f_read(&fil, Buff, sizeof(Buff), &br);
+  Readcount++;
+  if (Readcount < 90) {
+    if (Zerocount > 100) {
+      for (UINT i = 0 ; i < 511 ; i++){
+        if ((Buff[i] == 0xFF) && ((Buff[i+1] == 0xFA) ||(Buff[i+1] == 0xFB)||(Buff[i+1] == 0xF3))) {
+          Startfound = 1;
+          res = f_lseek(&fil, f_tell(&fil) - i);
+          goto GC;
+        }
+      }
+    }
+    else {
+      for (UINT i = 0 ; i < 509 ; i++){
+        if (Buff[i] == 0x00){
+          if(Buff[i+1] == 0x00) {
+            Zerocount++;
+          }
+          if ((Zerocount > 100) && (Buff[i+2] ==0xFF)){
+            if ((Buff[i+3] == 0xFA) ||(Buff[i+3] == 0xFB)) {
+              Startfound = 1;
+              res = f_lseek(&fil, f_tell(&fil) - i-1);
+              goto GC;
+            }
+          }
+          else {
+            if ((Zerocount <=100) && ((Buff[i+1]) > 0x00)) Zerocount = 0;
+          }
+        }
+      }
+    }
+  }
+  else { //readcount > 40, go to more sophisticated search
+    if ((SkipCount == 1) && (!(Buff[0] == 0))) {
+      res = f_lseek(&fil, f_tell(&fil) +4096); //4096 assumes there are LOTS of buffered zeros in these long headers
+      goto GC;
+    }
+    if (SkipCount ==0) {
+      for (UINT i = 0 ; i < 511 ; i++){
+        if ((Buff[i] == 0xFF) && ((Buff[i+1] == 0xFA) ||(Buff[i+1] == 0xFB)||(Buff[i+1] == 0xF3))) {
+          Startfound = 1;
+          res = f_lseek(&fil, f_tell(&fil) - i);
+          goto GC;
+        }
+      }
+    }
+    if ((SkipCount ==1) && (Buff[0] ==0)) {
+      AllZeros = 1;
+      for (UINT i = 0 ; i < 10 ; i++){
+        if ((!(Buff[5*i] ==0)) && (AllZeros = 1)) {
+          AllZeros = 0;
+        }
+      }
+      if (AllZeros ==1){
+        AllZeros = 0;
+        SkipCount = 0;
+        goto GC;
+      }
+    }
+  }
+}
+```
+
+
+If you are going to do any work on these files, a hex editor and an MP3 editor/parser are pretty useful tools. Here's how I used them-
+
 
 ### SPI bus
 First thing to know is that the codec has separate SPI enable lines for sending/receiving data (VS1053b_XDCS) or sending/receiving commands (VS1053b_XCS). The SD card has its own chip select line (SD_CS). Second is that for data and commands, the codec and the SD card share the SPI bus I/O lines (MISO/MOSI). Third, the codec has a special line in streaming mode which strobes if its buffer is full (VS1053b_DREQ) to limit further writing. Some examples-
 
-Receiving data from SD card over SPI:
+Send a command to SD card over SPI:
+
+```c
+static BYTE send_cmd (		// Returns command response (bit7==1:Send failed)
+	BYTE cmd,		// Command byte
+	DWORD arg		// Argument
+)
+{
+	BYTE n, res;
+
+
+	if (cmd & 0x80) {	// ACMD<n> is the command sequense of CMD55-CMD<n>
+		cmd &= 0x7F;
+		res = send_cmd(CMD55, 0);
+		if (res > 1) return res;
+	}
+
+	// Select the card and wait for ready
+	deselect();
+	if (!select()) return 0xFF;
+
+	// Send command packet
+	xmit_spi(0x40 | cmd);				// Start + Command index
+	xmit_spi((BYTE)(arg >> 24));		// Argument[31..24]
+	xmit_spi((BYTE)(arg >> 16));		// Argument[23..16]
+	xmit_spi((BYTE)(arg >> 8));			// Argument[15..8]
+	xmit_spi((BYTE)arg);				// Argument[7..0]
+	n = 0x01;							// Dummy CRC + Stop
+	if (cmd == CMD0) n = 0x95;			// Valid CRC for CMD0(0)
+	if (cmd == CMD8) n = 0x87;			// Valid CRC for CMD8(0x1AA)
+	xmit_spi(n);
+
+	// Receive command response
+	if (cmd == CMD12) rcv_spi();		// Skip a stuff byte when stop reading
+	n = 10;								// Wait for a valid response in timeout of 10 attempts
+	do
+		res = rcv_spi();
+	while ((res & 0x80) && --n);
+
+	return res;			// Return with the response value
+}
+```
 
 Writing a command to codec over SPI:
-
+```c
+//config register
+void VS1003B_WriteCMD(uint8_t addr, uint16_t dat)
+{
+	VS1003B_XDCS_H();
+	VS1003B_XCS_L();
+	VS1003B_WriteByte(0x02);
+	VS1003B_WriteByte(addr);
+	VS1003B_WriteByte(dat>>8);
+	VS1003B_WriteByte(dat);
+	VS1003B_XCS_H();
+}
+```
 Writing data to codec over SPI:
+
+```c
+//write data (music data)
+void VS1003B_WriteDAT(uint8_t dat)
+{
+	VS1003B_XCS_H();
+	VS1003B_XDCS_L();
+	VS1003B_WriteByte(dat);
+	VS1003B_XDCS_H();
+	VS1003B_XCS_H();
+}
+```
+In turn, each of these is calling byte-level read and write functions like `VS1003B_WriteByte` and `xmit_spi`, which look like this:
+
+```c
+//send an SPI byte
+static BYTE xmit_spi(BYTE val)
+{
+	SPDR = val;
+	while(!(SPSR & _BV(SPIF)));
+	return SPDR;
+}
+```
 
 ### Organizing songs, ordering them alphabetically
 
@@ -210,7 +523,23 @@ In order to ensure everything works, there are a few rules that have to be follo
 ### Random function
 I implemented a random shuffle function. It first figures out the number of tracks of the current type and then randomly chooses between them.
 
-> code snippet
+```c
+a_rand = (DWORD) 29223;
+m_rand = (DWORD) 131071;
+seed_rand = (DWORD) 0;
+
+if(CmdMode==K_RANDOM) {//if the mode is shuffle the songs
+  //lcd_goto_xy(7,6);
+  //fprintf_P(&lcd_out,PSTR("SHUFFL"));
+  if (seed_rand ==0) {
+    init_seed = (WORD) TCNT1;
+    seed_rand = (DWORD) init_seed;
+  }
+  seed_rand = (a_rand * seed_rand) % m_rand;
+  rand_val = ((DWORD) ntrks*seed_rand)/m_rand;
+  rand_song = (UINT) rand_val +1;
+}
+```
 
 ## Learn by re-doing
 

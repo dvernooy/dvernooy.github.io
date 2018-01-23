@@ -72,7 +72,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-01-21T20:16:29-05:00">
+  <meta property="article:published_time" content="2018-01-22T21:32:42-05:00">
 
 
 
@@ -322,7 +322,7 @@
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     <meta itemprop="headline" content="MP3 4me">
     <meta itemprop="description" content="A homebrew MP3 player">
-    <meta itemprop="datePublished" content="January 21, 2018">
+    <meta itemprop="datePublished" content="January 22, 2018">
     <meta itemprop="dateModified" content="August 09, 2014">
 
     <div class="page__inner-wrap">
@@ -337,7 +337,7 @@
 
 
 
-  12 minute read
+  17 minute read
 </p>
           
         </header>
@@ -468,7 +468,7 @@ I bought it already integrated on a board by a company called GEETech:</p>
 
 <h3 id="sd-cards--interfaces">SD cards &amp; interfaces</h3>
 
-<p>SD cards are an easy way to store the audio files. But how do you access them? Well, the mechanical interface was built into the board, so it was really a matter of figuring out how to access it. The standard pinout for an SD card for accessing with the serial peripheral interface (SPI) looks like this:</p>
+<p>SD cards are an easy way to store the audio files. But how do you access them? Well, the mechanical interface was built into the board, so it was really a matter of figuring out how to access it in software. The standard pinout for an SD card for accessing with the serial peripheral interface (SPI) looks like this:</p>
 
 <p><img src="http://localhost:4000/assets/images/projects/mp3/sd_pinout.jpg" alt="" />
 <em>Accessing SD card with SPI.</em></p>
@@ -494,13 +494,50 @@ I bought it already integrated on a board by a company called GEETech:</p>
 
 <p>The system is able to charge the battery even if the main power is off. The on/off switch drives a p-channel mosfet pass transistor.</p>
 
+<p>I used a Mini-B USB connector as they are pretty popular in wall-warts which supply 5-ish volts.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/mp3/USB-pinout.gif" alt="" />
+<em>USB connector pinout</em></p>
+
 <h3 id="battery-management">Battery Management</h3>
 
 <p>I added a little feature to measure the battery voltage and alert the user when it is getting low. As simple as comparing the battery voltage to a reference using one of the ADC inputs. I had to put a little calibration table together to make sure it was an accurate representation.</p>
 
-<h3 id="switches">Switches</h3>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">CmdVoltage</span> <span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">AverageVoltCount</span><span class="o">++</span><span class="p">;</span>
+  <span class="n">TranslateVoltage</span> <span class="o">+=</span> <span class="p">(</span><span class="n">DWORD</span><span class="p">)</span> <span class="n">MeasuredVoltage</span><span class="p">;</span>
+  <span class="n">CmdVoltage</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">AverageVoltCount</span> <span class="o">&gt;</span> <span class="mi">9</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">TranslateVoltage</span> <span class="o">=</span> <span class="n">TranslateVoltage</span><span class="o">/</span><span class="mi">10</span><span class="p">;</span>
+    <span class="n">TranslateVoltage</span> <span class="o">=</span> <span class="p">(</span><span class="n">DWORD</span><span class="p">)</span><span class="mi">500</span><span class="o">*</span><span class="n">TranslateVoltage</span><span class="p">;</span>
+    <span class="n">TranslateVoltage</span> <span class="o">=</span> <span class="n">TranslateVoltage</span><span class="o">/</span><span class="mi">775</span><span class="p">;</span>
+    <span class="n">MeasuredVoltage</span> <span class="o">=</span> <span class="p">(</span><span class="n">WORD</span><span class="p">)</span> <span class="n">TranslateVoltage</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">MeasuredVoltage</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">)</span> <span class="n">MeasuredVoltage</span> <span class="o">=</span> <span class="mi">999</span><span class="p">;</span>
+    <span class="n">XXX</span> <span class="o">=</span> <span class="n">MeasuredVoltage</span><span class="o">/</span><span class="mi">100</span><span class="p">;</span>
+    <span class="n">YYY</span> <span class="o">=</span> <span class="n">MeasuredVoltage</span> <span class="o">-</span> <span class="mi">100</span><span class="o">*</span><span class="n">XXX</span><span class="p">;</span>
+    <span class="n">ZZZ</span> <span class="o">=</span> <span class="n">YYY</span><span class="o">/</span><span class="mi">10</span><span class="p">;</span>
+    <span class="n">AAA</span> <span class="o">=</span> <span class="n">YYY</span><span class="o">-</span><span class="mi">10</span><span class="o">*</span><span class="n">ZZZ</span><span class="p">;</span>
+    <span class="n">lcd_goto_xy</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">6</span><span class="p">);</span>
+    <span class="n">fprintf_P</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcd_out</span><span class="p">,</span><span class="n">PSTR</span><span class="p">(</span><span class="s">"%d.%d%d"</span><span class="p">),</span><span class="n">XXX</span><span class="p">,</span><span class="n">ZZZ</span><span class="p">,</span><span class="n">AAA</span><span class="p">);</span>
+    <span class="n">AverageVoltCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">TranslateVoltage</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">CmdVoltage1</span> <span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">invert</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">lcd_goto_xy</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">);</span>
+  <span class="n">fprintf_P</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcd_out</span><span class="p">,</span><span class="n">PSTR</span><span class="p">(</span><span class="s">"LOW BATTERY"</span><span class="p">));</span>
+  <span class="n">invert</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">CmdVoltage1</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+  <span class="n">CountVoltage</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
-<p>3 position rotary switches just made sense here. Nice feel to them, easy to wire up and work with &amp; form factor was right.</p>
+<h3 id="switches">Switches</h3>
+<p>3 position navigation switches just made sense here. Nice feel to them, easy to wire up and work with &amp; form factor was right.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/mp3/nav_switch.jpg" alt="" />
+<em>Switch works well for navigate and select</em></p>
 
 <h3 id="layout">Layout</h3>
 <p>Believe it or not, this is one circuit layout I actually thought about &amp; planned a little bit. Screen, DSP/codec + audio jacks, micro, buttons, battery charger &amp; usb input, lipo battery and SD card were the real estate hogs. And I wanted it really small and thin. Here are the initial sketches I made to try to figure out nominally where stuff should go -</p>
@@ -509,7 +546,6 @@ I bought it already integrated on a board by a company called GEETech:</p>
 <em>Played around with a few ideas. End result was closer to door #2.</em></p>
 
 <h3 id="hardware-pictures">Hardware pictures</h3>
-
 <p>Here are a few pics of the final pcb build</p>
 <blockquote>
   <blockquote>
@@ -518,7 +554,6 @@ I bought it already integrated on a board by a company called GEETech:</p>
 </blockquote>
 
 <h3 id="packaging--skin---dollar-tree-foam-board">Packaging &amp; Skin - dollar tree foam board</h3>
-
 <p>I wanted a quick and dirty way to protect the whole thing. Nothing beats foam board to get the job done in 30 min or less. Even a little mount to sit on top of an old stereo where we can feed the AUX input with the audio ouput.</p>
 
 <h2 id="software">Software</h2>
@@ -539,10 +574,9 @@ I bought it already integrated on a board by a company called GEETech:</p>
 <h3 id="user-interface">User Interface</h3>
 
 <blockquote>
-  <p>video</p>
+  <p>video
+The way the user interacted with this was really important, starting with the response to the pushbuttons.</p>
 </blockquote>
-
-<p>The way the user interacted with this was really important, starting with the response to the pushbuttons.</p>
 
 <h3 id="input-responsiveness">Input responsiveness</h3>
 
@@ -555,16 +589,85 @@ I bought it already integrated on a board by a company called GEETech:</p>
 
 <p>So what do you need to think about, &amp; how do you actually do it?</p>
 
-<blockquote>
-  <p>code</p>
-</blockquote>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ISR</span><span class="p">(</span><span class="n">TIMER0_COMPA_vect</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">pha</span><span class="o">++</span><span class="p">;</span>
+
+	<span class="k">if</span> <span class="p">((</span><span class="n">pha</span> <span class="o">%</span> <span class="p">(</span><span class="n">LONG</span><span class="p">)</span> <span class="mi">20</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>	<span class="c1">// 16 times per second
+</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">squelched</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">squelch_count</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">UINT</span><span class="p">)</span> <span class="mi">40</span><span class="p">)</span> <span class="p">{</span>
+				<span class="n">squelch_count</span><span class="o">++</span><span class="p">;</span>
+			<span class="p">}</span>
+			<span class="k">else</span> <span class="p">{</span>
+				<span class="n">squelch_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+				<span class="n">squelched</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+		<span class="k">if</span> <span class="p">((</span><span class="n">NEXT</span> <span class="o">||</span> <span class="n">PREV</span> <span class="o">||</span> <span class="n">PAUSE_PLAY</span> <span class="o">||</span> <span class="n">VOL_UP</span> <span class="o">||</span> <span class="n">VOL_DOWN</span> <span class="o">||</span> <span class="n">MODE</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">squelched</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span> <span class="n">trapped</span><span class="o">++</span><span class="p">;</span>
+
+
+		<span class="k">if</span> <span class="p">(</span><span class="n">trapped</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">UINT</span><span class="p">)</span> <span class="mi">5</span><span class="p">){</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">NEXT</span><span class="p">)</span> <span class="n">CmdPlay</span> <span class="o">=</span> <span class="n">K_NEXT</span><span class="p">;</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">PREV</span><span class="p">)</span> <span class="n">CmdPlay</span> <span class="o">=</span> <span class="n">K_PREV</span><span class="p">;</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">PAUSE_PLAY</span><span class="p">)</span> <span class="p">{</span>
+				<span class="n">stat</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+				<span class="k">if</span> <span class="p">(</span><span class="n">Playing</span> <span class="o">==</span> <span class="mi">1</span><span class="p">){</span>
+					<span class="n">CmdPlay</span> <span class="o">=</span> <span class="n">K_PAUSE</span><span class="p">;</span>
+					<span class="n">Playing</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+				<span class="p">}</span>
+				<span class="k">else</span> <span class="p">{</span>
+					<span class="n">CmdPlay</span> <span class="o">=</span> <span class="n">K_PLAY</span><span class="p">;</span>
+					<span class="n">Playing</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">VOL_UP</span><span class="p">)</span> <span class="n">CmdVol</span> <span class="o">=</span> <span class="n">K_VOL_UP</span><span class="p">;</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">VOL_DOWN</span><span class="p">)</span> <span class="n">CmdVol</span> <span class="o">=</span> <span class="n">K_VOL_DOWN</span><span class="p">;</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">MODE</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">if</span> <span class="p">(</span><span class="n">CmdMode</span> <span class="o">==</span> <span class="n">K_RANDOM</span> <span class="p">){</span>
+					<span class="n">CmdMode</span> <span class="o">=</span> <span class="n">K_ORDER</span><span class="p">;</span>
+					<span class="k">if</span> <span class="p">(</span><span class="n">frozen</span> <span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+						<span class="n">lcd_goto_xy</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">6</span><span class="p">);</span>
+						<span class="n">fprintf_P</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcd_out</span><span class="p">,</span><span class="n">PSTR</span><span class="p">(</span><span class="s">"ORDER "</span><span class="p">));</span>
+					<span class="p">}</span>
+				<span class="p">}</span>
+				<span class="k">else</span> <span class="p">{</span>
+					<span class="n">CmdMode</span> <span class="o">=</span> <span class="n">K_RANDOM</span><span class="p">;</span>
+					<span class="k">if</span> <span class="p">(</span><span class="n">frozen</span> <span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+						<span class="n">lcd_goto_xy</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">6</span><span class="p">);</span>
+						<span class="n">fprintf_P</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lcd_out</span><span class="p">,</span><span class="n">PSTR</span><span class="p">(</span><span class="s">"SHUFFL"</span><span class="p">));</span>
+					<span class="p">}</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+		<span class="n">trapped</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="n">squelched</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+
+	<span class="k">if</span> <span class="p">((</span><span class="n">pha</span> <span class="o">%</span> <span class="p">(</span><span class="kt">long</span><span class="p">)</span> <span class="mi">16000</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+		<span class="c1">//single conversion
+</span>		<span class="n">ADCSRA</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">ADSC</span><span class="p">);</span>
+		<span class="k">while</span> <span class="p">(</span><span class="n">ADCSRA</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">ADSC</span><span class="p">));</span>
+		<span class="n">MeasuredVoltage</span> <span class="o">=</span> <span class="n">ADC</span><span class="p">;</span>
+		<span class="n">CmdVoltage</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+		<span class="k">if</span> <span class="p">((</span><span class="n">MeasuredVoltage</span> <span class="o">&lt;</span> <span class="mi">510</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">CountVoltage</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">))</span> <span class="n">CountVoltage</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">MeasuredVoltage</span> <span class="o">&gt;</span> <span class="mi">5100</span><span class="p">)</span> <span class="p">{</span>
+			<span class="n">CountVoltage</span><span class="o">++</span><span class="p">;</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">CountVoltage</span><span class="o">&gt;</span><span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+				<span class="n">CountVoltage</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+				<span class="n">CmdVoltage1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h3 id="navigation">Navigation</h3>
 
 <p>Because all the files are stored on the SD card, I used the SD card directory structure to navigate. Right now, all that’s implemented is one-way - there is no escape back to a higher level directory. When it starts up, you choose this subdirectory. Right now, I have that nested only 1 subdirectory deep. Within a subdirectory, you can play or pause, go forward or backwards in order, or play the entire subdirectory at random. To go back up, you need to cycle power. A maximum of 12 subdirectories are allowed at the highest level.</p>
 
 <p>The current settings are all displayed on the bottom line of the user interface:</p>
-
 <blockquote>
   <blockquote>
     <p>screenshots of various settings</p>
@@ -575,15 +678,51 @@ I bought it already integrated on a board by a company called GEETech:</p>
 
 <p>The volume can be moved up or down, with feedback to the user. I implemented a little bar system in the bottom right corner to see that. The VS1053b has a built in volume control, so this can all be done in software. I chose 8 settings that I thought were across a broad enough range.</p>
 
-<blockquote>
-  <blockquote>
-    <p>audio setup.</p>
-  </blockquote>
-</blockquote>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">CmdVol</span><span class="p">)</span> <span class="p">{</span>
+
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">CmdVol</span> <span class="o">==</span> <span class="n">K_VOL_DOWN</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">VolumeIndex</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">VolumeIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+      <span class="n">VolumeIndex</span> <span class="o">=</span> <span class="n">VolumeIndex</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">Volume</span><span class="o">=</span><span class="p">(((</span><span class="n">WORD</span><span class="p">)</span><span class="n">VolumeArray</span><span class="p">[</span><span class="n">VolumeIndex</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="mi">8</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">WORD</span><span class="p">)</span><span class="n">VolumeArray</span><span class="p">[</span><span class="n">VolumeIndex</span><span class="p">]);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">Volume</span><span class="o">&gt;=</span><span class="mh">0x8D8D</span><span class="p">)</span> <span class="n">Volume</span><span class="o">=</span><span class="mh">0x8D8D</span><span class="p">;</span>
+    <span class="k">else</span> <span class="n">VS1003B_WriteCMD</span><span class="p">(</span><span class="mh">0x0b</span><span class="p">,</span><span class="n">Volume</span><span class="p">);</span>
+
+    <span class="n">CmdVol</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">CmdVol</span> <span class="o">==</span> <span class="n">K_VOL_UP</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">VolumeIndex</span> <span class="o">==</span><span class="mi">15</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">VolumeIndex</span> <span class="o">=</span> <span class="mi">15</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span><span class="p">{</span>
+      <span class="n">VolumeIndex</span> <span class="o">=</span> <span class="n">VolumeIndex</span> <span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">Volume</span><span class="o">=</span><span class="p">(((</span><span class="n">WORD</span><span class="p">)</span><span class="n">VolumeArray</span><span class="p">[</span><span class="n">VolumeIndex</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="mi">8</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">WORD</span><span class="p">)</span><span class="n">VolumeArray</span><span class="p">[</span><span class="n">VolumeIndex</span><span class="p">]);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">Volume</span><span class="o">&lt;=</span><span class="mh">0x0505</span><span class="p">)</span> <span class="n">Volume</span><span class="o">=</span><span class="mh">0x0505</span><span class="p">;</span>
+    <span class="k">else</span> <span class="n">VS1003B_WriteCMD</span><span class="p">(</span><span class="mh">0x0b</span><span class="p">,</span><span class="n">Volume</span><span class="p">);</span>
+    <span class="n">CmdVol</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="p">}</span>
+
+<span class="n">DisplayVolume</span><span class="p">(</span><span class="n">VolumeIndex</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h3 id="small-fonts">Small fonts</h3>
 
-<p>I hadn’t thought about it much before this project, but the ability to support a very small font comes in handy sometimes. I went with it exclusively on this project. Especially helpful to display information about the track as well as a compact listing of the files on the MP3 player. I found a really cool 3x5 font on the web and used it.</p>
+<p>I hadn’t thought about it much before this project, but the ability to support a very small font comes in handy sometimes. I went with it exclusively on this project. Especially helpful to display information about the track as well as a compact listing of the files on the MP3 player. I found a really cool 3x5 font on the web and used it - but only after I had figured out how to translate it into the format I needed to send to the LCD. These projects are full of little puzzles like this:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/mp3/translator.png" alt="" />
+<em>Universal translator</em></p>
 
 <h3 id="embedded-file-system---fatfs">Embedded file system - FatFS</h3>
 
@@ -598,21 +737,179 @@ I bought it already integrated on a board by a company called GEETech:</p>
 </blockquote>
 
 <h3 id="digital-signal-processing">Digital signal processing</h3>
-<p>You don’t really need to think at all about what the actual codec is doing. One command &amp; its streaming. But you need to know what you are streaming!</p>
+<p>You don’t really need to think at all about what the actual codec is doing. One command &amp; its streaming.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="p">(</span><span class="n">UINT</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">512</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+  <span class="k">while</span> <span class="p">((</span><span class="n">VS1003B_PIN</span> <span class="o">&amp;</span> <span class="n">_BV</span><span class="p">(</span><span class="n">VS1003B_DREQ</span><span class="p">))</span><span class="o">==</span><span class="mi">0</span><span class="p">);</span> <span class="c1">//wait
+</span>  <span class="n">VS1003B_WriteDAT</span><span class="p">(</span><span class="n">Buff</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>But you need to know what you are streaming!</p>
 
 <h3 id="mp3-file-parsing">MP3 file parsing</h3>
-<p>Periodically, I’d find a song that either abruptly ended, didn’t play, or waited a serious amount of time before playing. I had already made enough compromises. I wanted it to be able to play almost all songs on demand, all the time. So I invested time in getting this right. It took some time, and I’ll spend a bit of time talking about MP3 file structure, because that’s what it all boils down to.</p>
+<p>Periodically, I’d find a song that either abruptly ended, didn’t play, or waited a serious amount of time before playing. I had already made enough compromises. I wanted it to be able to play almost all songs on demand, all the time. So I invested time in getting this right. It took some time, and I’ll spend a bit of time talking about MP3 file structure, because that’s what it all boils down to. This chunk of code for quickly parsing the header block of an MP3 took me a fair amount of time to get right:</p>
 
-<p>So, if you are going to do any work, a hex editor and an MP3 editor/parser are pretty useful tools. Here’s how I used them-</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//try first 500 bytes for traditional MP3 or simple MP3
+</span><span class="n">res</span> <span class="o">=</span> <span class="n">f_read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fil</span><span class="p">,</span> <span class="n">Buff</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">Buff</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">br</span><span class="p">);</span>
+
+
+<span class="k">for</span> <span class="p">(</span><span class="n">UINT</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">511</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+  <span class="k">if</span> <span class="p">((</span><span class="n">Buff</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0xFF</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">((</span><span class="n">Buff</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0xFA</span><span class="p">)</span> <span class="o">||</span><span class="p">(</span><span class="n">Buff</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0xFB</span><span class="p">)</span><span class="o">||</span><span class="p">(</span><span class="n">Buff</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0xF3</span><span class="p">)))</span> <span class="p">{</span>
+  <span class="n">Startfound</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">res</span> <span class="o">=</span> <span class="n">f_lseek</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fil</span><span class="p">,</span> <span class="n">f_tell</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fil</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span><span class="p">);</span>
+  <span class="k">goto</span> <span class="n">SF</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">SF</span><span class="o">:</span>	<span class="k">if</span> <span class="p">(</span><span class="n">Startfound</span> <span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="n">res</span> <span class="o">=</span> <span class="n">f_lseek</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fil</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+
+<span class="k">while</span> <span class="p">((</span><span class="o">!</span><span class="n">cmd</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="o">!</span><span class="n">Startfound</span><span class="p">))</span> <span class="p">{</span>
+  <span class="n">res</span> <span class="o">=</span> <span class="n">f_read</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fil</span><span class="p">,</span> <span class="n">Buff</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">Buff</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">br</span><span class="p">);</span>
+  <span class="n">Readcount</span><span class="o">++</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">Readcount</span> <span class="o">&lt;</span> <span class="mi">90</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">Zerocount</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">for</span> <span class="p">(</span><span class="n">UINT</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">511</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">Buff</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0xFF</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">((</span><span class="n">Buff</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0xFA</span><span class="p">)</span> <span class="o">||</span><span class="p">(</span><span class="n">Buff</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0xFB</span><span class="p">)</span><span class="o">||</span><span class="p">(</span><span class="n">Buff</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0xF3</span><span class="p">)))</span> <span class="p">{</span>
+          <span class="n">Startfound</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+          <span class="n">res</span> <span class="o">=</span> <span class="n">f_lseek</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fil</span><span class="p">,</span> <span class="n">f_tell</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fil</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span><span class="p">);</span>
+          <span class="k">goto</span> <span class="n">GC</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+      <span class="k">for</span> <span class="p">(</span><span class="n">UINT</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">509</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">Buff</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0x00</span><span class="p">){</span>
+          <span class="k">if</span><span class="p">(</span><span class="n">Buff</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0x00</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">Zerocount</span><span class="o">++</span><span class="p">;</span>
+          <span class="p">}</span>
+          <span class="k">if</span> <span class="p">((</span><span class="n">Zerocount</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">Buff</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span><span class="mh">0xFF</span><span class="p">)){</span>
+            <span class="k">if</span> <span class="p">((</span><span class="n">Buff</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0xFA</span><span class="p">)</span> <span class="o">||</span><span class="p">(</span><span class="n">Buff</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0xFB</span><span class="p">))</span> <span class="p">{</span>
+              <span class="n">Startfound</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+              <span class="n">res</span> <span class="o">=</span> <span class="n">f_lseek</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fil</span><span class="p">,</span> <span class="n">f_tell</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fil</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+              <span class="k">goto</span> <span class="n">GC</span><span class="p">;</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+          <span class="k">else</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">((</span><span class="n">Zerocount</span> <span class="o">&lt;=</span><span class="mi">100</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">((</span><span class="n">Buff</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mh">0x00</span><span class="p">))</span> <span class="n">Zerocount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="p">{</span> <span class="c1">//readcount &gt; 40, go to more sophisticated search
+</span>    <span class="k">if</span> <span class="p">((</span><span class="n">SkipCount</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">Buff</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)))</span> <span class="p">{</span>
+      <span class="n">res</span> <span class="o">=</span> <span class="n">f_lseek</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fil</span><span class="p">,</span> <span class="n">f_tell</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fil</span><span class="p">)</span> <span class="o">+</span><span class="mi">4096</span><span class="p">);</span> <span class="c1">//4096 assumes there are LOTS of buffered zeros in these long headers
+</span>      <span class="k">goto</span> <span class="n">GC</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">SkipCount</span> <span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">for</span> <span class="p">(</span><span class="n">UINT</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">511</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">Buff</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0xFF</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">((</span><span class="n">Buff</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0xFA</span><span class="p">)</span> <span class="o">||</span><span class="p">(</span><span class="n">Buff</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0xFB</span><span class="p">)</span><span class="o">||</span><span class="p">(</span><span class="n">Buff</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0xF3</span><span class="p">)))</span> <span class="p">{</span>
+          <span class="n">Startfound</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+          <span class="n">res</span> <span class="o">=</span> <span class="n">f_lseek</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fil</span><span class="p">,</span> <span class="n">f_tell</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fil</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span><span class="p">);</span>
+          <span class="k">goto</span> <span class="n">GC</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">SkipCount</span> <span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">Buff</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span><span class="mi">0</span><span class="p">))</span> <span class="p">{</span>
+      <span class="n">AllZeros</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="k">for</span> <span class="p">(</span><span class="n">UINT</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">if</span> <span class="p">((</span><span class="o">!</span><span class="p">(</span><span class="n">Buff</span><span class="p">[</span><span class="mi">5</span><span class="o">*</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span><span class="mi">0</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">AllZeros</span> <span class="o">=</span> <span class="mi">1</span><span class="p">))</span> <span class="p">{</span>
+          <span class="n">AllZeros</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">AllZeros</span> <span class="o">==</span><span class="mi">1</span><span class="p">){</span>
+        <span class="n">AllZeros</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">SkipCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">goto</span> <span class="n">GC</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>If you are going to do any work on these files, a hex editor and an MP3 editor/parser are pretty useful tools. Here’s how I used them-</p>
 
 <h3 id="spi-bus">SPI bus</h3>
 <p>First thing to know is that the codec has separate SPI enable lines for sending/receiving data (VS1053b_XDCS) or sending/receiving commands (VS1053b_XCS). The SD card has its own chip select line (SD_CS). Second is that for data and commands, the codec and the SD card share the SPI bus I/O lines (MISO/MOSI). Third, the codec has a special line in streaming mode which strobes if its buffer is full (VS1053b_DREQ) to limit further writing. Some examples-</p>
 
-<p>Receiving data from SD card over SPI:</p>
+<p>Send a command to SD card over SPI:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="n">BYTE</span> <span class="nf">send_cmd</span> <span class="p">(</span>		<span class="c1">// Returns command response (bit7==1:Send failed)
+</span>	<span class="n">BYTE</span> <span class="n">cmd</span><span class="p">,</span>		<span class="c1">// Command byte
+</span>	<span class="n">DWORD</span> <span class="n">arg</span>		<span class="c1">// Argument
+</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">BYTE</span> <span class="n">n</span><span class="p">,</span> <span class="n">res</span><span class="p">;</span>
+
+
+	<span class="k">if</span> <span class="p">(</span><span class="n">cmd</span> <span class="o">&amp;</span> <span class="mh">0x80</span><span class="p">)</span> <span class="p">{</span>	<span class="c1">// ACMD&lt;n&gt; is the command sequense of CMD55-CMD&lt;n&gt;
+</span>		<span class="n">cmd</span> <span class="o">&amp;=</span> <span class="mh">0x7F</span><span class="p">;</span>
+		<span class="n">res</span> <span class="o">=</span> <span class="n">send_cmd</span><span class="p">(</span><span class="n">CMD55</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">res</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="c1">// Select the card and wait for ready
+</span>	<span class="n">deselect</span><span class="p">();</span>
+	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">select</span><span class="p">())</span> <span class="k">return</span> <span class="mh">0xFF</span><span class="p">;</span>
+
+	<span class="c1">// Send command packet
+</span>	<span class="n">xmit_spi</span><span class="p">(</span><span class="mh">0x40</span> <span class="o">|</span> <span class="n">cmd</span><span class="p">);</span>				<span class="c1">// Start + Command index
+</span>	<span class="n">xmit_spi</span><span class="p">((</span><span class="n">BYTE</span><span class="p">)(</span><span class="n">arg</span> <span class="o">&gt;&gt;</span> <span class="mi">24</span><span class="p">));</span>		<span class="c1">// Argument[31..24]
+</span>	<span class="n">xmit_spi</span><span class="p">((</span><span class="n">BYTE</span><span class="p">)(</span><span class="n">arg</span> <span class="o">&gt;&gt;</span> <span class="mi">16</span><span class="p">));</span>		<span class="c1">// Argument[23..16]
+</span>	<span class="n">xmit_spi</span><span class="p">((</span><span class="n">BYTE</span><span class="p">)(</span><span class="n">arg</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="p">));</span>			<span class="c1">// Argument[15..8]
+</span>	<span class="n">xmit_spi</span><span class="p">((</span><span class="n">BYTE</span><span class="p">)</span><span class="n">arg</span><span class="p">);</span>				<span class="c1">// Argument[7..0]
+</span>	<span class="n">n</span> <span class="o">=</span> <span class="mh">0x01</span><span class="p">;</span>							<span class="c1">// Dummy CRC + Stop
+</span>	<span class="k">if</span> <span class="p">(</span><span class="n">cmd</span> <span class="o">==</span> <span class="n">CMD0</span><span class="p">)</span> <span class="n">n</span> <span class="o">=</span> <span class="mh">0x95</span><span class="p">;</span>			<span class="c1">// Valid CRC for CMD0(0)
+</span>	<span class="k">if</span> <span class="p">(</span><span class="n">cmd</span> <span class="o">==</span> <span class="n">CMD8</span><span class="p">)</span> <span class="n">n</span> <span class="o">=</span> <span class="mh">0x87</span><span class="p">;</span>			<span class="c1">// Valid CRC for CMD8(0x1AA)
+</span>	<span class="n">xmit_spi</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+
+	<span class="c1">// Receive command response
+</span>	<span class="k">if</span> <span class="p">(</span><span class="n">cmd</span> <span class="o">==</span> <span class="n">CMD12</span><span class="p">)</span> <span class="n">rcv_spi</span><span class="p">();</span>		<span class="c1">// Skip a stuff byte when stop reading
+</span>	<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>								<span class="c1">// Wait for a valid response in timeout of 10 attempts
+</span>	<span class="k">do</span>
+		<span class="n">res</span> <span class="o">=</span> <span class="n">rcv_spi</span><span class="p">();</span>
+	<span class="k">while</span> <span class="p">((</span><span class="n">res</span> <span class="o">&amp;</span> <span class="mh">0x80</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">--</span><span class="n">n</span><span class="p">);</span>
+
+	<span class="k">return</span> <span class="n">res</span><span class="p">;</span>			<span class="c1">// Return with the response value
+</span><span class="p">}</span>
+</code></pre></div></div>
 
 <p>Writing a command to codec over SPI:</p>
-
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//config register
+</span><span class="kt">void</span> <span class="nf">VS1003B_WriteCMD</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="n">addr</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">dat</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">VS1003B_XDCS_H</span><span class="p">();</span>
+	<span class="n">VS1003B_XCS_L</span><span class="p">();</span>
+	<span class="n">VS1003B_WriteByte</span><span class="p">(</span><span class="mh">0x02</span><span class="p">);</span>
+	<span class="n">VS1003B_WriteByte</span><span class="p">(</span><span class="n">addr</span><span class="p">);</span>
+	<span class="n">VS1003B_WriteByte</span><span class="p">(</span><span class="n">dat</span><span class="o">&gt;&gt;</span><span class="mi">8</span><span class="p">);</span>
+	<span class="n">VS1003B_WriteByte</span><span class="p">(</span><span class="n">dat</span><span class="p">);</span>
+	<span class="n">VS1003B_XCS_H</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
 <p>Writing data to codec over SPI:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//write data (music data)
+</span><span class="kt">void</span> <span class="nf">VS1003B_WriteDAT</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="n">dat</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">VS1003B_XCS_H</span><span class="p">();</span>
+	<span class="n">VS1003B_XDCS_L</span><span class="p">();</span>
+	<span class="n">VS1003B_WriteByte</span><span class="p">(</span><span class="n">dat</span><span class="p">);</span>
+	<span class="n">VS1003B_XDCS_H</span><span class="p">();</span>
+	<span class="n">VS1003B_XCS_H</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>In turn, each of these is calling byte-level read and write functions like <code class="highlighter-rouge">VS1003B_WriteByte</code> and <code class="highlighter-rouge">xmit_spi</code>, which look like this:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//send an SPI byte
+</span><span class="k">static</span> <span class="n">BYTE</span> <span class="nf">xmit_spi</span><span class="p">(</span><span class="n">BYTE</span> <span class="n">val</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">SPDR</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
+	<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">SPSR</span> <span class="o">&amp;</span> <span class="n">_BV</span><span class="p">(</span><span class="n">SPIF</span><span class="p">)));</span>
+	<span class="k">return</span> <span class="n">SPDR</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h3 id="organizing-songs-ordering-them-alphabetically">Organizing songs, ordering them alphabetically</h3>
 
@@ -621,9 +918,22 @@ I bought it already integrated on a board by a company called GEETech:</p>
 <h3 id="random-function">Random function</h3>
 <p>I implemented a random shuffle function. It first figures out the number of tracks of the current type and then randomly chooses between them.</p>
 
-<blockquote>
-  <p>code snippet</p>
-</blockquote>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a_rand</span> <span class="o">=</span> <span class="p">(</span><span class="n">DWORD</span><span class="p">)</span> <span class="mi">29223</span><span class="p">;</span>
+<span class="n">m_rand</span> <span class="o">=</span> <span class="p">(</span><span class="n">DWORD</span><span class="p">)</span> <span class="mi">131071</span><span class="p">;</span>
+<span class="n">seed_rand</span> <span class="o">=</span> <span class="p">(</span><span class="n">DWORD</span><span class="p">)</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="k">if</span><span class="p">(</span><span class="n">CmdMode</span><span class="o">==</span><span class="n">K_RANDOM</span><span class="p">)</span> <span class="p">{</span><span class="c1">//if the mode is shuffle the songs
+</span>  <span class="c1">//lcd_goto_xy(7,6);
+</span>  <span class="c1">//fprintf_P(&amp;lcd_out,PSTR("SHUFFL"));
+</span>  <span class="k">if</span> <span class="p">(</span><span class="n">seed_rand</span> <span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">init_seed</span> <span class="o">=</span> <span class="p">(</span><span class="n">WORD</span><span class="p">)</span> <span class="n">TCNT1</span><span class="p">;</span>
+    <span class="n">seed_rand</span> <span class="o">=</span> <span class="p">(</span><span class="n">DWORD</span><span class="p">)</span> <span class="n">init_seed</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">seed_rand</span> <span class="o">=</span> <span class="p">(</span><span class="n">a_rand</span> <span class="o">*</span> <span class="n">seed_rand</span><span class="p">)</span> <span class="o">%</span> <span class="n">m_rand</span><span class="p">;</span>
+  <span class="n">rand_val</span> <span class="o">=</span> <span class="p">((</span><span class="n">DWORD</span><span class="p">)</span> <span class="n">ntrks</span><span class="o">*</span><span class="n">seed_rand</span><span class="p">)</span><span class="o">/</span><span class="n">m_rand</span><span class="p">;</span>
+  <span class="n">rand_song</span> <span class="o">=</span> <span class="p">(</span><span class="n">UINT</span><span class="p">)</span> <span class="n">rand_val</span> <span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h2 id="learn-by-re-doing">Learn by re-doing</h2>
 
