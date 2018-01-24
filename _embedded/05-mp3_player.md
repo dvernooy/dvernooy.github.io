@@ -1,7 +1,7 @@
 ---
 title: "MP3 4me"
 published: true
-subtitle: "10 years behind the iPOD"
+subtitle: "15 years behind the iPOD"
 permalink: /projects/mp3/
 excerpt: "A homebrew MP3 player"
 last_modified_at: 2014-08-09
@@ -157,6 +157,10 @@ if (CmdVoltage1 ==1) {
   CountVoltage = 0;
 }
 ```
+Here is what the voltage of the battery did as a function of playing time for a battery that was in use for about 6 months. Not too bad for not doing a serious job of power management.
+
+![]({{ site.url }}/assets/images/projects/mp3/lipo_drain.png)
+*LiPO battery voltage vs. time. Playing time about 4 hours.*
 
 ### Switches
 3 position navigation switches just made sense here. Nice feel to them, easy to wire up and work with & form factor was right.
@@ -183,6 +187,9 @@ I wanted a quick and dirty way to protect the whole thing. Nothing beats foam bo
 *Covering and mounting - dollar tree foam board & hot glue*
 
 ## Software
+
+All of the software is posted in [my repository](https://github.com/dvernooy/mp3).
+
 ### Debug strategy & software UART
 
 I'm going to start with this, even though its something I realized I needed halfway through. Clearly, the LCD wouldn't cut it as both the main screen and a way to debug what was happening. That's where the serial port comes in. The code for the file system I ended up using (FatFS) included a really lightweight *software-defined UART*, written in assembler. Meaning all of the timing was done in software. In addition, it included some really low overhead serial print functions - so I went with all of this as my main debug path.
@@ -196,7 +203,16 @@ Putting together the pieces one-by-one:
 
 ### User Interface
 
-> video
+Here is a little video of the MP3 player in action, demonstrating most of the features
+
+{% include video id="vngH-SrozKY" provider="youtube" %}
+
+The current settings are all displayed on the bottom line of the user interface.
+> `PLAY` or `PAUSE`
+> `ORDER` or `SHUFFL`
+> Volume level
+> Voltage on battery
+
 The way the user interacted with this was really important, starting with the response to the pushbuttons.
 
 ### Input responsiveness
@@ -206,7 +222,9 @@ I played with 3 different methods to get a good user response.
 2. Pure hardware interrupt: The second was having the press of a button interrupt the processor. OK, in the running.
 3. Interrupt-driven hardware polling: The third was using a dedicated hardware timer interrupt the processor and use this interrupt to manage any button presses. At first, I thought this would have a really bad impact on the audio, but after fiddling with it for an afternoon I found it was a really flexible way to do things. I never went back to method 2. Winner.
 
-So what do you need to think about, & how do you actually do it?
+Here's what you need to do.
+
+You need to experiment with the interrupt timer. You need to include a debouncer to avoid "double clicks". You need to figure out which button was pressed & ensure it was pressed. You need to use that information to update a state variable that can be managed within the main loop. You need to use this timer for any other things you can think of (like the periodic voltage measurement). Finally, you need to get out of this interrupt service routine as fast as possible.
 
 ```c
 ISR(TIMER0_COMPA_vect)
@@ -279,16 +297,12 @@ ISR(TIMER0_COMPA_vect)
 			}
 		}
 	}
-
 }
 ```
 
 ### Navigation
 
 Because all the files are stored on the SD card, I used the SD card directory structure to navigate. Right now, all that's implemented is one-way - there is no escape back to a higher level directory. When it starts up, you choose this subdirectory. Right now, I have that nested only 1 subdirectory deep. Within a subdirectory, you can play or pause, go forward or backwards in order, or play the entire subdirectory at random. To go back up, you need to cycle power. A maximum of 12 subdirectories are allowed at the highest level.
-
-The current settings are all displayed on the bottom line of the user interface:
->> screenshots of various settings
 
 ### Volume setting
 
@@ -366,7 +380,12 @@ for (UINT i = 0 ; i < 512 ; i++){
 But you need to know what you are streaming!
 
 ### MP3 file parsing
-Periodically, I'd find a song that either abruptly ended, didn't play, or waited a serious amount of time before playing. I had already made enough compromises. I wanted it to be able to play almost all songs on demand, all the time. So I invested time in getting this right. It took some time, and I'll spend a bit of time talking about MP3 file structure, because that's what it all boils down to. This chunk of code for quickly parsing the header block of an MP3 took me a fair amount of time to get right:
+Periodically, I'd find a song that either abruptly ended, didn't play, or waited a serious amount of time before playing. I had already made enough compromises. I wanted it to be able to play almost all songs on demand, all the time. So I invested time in getting this right. It took some time to learn about the MP3 file structure, because that's what it all boils down to. I might regurgitate some of the key points, but really this picture from the Wikipedia article is the key:
+
+![]({{ site.url }}/assets/images/projects/mp3/mp3_spec.png)
+*MP3 file spec ... FFF-something is the magic code*
+
+It tells you the format of a valid MP3 header block, and also how to interpret it. This chunk of code for quickly parsing the header took several iterations to get right:
 
 ```c
 //try first 500 bytes for traditional MP3 or simple MP3
@@ -382,7 +401,6 @@ for (UINT i = 0 ; i < 511 ; i++){
 }
 
 SF:	if (Startfound ==0) res = f_lseek(&fil, 0);
-
 
 while ((!cmd) && (!Startfound)) {
   res = f_read(&fil, Buff, sizeof(Buff), &br);
@@ -448,11 +466,32 @@ while ((!cmd) && (!Startfound)) {
 }
 ```
 
+If you are going to do any work on these files, a hex editor and an MP3 ID3 tag editor are pretty useful tools.
 
-If you are going to do any work on these files, a hex editor and an MP3 editor/parser are pretty useful tools. Here's how I used them-
+### Getting the song names: ID3 tags
 
+The other thing I incorporated was a piece of code to find the artist and title of the song from the ID3 tags, which are pieces of information inside the MP3 file. You can use an ID3 editor to change or add them if they are missing.
+
+If they exist, they are written to the screen during the song.
+
+```c
+strcpy_P(info_id3v2v3.artist, PSTR("Unknown Artist"));
+id3_read_status = read_ID3_info(ARTIST_ID3,info_id3v2v3.artist,sizeof(info_id3v2v3.artist),&fil);
+xout("artist", info_id3v2v3.artist, sizeof(info_id3v2v3.artist));
+lcd_goto_xy(1,1);
+fprintf_P(&lcd_out,PSTR("%s"), info_id3v2v3.artist);
+
+
+
+strcpy_P(info_id3v2v3.title, PSTR("Unknown Title"));
+id3_read_status = read_ID3_info(TITLE_ID3,info_id3v2v3.title,sizeof(info_id3v2v3.title),&fil);
+xout("title", info_id3v2v3.title, sizeof(info_id3v2v3.title));
+lcd_goto_xy(1,3);
+fprintf_P(&lcd_out,PSTR("%s"), info_id3v2v3.title);
+```
 
 ### SPI bus
+
 First thing to know is that the codec has separate SPI enable lines for sending/receiving data (VS1053b_XDCS) or sending/receiving commands (VS1053b_XCS). The SD card has its own chip select line (SD_CS). Second is that for data and commands, the codec and the SD card share the SPI bus I/O lines (MISO/MOSI). Third, the codec has a special line in streaming mode which strobes if its buffer is full (VS1053b_DREQ) to limit further writing. Some examples-
 
 Send a command to SD card over SPI:
@@ -539,7 +578,15 @@ static BYTE xmit_spi(BYTE val)
 
 ### Organizing songs, ordering them alphabetically
 
-In order to ensure everything works, there are a few rules that have to be followed. I'll go through them one by one just so I have them written down, and that will make it easier for me to go after them eventually. A really frustrating thing was that I wanted songs to be ordered alphabetically on the SD card, just for simplicity.
+In order to ensure everything works, there are a few rules that have to be followed. I'll go through them one by one just so I have them written down, and that will make it easier for me to (eventually) address them.
+
+1. The songs are played out in order they appear in the SD card file allocation table. So first order them by using some sort of numbering scheme. Then when transferring to the SD card from windows, order them in the windows folder, then drag them to the SD card by selecting all, then right clicking on the first file & then copy paste. This somehow preserves order independent of file time stamp.
+
+2. For simplicity, use `YYYYYXXX.mp3` song naming scheme. YYYYY is the name, XXX is a number.
+
+3. Keep the folder names to 10 characters or less, and have 12 folders or less
+![]({{ site.url }}/assets/images/projects/mp3/folders.jpg)
+*Folder names of 10 characters or less*
 
 ### Random function
 I implemented a random shuffle function. It first figures out the number of tracks of the current type and then randomly chooses between them.
@@ -550,8 +597,6 @@ m_rand = (DWORD) 131071;
 seed_rand = (DWORD) 0;
 
 if(CmdMode==K_RANDOM) {//if the mode is shuffle the songs
-  //lcd_goto_xy(7,6);
-  //fprintf_P(&lcd_out,PSTR("SHUFFL"));
   if (seed_rand ==0) {
     init_seed = (WORD) TCNT1;
     seed_rand = (DWORD) init_seed;
@@ -573,7 +618,7 @@ In order to get the smoothest playback possible, it was important to send the DS
 ### Limitations
 So here, in one spot, is a list of all the current limitations. All of them have to do with the software.
 - doesn't show total play time & current played amount of current track
-- doesn't allow flexible navigation, especially out of a subdirectory back up
+- doesn't allow flexible navigation, especially back out of a subdirectory
 - doesn't scroll the name of the track or author if longer than 23 characters
 - doesn't allow flexibility in play mode - e.g. no "total random" mode
 - wouldn't easily show more than 12 subdirectories - they need to be structured
