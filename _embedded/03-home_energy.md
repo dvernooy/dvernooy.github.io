@@ -11,7 +11,15 @@ toc: true
 ---
 > screenshot of home energy consumption dashboard
 ## Project overview
->> how much energy are we using?
+
+Winter months in the Northeast US give you plenty of time to sit around and come up with your next project. I kind of backed myself into this one by getting most of the piece parts together and then shaming myself into building it. In the end, it was another really fun project.
+
+In fact, it was probably the best mix of hardware and software to date, and probably not done yet. It starts with a simple question:
+
+> How much energy are we using **right now**?
+
+And remember, natural gas is a form of energy.
+
 ### Bill & Ted's excellent adventure
 
 ## S.T.E.M.
@@ -23,7 +31,7 @@ toc: true
 ### Internet serving
 
 ## Hardware
-### Circuit diagram
+### Circuit diagram - combined
 ### Gas detection - lasers & filters
 ### Electricity - Current clamps
 ### ATMega1284

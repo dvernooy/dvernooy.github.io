@@ -164,7 +164,7 @@ if (CmdVoltage1 ==1) {
 Here is what the voltage of the battery did as a function of playing time for a battery that was in use for about 6 months. Not too bad for not doing a serious job of power management.
 
 ![]({{ site.url }}/assets/images/projects/mp3/lipo_drain.png)
-*LiPO battery voltage vs. time. Playing time about 4 hours.*
+*LiPO battery voltage vs. time. Playing time beyond 6 hours. Well beyond my attention span.*
 
 ### Switches
 3 position navigation switches just made sense here. Nice feel to them, easy to wire up and work with & form factor was right.
