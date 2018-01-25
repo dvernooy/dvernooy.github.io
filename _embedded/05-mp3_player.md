@@ -22,7 +22,7 @@ Suspend your disbelief. I'm once again at least 15 years behind the times with t
 
 Turned out to have a few challenges on the AVR ATMega's that I always use - but nothing insurmountable. It was very software-centric, since much of the hardware work was done with one or two chips.
 
-My goal was to make it portable and small form factor, with a reasonably long battery life, an SD-card interface and a decent user interface - all with the ATMega328 8 bit microcontroller. I finally got there.
+My goal was to make it portable and small form factor, with a reasonably long battery life, an SD-card interface and a decent user interface - all with the ATMega328 8 bit microcontroller. I think I got there.
 
 ![]({{ site.url }}/assets/images/projects/mp3/handheld.png)
 *Good, fast and cheap ... pick one? Well, it was cheap.*
@@ -31,7 +31,7 @@ My goal was to make it portable and small form factor, with a reasonably long ba
 
 There is plenty of technology I had to work my way through - battery charger circuitry, MP3 audio specification, embedded file systems and SD cards - but the most interesting thing here is that the MP3 player is a *system*. All of the stuff needs to work together really well, or the user experience is a stinker. And even if you do get it all right, it can still be a loser.
 
-And of course, the deficiencies in what I built are all the more visible since everyone else around me just uses their phone, which gets better every couple of months. So you really have to think about everything in a fair amount of detail if you want to see it through and come out with something that will last for more than 10 minutes.
+And of course, the deficiencies in what I built are all the more visible since everyone else around me just uses their phone to play music. And phones are getting better every couple of months. So you really have to think about every detail if you want to see it through and come out with something that will last for more than 10 minutes.
 
 Turns out, software is the way to hold it all together, and this one was pretty software intensive.
 
@@ -40,7 +40,7 @@ But I'm so far behind the state-of-the-art, lets dispense with the S.T.E.M. soap
 ## Hardware
 
 ### Codec VS1053B
-OK, so almost all of the hard work is actually done here by a single chip, the VLSI solutions VS1053B.
+OK, so almost all of the hard work is actually done here by a single chip, the VLSI solutions VS1053b.
 
 ![]({{ site.url }}/assets/images/projects/mp3/VS1053b.png)
 *About 80 pages. OK, we'll start with page 1*
@@ -56,8 +56,7 @@ It is a decoder for many audio types, with a ton of functionality:
 - WAV (PCM + IMA ADPCM)
 - General MIDI 1 / SP-MIDI format 0
 
-and can also *stream*. Streaming means it can take a digital audio stream and convert it "on the fly" to analog audio.
-I bought it already integrated on a board by a company called GEETech:
+and can also *stream*. Streaming means it can take a digital audio stream encoded in an MP3 file and convert it "on the fly" to analog audio. I bought it already integrated on a board by a company called GEEEtech:
 
 ![]({{ site.url }}/assets/images/projects/mp3/GEEEtech.jpg)
 *You can get one of these for about 15 bucks ... some Assembly (and C) required*
@@ -73,27 +72,27 @@ The feature list was good, but I hadn't really given any of this much thought at
 - 12.288 Mhz crystal
 - SD card slot
 
-except for the single **5V** power supply feature - which we'll come to in a minute. There was not much to go by, just [this website](http://www.geeetech.com/wiki/index.php/VS1053_MP3_breakout_board_with_SD_card). But it was more than enough to get me started. In fact, they had a little example Arduino project posted there, which was fun to play with and just make sure the board worked. Mine did.
+Except for the single **5V** power supply feature - which we'll come to in a minute. There was not much to go by, just [this website](http://www.geeetech.com/wiki/index.php/VS1053_MP3_breakout_board_with_SD_card). But it was more than enough to get me started. In fact, they had a little example Arduino project posted there, which was fun to play with to just make sure the board worked. Mine did.
 
 ![]({{ site.url }}/assets/images/projects/mp3/arduino_test.jpg)
 *As usual, the Arduino community has it all covered*
 
-We'll come back to this "test" project in a minute - turns out that buried inside was something I thought was pretty big, but initially ignored.
+We'll come back to this "test" project in a minute. I didn't appreciate until later just what it takes to embed a fully working file system for SD cards.
 
 ### Circuit diagram
-Here is the circuit diagram for the MP3 player.
+Here is the circuit diagram for the MP3 player. The GEEEtech board takes care of the VS1053b mounting, otherwise the schematic would be a bit more gnarly.
 
 [![]({{ site.url }}/assets/images/projects/mp3/mp3_circuit.png)]({{ site.url }}/assets/images/projects/mp3/mp3_circuit.png)
 *No pin left behind*
 
 ### SD cards & interfaces
 
-SD cards are an easy way to store the audio files. But how do you access them? Well, the mechanical interface was built into the board, so it was really a matter of figuring out how to access it in software. The standard pinout for an SD card for accessing with the serial peripheral interface (SPI) looks like this:
+SD cards are an easy way to store the audio files. But how do you access those files? Well, SD card slot was populated on the back side of the GEEEtech board, so it was really a matter of figuring out how to access it in software. I didn't have to hack my own interface on this one. The standard pinout for an SD card for accessing with the serial peripheral interface (SPI) looks like this:
 
 ![]({{ site.url }}/assets/images/projects/mp3/sd_pinout.jpg)
 *Accessing SD card with SPI.*
 
-Good news is that an SPI bus is built into the ATMega328. Just needed to figure out how to package this so the SD card could easily be inserted, but also be out of the way. Answer? Tuck it in back.
+Good news is that an SPI interface is also built into the ATMega328. So, software aside, I just needed to figure out how to package things so the SD card could easily be inserted, but also be out of the way. Answer? Tuck it in back.
 
 ![]({{ site.url }}/assets/images/projects/mp3/SD.jpg)
 *SD slot is in the back*
@@ -107,7 +106,12 @@ Why?
 1. I knew a 1 cell LiPO battery typically works between 3.65V (discharged) and 4.2V (fully charged)
 2. I also knew a "low drop out regulator (LDO)" for these voltage levels can stabilize an output voltage with as little as 0.2 to 0.3V overhead. And 3.3V + 0.3V = 3.6V, which is less that the lowest voltage on a 1 cell LiPO.
 
-Bottom line, we can get away with a 1 cell LiPO circuit for the entire thing, with a hack to the GEEEtech board. And that simplifies life. Game on.
+Bottom line, we can get away with a 1 cell LiPO circuit for the entire thing, with a hack to the GEEEtech board using an LP2966.
+
+![]({{ site.url }}/assets/images/projects/mp3/geee_mod.png)
+*USB connector pinout*
+
+Remembering that the 5V input pin is now a 3.7V (nominal) input pin from the battery. And that simplifies life. Game on.
 
 ![]({{ site.url }}/assets/images/projects/mp3/lipo_closeup.png)
 *A 400mAh backpack*
@@ -199,7 +203,7 @@ Putting together the pieces one-by-one:
 2. learn to work with the xprintf functions - xitoai.S
 
 ![]({{ site.url }}/assets/images/projects/mp3/dev_environment.png)
-*My debug setup ... STK500 + a software UART & terminal emulator*
+*My debug setup: STK500 + a software UART & terminal emulator*
 
 ### User Interface
 
@@ -209,8 +213,11 @@ Here is a little video of the MP3 player in action, demonstrating most of the fe
 
 The current settings are all displayed on the bottom line of the user interface.
 > `PLAY` or `PAUSE`
+
 > `ORDER` or `SHUFFL`
+
 > Volume level
+
 > Voltage on battery
 
 The way the user interacted with this was really important, starting with the response to the pushbuttons.
@@ -364,9 +371,9 @@ I had no appreciation for the complexities of dealing with embedded file systems
 
 Enter FatFS.
 
-Respect. That's all I can say about ELM-Chan. Everything he does is awesome. His FatFS file system (among other things). The learning curve is pretty steep for a weekend hacker like me, and I climbed that sucker. But to have a fully featured file system available at my beck and call to deal with SD card read/writes, in an 8-bit microcontroller was really cool. Let me start from the beginning.
+Respect. That's all I can say about ELM-Chan. Everything he does is awesome. His FatFS file system (among other things). The learning curve is pretty steep for a weekend hacker like me, and I climbed that sucker. But to have a fully featured file system available at my beck and call to deal with SD card read/writes, in an 8-bit microcontroller was really cool.
 
-> Fatfs usage.
+I'll expand on this section soon, but suffice it to say I probably spent a good 10 hours or so just playing with FatFS, understanding the configuration file `ffconf.h`, minimizing the footprint and figuring out how to integrate it into the code base.
 
 ### Digital signal processing
 You don't really need to think at all about what the actual codec is doing. One command & its streaming.
@@ -492,7 +499,9 @@ fprintf_P(&lcd_out,PSTR("%s"), info_id3v2v3.title);
 
 ### SPI bus
 
-First thing to know is that the codec has separate SPI enable lines for sending/receiving data (VS1053b_XDCS) or sending/receiving commands (VS1053b_XCS). The SD card has its own chip select line (SD_CS). Second is that for data and commands, the codec and the SD card share the SPI bus I/O lines (MISO/MOSI). Third, the codec has a special line in streaming mode which strobes if its buffer is full (VS1053b_DREQ) to limit further writing. Some examples-
+First thing to know is that the codec has separate SPI enable lines for sending/receiving data (VS1053b_XDCS) or sending/receiving commands (VS1053b_XCS). The SD card has its own chip select line (SD_CS). Second is that for data and commands, the codec and the SD card share the SPI bus I/O lines (MISO/MOSI). Third, the codec has a special line in streaming mode which strobes if its buffer is full (VS1053b_DREQ) to limit further writing. The VS1053b code is in `VS1003B.c` and the SD card code is in `mmcbb.c`.
+
+Some examples-
 
 Send a command to SD card over SPI:
 
