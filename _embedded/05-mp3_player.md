@@ -371,12 +371,12 @@ I had no appreciation for the complexities of dealing with embedded file systems
 
 Enter FatFS.
 
-Respect. That's all I can say about ELM-Chan. Everything he does is awesome. His FatFS file system (among other things). The learning curve is pretty steep for a weekend hacker like me, and I climbed that sucker. But to have a fully featured file system available at my beck and call to deal with SD card read/writes, in an 8-bit microcontroller was really cool.
+Respect. That's all I can say about ELM-Chan. Everything he does is awesome. His FatFS file system (among other things). The learning curve is a little steep. But to have a fully featured file system available at my beck and call to deal with SD card read/writes, in an 8-bit microcontroller, was really cool.
 
-I'll expand on this section soon, but suffice it to say I probably spent a good 10 hours or so just playing with FatFS, understanding the configuration file `ffconf.h`, minimizing the footprint and figuring out how to integrate it into the code base.
+I'll expand on this section at some point, but suffice it to say I probably spent a good 10 hours or so just playing with FatFS, understanding the code, understanding the impact of changes to the configuration file `ffconf.h`, minimizing the footprint and figuring out how to integrate it into the code base.
 
 ### Digital signal processing
-You don't really need to think at all about what the actual codec is doing. One command & its streaming.
+You don't really need to think at all about what the actual codec is doing. One command & it's streaming.
 
 ```c
 for (UINT i = 0 ; i < 512 ; i++){
@@ -594,6 +594,7 @@ In order to ensure everything works, there are a few rules that have to be follo
 2. For simplicity, use `YYYYYXXX.mp3` song naming scheme. YYYYY is the name, XXX is a number.
 
 3. Keep the folder names to 10 characters or less, and have 12 folders or less
+
 ![]({{ site.url }}/assets/images/projects/mp3/folders.jpg)
 *Folder names of 10 characters or less*
 
