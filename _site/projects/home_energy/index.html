@@ -1,0 +1,1302 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.8.0 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+
+
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Home Energy Monitoring - Ab hinc</title>
+
+
+
+
+<meta name="description" content="Monitoring home energy usage">
+
+
+
+
+<meta name="author" content="Dave Vernooy">
+
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Ab hinc">
+<meta property="og:title" content="Home Energy Monitoring">
+
+
+  <link rel="canonical" href="http://localhost:4000/projects/home_energy/">
+  <meta property="og:url" content="http://localhost:4000/projects/home_energy/">
+
+
+
+  <meta property="og:description" content="Monitoring home energy usage">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/front/site-logo.png">
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2018-02-02T19:42:31-05:00">
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "http://localhost:4000",
+      "logo": "http://localhost:4000/assets/images/front/site-logo.png"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Dave Vernooy",
+      "url" : "http://localhost:4000",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Ab hinc Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
+  </head>
+
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="http://localhost:4000/">Ab hinc</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/projects/" >Projects</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/blog/" >Blog</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about/" >About</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        
+        <a href="https://dvernooy.github.io">
+          <img src="http://localhost:4000/assets/images/front/dave-vernooy-cropped.jpg" alt="Dave Vernooy" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <a href="https://dvernooy.github.io"><h3 class="author__name" itemprop="name">Dave Vernooy</h3></a>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Learning by (re)doing
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Niskayuna, NY</span>
+        </li>
+      
+
+      
+        <li>
+          <a href="https://dvernooy.github.io" itemprop="url">
+            <i class="fa fa-fw fa-chain" aria-hidden="true"></i> Website
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/dvernooy" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Home Energy Monitoring">
+    <meta itemprop="description" content="Monitoring home energy usage">
+    <meta itemprop="datePublished" content="February 02, 2018">
+    <meta itemprop="dateModified" content="September 01, 2015">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Home Energy Monitoring
+</h1>
+          <h4 class="page__related-title">Its all a bunch of hot air</h4> 
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  26 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fa fa-file-text"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#project-overview">Project overview</a></li>
+  <li><a href="#stem">S.T.E.M.</a>
+    <ul>
+      <li><a href="#heat---gas">Heat … + gas</a></li>
+      <li><a href="#electricity-in-the-house">Electricity in the house</a></li>
+      <li><a href="#home-wiring">Home wiring</a></li>
+      <li><a href="#current-detection">Current detection</a></li>
+      <li><a href="#ac-power-calculations">AC power calculations</a></li>
+      <li><a href="#gas-meters--gas-usage">Gas Meters &amp; gas usage</a></li>
+      <li><a href="#internet-serving">Internet serving</a></li>
+    </ul>
+  </li>
+  <li><a href="#hardware">Hardware</a>
+    <ul>
+      <li><a href="#circuit-diagram---combined">Circuit diagram - combined</a></li>
+      <li><a href="#electricity---current-transformers">Electricity - Current transformers</a></li>
+      <li><a href="#electricity---voltage-measurement">Electricity - Voltage measurement</a></li>
+      <li><a href="#electricity---interface-circuit">Electricity - interface circuit</a></li>
+      <li><a href="#gas-detection---lasers--filters">Gas detection - lasers &amp; filters</a></li>
+      <li><a href="#ethernet-board">Ethernet board</a></li>
+      <li><a href="#atmega1284">ATMega1284</a></li>
+      <li><a href="#attiny">ATTiny</a></li>
+      <li><a href="#micro-to-micro">Micro to micro</a></li>
+      <li><a href="#mechanical">Mechanical</a></li>
+    </ul>
+  </li>
+  <li><a href="#software">Software</a>
+    <ul>
+      <li><a href="#gas-detection-software">Gas detection software</a></li>
+      <li><a href="#electrical-algorithm---speed--low-noise">Electrical algorithm - speed &amp; low noise</a></li>
+      <li><a href="#get-the-right-numbers">Get the right numbers</a></li>
+      <li><a href="#embedded-web-serving">Embedded Web serving</a></li>
+      <li><a href="#tcpip-slim-down">TCP/IP slim down</a></li>
+      <li><a href="#internet-visualization">Internet Visualization</a></li>
+      <li><a href="#command-response">Command response</a></li>
+      <li><a href="#see-it-on-your-phone">See it on your phone?</a></li>
+      <li><a href="#r">R</a></li>
+      <li><a href="#sql-database">SQL database</a></li>
+      <li><a href="#visual-basic">Visual Basic</a></li>
+      <li><a href="#python">Python</a></li>
+    </ul>
+  </li>
+  <li><a href="#data-analysis">Data analysis</a>
+    <ul>
+      <li><a href="#energy-usage---stats">Energy usage - stats</a></li>
+      <li><a href="#noise-floor">Noise floor</a></li>
+      <li><a href="#seeing-a-lightbulb">Seeing a lightbulb</a></li>
+      <li><a href="#toasters-vs-washing-machines---real-and-reactive-power">Toasters vs. washing machines - Real and reactive power</a></li>
+      <li><a href="#120v-vs-240v">120V vs. 240V</a></li>
+      <li><a href="#fridge">Fridge</a></li>
+      <li><a href="#coffee-machine">Coffee machine</a></li>
+      <li><a href="#garage-door-opener">Garage door opener</a></li>
+      <li><a href="#gas-usage---boiling-water-vs-heating-the-house">Gas usage - boiling water vs. heating the house</a></li>
+      <li><a href="#disaggregation-algorithm">Disaggregation algorithm</a></li>
+    </ul>
+  </li>
+  <li><a href="#learning-by-re-doing">Learning by re-doing</a>
+    <ul>
+      <li><a href="#gas-circuit-in-the-elements">Gas circuit in the elements</a></li>
+      <li><a href="#why-stick-with-8-bits--all-that">Why stick with 8 bits &amp; all that</a></li>
+    </ul>
+  </li>
+</ul>
+            </nav>
+          </aside>
+        
+        <script type="text/javascript" async="" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/screenshot.jpg" alt="" />
+<em>Keeping tabs</em></p>
+
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/hardware.jpg" alt="" />
+<em>Sight for sore eyes … or eye sore?</em></p>
+
+<h2 id="project-overview">Project overview</h2>
+
+<p>Winter months in the Northeast US give you plenty of time to sit around and come up with your next project. It starts with simple questions, like</p>
+
+<p><strong>How much energy are we using right now</strong>?</p>
+
+<p>After noodling on that, I backed myself into it by getting most of the piece parts together. Then I had to build it. In the end, it was another really fun project, especially the mix of hardware and software.</p>
+
+<p>Lets start off with some of the techy-background.</p>
+
+<h2 id="stem">S.T.E.M.</h2>
+<h3 id="heat---gas">Heat … + gas</h3>
+
+<p>To really answer this question, I knew that most energy usage comes from heating and cooling. Our fridge, oven and dryer run on electricity. Our stove (range), fireplace and furnace run on natural gas. So I need to monitor both to get the answer I’m looking for. Ok, you eat an elephant one bite at a time.</p>
+
+<h3 id="electricity-in-the-house">Electricity in the house</h3>
+
+<p>There are lots of ways to measure electricity usage in your home. By far the simplest is to find the single point where the electricity enters and monitor it there. The advantage is that you get “everything” and the monitoring need only be done at one spot. The disadvantage is that everything will be measured at once.</p>
+
+<p>I also thought it would be cool to see what the individual appliances are doing (we’ll come back to that), so the other option is to measure every endpoint (or at least the big ones). This requires more hardware but will allow the effects of each appliance to be more clear.</p>
+
+<p>I went with the first solution. Easiest and fastest to implement. Cheap and fast, every time.</p>
+
+<blockquote>
+  <p>fridge</p>
+</blockquote>
+
+<p>And then I end up re-doing it. I never learn.</p>
+
+<h3 id="home-wiring">Home wiring</h3>
+
+<p>When you open up your electricity panel, there are generally two large wires that carry the current, and a third connection for neutral/ground.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/panel.png" alt="" />
+<em>Home is where the heart is … so, we’re in for some open home surgery</em></p>
+
+<p>This panel is rated for 200A service.</p>
+
+<p>The two central wires both carry 120 V at 60 Hz, but 180 degrees out of phase with each other. The neutral connection, which is grounded at this point, is the copper exposed wire. This scheme is sometimes referred to as “split phase 120V”. So measuring between each wire and ground, you get 120V, but wire to wire is 240V. Most home appliances use one of the two 120V circuits. You can see the individual circuit breakers lined up in two columns underneath the central wires. Some, like the oven, use 240V. Everything is oscillating at 60Hz.</p>
+
+<p>Home wiring will divvy up the circuits between these two split phases, so it is important to monitor both of the phases and then “add together” the results.</p>
+
+<p>So how do we get started?</p>
+
+<h3 id="current-detection">Current detection</h3>
+
+<p>A wire that carries current generates a magnetic field. That field can be collected in a secondary magnetic circuit and be used to generate a current in another wire. This is called “transformer action”, and a device that it designed to do this is called a current transformer (CT). CTs will come with a secondary current ratio rating. This means the (large and unsafe) current in the original wire can be back-calculated from this ratio, once you have measured the (much lower and safer) current in the CT.</p>
+
+<p>So lets see if we can figure it out. We’ll put a ring of magnetic material around the wire carrying our house current <script type="math/tex">I_{1}</script>. The magnetic field <script type="math/tex">B</script> in that material (permeability <script type="math/tex">\mu_{r}</script> at a distance <script type="math/tex">R</script> from the wire) is</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+B = \frac{\mu_{r} \mu_{0} I_{1}}{2\pi R}
+\tag{1}
+\label{magnetic}
+\end{align*}</script>
+
+<p>We’ll use that magnetic field to induce another current <script type="math/tex">I_{2}</script> in our CT, which is really just a coil of <script type="math/tex">N</script> turns of wire of inductance <script type="math/tex">L</script> wrapped around that material. So, if that material has cross-sectional area <script type="math/tex">A</script> the induced current is related to the flux <script type="math/tex">\phi</script> by <script type="math/tex">LI_{2} = N\phi</script>, or</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+I_{2} &= \frac{NBA}{L}\\
+&=\frac{N \mu_{r} \mu_{0} I_{1} A}{2 \pi R L}
+\end{align*} %]]></script>
+
+<p>We’re getting close. Inductance <script type="math/tex">L</script> of an <script type="math/tex">N</script> turn wire of length <script type="math/tex">l</script> and cross-sectional area <script type="math/tex">A</script> is</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+L &= \frac{\mu_{r} \mu_{0} N^{2} A} {l}
+\end{align*} %]]></script>
+
+<p>so finally, the ratio of the currents is</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+\frac{I_2}{I_1} &= (\frac {l}{2\pi R})(\frac{1}{N})
+\end{align*} %]]></script>
+
+<p>Assuming the coil extends mostly around the entire CT, <script type="math/tex">l/2 \pi R</script> is close to 1, and the current ratio is very close to <script type="math/tex">1/N</script>. By the way, some of you will know this is sort of a circular (!) argument, not a real “proof” because I just pulled that inductance formula out of the air. But the end result is true.</p>
+
+<p>Here are the two current transformers in action clamped around the two phases inside my electrical panel.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/CTs.jpg" alt="" />
+<em>Current transformers installed</em></p>
+
+<p>In practice, we will use a resistor across the output of the CT, called a burden resistor. This will give us a voltage that we can measure with a microcontroller. It also protects the CT in case of a sudden power outage.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/burden.png" alt="" />
+<em>Current-to-voltage conversion &amp; protection</em></p>
+
+<p>In order to get to our goal of energy consumption, we need also need to know the voltage to get the power. It would be best to measure both phases, but in practice the grid is “pretty stable”, so we can just measure one of the voltages to get a phase reference, and assume the other leg is 180 degrees different.</p>
+
+<h3 id="ac-power-calculations">AC power calculations</h3>
+
+<p>Really what we want here is power. Power is voltage x current. Easy. Except everything here is AC at a frequency <script type="math/tex">f=</script> 60 Hz, not DC. So we need to pay a bit of attention. Since we’re monitoring each of the two 120V circuits independently, lets dive deeply into one of them. I’ll choose circuit 1 and carry around a subscript 1 to remind us of that. The instantaneous voltage and current in circuit 1 are:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+v_{1}(t) &= V_{1}(t)\cos(2\pi f t)\\
+i_{1}(t) &= I_{1}(t)\cos(2\pi f t+ \phi_{1}(t))
+\end{align*} %]]></script>
+
+<p>As a first little diversion, if you were to stick the wall plug directly into an oscilloscope that is following every move, you would find that the amplitude <script type="math/tex">V_{1}(t)</script> is close to a constant 170V, and peak to peak the cosine wave would be double that. So where does the “120V” come from? Hold on for a min.</p>
+
+<p>As another little diversion, the phase <script type="math/tex">\phi_{1}(t)</script> tells you what type of load you have. If it is close to zero, the load is primarily resistive - like the heater in your toaster, or a light bulb, or the oven or dryer. If it is greater than zero, the load is inductive, like the motor in the washing machine, or the compressor motor in the fridge. If it is less than zero, the load is more capacitive - like perhaps the microwave.</p>
+
+<p>Anyhoo, the instantaneous power is then</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+P_{1}(t) &= v_{1}(t)i_{1}(t)
+\end{align*} %]]></script>
+
+<p>Really what we’d like to do is get the power averaged over the AC cycle to get a better snapshot of what’s going on. A single AC cycle is <script type="math/tex">T</script> = 1/60 Hz = 16.67 ms, which is pretty fast. If we average the voltage, and current over a cycle, both would be zero (it’s AC!!!). But for the power we get</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+\overline{P_{\text{1,cycle}}(t)} &= \frac{1}{T}\int_{t}^{t+T} (P_{1}(\tau) d\tau) \\
+&= \frac{1}{2}V_{1}(t) I_{1}(t)\cos(\phi_{1}(t))
+\end{align*}
+\tag{2}
+\label{p_bar} %]]></script>
+
+<p>assuming <script type="math/tex">V_{1}</script>, <script type="math/tex">I_{1}</script> &amp; <script type="math/tex">\phi</script> all varying slowly compared to the AC cycle. This number is the <em>real</em> power our circuit is consuming. Power you’d be willing to pay for. We can also independently calculate <script type="math/tex">V_{1}(t)</script> and <script type="math/tex">I_{1}(t)</script> by their “root mean square” (rms) value, where the mean is taken over a cycle.</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+v_{1,rms}(t) &= \sqrt{(\frac{1}{T}\int_{t}^{t+T} v_{1}(\tau) d\tau)^2} \\
+&=\frac{V_{1}(t)}{\sqrt{2}}\\
+i_{1,rms}(t) &= \sqrt{(\frac{1}{T}\int_{t}^{t+T} i_{1}(\tau) d\tau)^2} \\
+&=\frac{I_{1}(t)}{\sqrt{2}}\\
+\end{align*} %]]></script>
+
+<p>It turns out that these rms values are what a handheld multimeter will measure. More like an averaged voltage over a few cycles. If you calculate it out, you find <script type="math/tex">v_{1,rms}(t) = V_{1}(t)/\sqrt{2}</script> = 120V. So that’s where the 120V comes from. Almost any power engineer will only ever talk about rms values, not amplitudes or peak-to-peak values. We can now calculate the phase angle <script type="math/tex">\phi_{1}(t)</script>, which also called the <strong>power factor</strong></p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+\cos(\phi_{1}(t)) &= \frac{\overline{P_{\text{1,cycle}}(t)}}{v_{1,rms}(t)i_{1,rms}(t)} \\
+&= \text{power factor}
+\end{align*} %]]></script>
+
+<p>The <em>reactive</em> power in our home circuit is using is</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+\overline{Q_{\text{1,cycle}}(t)} = \frac{1}{2}V_{1}(t) I_{1}(t)\sin(\phi_{1}(t)).
+\end{align*}</script>
+
+<p>Again, this is a bit of a fictitious power. You can see it is only non-zero when phi is non-zero, and really represents the energy stored in the inductive (motor) and capacitive loads in the house. But it does tell us a lot about what appliances are being used. And the <em>apparent</em> power <script type="math/tex">S</script> is just</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+\overline{S_{\text{1,cycle}}(t)} &= v_{1,rms}(t)i_{1,rms}(t)\\
+&=\sqrt{\overline{P_{\text{1,cycle}}(t)}^2 + \overline{Q_{\text{1,cycle}}(t)}^2}\\
+\end{align*} %]]></script>
+
+<p>In practice on the digital computer, I took snapshots of <script type="math/tex">v_{1}(t)</script>, and <script type="math/tex">i_{1}(t)</script> over about 4 cycles instead of just one (at about 130 samples/cycle), and then did the averaging over these 4 cycles. Note that the math in Equation <script type="math/tex">\ref{p_bar}</script> is the same whether we integrate for <script type="math/tex">4T</script> as it is for <script type="math/tex">T</script>, but just a little bit less noise that way. And still pretty “instantaneous” since 4 cycles at 60Hz is still about 65 ms, or less than a tenth of a second. You’ll see that getting the details right, though, took quite some sleuthing.</p>
+
+<p>Finally, the energy <script type="math/tex">E</script> consumed is just power <script type="math/tex">P</script> times time <script type="math/tex">t</script>. Since the power is changing every few seconds (or faster), we have to get a bit fancier. Over some time span <script type="math/tex">t_{s}</script> much larger than a cycle <script type="math/tex">T</script>, the energy consumed in circuit 1 <script type="math/tex">E_{1}(t_{s})</script> is</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+E_{1}(t_{s}) &= \int_{t}^{t+t_{s}}\overline{P_{\text{1,cycle}}(\tau)}d\tau
+\end{align*} %]]></script>
+
+<p>This is the kind of thing is what computers were meant to do. Finally, if <script type="math/tex">t_{s}</script> is a month, we’d just multiply <script type="math/tex">E(t_{s})</script> times the cost of energy in $/kWh. All of this fancy math ends up in one number on your bill at the end of the month. So you are paying for real power. That’s nice.</p>
+
+<p>We can do all the same stuff above for the second circuit, remembering that the voltage for that circuit is</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+v_{2}(t) &= V_{2}(t)\cos(2\pi f t)\\
+&= -v_{1}(t)\\
+ &= -V_{1}(t)\cos(2\pi f t)\\
+\end{align*} %]]></script>
+
+<p>and just add things up in the end.</p>
+
+<h3 id="gas-meters--gas-usage">Gas Meters &amp; gas usage</h3>
+
+<p>Our gas meter is one of these guys:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/gas_meter.jpg" alt="" />
+<em>Old school</em></p>
+
+<p>The hands spin around. If we concentrate on the hand that spins the fastest (bottom left), every revolution is 1/2 cubic foot of gas flowing through the meter. So if we can count the revolutions of that guy, we can just “count up” how much gas is being used.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/gas_dial.png" alt="" />
+<em>Lets get this thing dialed in</em></p>
+
+<p>How do you count the revolutions? I “opt”ed for a laser-based approach. The beam gets interrupted by the dial pointer and you can count the interruptions with a microcontroller.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/laser_spot.png" alt="" />
+<em>Interruptions in the beam by the dial are easy to detect</em></p>
+
+<p>Once you have it all counted up, its just a matter of understanding the cost per cubic foot of gas usage.</p>
+
+<h3 id="internet-serving">Internet serving</h3>
+
+<p>Finally, I wanted to be able to see all of this information in real time and decided that I wanted this device to have its own web page. So I needed an ethernet interface to my home network, as well as an embedded web server that will “serve up” the information to anyone who asks for it. A raspberry pi would have been one way to go, but I ended up staying with my 8-bit microcontroller. This has some drawbacks, but several really interesting benefits as well.</p>
+
+<p>Web technologies are always the way to go, since they are supported by everything.</p>
+
+<h2 id="hardware">Hardware</h2>
+
+<p>This project had more hardware than some I have done previously. I’ll talk you through the interesting pieces, but first lets see the big picture.</p>
+
+<h3 id="circuit-diagram---combined">Circuit diagram - combined</h3>
+
+<p>Between the gas meter and the electricity monitor, we really have two circuits working together. Here is the overall circuit diagram of the system.</p>
+
+<p><a href="http://localhost:4000/assets/images/projects/home_energy/home_en.png"><img src="http://localhost:4000/assets/images/projects/home_energy/home_en.png" alt="" /></a>
+<em>Circuit diagram for entire home energy monitoring system</em></p>
+
+<h3 id="electricity---current-transformers">Electricity - Current transformers</h3>
+
+<p>The current transformers (CTs) I chose have a 1:3000 turns ratio.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/ct_specs.jpg" alt="" />
+<em>120A in the wire gets converted to 40mA in the CT. This is a ratio of 3000.</em></p>
+
+<p>The first step was to ensure they were working so I did a test. I didn’t have a large AC test current handy, so I co-opted our vacuum cleaner. Then I took an old cord and separated the two wires and put the current clamp around one of them. If you put it around both, you won’t read much since the current is delivered to the vacuum on one wire, and returned on the other wire. Enclose both with the CT means the total current inside is zero (in Equation 1) which essentially cancels the external magnetic field. So just use one. And then tape the cord back up. And vacuum while you’re at it.</p>
+
+<p>I just used an ac voltmeter to measure the secondary current directly. The current inside the CT (the transformer “secondary”) is much less than the primary because of the turns ratio of 3000. Accounting for the calibration constant on the CT, I found that the current draw matched reasonably well the rating on the vacuum cleaner. With a resistance of 1kohm, I measured 2.27V on my AC voltmeter, which is the same as a current of 2.27 mA. Multiplying by 3000 gives 6.8A. Close to how the vacuum  is spec’d.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/vacuum.jpg" alt="" />
+<em>Test load of 7.0 Amps</em></p>
+
+<p>I also discovered that one CT read about 9% lower than the other for the same load current, which I’d need to account for in the code. The other interesting thing is that the current transformers have a “direction” (Lenz’s law), so I’d have to either pay attention and get that right, or have some minus signs in my software.</p>
+
+<p>Next step was to add the right size burden resistor to measure voltage instead of current, and get the calibration constants correct. The entire panel was rated for 200A (24,000W at 120V) at the high end, and I wanted to “see a 60W light bulb turn on and off” on the low end. This little table helped me choose the 68 ohm value for the resistor so that I did not overflow the 5V, 10 bit full scale ADC on the microcontroller, while still maintaining just enough resolution on the low end. We’ll see if it is enough.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/burden_value.png" alt="" />
+<em>A heavy burden</em></p>
+
+<p>Finally, I installed them in my electrical panel. No coffee that morning, &amp; one hand behind the back since they are on the “hot side” of the main breaker for convenience.</p>
+
+<h3 id="electricity---voltage-measurement">Electricity - Voltage measurement</h3>
+
+<p>With current out of the way, time to measure voltage. We know the voltage is 120V, so why measure anything at all? Just use that number. Because: to get the instantaneous real and reactive power draws we really need to be sampling the voltage signal in time. It is the relative positions <em>in time</em> of the current and voltage sine waves that matter. I’ll elaborate on this in the software section.</p>
+
+<p>A simple way to do this is to pick any sub-circuit in the home, and measure its voltage with respect to the system neutral or ground wire. I just used an AC transformer tapped on one of the circuits inside the panel.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/ac_txfrmr.png" alt="" />
+<em>Tapping a circuit to measure one of the voltage phases</em></p>
+
+<p>That voltage wire is sitting at (a dangerous) 120V, so you want to “divide it down” with a voltage divider circuit to get something safe to work with. You can see this voltage divider in the circuit diagram.</p>
+
+<p>In principle, I should do this also for the other phase, but I made the assumption that the voltage on the other phase was just 180 degrees from the one I chose, which made everything just a bit less complex.</p>
+
+<h3 id="electricity---interface-circuit">Electricity - interface circuit</h3>
+
+<p>Now that we’ve picked off our current and voltage signals, we need to digitize them so our software can kick in. These are <em>AC signals</em> which wiggle above and below the reference. Since the microcontroller’s reference is 0V, we need to offset (bias) each of the 3 ac signals to be “mid-range” for the ADC. Mid-range is 2.5V. And as long as their amplitude is not greater than 5V peak-to-peak (which I’ve essentially guaranteed by my choice of burden resistors and resistor dividers), we should have no trouble with the analog to digital conversion.</p>
+
+<p>The biasing is done by creating 2.5V, buffering it and just “adding it” to each of the sensor circuits. Using the op-amp buffer for negative feedback guarantees the 2.5V does not move around.</p>
+
+<h3 id="gas-detection---lasers--filters">Gas detection - lasers &amp; filters</h3>
+
+<p>I had a few red laser pointers lying around, and a piece of a silicon solar cell. Perfect.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/piece_parts_laser.png" alt="" />
+<em>Laser pointer to transmit the light, and a solar cell as a receiver</em></p>
+
+<p>Providing the laser pointer with a low duty cycle AC signal should not only prolong its life, it should also allow the signal detection to be a bit easier. I used the pulse width modulation output of the microcontroller to provide the driving signal.</p>
+
+<p>The laser is driven using an op-amp + npn transistor, and the receiver is a transimpedance amplifier configuration for the photocurrent from the solar cell.</p>
+
+<p>Our gas meter is outside, so I did a couple simple experiments to figure out the reflectivity of the meter and whether this was even possible. Turns out, it works really well, except when it doesn’t.</p>
+
+<p>So, just align the laser spot on the dial, follow the reflected path back to the detector and measure the photocurrent received by the chunk of solar cell. Aligning things took a bit of trial and error.</p>
+
+<p>Wait, it’s outdoors? And it uses a solar cell? Ooops, the reflected laser signal is not exactly massive, and the solar cell will also detected any reflected sunlight, so its baseline will bounce around over time. So I implemented two things to get rid of the impact of this variability.</p>
+
+<ol>
+  <li>A red laser filter helps.</li>
+</ol>
+
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/laser_filter.jpg" alt="" />
+<em>670 nm laser line filter helps block out unwanted sunlight</em></p>
+
+<ol>
+  <li>And software discrimination using our AC signal - helps quite a bit more. More about that technique soon.</li>
+</ol>
+
+<p>In the end, I would still get a situation when at noon on the hottest summer days, the laser threshold would fall and the solar baseline would be at its peak .. and the signal would die. Its a challenge for another day.</p>
+
+<h3 id="ethernet-board">Ethernet board</h3>
+
+<p>To do an embedded webserver, I used <a href="http://www.geeetech.com/wiki/index.php/Arduino_ENC28J60_Ethernet_Module">this</a> ethernet board to be able to talk to the outside world. It is based on the ENC28J60 chip and had everything else easily accessbile. Since all the work is in the software, won’t say much more about it other than it worked really well with the drivers I included with the source code.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/ethernet_board.jpg" alt="" />
+<em>Connection to the outside</em></p>
+
+<h3 id="atmega1284">ATMega1284</h3>
+
+<p>There was enough going on in this project that I opted for the largest 8 bit microcontroller, the ATmega1284. It has 128K of flash, 4K of SRAM and 2K of EEPROM space. Other than a few tweaks in pin, port and interrupt vector names it was easy to work with.</p>
+
+<p>Here are some pictures of the main board:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/main_board.png" alt="" />
+<em>Main circuit board build</em></p>
+
+<h3 id="attiny">ATTiny</h3>
+
+<p>Because the laser was remote from the main monitoring, I used the ATTinyXX microcontroller for the laser driver circuit. Again, really easy to work with. Here are a few pictures of the remote gas monitoring board.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/laser_board.png" alt="" />
+<em>Laser driver and solar cell receiver board</em></p>
+
+<h3 id="micro-to-micro">Micro to micro</h3>
+
+<p>I didn’t do anything special to have the two microcontrollers “talk” to one another. No serial port comms or anything like that. Just a standard “port out” to “port in”, since we are talking about digital signals.</p>
+
+<h3 id="mechanical">Mechanical</h3>
+
+<p>My mounting leaves something to be desired. Here are some of the pics. Not super proud of any of this, but hey, gives me something to re-do.</p>
+<ul>
+  <li>wiring in the circuit breaker</li>
+  <li>main monitor mounting &amp; power</li>
+  <li>ethernet wiring</li>
+  <li>mounting the laser box near the gas meter</li>
+  <li>running wire into the house</li>
+</ul>
+
+<h2 id="software">Software</h2>
+<p>All of the code is posted <a href="https://github.com/dvernooy/home_energy">at my repo</a>.</p>
+
+<h3 id="gas-detection-software">Gas detection software</h3>
+
+<p>Lets start with the gas side of things. As simple as the scheme was, it took a fair amount of finagling to get this to work out right.</p>
+
+<p>First, I averaged the signal level for that part of the PWM cycle when the laser was on and the “background” when it was off.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">signal_average</span> <span class="o">=</span> <span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="n">background_average</span> <span class="o">=</span> <span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="n">count_signal</span> <span class="o">=</span> <span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="n">count_background</span> <span class="o">=</span> <span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">while</span> <span class="p">(</span><span class="n">TCNT0</span> <span class="o">&lt;</span> <span class="mi">245</span><span class="p">)</span> <span class="p">{</span>  
+<span class="c1">// read ADC
+</span><span class="n">read_adc</span><span class="p">();</span>
+<span class="k">if</span> <span class="p">((</span><span class="n">TCNT0</span> <span class="o">&gt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">TCNT0</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">DUTY_CYCLE</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)))</span> <span class="p">{</span>
+ <span class="n">count_signal</span><span class="o">++</span><span class="p">;</span>
+ <span class="n">signal_average</span> <span class="o">=</span> <span class="n">signal_average</span> <span class="o">+</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">else</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">TCNT0</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">DUTY_CYCLE</span> <span class="o">+</span> <span class="mi">15</span><span class="p">))</span> <span class="p">{</span>
+ <span class="n">count_background</span><span class="o">++</span><span class="p">;</span>
+ <span class="n">background_average</span> <span class="o">=</span> <span class="n">background_average</span> <span class="o">+</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span> <span class="n">result</span><span class="p">;</span>
+ <span class="p">}</span>
+<span class="p">}</span>
+<span class="p">}</span>
+<span class="n">signal_average</span> <span class="o">=</span> <span class="n">signal_average</span><span class="o">/</span><span class="n">count_signal</span><span class="p">;</span>
+<span class="n">background_average</span> <span class="o">=</span> <span class="n">background_average</span><span class="o">/</span><span class="n">count_background</span><span class="p">;</span>
+</code></pre></div></div>
+<p>Then, I implemented my detection algorithm to make sure we are tracking the right state of the counter and not double counting.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  <span class="k">if</span> <span class="p">((</span><span class="n">itsdown</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">output_level</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">signal_average</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">background_average</span> <span class="o">+</span> <span class="n">THRESHOLD1</span><span class="p">))){</span>
+  <span class="n">itsdown</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+  <span class="n">rampup_counter</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">((</span><span class="n">itsup</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">output_level</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">signal_average</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">background_average</span> <span class="o">+</span> <span class="n">THRESHOLD1</span><span class="p">)))</span> <span class="p">{</span>
+  <span class="n">itsup</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+  <span class="n">rampdown_counter</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+
+<span class="c1">//if ADC above a certain value, strobe
+</span> <span class="k">if</span> <span class="p">((</span><span class="n">signal_average</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">background_average</span> <span class="o">+</span> <span class="n">THRESHOLD1</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">output_level</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span> <span class="p">{</span>
+ <span class="n">rampup_counter</span><span class="o">++</span><span class="p">;</span>
+ <span class="n">itsdown</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">rampup_counter</span> <span class="o">&gt;</span> <span class="mi">15</span><span class="p">)</span> <span class="p">{</span>
+     <span class="n">output_high</span><span class="p">(</span><span class="n">PORTB</span><span class="p">,</span> <span class="n">STROBE</span><span class="p">);</span>
+     <span class="n">output_level</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+     <span class="n">rampup_counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+     <span class="n">itsdown</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+     <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">else</span> <span class="p">{</span>
+ <span class="k">if</span> <span class="p">((</span><span class="n">signal_average</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">background_average</span> <span class="o">+</span> <span class="n">THRESHOLD1</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">output_level</span> <span class="o">==</span> <span class="mi">1</span><span class="p">))</span> <span class="p">{</span>
+ <span class="n">rampdown_counter</span><span class="o">++</span><span class="p">;</span>
+ <span class="n">itsup</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">rampdown_counter</span> <span class="o">&gt;</span> <span class="mi">15</span><span class="p">)</span> <span class="p">{</span>
+     <span class="n">output_low</span><span class="p">(</span><span class="n">PORTB</span><span class="p">,</span> <span class="n">STROBE</span><span class="p">);</span>
+     <span class="n">output_level</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+     <span class="n">rampdown_counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+     <span class="n">itsup</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+   <span class="p">}</span>
+     <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>This scheme worked out well.</p>
+
+<h3 id="electrical-algorithm---speed--low-noise">Electrical algorithm - speed &amp; low noise</h3>
+
+<p>I opted for a single loop again here inside <code class="highlighter-rouge">main()</code>, complemented by the ADC interrupt which did all of the data capture. I enabled/disabled the ADC interrupt once per main software loop, and had the ADC take 521 measurements per software loop. The use of the interrupt was to ensure the electrical signal measurements and averaging were independent of the software loop time.</p>
+
+<p>With the ADC timer set at 1/32nd the main 12MHz clockrate (so the ADC sample time = 32X the clock period),</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="n">ADCSRA</span> <span class="o">=</span> <span class="n">_BV</span><span class="p">(</span><span class="n">ADEN</span><span class="p">)</span><span class="o">|</span><span class="n">_BV</span><span class="p">(</span><span class="n">ADIE</span><span class="p">)</span><span class="o">|</span><span class="n">_BV</span><span class="p">(</span><span class="n">ADPS2</span><span class="p">)</span><span class="o">|</span><span class="n">_BV</span><span class="p">(</span><span class="n">ADPS0</span><span class="p">);</span> <span class="c1">//clock divided by 32
+</span></code></pre></div></div>
+
+<p>and knowing from the data sheet that 13 ADC clock cycles are needed to make a measurement after ADSC is set, plus one cycle after ADSC is set and taking 1/3rd of the measurements per interrupt cycle, you find that for the 521 samples the entire sample time should take 54.2 ms. But I measured 66 to 67 ms … which is 4 full sine waves. Why?</p>
+
+<p>I actually beat my head against this one for a couple of days, measuring everything in sight. Kinda like <a href="https://en.wikipedia.org/wiki/The_Cuckoo%27s_Egg">the Cuckoo’s Egg</a>. Where did my 75 cents go? Until I noticed the discrepancy was curiously close to 3 ADC cycles.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/mystery.png" alt="" />
+<em>Hmmm - what’s going on here?</em></p>
+
+<p>After staring at the ADC timing diagram, I realized that <code class="highlighter-rouge">ADSC</code> was only going high at the <strong>end</strong> of the interrupt service routine (ISR)</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ISR</span><span class="p">(</span><span class="n">ADC_vect</span><span class="p">)</span>
+ <span class="p">{</span>
+ <span class="k">if</span> <span class="p">(</span><span class="n">ADMUX</span> <span class="o">==</span> <span class="mh">0x00</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">count</span> <span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="n">GetTime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">t</span><span class="p">);</span>
+		<span class="n">buffer0</span><span class="p">[</span><span class="n">count</span><span class="p">]</span> <span class="o">=</span> <span class="n">ADC</span><span class="p">;</span>
+		<span class="n">ADMUX</span> <span class="o">=</span> <span class="mh">0x01</span><span class="p">;</span>
+ <span class="p">}</span>
+ <span class="k">else</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">ADMUX</span> <span class="o">==</span> <span class="mh">0x01</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">buffer1</span><span class="p">[</span><span class="n">count</span><span class="p">]</span> <span class="o">=</span> <span class="n">ADC</span><span class="p">;</span>
+		<span class="n">ADMUX</span> <span class="o">=</span> <span class="mh">0x02</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">else</span> <span class="p">{</span>
+		<span class="n">buffer2</span><span class="p">[</span><span class="n">count</span><span class="p">]</span> <span class="o">=</span> <span class="n">ADC</span><span class="p">;</span>
+		<span class="n">ADMUX</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">;</span>
+		<span class="n">count</span><span class="o">++</span><span class="p">;</span>
+		<span class="c1">//after process last point in 3rd channel, stop conversions	 
+</span>		<span class="k">if</span> <span class="p">(</span><span class="n">count</span> <span class="o">==</span> <span class="n">N_POINTS</span><span class="p">)</span>  <span class="p">{</span>
+			<span class="n">temp</span> <span class="o">=</span>  <span class="n">GetElaspMs</span><span class="p">(</span><span class="o">&amp;</span><span class="n">t</span><span class="p">);</span>
+			<span class="n">temp1</span> <span class="o">=</span> <span class="p">(</span><span class="n">UINT32</span><span class="p">)</span><span class="n">getSeconds</span><span class="p">();</span>
+			<span class="n">done</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+			<span class="n">cli</span><span class="p">();</span>
+			<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+ <span class="n">ADCSRA</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">ADSC</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>whereas the <code class="highlighter-rouge">ADIF</code> bit is what <strong>triggers</strong> the interrupt. So how many clock cycles is that? Well, I had to look at the actual assembly code, and depending on what branch it was either 72, 76 or 88 clock cycles, but in all cases it was between 2 and 3 ADC cycles.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/assembler.png" alt="" />
+<em>Sometimes you gotta count the beans</em></p>
+
+<p>Aaaah. So the ADSC bit only goes high in between 2 and 3 cycles, and the <strong>next conversion</strong> happens after the 3rd cycle.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/clock_mystery.png" alt="" />
+<em>Hmmm - unwinding the mystery</em></p>
+
+<p>Cool, I think I understand this. So actually, I ended up choosing the 521 samples to average over so that the sample time:</p>
+<ol>
+  <li>was close to an integer # of cycles, in this case 4.0013</li>
+  <li>minimized SRAM usage</li>
+  <li>was much less than 0.5 seconds (here, 67 ms)</li>
+</ol>
+
+<p>The choice of 521 samples amounted to figuring out a good, practical value for T in Equation <script type="math/tex">\ref{p_bar}</script>. It took some time to get there, but I’m glad I did because it made the signals really clean.</p>
+
+<p>In pictures, then, here is where what the overall sampling scheme looks like:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/sampling_scheme.png" alt="" />
+<em>Sampling the I-V</em></p>
+
+<h3 id="get-the-right-numbers">Get the right numbers</h3>
+
+<p>Now, to connect these basic numbers to stuff we care about. First, I copied the buffered values so I could manipulate them and the ADC could go off and work independently on the next cycle of data. Here is the value munging:</p>
+
+<ol>
+  <li>Account for ADC and pre-amplifier scaling factors
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">//calculate vrms, i1 rms, i2 rms
+</span>  <span class="c1">//0.004888 = 5/1023: ADC 5V volts/10 bits = 5V/1023 levels
+</span>  <span class="c1">//84.62 = (120*2*sqrt(2)/(4.501-.490)): Voltage scaling from the resistor divider network
+</span>  <span class="c1">//44.118 = 3000 turns /68 ohms: Current sensor
+</span>  <span class="c1">//1.0902 = 84.6/77.6: broken current sensor recal
+</span></code></pre></div>    </div>
+  </li>
+  <li>Account for ADC offset of 2.5V
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">vrms</span> <span class="o">=</span> <span class="n">vrms</span> <span class="o">+</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mo">004</span><span class="mi">888</span><span class="o">*</span><span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mo">004</span><span class="mi">888</span><span class="o">*</span><span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">5</span><span class="p">);</span>
+  <span class="c1">//etc...
+</span></code></pre></div>    </div>
+  </li>
+  <li>Account for the 9% difference between the CTs
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">i1rms</span> <span class="o">=</span> <span class="n">i1rms</span> <span class="o">+</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0902</span><span class="o">*</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mo">004</span><span class="mi">888</span><span class="o">*</span><span class="n">i1</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0902</span> <span class="o">*</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mo">004</span><span class="mi">888</span><span class="o">*</span><span class="n">i1</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">5</span><span class="p">);</span>
+  <span class="n">i2rms</span> <span class="o">=</span> <span class="n">i2rms</span> <span class="o">+</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mo">004</span><span class="mi">888</span><span class="o">*</span><span class="n">i2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mo">004</span><span class="mi">888</span><span class="o">*</span><span class="n">i2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">5</span><span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Use the basic forumlas
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">N_POINTS</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">vrms</span> <span class="o">=</span> <span class="n">vrms</span> <span class="o">+</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mo">004</span><span class="mi">888</span><span class="o">*</span><span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mo">004</span><span class="mi">888</span><span class="o">*</span><span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">5</span><span class="p">);</span>
+  <span class="n">i1rms</span> <span class="o">=</span> <span class="n">i1rms</span> <span class="o">+</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0902</span><span class="o">*</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mo">004</span><span class="mi">888</span><span class="o">*</span><span class="n">i1</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0902</span> <span class="o">*</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mo">004</span><span class="mi">888</span><span class="o">*</span><span class="n">i1</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">5</span><span class="p">);</span>
+  <span class="n">i2rms</span> <span class="o">=</span> <span class="n">i2rms</span> <span class="o">+</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mo">004</span><span class="mi">888</span><span class="o">*</span><span class="n">i2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mo">004</span><span class="mi">888</span><span class="o">*</span><span class="n">i2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">5</span><span class="p">);</span>
+  <span class="n">v_i1</span> <span class="o">=</span> <span class="n">v_i1</span> <span class="o">+</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mo">004</span><span class="mi">888</span><span class="o">*</span><span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0902</span> <span class="o">*</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mo">004</span><span class="mi">888</span><span class="o">*</span><span class="n">i1</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">5</span><span class="p">);</span>
+  <span class="n">v_i2</span> <span class="o">=</span> <span class="n">v_i2</span> <span class="o">+</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mo">004</span><span class="mi">888</span><span class="o">*</span><span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mo">004</span><span class="mi">888</span><span class="o">*</span><span class="n">i2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">5</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="n">vrms</span> <span class="o">=</span> <span class="mi">84</span><span class="p">.</span><span class="mi">62</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">vrms</span><span class="o">/</span><span class="n">N_POINTS</span><span class="p">);</span>
+  <span class="n">i1rms</span> <span class="o">=</span> <span class="mi">44</span><span class="p">.</span><span class="mi">118</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">i1rms</span><span class="o">/</span><span class="n">N_POINTS</span><span class="p">);</span>
+  <span class="n">i2rms</span> <span class="o">=</span> <span class="mi">44</span><span class="p">.</span><span class="mi">118</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">i2rms</span><span class="o">/</span><span class="n">N_POINTS</span><span class="p">);</span>
+  <span class="n">v_i1</span> <span class="o">=</span> <span class="mi">84</span><span class="p">.</span><span class="mi">62</span><span class="o">*</span><span class="mi">44</span><span class="p">.</span><span class="mi">118</span><span class="o">*</span><span class="n">v_i1</span><span class="o">/</span><span class="n">N_POINTS</span><span class="p">;</span>
+  <span class="n">v_i2</span> <span class="o">=</span> <span class="mi">84</span><span class="p">.</span><span class="mi">62</span><span class="o">*</span><span class="mi">44</span><span class="p">.</span><span class="mi">118</span><span class="o">*</span><span class="n">v_i2</span><span class="o">/</span><span class="n">N_POINTS</span><span class="p">;</span>
+  <span class="c1">//calculate powers
+</span>  <span class="n">P1</span> <span class="o">=</span> <span class="n">fabs</span><span class="p">(</span><span class="n">v_i1</span><span class="o">/</span><span class="mi">1000</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">VA1</span> <span class="o">=</span> <span class="n">vrms</span><span class="o">*</span><span class="n">i1rms</span><span class="o">/</span><span class="mi">1000</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+  <span class="n">VAR1</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">VA1</span><span class="o">*</span><span class="n">VA1</span> <span class="o">-</span> <span class="n">P1</span><span class="o">*</span><span class="n">P1</span><span class="p">);</span>
+  <span class="n">PF1</span> <span class="o">=</span> <span class="n">P1</span><span class="o">/</span><span class="n">VA1</span><span class="p">;</span>
+  <span class="n">P2</span> <span class="o">=</span> <span class="n">fabs</span><span class="p">(</span><span class="n">v_i2</span><span class="o">/</span><span class="mi">1000</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">VA2</span> <span class="o">=</span> <span class="n">vrms</span><span class="o">*</span><span class="n">i2rms</span><span class="o">/</span><span class="mi">1000</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+  <span class="n">VAR2</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">VA2</span><span class="o">*</span><span class="n">VA2</span> <span class="o">-</span> <span class="n">P2</span><span class="o">*</span><span class="n">P2</span><span class="p">);</span>
+  <span class="n">PF2</span> <span class="o">=</span> <span class="n">P2</span><span class="o">/</span><span class="n">VA2</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>I then spit all of these out to the LCD, &amp; served them up to the web as requested.</p>
+
+<h3 id="embedded-web-serving">Embedded Web serving</h3>
+
+<p>So this piece was a bit new to me. If you ever want to try something like this, I’d recommend spending an hour or two reading Guido Socher’s website. What he’s done is very impressive, both in scope, but also releasing his code for general use.</p>
+
+<p>It took me a bit to piece it all together, but the basic idea is this:</p>
+
+<ol>
+  <li>Slim down the implementation of the TCP/IP protocol so that our responses fit in a single ethernet frame of 1500 bytes. After all of the room for TCP/IP &amp; packet headers, the message needs to be 1387 bytes or less.</li>
+  <li>Use http responses as a command interface.</li>
+  <li>Embed javascript so that most of the hard work is done at run time on the requesting device side.</li>
+</ol>
+
+<p>With these constraints, this little web server is unbelievably capable, especially considering it’s running on an 8 bit microcontroller at 12 MHz. I’ll talk through them one by one.</p>
+
+<h3 id="tcpip-slim-down">TCP/IP slim down</h3>
+
+<p>We need an interface to the ENC28J30, and we need an implementation of the TCP/IP protocol. The magic is in the latter.</p>
+
+<h3 id="internet-visualization">Internet Visualization</h3>
+
+<p>Javascript is a way to embed code into a webpage that runs when you load the page. that’s why its called Java-<em>script</em>. Because that code is piped over the network from the web server to the requesting device, to get it to run fast you typically optimize the heck out of it. What was once readable code turns into hyper-optimized mash.</p>
+
+<p>Made even worse when embedding in c-code to be output as a tcp packet. Here is an example:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// prepare the webpage by writing the data to the tcp send buffer
+uint16_t print_webpage_reduced2h(uint8_t *buf, uint16_t *data, uint16_t power) {   
+ cli();
+ uint16_t plen;
+ uint16_t j;
+ plen=fill_tcp_data_p(buf,0,PSTR("HTTP/1.0 200 OK\r\nContent-Type: text/html\r\nPragma: no-cache\r\nRefresh: 2\r\n\r\n"));
+ plen=fill_tcp_data_p(buf,plen,PSTR("&lt;a href=/s&gt;[1X]&lt;/a&gt;"));
+ plen=fill_tcp_data_p(buf,plen,PSTR("&lt;a href=/r&gt;[5m]&lt;/a&gt;"));
+ plen=fill_tcp_data_p(buf,plen,PSTR("&lt;body onload=\"c(p)\"&gt;&lt;canvas id=\"g\"width=\"501\"height=\"501\"&gt;"));
+ plen=fill_tcp_data_p(buf,plen,PSTR("&lt;/canvas&gt;&lt;script type=\"text/javascript\"&gt;var p=["));
+ for (j = 0; j&lt; (N_DISP-1); j++) {
+   _delay_ms(1);
+    plen=fill_tcp_data_int(buf,plen,data[j]/10);
+    plen=fill_tcp_data_p(buf,plen,PSTR(","));
+  }
+ plen=fill_tcp_data_int(buf,plen,data[N_DISP-1]/10);
+ plen=fill_tcp_data_p(buf,plen,PSTR("];function c(p){var r=[];for(x=-240,i=0;i&lt;=150;i++)"));
+ plen=fill_tcp_data_p(buf,plen,PSTR("{y=p[i];r.push([x,y]);x+=3;}d(r);}function d(r)"));
+ plen=fill_tcp_data_p(buf,plen,PSTR("{var w=document.getElementById('g');var i,x,y;"));
+ plen=fill_tcp_data_p(buf,plen,PSTR("if(w.getContext){var s=2;var z=w.getContext('2d');"));
+ plen=fill_tcp_data_p(buf,plen,PSTR("z.moveTo(15,15);z.lineTo(15,475);"));
+ plen=fill_tcp_data_p(buf,plen,PSTR("z.moveTo(15,475);z.lineTo(475,475);"));
+ plen=fill_tcp_data_p(buf,plen,PSTR("z.stroke();z.save();z.translate(250,475);"));
+ plen=fill_tcp_data_p(buf,plen,PSTR("z.scale(1.0,-1.0);z.strokeStyle=\"#FF0000\";"));
+ plen=fill_tcp_data_p(buf,plen,PSTR("z.beginPath();if(r.length&gt;0)"));
+ plen=fill_tcp_data_p(buf,plen,PSTR("{x=r[0][0]\*0.5\*s;y=r[0][1]\*s;z.moveTo(x,y);"));
+ plen=fill_tcp_data_p(buf,plen,PSTR("for(i=0;i&lt;r.length;i+=1)"));
+ plen=fill_tcp_data_p(buf,plen,PSTR("{x=r[i][0]\*0.5\*s;y=r[i][1]\*s;z.lineTo(x,y);}"));
+ plen=fill_tcp_data_p(buf,plen,PSTR("z.stroke();}z.restore();"));
+ plen=fill_tcp_data_p(buf,plen,PSTR("z.font='20px sans-serif';z.textBaseline='top';"));
+ plen=fill_tcp_data_p(buf,plen,PSTR("z.fillText('"));
+ plen=fill_tcp_data_int(buf,plen,power);
+ plen=fill_tcp_data_p(buf,plen,PSTR(" W',200,0);z.fillText('2hrs',200,480);"));
+ plen=fill_tcp_data_p(buf,plen,PSTR("}}&lt;/script&gt;&lt;/body&gt;"));
+ return(plen);
+}
+</code></pre></div></div>
+
+<p>And here is what the web page looks like:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/window.png" alt="" />
+<em>From javascript to something meaningful</em></p>
+
+<p>That was fun to do once or twice by hand. I’m sure there are javascript optimizers out there. Problem is, when you do it manually there is no going back and adding features without mucho pain.</p>
+
+<p>To get interactivity with a user, you can embed graphs, buttons, etc.</p>
+
+<h3 id="command-response">Command response</h3>
+
+<p>When clicking on a button, my software can read that and do any number of things: read a sensor, actuate something, or serve up yet another web page. Tuxgraphics has examples of all of these. For now, I’m just using it to flip between different web views of the same data.</p>
+
+<h3 id="see-it-on-your-phone">See it on your phone?</h3>
+
+<p>Yeah. Need to open up the port to the internet. Need to do some IP address casting. But yeah. Very cool, and again, this webserver is amazingly responsive because the implementation is so lightweight.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/iphone.png" alt="" />
+<em>Energy consumption at my fingertips</em></p>
+
+<h3 id="r">R</h3>
+<p>I built a really simple interface in R.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/R_screen.png" alt="" />
+<em>Very R-tistic</em></p>
+
+<p>This is the code that produces that useful dashboard.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">matrix</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="m">1</span><span class="p">,</span><span class="m">7</span><span class="p">)</span><span class="w">
+</span><span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">matrix</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="m">1</span><span class="p">,</span><span class="m">7</span><span class="p">)</span><span class="w">
+</span><span class="n">delay_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="w">
+</span><span class="n">cost_per_kwh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.2284</span><span class="w">
+</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">10000</span><span class="p">){</span><span class="w">
+
+  </span><span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">readLines</span><span class="p">(</span><span class="s2">"http://192.168.2.16/c"</span><span class="p">)</span><span class="w">
+  </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strsplit</span><span class="p">(</span><span class="n">test</span><span class="p">,</span><span class="w"> </span><span class="s2">";"</span><span class="p">)</span><span class="w">
+  </span><span class="n">A</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Sys.time</span><span class="p">()</span><span class="w">
+  </span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="m">6</span><span class="p">){</span><span class="w">
+    </span><span class="n">Z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strsplit</span><span class="p">(</span><span class="n">X</span><span class="p">[[</span><span class="m">1</span><span class="p">]][</span><span class="n">i</span><span class="m">-1</span><span class="p">],</span><span class="w"> </span><span class="s2">":"</span><span class="p">)</span><span class="w">
+    </span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">Z</span><span class="p">[[</span><span class="m">1</span><span class="p">]][</span><span class="m">2</span><span class="p">])</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+  </span><span class="n">A</span><span class="p">[</span><span class="m">7</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="w">
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">){</span><span class="w">
+    </span><span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+  </span><span class="k">else</span><span class="p">{</span><span class="w">
+    </span><span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rbind</span><span class="p">(</span><span class="n">B</span><span class="p">,</span><span class="n">A</span><span class="p">)</span><span class="w">
+    </span><span class="n">B</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="m">7</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">[</span><span class="n">j</span><span class="m">-1</span><span class="p">,</span><span class="m">7</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">B</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="m">2</span><span class="p">]</span><span class="o">/</span><span class="m">1000</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">delay_time</span><span class="o">/</span><span class="m">3600</span><span class="p">)</span><span class="o">*</span><span class="n">cost_per_kwh</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+  </span><span class="n">Sys.sleep</span><span class="p">(</span><span class="n">delay_time</span><span class="p">)</span><span class="w">
+  </span><span class="n">flush.console</span><span class="p">()</span><span class="w">
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="o">&gt;</span><span class="m">1</span><span class="p">){</span><span class="w">
+
+    </span><span class="n">par</span><span class="p">(</span><span class="w"> </span><span class="n">mfrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w">  
+
+    </span><span class="c1"># FIGURE 1</span><span class="w">
+    </span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">5</span><span class="p">))</span><span class="w">  
+    </span><span class="n">plot</span><span class="p">(</span><span class="n">as.POSIXct</span><span class="p">(</span><span class="n">B</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1970-01-01"</span><span class="p">),</span><span class="w"> </span><span class="n">B</span><span class="p">[,</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"time"</span><span class="p">,</span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Power"</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"n"</span><span class="p">)</span><span class="w">
+    </span><span class="n">lines</span><span class="p">(</span><span class="n">as.POSIXct</span><span class="p">(</span><span class="n">B</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1970-01-01"</span><span class="p">),</span><span class="w"> </span><span class="n">B</span><span class="p">[,</span><span class="m">2</span><span class="p">])</span><span class="w">
+
+    </span><span class="n">par</span><span class="p">(</span><span class="n">new</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="p">)</span><span class="w">
+    </span><span class="n">plot</span><span class="p">(</span><span class="n">as.POSIXct</span><span class="p">(</span><span class="n">B</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1970-01-01"</span><span class="p">),</span><span class="w"> </span><span class="n">B</span><span class="p">[,</span><span class="m">7</span><span class="p">],</span><span class="w"> </span><span class="n">axes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">F</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"n"</span><span class="p">)</span><span class="w">
+    </span><span class="n">lines</span><span class="p">(</span><span class="n">as.POSIXct</span><span class="p">(</span><span class="n">B</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1970-01-01"</span><span class="p">),</span><span class="w"> </span><span class="n">B</span><span class="p">[,</span><span class="m">7</span><span class="p">],</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red"</span><span class="p">)</span><span class="w">
+    </span><span class="n">axis</span><span class="w"> </span><span class="p">(</span><span class="n">side</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="n">col.axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red"</span><span class="p">)</span><span class="w">
+    </span><span class="n">mtext</span><span class="p">(</span><span class="s2">"Cost"</span><span class="p">,</span><span class="w"> </span><span class="n">side</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red"</span><span class="p">)</span><span class="w">
+
+    </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="p">(</span><span class="n">as.POSIXct</span><span class="p">(</span><span class="nf">min</span><span class="p">(</span><span class="n">B</span><span class="p">[,</span><span class="m">1</span><span class="p">]),</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1970-01-01"</span><span class="p">),</span><span class="n">as.POSIXct</span><span class="p">(</span><span class="nf">max</span><span class="p">(</span><span class="n">B</span><span class="p">[,</span><span class="m">1</span><span class="p">]),</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1970-01-01"</span><span class="p">))</span><span class="w">
+    </span><span class="n">axis.POSIXct</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"hour"</span><span class="p">))</span><span class="w">
+    </span><span class="c1">#mtext(cat(as.character(B[j,2]), side = 3, line = 0)</span><span class="w">
+    </span><span class="n">options</span><span class="p">(</span><span class="n">scipen</span><span class="o">=</span><span class="m">999</span><span class="p">)</span><span class="w">
+    </span><span class="n">mtext</span><span class="p">(</span><span class="n">test</span><span class="p">,</span><span class="w"> </span><span class="n">side</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w">
+
+
+    </span><span class="c1">#FIGURE 2</span><span class="w">
+    </span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">5</span><span class="p">))</span><span class="w">  
+    </span><span class="n">plot</span><span class="p">(</span><span class="m">0</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="n">xaxt</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span><span class="n">yaxt</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span><span class="n">bty</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span><span class="n">pch</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span><span class="n">ylab</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span><span class="n">xlab</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span><span class="w">
+    </span><span class="n">text</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="m">7</span><span class="p">,</span><span class="n">paste</span><span class="p">(</span><span class="s2">"Power: "</span><span class="p">,</span><span class="n">format</span><span class="p">(</span><span class="n">B</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">digits</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">nsmall</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">Scientific</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">),</span><span class="s2">"W"</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s2">"black"</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">2</span><span class="p">)</span><span class="w">
+    </span><span class="n">text</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="n">paste</span><span class="p">(</span><span class="s2">"Cost: $"</span><span class="p">,</span><span class="n">format</span><span class="p">(</span><span class="n">B</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="m">7</span><span class="p">],</span><span class="w"> </span><span class="n">digits</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">nsmall</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">Scientific</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">3</span><span class="p">)</span><span class="w">
+    </span><span class="c1">#</span><span class="w">
+
+    </span><span class="c1">#FIGURE 3</span><span class="w">
+    </span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">5</span><span class="p">))</span><span class="w">  
+    </span><span class="n">plot</span><span class="p">(</span><span class="n">as.POSIXct</span><span class="p">(</span><span class="n">B</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1970-01-01"</span><span class="p">),</span><span class="w"> </span><span class="n">B</span><span class="p">[,</span><span class="m">3</span><span class="p">],</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"time"</span><span class="p">,</span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"P1"</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"l"</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">B</span><span class="p">[,</span><span class="m">3</span><span class="p">],</span><span class="n">B</span><span class="p">[,</span><span class="m">2</span><span class="p">])))</span><span class="w">
+    </span><span class="n">lines</span><span class="p">(</span><span class="n">as.POSIXct</span><span class="p">(</span><span class="n">B</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1970-01-01"</span><span class="p">),</span><span class="w"> </span><span class="n">B</span><span class="p">[,</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey"</span><span class="p">)</span><span class="w">
+
+    </span><span class="n">par</span><span class="p">(</span><span class="n">new</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="p">)</span><span class="w">
+    </span><span class="n">plot</span><span class="p">(</span><span class="n">as.POSIXct</span><span class="p">(</span><span class="n">B</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1970-01-01"</span><span class="p">),</span><span class="w"> </span><span class="n">B</span><span class="p">[,</span><span class="m">5</span><span class="p">],</span><span class="w"> </span><span class="n">axes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">F</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"n"</span><span class="p">)</span><span class="w">
+    </span><span class="n">lines</span><span class="p">(</span><span class="n">as.POSIXct</span><span class="p">(</span><span class="n">B</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1970-01-01"</span><span class="p">),</span><span class="w"> </span><span class="n">B</span><span class="p">[,</span><span class="m">5</span><span class="p">],</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">)</span><span class="w">
+    </span><span class="n">axis</span><span class="w"> </span><span class="p">(</span><span class="n">side</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">,</span><span class="w"> </span><span class="n">col.axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">)</span><span class="w">
+    </span><span class="n">mtext</span><span class="p">(</span><span class="s2">"PF1"</span><span class="p">,</span><span class="w"> </span><span class="n">side</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">)</span><span class="w">
+
+    </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="p">(</span><span class="n">as.POSIXct</span><span class="p">(</span><span class="nf">min</span><span class="p">(</span><span class="n">B</span><span class="p">[,</span><span class="m">1</span><span class="p">]),</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1970-01-01"</span><span class="p">),</span><span class="n">as.POSIXct</span><span class="p">(</span><span class="nf">max</span><span class="p">(</span><span class="n">B</span><span class="p">[,</span><span class="m">1</span><span class="p">]),</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1970-01-01"</span><span class="p">))</span><span class="w">
+    </span><span class="n">axis.POSIXct</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"hour"</span><span class="p">))</span><span class="w">
+    </span><span class="n">options</span><span class="p">(</span><span class="n">scipen</span><span class="o">=</span><span class="m">999</span><span class="p">)</span><span class="w">
+    </span><span class="c1">#</span><span class="w">
+
+    </span><span class="c1">#FIGURE 4</span><span class="w">
+    </span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">5</span><span class="p">))</span><span class="w">  
+    </span><span class="n">plot</span><span class="p">(</span><span class="n">as.POSIXct</span><span class="p">(</span><span class="n">B</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1970-01-01"</span><span class="p">),</span><span class="w"> </span><span class="n">B</span><span class="p">[,</span><span class="m">4</span><span class="p">],</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"time"</span><span class="p">,</span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"P2"</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"l"</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">B</span><span class="p">[,</span><span class="m">3</span><span class="p">],</span><span class="n">B</span><span class="p">[,</span><span class="m">2</span><span class="p">])))</span><span class="w">
+    </span><span class="n">lines</span><span class="p">(</span><span class="n">as.POSIXct</span><span class="p">(</span><span class="n">B</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1970-01-01"</span><span class="p">),</span><span class="w"> </span><span class="n">B</span><span class="p">[,</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey"</span><span class="p">)</span><span class="w">
+
+    </span><span class="n">par</span><span class="p">(</span><span class="n">new</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="p">)</span><span class="w">
+    </span><span class="n">plot</span><span class="p">(</span><span class="n">as.POSIXct</span><span class="p">(</span><span class="n">B</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1970-01-01"</span><span class="p">),</span><span class="w"> </span><span class="n">B</span><span class="p">[,</span><span class="m">6</span><span class="p">],</span><span class="w"> </span><span class="n">axes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">F</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"n"</span><span class="p">)</span><span class="w">
+    </span><span class="n">lines</span><span class="p">(</span><span class="n">as.POSIXct</span><span class="p">(</span><span class="n">B</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1970-01-01"</span><span class="p">),</span><span class="w"> </span><span class="n">B</span><span class="p">[,</span><span class="m">6</span><span class="p">],</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">)</span><span class="w">
+    </span><span class="n">axis</span><span class="w"> </span><span class="p">(</span><span class="n">side</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">,</span><span class="w"> </span><span class="n">col.axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">)</span><span class="w">
+    </span><span class="n">mtext</span><span class="p">(</span><span class="s2">"PF2"</span><span class="p">,</span><span class="w"> </span><span class="n">side</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">)</span><span class="w">
+
+    </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="p">(</span><span class="n">as.POSIXct</span><span class="p">(</span><span class="nf">min</span><span class="p">(</span><span class="n">B</span><span class="p">[,</span><span class="m">1</span><span class="p">]),</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1970-01-01"</span><span class="p">),</span><span class="n">as.POSIXct</span><span class="p">(</span><span class="nf">max</span><span class="p">(</span><span class="n">B</span><span class="p">[,</span><span class="m">1</span><span class="p">]),</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1970-01-01"</span><span class="p">))</span><span class="w">
+    </span><span class="n">axis.POSIXct</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"hour"</span><span class="p">))</span><span class="w">
+    </span><span class="n">options</span><span class="p">(</span><span class="n">scipen</span><span class="o">=</span><span class="m">999</span><span class="p">)</span><span class="w">
+    </span><span class="c1">#</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="sql-database">SQL database</h3>
+
+<p>Ok, so playing with web technologies is fun. To do analysis, we need that data in a database, or a spreadsheet, or whatever. The really interesting thing is that any higher level language can just now hit the web page and read the response and then parse it. You really start to “feel” the power of web technologies and standardization doing a project like this - programming the complete stack beginning to end.</p>
+
+<p>I built a very quick and dirty MySQL database to hold the data, and have been playing with several different interfaces to understand the data.</p>
+
+<h3 id="visual-basic">Visual Basic</h3>
+<p>I like Excel, so I also wrote some VBA code and a spreadsheet to look at the data there. It is really easy to pull it offline and look at it and fiddle with different averaging and signal processing techniques.</p>
+
+<h3 id="python">Python</h3>
+<p>This is where I’m spending most of my time now, building piece by piece.</p>
+
+<h2 id="data-analysis">Data analysis</h2>
+<p>So what have I found out?</p>
+<h3 id="energy-usage---stats">Energy usage - stats</h3>
+<h3 id="noise-floor">Noise floor</h3>
+<h3 id="seeing-a-lightbulb">Seeing a lightbulb</h3>
+<h3 id="toasters-vs-washing-machines---real-and-reactive-power">Toasters vs. washing machines - Real and reactive power</h3>
+<h3 id="120v-vs-240v">120V vs. 240V</h3>
+<h3 id="fridge">Fridge</h3>
+<h3 id="coffee-machine">Coffee machine</h3>
+<h3 id="garage-door-opener">Garage door opener</h3>
+<h3 id="gas-usage---boiling-water-vs-heating-the-house">Gas usage - boiling water vs. heating the house</h3>
+
+<h3 id="disaggregation-algorithm">Disaggregation algorithm</h3>
+<p>The goal is to have a master code set that maps the entire house energy usage through clever signal processing of just this one data feed.</p>
+
+<h2 id="learning-by-re-doing">Learning by re-doing</h2>
+
+<h3 id="gas-circuit-in-the-elements">Gas circuit in the elements</h3>
+<p>A few drawbacks about the outdoors piece. Spiders, snow, rain, voles.</p>
+
+<h3 id="why-stick-with-8-bits--all-that">Why stick with 8 bits &amp; all that</h3>
+<p>Ok, you’ve got me there. Maybe time to move on.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2015-09-01">September 01, 2015</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Home+Energy+Monitoring%20http%3A%2F%2Flocalhost%3A4000%2Fprojects%2Fhome_energy%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fprojects%2Fhome_energy%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=http%3A%2F%2Flocalhost%3A4000%2Fprojects%2Fhome_energy%2F" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fprojects%2Fhome_energy%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="http://localhost:4000/projects/bobb/" class="pagination--pager" title="Uncle BOBBy
+">Previous</a>
+    
+    
+      <a href="http://localhost:4000/projects/obd-ii/" class="pagination--pager" title="OBD2 4u
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <!-- <script src="http://localhost:4000/assets/js/comments.js"></script> -->
+      <!-- <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a Comment</h4>
+      <section id="disqus_thread"></section>
+    
+</div> -->
+    <div id="disqus_thread"></div>
+    <a href="single.html#disqus_thread" data-disqus-identifier=""></a>
+
+    <script>
+      // var disqus_developer = 1;
+      var disqus_config = function () {
+      this.page.url = "/projects/home_energy/";
+      this.page.identifier = "/projects/home_energy/";
+      };
+
+      (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://dvernooy-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      <script id="dsq-count-scr" src="//dvernooy-github-io.disqus.com/count.js" async></script>
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+  <input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  <div id="results" class="results"></div>
+</div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+      <li><a href="https://github.com/dvernooy"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="http://localhost:4000/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2018 Dave Vernooy. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="http://localhost:4000/assets/js/main.min.js"></script>
+
+
+
+  <script src="http://localhost:4000/assets/js/lunr.min.js"></script>
+  <script src="http://localhost:4000/assets/js/lunr-en.js"></script>
+
+
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://localhost:4000/projects/home_energy/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/projects/03-home_energy"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://dvernooy.github.io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+  </body>
+</html>
