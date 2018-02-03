@@ -72,7 +72,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-02-02T19:42:31-05:00">
+  <meta property="article:published_time" content="2018-02-03T17:43:39-05:00">
 
 
 
@@ -322,7 +322,7 @@
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     <meta itemprop="headline" content="Home Energy Monitoring">
     <meta itemprop="description" content="Monitoring home energy usage">
-    <meta itemprop="datePublished" content="February 02, 2018">
+    <meta itemprop="datePublished" content="February 03, 2018">
     <meta itemprop="dateModified" content="September 01, 2015">
 
     <div class="page__inner-wrap">
@@ -337,7 +337,7 @@
 
 
 
-  26 minute read
+  30 minute read
 </p>
           
         </header>
@@ -372,7 +372,7 @@
       <li><a href="#atmega1284">ATMega1284</a></li>
       <li><a href="#attiny">ATTiny</a></li>
       <li><a href="#micro-to-micro">Micro to micro</a></li>
-      <li><a href="#mechanical">Mechanical</a></li>
+      <li><a href="#mounting">Mounting</a></li>
     </ul>
   </li>
   <li><a href="#software">Software</a>
@@ -388,27 +388,14 @@
       <li><a href="#r">R</a></li>
       <li><a href="#sql-database">SQL database</a></li>
       <li><a href="#visual-basic">Visual Basic</a></li>
-      <li><a href="#python">Python</a></li>
     </ul>
   </li>
-  <li><a href="#data-analysis">Data analysis</a>
-    <ul>
-      <li><a href="#energy-usage---stats">Energy usage - stats</a></li>
-      <li><a href="#noise-floor">Noise floor</a></li>
-      <li><a href="#seeing-a-lightbulb">Seeing a lightbulb</a></li>
-      <li><a href="#toasters-vs-washing-machines---real-and-reactive-power">Toasters vs. washing machines - Real and reactive power</a></li>
-      <li><a href="#120v-vs-240v">120V vs. 240V</a></li>
-      <li><a href="#fridge">Fridge</a></li>
-      <li><a href="#coffee-machine">Coffee machine</a></li>
-      <li><a href="#garage-door-opener">Garage door opener</a></li>
-      <li><a href="#gas-usage---boiling-water-vs-heating-the-house">Gas usage - boiling water vs. heating the house</a></li>
-      <li><a href="#disaggregation-algorithm">Disaggregation algorithm</a></li>
-    </ul>
-  </li>
+  <li><a href="#data-analysis">Data analysis</a></li>
   <li><a href="#learning-by-re-doing">Learning by re-doing</a>
     <ul>
+      <li><a href="#disaggregation-algorithm">Disaggregation algorithm</a></li>
       <li><a href="#gas-circuit-in-the-elements">Gas circuit in the elements</a></li>
-      <li><a href="#why-stick-with-8-bits--all-that">Why stick with 8 bits &amp; all that</a></li>
+      <li><a href="#why-stick-with-an-8-bit-microcontroller---all-that">Why stick with an 8 bit microcontroller … &amp; all that</a></li>
     </ul>
   </li>
 </ul>
@@ -443,24 +430,23 @@
 
 <p>There are lots of ways to measure electricity usage in your home. By far the simplest is to find the single point where the electricity enters and monitor it there. The advantage is that you get “everything” and the monitoring need only be done at one spot. The disadvantage is that everything will be measured at once.</p>
 
-<p>I also thought it would be cool to see what the individual appliances are doing (we’ll come back to that), so the other option is to measure every endpoint (or at least the big ones). This requires more hardware but will allow the effects of each appliance to be more clear.</p>
+<p>I also thought it would be cool to see what the individual appliances are doing (we’ll come back to that), so the other option is to measure every endpoint (or at least the big ones). This requires more hardware but will allow the effects of each appliance to be more clear. I went with the first solution. Easiest and fastest to implement. Cheap and fast, every time, until I end up re-doing it.</p>
 
-<p>I went with the first solution. Easiest and fastest to implement. Cheap and fast, every time.</p>
+<p>One of my major goals at the outset was to be able to “see” an individual light bulb turning on in the house, even with everything else going. This was so cool …</p>
 
-<blockquote>
-  <p>fridge</p>
-</blockquote>
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/see_a_lightbulb.png" alt="" />
+<em>Tracking down all the leaks</em></p>
 
-<p>And then I end up re-doing it. I never learn.</p>
+<p>I was able to easily detect a 2-CFL, 26W lamp turning on, even with the furnace fan going full blast. That’s pretty cool.</p>
 
 <h3 id="home-wiring">Home wiring</h3>
 
-<p>When you open up your electricity panel, there are generally two large wires that carry the current, and a third connection for neutral/ground.</p>
+<p>When you open up your electricity panel, there are generally two large wires that carry the current, and a third connection for neutral/ground. Here is what mine looks like:</p>
 
 <p><img src="http://localhost:4000/assets/images/projects/home_energy/panel.png" alt="" />
 <em>Home is where the heart is … so, we’re in for some open home surgery</em></p>
 
-<p>This panel is rated for 200A service.</p>
+<p>Our panel is rated for 200A service.</p>
 
 <p>The two central wires both carry 120 V at 60 Hz, but 180 degrees out of phase with each other. The neutral connection, which is grounded at this point, is the copper exposed wire. This scheme is sometimes referred to as “split phase 120V”. So measuring between each wire and ground, you get 120V, but wire to wire is 240V. Most home appliances use one of the two 120V circuits. You can see the individual circuit breakers lined up in two columns underneath the central wires. Some, like the oven, use 240V. Everything is oscillating at 60Hz.</p>
 
@@ -618,7 +604,7 @@ v_{2}(t) &= V_{2}(t)\cos(2\pi f t)\\
 <p><img src="http://localhost:4000/assets/images/projects/home_energy/laser_spot.png" alt="" />
 <em>Interruptions in the beam by the dial are easy to detect</em></p>
 
-<p>Once you have it all counted up, its just a matter of understanding the cost per cubic foot of gas usage.</p>
+<p>Once you have them all counted up, its easy to get the cost. Just a matter of multiplying by the cost per cubic foot of natural gas.</p>
 
 <h3 id="internet-serving">Internet serving</h3>
 
@@ -653,7 +639,7 @@ v_{2}(t) &= V_{2}(t)\cos(2\pi f t)\\
 
 <p>I also discovered that one CT read about 9% lower than the other for the same load current, which I’d need to account for in the code. The other interesting thing is that the current transformers have a “direction” (Lenz’s law), so I’d have to either pay attention and get that right, or have some minus signs in my software.</p>
 
-<p>Next step was to add the right size burden resistor to measure voltage instead of current, and get the calibration constants correct. The entire panel was rated for 200A (24,000W at 120V) at the high end, and I wanted to “see a 60W light bulb turn on and off” on the low end. This little table helped me choose the 68 ohm value for the resistor so that I did not overflow the 5V, 10 bit full scale ADC on the microcontroller, while still maintaining just enough resolution on the low end. We’ll see if it is enough.</p>
+<p>Next step was to add the right size burden resistor to measure voltage instead of current, and get the calibration constants correct. The entire panel was rated for 200A (24,000W at 120V) at the high end, and I wanted to “see a 60W light bulb turn on and off” on the low end. This little table helped me choose the 68 ohm value. One bit of ADC resolution is about 10W, so I should be able to see a lightbulb. The ADC will overflow at 10kW, which is a little low but certainly ok to get things going. Can always re-do later as I learn.</p>
 
 <p><img src="http://localhost:4000/assets/images/projects/home_energy/burden_value.png" alt="" />
 <em>A heavy burden</em></p>
@@ -700,7 +686,7 @@ v_{2}(t) &= V_{2}(t)\cos(2\pi f t)\\
   <li>A red laser filter helps.</li>
 </ol>
 
-<p><img src="http://localhost:4000/assets/images/projects/home_energy/laser_filter.jpg" alt="" />
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/laser_filter.png" alt="" />
 <em>670 nm laser line filter helps block out unwanted sunlight</em></p>
 
 <ol>
@@ -736,16 +722,14 @@ v_{2}(t) &= V_{2}(t)\cos(2\pi f t)\\
 
 <p>I didn’t do anything special to have the two microcontrollers “talk” to one another. No serial port comms or anything like that. Just a standard “port out” to “port in”, since we are talking about digital signals.</p>
 
-<h3 id="mechanical">Mechanical</h3>
+<h3 id="mounting">Mounting</h3>
 
-<p>My mounting leaves something to be desired. Here are some of the pics. Not super proud of any of this, but hey, gives me something to re-do.</p>
-<ul>
-  <li>wiring in the circuit breaker</li>
-  <li>main monitor mounting &amp; power</li>
-  <li>ethernet wiring</li>
-  <li>mounting the laser box near the gas meter</li>
-  <li>running wire into the house</li>
-</ul>
+<p>Here is what the final laser setup looks like:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/outdoor_setup.png" alt="" />
+<em>What … that ‘ol thang? Aaah, its nuthin’ …</em></p>
+
+<p>I’m sure the gas company folks love me … but hey, gives me something to re-do.</p>
 
 <h2 id="software">Software</h2>
 <p>All of the code is posted <a href="https://github.com/dvernooy/home_energy">at my repo</a>.</p>
@@ -814,20 +798,27 @@ v_{2}(t) &= V_{2}(t)\cos(2\pi f t)\\
      <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
-<p>This scheme worked out well.</p>
+<p>This scheme worked out well. Below is a picture of gas usage on a particular night in the fall:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/gas_overnight.png" alt="" />
+<em>Close to Hallowe’en, time to fire up the furnace</em></p>
+
+<p>The gas usage comes directly from the counting algorithm above. Gas usage is like energy usage in the electrical case. To get the equivalent gas flow rate in green, you need to integrate the counts. I built an excel spreadsheet to do it offline. The resultant gas flow rate is somewhat analogous to electrical power. It’s interesting to see the relative gas flow rates of the various home appliances.</p>
+
+<p>So how did I know which appliance is which without running around and taking notes? We’ll get to the sleuthing in a minute.</p>
 
 <h3 id="electrical-algorithm---speed--low-noise">Electrical algorithm - speed &amp; low noise</h3>
 
 <p>I opted for a single loop again here inside <code class="highlighter-rouge">main()</code>, complemented by the ADC interrupt which did all of the data capture. I enabled/disabled the ADC interrupt once per main software loop, and had the ADC take 521 measurements per software loop. The use of the interrupt was to ensure the electrical signal measurements and averaging were independent of the software loop time.</p>
 
-<p>With the ADC timer set at 1/32nd the main 12MHz clockrate (so the ADC sample time = 32X the clock period),</p>
+<p>With the ADC timer set at 1/64th the main 12MHz clockrate (so the ADC sample time = 64X the clock period),</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="n">ADCSRA</span> <span class="o">=</span> <span class="n">_BV</span><span class="p">(</span><span class="n">ADEN</span><span class="p">)</span><span class="o">|</span><span class="n">_BV</span><span class="p">(</span><span class="n">ADIE</span><span class="p">)</span><span class="o">|</span><span class="n">_BV</span><span class="p">(</span><span class="n">ADPS2</span><span class="p">)</span><span class="o">|</span><span class="n">_BV</span><span class="p">(</span><span class="n">ADPS0</span><span class="p">);</span> <span class="c1">//clock divided by 32
 </span></code></pre></div></div>
 
-<p>and knowing from the data sheet that 13 ADC clock cycles are needed to make a measurement after ADSC is set, plus one cycle after ADSC is set and taking 1/3rd of the measurements per interrupt cycle, you find that for the 521 samples the entire sample time should take 54.2 ms. But I measured 66 to 67 ms … which is 4 full sine waves. Why?</p>
+<p>and knowing from the data sheet that 13 ADC clock cycles are needed to make a measurement after ADSC is set, plus one cycle after ADSC is set and taking 1/3rd of the measurements per interrupt cycle, you find that for the 139 samples the entire sample time should take 31 ms. But I measured 33 ms …. why?</p>
 
-<p>I actually beat my head against this one for a couple of days, measuring everything in sight. Kinda like <a href="https://en.wikipedia.org/wiki/The_Cuckoo%27s_Egg">the Cuckoo’s Egg</a>. Where did my 75 cents go? Until I noticed the discrepancy was curiously close to 3 ADC cycles.</p>
+<p>I actually beat my head against this one for a couple of days, measuring everything in sight. Kinda like <a href="https://en.wikipedia.org/wiki/The_Cuckoo%27s_Egg">the Cuckoo’s Egg</a>. Where did my 75 cents go? Until I noticed the discrepancy was curiously close to 1 ADC cycle.</p>
 
 <p><img src="http://localhost:4000/assets/images/projects/home_energy/mystery.png" alt="" />
 <em>Hmmm - what’s going on here?</em></p>
@@ -863,24 +854,24 @@ v_{2}(t) &= V_{2}(t)\cos(2\pi f t)\\
  <span class="n">ADCSRA</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">ADSC</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div>
-<p>whereas the <code class="highlighter-rouge">ADIF</code> bit is what <strong>triggers</strong> the interrupt. So how many clock cycles is that? Well, I had to look at the actual assembly code, and depending on what branch it was either 72, 76 or 88 clock cycles, but in all cases it was between 2 and 3 ADC cycles.</p>
+<p>whereas the <code class="highlighter-rouge">ADIF</code> bit is what <strong>triggers</strong> the interrupt. So how many clock cycles is that? Well, I had to look at the actual assembly code, and depending on what branch it was either 72, 76 or 88 clock cycles, but in all cases it was between 1 and 2 ADC cycles.</p>
 
 <p><img src="http://localhost:4000/assets/images/projects/home_energy/assembler.png" alt="" />
 <em>Sometimes you gotta count the beans</em></p>
 
-<p>Aaaah. So the ADSC bit only goes high in between 2 and 3 cycles, and the <strong>next conversion</strong> happens after the 3rd cycle.</p>
+<p>Aaaah. So the ADSC bit only goes high in between 1 and 2 cycles, and the <strong>next conversion</strong> happens after the 2nd cycle.</p>
 
 <p><img src="http://localhost:4000/assets/images/projects/home_energy/clock_mystery.png" alt="" />
 <em>Hmmm - unwinding the mystery</em></p>
 
-<p>Cool, I think I understand this. So actually, I ended up choosing the 521 samples to average over so that the sample time:</p>
+<p>Cool, I think I understand this. So actually, I ended up choosing the 139 samples to average over so that the sample time:</p>
 <ol>
-  <li>was close to an integer # of cycles, in this case 4.0013</li>
+  <li>was close to an integer # of cycles, in this case 2.0016</li>
   <li>minimized SRAM usage</li>
-  <li>was much less than 0.5 seconds (here, 67 ms)</li>
+  <li>was much less than 0.5 seconds (here, 33 ms)</li>
 </ol>
 
-<p>The choice of 521 samples amounted to figuring out a good, practical value for T in Equation <script type="math/tex">\ref{p_bar}</script>. It took some time to get there, but I’m glad I did because it made the signals really clean.</p>
+<p>The choice of 139 samples amounted to figuring out a good, practical value for T in Equation <script type="math/tex">\ref{p_bar}</script>. It took some time to get there, but I’m glad I did because it made the signals really clean.</p>
 
 <p>In pictures, then, here is where what the overall sampling scheme looks like:</p>
 
@@ -910,7 +901,7 @@ v_{2}(t) &= V_{2}(t)\cos(2\pi f t)\\
   <span class="n">i2rms</span> <span class="o">=</span> <span class="n">i2rms</span> <span class="o">+</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mo">004</span><span class="mi">888</span><span class="o">*</span><span class="n">i2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mo">004</span><span class="mi">888</span><span class="o">*</span><span class="n">i2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">5</span><span class="p">);</span>
 </code></pre></div>    </div>
   </li>
-  <li>Use the basic forumlas
+  <li>Use the basic formulas
     <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">N_POINTS</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
   <span class="n">vrms</span> <span class="o">=</span> <span class="n">vrms</span> <span class="o">+</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mo">004</span><span class="mi">888</span><span class="o">*</span><span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mo">004</span><span class="mi">888</span><span class="o">*</span><span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">5</span><span class="p">);</span>
   <span class="n">i1rms</span> <span class="o">=</span> <span class="n">i1rms</span> <span class="o">+</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0902</span><span class="o">*</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mo">004</span><span class="mi">888</span><span class="o">*</span><span class="n">i1</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0902</span> <span class="o">*</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mo">004</span><span class="mi">888</span><span class="o">*</span><span class="n">i1</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">5</span><span class="p">);</span>
@@ -923,20 +914,62 @@ v_{2}(t) &= V_{2}(t)\cos(2\pi f t)\\
   <span class="n">i2rms</span> <span class="o">=</span> <span class="mi">44</span><span class="p">.</span><span class="mi">118</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">i2rms</span><span class="o">/</span><span class="n">N_POINTS</span><span class="p">);</span>
   <span class="n">v_i1</span> <span class="o">=</span> <span class="mi">84</span><span class="p">.</span><span class="mi">62</span><span class="o">*</span><span class="mi">44</span><span class="p">.</span><span class="mi">118</span><span class="o">*</span><span class="n">v_i1</span><span class="o">/</span><span class="n">N_POINTS</span><span class="p">;</span>
   <span class="n">v_i2</span> <span class="o">=</span> <span class="mi">84</span><span class="p">.</span><span class="mi">62</span><span class="o">*</span><span class="mi">44</span><span class="p">.</span><span class="mi">118</span><span class="o">*</span><span class="n">v_i2</span><span class="o">/</span><span class="n">N_POINTS</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Average like crazy
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="p">(</span><span class="n">N_AVG</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+  <span class="n">P1_vec</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">P1_vec</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+  <span class="n">VAR1_vec</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span> <span class="n">VAR1_vec</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+  <span class="n">VA1_vec</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span> <span class="n">VA1_vec</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+  <span class="n">PF1_vec</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span> <span class="n">PF1_vec</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+  <span class="n">P2_vec</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">P2_vec</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+  <span class="n">VAR2_vec</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">VAR2_vec</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+  <span class="n">VA2_vec</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">VA2_vec</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+  <span class="n">PF2_vec</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">PF2_vec</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+  <span class="p">}</span>
+  <span class="c1">//
+</span>  <span class="n">P1_vec</span><span class="p">[</span><span class="n">N_AVG</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">fabs</span><span class="p">(</span><span class="n">v_i1</span><span class="o">/</span><span class="mi">1000</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">VA1_vec</span><span class="p">[</span><span class="n">N_AVG</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">vrms</span><span class="o">*</span><span class="n">i1rms</span><span class="o">/</span><span class="mi">1000</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+  <span class="n">VAR1_vec</span><span class="p">[</span><span class="n">N_AVG</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">VA1</span><span class="o">*</span><span class="n">VA1</span> <span class="o">-</span> <span class="n">P1</span><span class="o">*</span><span class="n">P1</span><span class="p">);</span>
+  <span class="n">PF1_vec</span><span class="p">[</span><span class="n">N_AVG</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">P1</span><span class="o">/</span><span class="n">VA1</span><span class="p">;</span>
+  <span class="n">P2_vec</span><span class="p">[</span><span class="n">N_AVG</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">fabs</span><span class="p">(</span><span class="n">v_i2</span><span class="o">/</span><span class="mi">1000</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">VA2_vec</span><span class="p">[</span><span class="n">N_AVG</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">vrms</span><span class="o">*</span><span class="n">i2rms</span><span class="o">/</span><span class="mi">1000</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+  <span class="n">VAR2_vec</span><span class="p">[</span><span class="n">N_AVG</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">VA2</span><span class="o">*</span><span class="n">VA2</span> <span class="o">-</span> <span class="n">P2</span><span class="o">*</span><span class="n">P2</span><span class="p">);</span>
+  <span class="n">PF2_vec</span><span class="p">[</span><span class="n">N_AVG</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">P2</span><span class="o">/</span><span class="n">VA2</span><span class="p">;</span>
+  <span class="c1">//
+</span>  <span class="n">P1</span> <span class="o">=</span> <span class="n">P1_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="n">VA1</span> <span class="o">=</span> <span class="n">VA1_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="n">VAR1</span> <span class="o">=</span> <span class="n">VAR1_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="n">PF1</span> <span class="o">=</span> <span class="n">PF1_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="n">P2</span> <span class="o">=</span> <span class="n">P2_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="n">VA2</span> <span class="o">=</span> <span class="n">VA2_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="n">VAR2</span> <span class="o">=</span> <span class="n">VAR2_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="n">PF2</span> <span class="o">=</span> <span class="n">PF2_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="c1">//
+</span>  <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="p">(</span><span class="n">N_AVG</span><span class="p">);</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+ <span class="n">P1</span> <span class="o">+=</span> <span class="n">P1_vec</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+  <span class="n">VA1</span> <span class="o">+=</span> <span class="n">VA1_vec</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+  <span class="n">VAR1</span> <span class="o">+=</span> <span class="n">VAR1_vec</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+  <span class="n">PF1</span> <span class="o">+=</span> <span class="n">PF1_vec</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+  <span class="n">P2</span> <span class="o">+=</span> <span class="n">P2_vec</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+  <span class="n">VA2</span> <span class="o">+=</span> <span class="n">VA2_vec</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+  <span class="n">VAR2</span> <span class="o">+=</span> <span class="n">VAR2_vec</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+  <span class="n">PF2</span> <span class="o">+=</span> <span class="n">PF2_vec</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+  <span class="p">}</span>
   <span class="c1">//calculate powers
-</span>  <span class="n">P1</span> <span class="o">=</span> <span class="n">fabs</span><span class="p">(</span><span class="n">v_i1</span><span class="o">/</span><span class="mi">1000</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
-  <span class="n">VA1</span> <span class="o">=</span> <span class="n">vrms</span><span class="o">*</span><span class="n">i1rms</span><span class="o">/</span><span class="mi">1000</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
-  <span class="n">VAR1</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">VA1</span><span class="o">*</span><span class="n">VA1</span> <span class="o">-</span> <span class="n">P1</span><span class="o">*</span><span class="n">P1</span><span class="p">);</span>
-  <span class="n">PF1</span> <span class="o">=</span> <span class="n">P1</span><span class="o">/</span><span class="n">VA1</span><span class="p">;</span>
-  <span class="n">P2</span> <span class="o">=</span> <span class="n">fabs</span><span class="p">(</span><span class="n">v_i2</span><span class="o">/</span><span class="mi">1000</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
-  <span class="n">VA2</span> <span class="o">=</span> <span class="n">vrms</span><span class="o">*</span><span class="n">i2rms</span><span class="o">/</span><span class="mi">1000</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
-  <span class="n">VAR2</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">VA2</span><span class="o">*</span><span class="n">VA2</span> <span class="o">-</span> <span class="n">P2</span><span class="o">*</span><span class="n">P2</span><span class="p">);</span>
-  <span class="n">PF2</span> <span class="o">=</span> <span class="n">P2</span><span class="o">/</span><span class="n">VA2</span><span class="p">;</span>
+</span>  <span class="n">P1</span> <span class="o">=</span> <span class="n">P1</span><span class="o">/</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">N_AVG</span><span class="p">;</span>
+  <span class="n">VA1</span> <span class="o">=</span> <span class="n">VA1</span><span class="o">/</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">N_AVG</span><span class="p">;</span>
+  <span class="n">VAR1</span> <span class="o">=</span> <span class="n">VAR1</span><span class="o">/</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">N_AVG</span><span class="p">;</span>
+  <span class="n">PF1</span> <span class="o">=</span> <span class="n">PF1</span><span class="o">/</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">N_AVG</span><span class="p">;</span>
+  <span class="n">P2</span> <span class="o">=</span> <span class="n">P2</span><span class="o">/</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">N_AVG</span><span class="p">;</span>
+  <span class="n">VA2</span> <span class="o">=</span> <span class="n">VA2</span><span class="o">/</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">N_AVG</span><span class="p">;</span>
+  <span class="n">VAR2</span> <span class="o">=</span> <span class="n">VAR2</span><span class="o">/</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">N_AVG</span><span class="p">;</span>
+  <span class="n">PF2</span> <span class="o">=</span> <span class="n">PF2</span><span class="o">/</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">N_AVG</span><span class="p">;</span>
 </code></pre></div>    </div>
   </li>
 </ol>
 
-<p>I then spit all of these out to the LCD, &amp; served them up to the web as requested.</p>
+<p>I used <code class="highlighter-rouge">N_AVG = 100</code> &amp; spit all of these out to the LCD, &amp; served them up to the web as requested.</p>
 
 <h3 id="embedded-web-serving">Embedded Web serving</h3>
 
@@ -1123,32 +1156,124 @@ uint16_t print_webpage_reduced2h(uint8_t *buf, uint16_t *data, uint16_t power) {
 <p>I built a very quick and dirty MySQL database to hold the data, and have been playing with several different interfaces to understand the data.</p>
 
 <h3 id="visual-basic">Visual Basic</h3>
-<p>I like Excel, so I also wrote some VBA code and a spreadsheet to look at the data there. It is really easy to pull it offline and look at it and fiddle with different averaging and signal processing techniques.</p>
 
-<h3 id="python">Python</h3>
-<p>This is where I’m spending most of my time now, building piece by piece.</p>
+<p>I like Excel, so I also wrote some VBA code to pull the data off of the webpage and put it into the SQL database. I also munged it in the spreadsheet.</p>
+
+<div class="language-vb highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">Rem Attribute VBA_ModuleType=VBADocumentModule</span>
+<span class="k">Option</span> <span class="n">VBASupport</span> <span class="mi">1</span>
+
+<span class="k">Enum</span> <span class="nc">READYSTATE</span>
+<span class="n">READYSTATE_UNINITIALIZED</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">READYSTATE_LOADING</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">READYSTATE_LOADED</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">READYSTATE_INTERACTIVE</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">READYSTATE_COMPLETE</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="k">End</span> <span class="k">Enum</span>
+
+
+<span class="k">Private</span> <span class="k">Declare</span> <span class="k">Sub</span> <span class="nf">Sleep</span> <span class="k">Lib</span> <span class="s">"kernel32"</span> <span class="p">(</span><span class="k">ByVal</span> <span class="n">lngMilliSeconds</span> <span class="ow">As</span> <span class="kt">Long</span><span class="p">)</span>
+<span class="k">Private</span> <span class="k">Sub</span> <span class="nf">WaitSeconds</span><span class="p">(</span><span class="n">intSeconds</span> <span class="ow">As</span> <span class="kt">Integer</span><span class="p">)</span>
+  <span class="c1">' Comments: Waits for a specified number of seconds</span>
+  <span class="c1">' Params  : intSeconds      Number of seconds to wait</span>
+  <span class="c1">' Source  : Total Visual SourceBook</span>
+
+  <span class="k">On</span> <span class="k">Error</span> <span class="k">GoTo</span> <span class="n">PROC_ERR</span>
+
+  <span class="k">Dim</span> <span class="nv">datTime</span> <span class="ow">As</span> <span class="kt">Date</span>
+
+  <span class="n">datTime</span> <span class="o">=</span> <span class="n">DateAdd</span><span class="p">(</span><span class="s">"s"</span><span class="p">,</span> <span class="n">intSeconds</span><span class="p">,</span> <span class="n">Now</span><span class="p">)</span>
+
+  <span class="k">Do</span>
+   <span class="c1">' Yield to other programs (better than using DoEvents which eats up all the CPU cycles)</span>
+    <span class="n">Sleep</span> <span class="mi">100</span>
+    <span class="n">DoEvents</span>
+  <span class="k">Loop</span> <span class="n">Until</span> <span class="n">Now</span> <span class="o">&gt;=</span> <span class="n">datTime</span>
+
+<span class="n">PROC_EXIT</span><span class="p">:</span>
+  <span class="k">Exit</span> <span class="k">Sub</span>
+
+<span class="nf">PROC_ERR</span><span class="p">:</span>
+  <span class="n">MsgBox</span> <span class="s">"Error: "</span> <span class="o">&amp;</span> <span class="n">Err</span><span class="p">.</span><span class="n">Number</span> <span class="o">&amp;</span> <span class="s">". "</span> <span class="o">&amp;</span> <span class="n">Err</span><span class="p">.</span><span class="n">Description</span><span class="p">,</span> <span class="p">,</span> <span class="s">"modDateTime.WaitSeconds"</span>
+  <span class="k">Resume</span> <span class="n">PROC_EXIT</span>
+<span class="k">End</span> <span class="k">Sub</span>
+
+<span class="k">Private</span> <span class="k">Sub</span> <span class="nf">CommandButton1_Click</span><span class="p">()</span>
+<span class="n">starting_row</span> <span class="o">=</span> <span class="n">Cells</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">).</span><span class="n">Value</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">Num_loops</span> <span class="o">=</span> <span class="n">Cells</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">).</span><span class="n">Value</span>
+
+<span class="k">Dim</span> <span class="nv">data_array</span><span class="p">()</span>
+<span class="k">Dim</span> <span class="nv">my_obj</span> <span class="ow">As</span> <span class="kt">Object</span>
+<span class="k">ReDim</span> <span class="n">data_array</span><span class="p">(</span><span class="mi">1</span> <span class="k">To</span> <span class="mi">7</span><span class="p">)</span>
+
+<span class="k">Dim</span> <span class="nv">sCNX</span> <span class="ow">As</span> <span class="kt">String</span><span class="p">,</span> <span class="n">sSQL</span> <span class="ow">As</span> <span class="kt">String</span>
+<span class="k">Dim</span> <span class="nv">cnx</span> <span class="ow">As</span> <span class="kt">Object</span><span class="p">,</span> <span class="n">rs</span> <span class="ow">As</span> <span class="kt">Object</span>
+<span class="k">Set</span> <span class="n">cnx</span> <span class="o">=</span> <span class="n">CreateObject</span><span class="p">(</span><span class="s">"ADODB.Connection"</span><span class="p">)</span>
+<span class="k">Set</span> <span class="n">rs</span> <span class="o">=</span> <span class="n">CreateObject</span><span class="p">(</span><span class="s">"ADODB.Recordset"</span><span class="p">)</span>
+
+<span class="c1">'sCNX = "Driver={MySQL ODBC 5.3 ANSI Driver}; Server=localhost; Database=energy; uid = root; pwd=;"</span>
+<span class="n">sCNX</span> <span class="o">=</span> <span class="s">"Driver={MySQL ODBC 5.3 ANSI Driver}; Server=localhost;  Database=energy; uid = root; pwd=;"</span>
+
+<span class="n">cnx</span><span class="p">.</span><span class="n">Open</span> <span class="n">sCNX</span>
+
+<span class="k">For</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">To</span> <span class="n">Num_loops</span>
+    <span class="n">my_url</span> <span class="o">=</span> <span class="s">"http://192.168.2.16/c"</span>
+    <span class="n">my_url</span> <span class="o">=</span> <span class="n">my_url</span> <span class="o">&amp;</span> <span class="s">"?cb="</span> <span class="o">&amp;</span> <span class="n">Timer</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span>
+        <span class="n">sSQL</span> <span class="o">=</span> <span class="s">"insert into en (P, P1, P2, PF1, PF2, GT, GN) values ("</span>
+
+    <span class="k">Set</span> <span class="n">my_obj</span> <span class="o">=</span> <span class="n">CreateObject</span><span class="p">(</span><span class="s">"MSXML2.XMLHTTP"</span><span class="p">)</span>
+    <span class="n">my_obj</span><span class="p">.</span><span class="n">Open</span> <span class="s">"GET"</span><span class="p">,</span> <span class="n">my_url</span><span class="p">,</span> <span class="k">False</span>
+    <span class="n">my_obj</span><span class="p">.</span><span class="n">send</span>
+    <span class="k">Do</span> <span class="k">While</span> <span class="p">(</span><span class="n">my_obj</span><span class="p">.</span><span class="n">READYSTATE</span> <span class="o">&lt;&gt;</span> <span class="n">READYSTATE_COMPLETE</span><span class="p">)</span>
+    <span class="n">DoEvents</span>
+    <span class="k">Loop</span>
+
+    <span class="n">stringy</span> <span class="o">=</span> <span class="n">my_obj</span><span class="p">.</span><span class="n">responseText</span>
+    <span class="n">Cells</span><span class="p">(</span><span class="n">starting_row</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">).</span><span class="n">Value</span> <span class="o">=</span> <span class="n">i</span>
+
+    <span class="k">For</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">To</span> <span class="mi">7</span>
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">InStr</span><span class="p">(</span><span class="n">stringy</span><span class="p">,</span> <span class="s">";"</span><span class="p">)</span>
+    <span class="n">t2</span> <span class="o">=</span> <span class="n">InStr</span><span class="p">(</span><span class="n">stringy</span><span class="p">,</span> <span class="s">":"</span><span class="p">)</span>
+    <span class="n">Cells</span><span class="p">(</span><span class="n">starting_row</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">k</span><span class="p">).</span><span class="n">Value</span> <span class="o">=</span> <span class="n">Right</span><span class="p">(</span><span class="n">Left</span><span class="p">(</span><span class="n">stringy</span><span class="p">,</span> <span class="n">t1</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">t1</span> <span class="o">-</span> <span class="n">t2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">Cells</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">k</span><span class="p">).</span><span class="n">Value</span> <span class="o">=</span> <span class="n">Right</span><span class="p">(</span><span class="n">Left</span><span class="p">(</span><span class="n">stringy</span><span class="p">,</span> <span class="n">t1</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">t1</span> <span class="o">-</span> <span class="n">t2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">data_array</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">=</span> <span class="n">Cells</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">k</span><span class="p">).</span><span class="n">Value</span>
+    <span class="n">stringy</span> <span class="o">=</span> <span class="n">Right</span><span class="p">(</span><span class="n">stringy</span><span class="p">,</span> <span class="n">Len</span><span class="p">(</span><span class="n">stringy</span><span class="p">)</span> <span class="o">-</span> <span class="n">t1</span><span class="p">)</span>
+    <span class="k">Next</span> <span class="n">k</span>
+    <span class="n">Cells</span><span class="p">(</span><span class="n">starting_row</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">).</span><span class="n">Value</span> <span class="o">=</span> <span class="n">Now</span><span class="p">()</span>
+    <span class="n">Cells</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">).</span><span class="n">Value</span> <span class="o">=</span> <span class="n">Now</span><span class="p">()</span>
+    <span class="k">Set</span> <span class="n">my_obj</span> <span class="o">=</span> <span class="k">Nothing</span>
+
+    <span class="k">For</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">To</span> <span class="mi">6</span>
+    <span class="n">sSQL</span> <span class="o">=</span> <span class="n">sSQL</span> <span class="o">&amp;</span> <span class="n">data_array</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">&amp;</span> <span class="s">", "</span>
+    <span class="k">Next</span> <span class="n">j</span>
+    <span class="n">sSQL</span> <span class="o">=</span> <span class="n">sSQL</span> <span class="o">&amp;</span> <span class="n">data_array</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span> <span class="o">&amp;</span> <span class="s">")"</span>
+
+    <span class="k">Set</span> <span class="n">rs</span> <span class="o">=</span> <span class="n">cnx</span><span class="p">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">sSQL</span><span class="p">)</span>
+    <span class="n">WaitSeconds</span> <span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="k">Next</span> <span class="n">i</span>
+<span class="n">cnx</span><span class="p">.</span><span class="n">Close</span><span class="p">:</span> <span class="k">Set</span> <span class="n">cnx</span> <span class="o">=</span> <span class="k">Nothing</span>
+
+
+<span class="k">End</span> <span class="k">Sub</span>
+</code></pre></div></div>
+
+<p>It is really easy to pull it off-line and look at it and fiddle with different averaging and signal processing techniques.</p>
 
 <h2 id="data-analysis">Data analysis</h2>
-<p>So what have I found out?</p>
-<h3 id="energy-usage---stats">Energy usage - stats</h3>
-<h3 id="noise-floor">Noise floor</h3>
-<h3 id="seeing-a-lightbulb">Seeing a lightbulb</h3>
-<h3 id="toasters-vs-washing-machines---real-and-reactive-power">Toasters vs. washing machines - Real and reactive power</h3>
-<h3 id="120v-vs-240v">120V vs. 240V</h3>
-<h3 id="fridge">Fridge</h3>
-<h3 id="coffee-machine">Coffee machine</h3>
-<h3 id="garage-door-opener">Garage door opener</h3>
-<h3 id="gas-usage---boiling-water-vs-heating-the-house">Gas usage - boiling water vs. heating the house</h3>
+<p>So what have I found out? Well, for starters, its really cool to have coincident electrical and gas measurements since together they tell a story. Here’s how I figured out what was going on that October night:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/home_energy/sleuthing.png" alt="" />
+<em>Like reading palms … or being a stock market chartologist</em></p>
+
+<h2 id="learning-by-re-doing">Learning by re-doing</h2>
 
 <h3 id="disaggregation-algorithm">Disaggregation algorithm</h3>
 <p>The goal is to have a master code set that maps the entire house energy usage through clever signal processing of just this one data feed.</p>
 
-<h2 id="learning-by-re-doing">Learning by re-doing</h2>
-
 <h3 id="gas-circuit-in-the-elements">Gas circuit in the elements</h3>
-<p>A few drawbacks about the outdoors piece. Spiders, snow, rain, voles.</p>
+<p>A few drawbacks about the outdoors piece. Spiders, snow, rain, voles. But we are 3 winters and still going, though I have to get out there from time to time and tweak the alignment.</p>
 
-<h3 id="why-stick-with-8-bits--all-that">Why stick with 8 bits &amp; all that</h3>
+<h3 id="why-stick-with-an-8-bit-microcontroller---all-that">Why stick with an 8 bit microcontroller … &amp; all that</h3>
 <p>Ok, you’ve got me there. Maybe time to move on.</p>
 
         

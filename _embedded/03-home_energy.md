@@ -39,22 +39,23 @@ To really answer this question, I knew that most energy usage comes from heating
 
 There are lots of ways to measure electricity usage in your home. By far the simplest is to find the single point where the electricity enters and monitor it there. The advantage is that you get "everything" and the monitoring need only be done at one spot. The disadvantage is that everything will be measured at once.
 
-I also thought it would be cool to see what the individual appliances are doing (we'll come back to that), so the other option is to measure every endpoint (or at least the big ones). This requires more hardware but will allow the effects of each appliance to be more clear.
+I also thought it would be cool to see what the individual appliances are doing (we'll come back to that), so the other option is to measure every endpoint (or at least the big ones). This requires more hardware but will allow the effects of each appliance to be more clear. I went with the first solution. Easiest and fastest to implement. Cheap and fast, every time, until I end up re-doing it.
 
-I went with the first solution. Easiest and fastest to implement. Cheap and fast, every time.
+One of my major goals at the outset was to be able to "see" an individual light bulb turning on in the house, even with everything else going. This was so cool ...
 
-> fridge
+![]({{ site.url }}/assets/images/projects/home_energy/see_a_lightbulb.png)
+*Tracking down all the leaks*
 
- And then I end up re-doing it. I never learn.
+I was able to easily detect a 2-CFL, 26W lamp turning on, even with the furnace fan going full blast. That's pretty cool.
 
 ### Home wiring
 
-When you open up your electricity panel, there are generally two large wires that carry the current, and a third connection for neutral/ground.
+When you open up your electricity panel, there are generally two large wires that carry the current, and a third connection for neutral/ground. Here is what mine looks like:
 
 ![]({{ site.url }}/assets/images/projects/home_energy/panel.png)
 *Home is where the heart is ... so, we're in for some open home surgery*
 
-This panel is rated for 200A service.
+Our panel is rated for 200A service.
 
 The two central wires both carry 120 V at 60 Hz, but 180 degrees out of phase with each other. The neutral connection, which is grounded at this point, is the copper exposed wire. This scheme is sometimes referred to as "split phase 120V". So measuring between each wire and ground, you get 120V, but wire to wire is 240V. Most home appliances use one of the two 120V circuits. You can see the individual circuit breakers lined up in two columns underneath the central wires. Some, like the oven, use 240V. Everything is oscillating at 60Hz.
 
@@ -227,7 +228,7 @@ How do you count the revolutions? I "opt"ed for a laser-based approach. The beam
 ![]({{ site.url }}/assets/images/projects/home_energy/laser_spot.png)
 *Interruptions in the beam by the dial are easy to detect*
 
-Once you have it all counted up, its just a matter of understanding the cost per cubic foot of gas usage.
+Once you have them all counted up, its easy to get the cost. Just a matter of multiplying by the cost per cubic foot of natural gas.
 
 ### Internet serving
 
@@ -262,7 +263,7 @@ I just used an ac voltmeter to measure the secondary current directly. The curre
 
 I also discovered that one CT read about 9% lower than the other for the same load current, which I'd need to account for in the code. The other interesting thing is that the current transformers have a "direction" (Lenz's law), so I'd have to either pay attention and get that right, or have some minus signs in my software.
 
-Next step was to add the right size burden resistor to measure voltage instead of current, and get the calibration constants correct. The entire panel was rated for 200A (24,000W at 120V) at the high end, and I wanted to "see a 60W light bulb turn on and off" on the low end. This little table helped me choose the 68 ohm value for the resistor so that I did not overflow the 5V, 10 bit full scale ADC on the microcontroller, while still maintaining just enough resolution on the low end. We'll see if it is enough.
+Next step was to add the right size burden resistor to measure voltage instead of current, and get the calibration constants correct. The entire panel was rated for 200A (24,000W at 120V) at the high end, and I wanted to "see a 60W light bulb turn on and off" on the low end. This little table helped me choose the 68 ohm value. One bit of ADC resolution is about 10W, so I should be able to see a lightbulb. The ADC will overflow at 10kW, which is a little low but certainly ok to get things going. Can always re-do later as I learn.
 
 ![]({{ site.url }}/assets/images/projects/home_energy/burden_value.png)
 *A heavy burden*
@@ -307,7 +308,7 @@ Wait, it's outdoors? And it uses a solar cell? Ooops, the reflected laser signal
 
 1. A red laser filter helps.
 
-![]({{ site.url }}/assets/images/projects/home_energy/laser_filter.jpg)
+![]({{ site.url }}/assets/images/projects/home_energy/laser_filter.png)
 *670 nm laser line filter helps block out unwanted sunlight*
 
 2. And software discrimination using our AC signal - helps quite a bit more. More about that technique soon.
@@ -341,14 +342,14 @@ Because the laser was remote from the main monitoring, I used the ATTinyXX micro
 
 I didn't do anything special to have the two microcontrollers "talk" to one another. No serial port comms or anything like that. Just a standard "port out" to "port in", since we are talking about digital signals.
 
-### Mechanical
+### Mounting
 
-My mounting leaves something to be desired. Here are some of the pics. Not super proud of any of this, but hey, gives me something to re-do.
-* wiring in the circuit breaker
-* main monitor mounting & power
-* ethernet wiring
-* mounting the laser box near the gas meter
-* running wire into the house
+Here is what the final laser setup looks like:
+
+![]({{ site.url }}/assets/images/projects/home_energy/outdoor_setup.png)
+*What ... that 'ol thang? Aaah, its nuthin' ...*
+
+I'm sure the gas company folks love me ... but hey, gives me something to re-do.
 
 ## Software
 All of the code is posted [at my repo](https://github.com/dvernooy/home_energy).
@@ -419,21 +420,28 @@ else {
      }
 }
 ```
-This scheme worked out well.
+This scheme worked out well. Below is a picture of gas usage on a particular night in the fall:
+
+![]({{ site.url }}/assets/images/projects/home_energy/gas_overnight.png)
+*Close to Hallowe'en, time to fire up the furnace*
+
+The gas usage comes directly from the counting algorithm above. Gas usage is like energy usage in the electrical case. To get the equivalent gas flow rate in green, you need to integrate the counts. I built an excel spreadsheet to do it offline. The resultant gas flow rate is somewhat analogous to electrical power. It's interesting to see the relative gas flow rates of the various home appliances.
+
+So how did I know which appliance is which without running around and taking notes? We'll get to the sleuthing in a minute.
 
 ### Electrical algorithm - speed & low noise
 
 I opted for a single loop again here inside `main()`, complemented by the ADC interrupt which did all of the data capture. I enabled/disabled the ADC interrupt once per main software loop, and had the ADC take 521 measurements per software loop. The use of the interrupt was to ensure the electrical signal measurements and averaging were independent of the software loop time.  
 
-With the ADC timer set at 1/32nd the main 12MHz clockrate (so the ADC sample time = 32X the clock period),
+With the ADC timer set at 1/64th the main 12MHz clockrate (so the ADC sample time = 64X the clock period),
 
 ```c
 	ADCSRA = _BV(ADEN)|_BV(ADIE)|_BV(ADPS2)|_BV(ADPS0); //clock divided by 32
 ```
 
-and knowing from the data sheet that 13 ADC clock cycles are needed to make a measurement after ADSC is set, plus one cycle after ADSC is set and taking 1/3rd of the measurements per interrupt cycle, you find that for the 521 samples the entire sample time should take 54.2 ms. But I measured 66 to 67 ms ... which is 4 full sine waves. Why?
+and knowing from the data sheet that 13 ADC clock cycles are needed to make a measurement after ADSC is set, plus one cycle after ADSC is set and taking 1/3rd of the measurements per interrupt cycle, you find that for the 139 samples the entire sample time should take 31 ms. But I measured 33 ms .... why?
 
-I actually beat my head against this one for a couple of days, measuring everything in sight. Kinda like [the Cuckoo's Egg](https://en.wikipedia.org/wiki/The_Cuckoo%27s_Egg). Where did my 75 cents go? Until I noticed the discrepancy was curiously close to 3 ADC cycles.
+I actually beat my head against this one for a couple of days, measuring everything in sight. Kinda like [the Cuckoo's Egg](https://en.wikipedia.org/wiki/The_Cuckoo%27s_Egg). Where did my 75 cents go? Until I noticed the discrepancy was curiously close to 1 ADC cycle.
 
 ![]({{ site.url }}/assets/images/projects/home_energy/mystery.png)
 *Hmmm - what's going on here?*
@@ -470,22 +478,22 @@ ISR(ADC_vect)
  ADCSRA |= (1<<ADSC);
 }
 ```
-whereas the `ADIF` bit is what **triggers** the interrupt. So how many clock cycles is that? Well, I had to look at the actual assembly code, and depending on what branch it was either 72, 76 or 88 clock cycles, but in all cases it was between 2 and 3 ADC cycles.
+whereas the `ADIF` bit is what **triggers** the interrupt. So how many clock cycles is that? Well, I had to look at the actual assembly code, and depending on what branch it was either 72, 76 or 88 clock cycles, but in all cases it was between 1 and 2 ADC cycles.
 
 ![]({{ site.url }}/assets/images/projects/home_energy/assembler.png)
 *Sometimes you gotta count the beans*
 
-Aaaah. So the ADSC bit only goes high in between 2 and 3 cycles, and the **next conversion** happens after the 3rd cycle.
+Aaaah. So the ADSC bit only goes high in between 1 and 2 cycles, and the **next conversion** happens after the 2nd cycle.
 
 ![]({{ site.url }}/assets/images/projects/home_energy/clock_mystery.png)
 *Hmmm - unwinding the mystery*
 
-Cool, I think I understand this. So actually, I ended up choosing the 521 samples to average over so that the sample time:
-1. was close to an integer # of cycles, in this case 4.0013
+Cool, I think I understand this. So actually, I ended up choosing the 139 samples to average over so that the sample time:
+1. was close to an integer # of cycles, in this case 2.0016
 2. minimized SRAM usage
-3. was much less than 0.5 seconds (here, 67 ms)
+3. was much less than 0.5 seconds (here, 33 ms)
 
-The choice of 521 samples amounted to figuring out a good, practical value for T in Equation $$\ref{p_bar}$$. It took some time to get there, but I'm glad I did because it made the signals really clean.
+The choice of 139 samples amounted to figuring out a good, practical value for T in Equation $$\ref{p_bar}$$. It took some time to get there, but I'm glad I did because it made the signals really clean.
 
 In pictures, then, here is where what the overall sampling scheme looks like:
 
@@ -514,7 +522,7 @@ Now, to connect these basic numbers to stuff we care about. First, I copied the 
   i1rms = i1rms + 1.0902*(0.004888*i1[j]-2.5) * 1.0902 * (0.004888*i1[j]-2.5);
   i2rms = i2rms + (0.004888*i2[j]-2.5) * (0.004888*i2[j]-2.5);
   ```
-4. Use the basic forumlas
+4. Use the basic formulas
   ```c
   for (j = 0;j<N_POINTS;j++) {
   vrms = vrms + (0.004888*v[j]-2.5) * (0.004888*v[j]-2.5);
@@ -528,18 +536,60 @@ Now, to connect these basic numbers to stuff we care about. First, I copied the 
   i2rms = 44.118*sqrt(i2rms/N_POINTS);
   v_i1 = 84.62*44.118*v_i1/N_POINTS;
   v_i2 = 84.62*44.118*v_i2/N_POINTS;
+  ```
+5. Average like crazy
+  ```c
+  for (j = 0;j<(N_AVG-1);j++){
+  P1_vec[j] = P1_vec[j+1];
+  VAR1_vec[j]= VAR1_vec[j+1];
+  VA1_vec[j]= VA1_vec[j+1];
+  PF1_vec[j]= PF1_vec[j+1];
+  P2_vec[j]=P2_vec[j+1];
+  VAR2_vec[j]=VAR2_vec[j+1];
+  VA2_vec[j]=VA2_vec[j+1];
+  PF2_vec[j]=PF2_vec[j+1];
+  }
+  //
+  P1_vec[N_AVG-1] = fabs(v_i1/1000.0);
+  VA1_vec[N_AVG-1] = vrms*i1rms/1000.0;
+  VAR1_vec[N_AVG-1] = sqrt(VA1*VA1 - P1*P1);
+  PF1_vec[N_AVG-1] = P1/VA1;
+  P2_vec[N_AVG-1] = fabs(v_i2/1000.0);
+  VA2_vec[N_AVG-1] = vrms*i2rms/1000.0;
+  VAR2_vec[N_AVG-1] = sqrt(VA2*VA2 - P2*P2);
+  PF2_vec[N_AVG-1] = P2/VA2;
+  //
+  P1 = P1_vec[0];
+  VA1 = VA1_vec[0];
+  VAR1 = VAR1_vec[0];
+  PF1 = PF1_vec[0];
+  P2 = P2_vec[0];
+  VA2 = VA2_vec[0];
+  VAR2 = VAR2_vec[0];
+  PF2 = PF2_vec[0];
+  //
+  for (j = 1;j<(N_AVG);j++){
+    P1 += P1_vec[j];
+  VA1 += VA1_vec[j];
+  VAR1 += VAR1_vec[j];
+  PF1 += PF1_vec[j];
+  P2 += P2_vec[j];
+  VA2 += VA2_vec[j];
+  VAR2 += VAR2_vec[j];
+  PF2 += PF2_vec[j];
+  }
   //calculate powers
-  P1 = fabs(v_i1/1000.0);
-  VA1 = vrms*i1rms/1000.0;
-  VAR1 = sqrt(VA1*VA1 - P1*P1);
-  PF1 = P1/VA1;
-  P2 = fabs(v_i2/1000.0);
-  VA2 = vrms*i2rms/1000.0;
-  VAR2 = sqrt(VA2*VA2 - P2*P2);
-  PF2 = P2/VA2;
+  P1 = P1/(double)N_AVG;
+  VA1 = VA1/(double)N_AVG;
+  VAR1 = VAR1/(double)N_AVG;
+  PF1 = PF1/(double)N_AVG;
+  P2 = P2/(double)N_AVG;
+  VA2 = VA2/(double)N_AVG;
+  VAR2 = VAR2/(double)N_AVG;
+  PF2 = PF2/(double)N_AVG;
   ```
 
-I then spit all of these out to the LCD, & served them up to the web as requested.
+I used `N_AVG = 100` & spit all of these out to the LCD, & served them up to the web as requested.
 
 ### Embedded Web serving
 
@@ -726,30 +776,123 @@ Ok, so playing with web technologies is fun. To do analysis, we need that data i
 I built a very quick and dirty MySQL database to hold the data, and have been playing with several different interfaces to understand the data.
 
 ### Visual Basic
-I like Excel, so I also wrote some VBA code and a spreadsheet to look at the data there. It is really easy to pull it offline and look at it and fiddle with different averaging and signal processing techniques.
 
-### Python
-This is where I'm spending most of my time now, building piece by piece.
+I like Excel, so I also wrote some VBA code to pull the data off of the webpage and put it into the SQL database. I also munged it in the spreadsheet.
+
+```vb
+Rem Attribute VBA_ModuleType=VBADocumentModule
+Option VBASupport 1
+
+Enum READYSTATE
+READYSTATE_UNINITIALIZED = 0
+READYSTATE_LOADING = 1
+READYSTATE_LOADED = 2
+READYSTATE_INTERACTIVE = 3
+READYSTATE_COMPLETE = 4
+End Enum
+
+
+Private Declare Sub Sleep Lib "kernel32" (ByVal lngMilliSeconds As Long)
+Private Sub WaitSeconds(intSeconds As Integer)
+  ' Comments: Waits for a specified number of seconds
+  ' Params  : intSeconds      Number of seconds to wait
+  ' Source  : Total Visual SourceBook
+
+  On Error GoTo PROC_ERR
+
+  Dim datTime As Date
+
+  datTime = DateAdd("s", intSeconds, Now)
+
+  Do
+   ' Yield to other programs (better than using DoEvents which eats up all the CPU cycles)
+    Sleep 100
+    DoEvents
+  Loop Until Now >= datTime
+
+PROC_EXIT:
+  Exit Sub
+
+PROC_ERR:
+  MsgBox "Error: " & Err.Number & ". " & Err.Description, , "modDateTime.WaitSeconds"
+  Resume PROC_EXIT
+End Sub
+
+Private Sub CommandButton1_Click()
+starting_row = Cells(1, 2).Value - 1
+Num_loops = Cells(2, 2).Value
+
+Dim data_array()
+Dim my_obj As Object
+ReDim data_array(1 To 7)
+
+Dim sCNX As String, sSQL As String
+Dim cnx As Object, rs As Object
+Set cnx = CreateObject("ADODB.Connection")
+Set rs = CreateObject("ADODB.Recordset")
+
+'sCNX = "Driver={MySQL ODBC 5.3 ANSI Driver}; Server=localhost; Database=energy; uid = root; pwd=;"
+sCNX = "Driver={MySQL ODBC 5.3 ANSI Driver}; Server=localhost;  Database=energy; uid = root; pwd=;"
+
+cnx.Open sCNX
+
+For i = 1 To Num_loops
+    my_url = "http://192.168.2.16/c"
+    my_url = my_url & "?cb=" & Timer() * 100
+        sSQL = "insert into en (P, P1, P2, PF1, PF2, GT, GN) values ("
+
+    Set my_obj = CreateObject("MSXML2.XMLHTTP")
+    my_obj.Open "GET", my_url, False
+    my_obj.send
+    Do While (my_obj.READYSTATE <> READYSTATE_COMPLETE)
+    DoEvents
+    Loop
+
+    stringy = my_obj.responseText
+    Cells(starting_row - 1, 1).Value = i
+
+    For k = 1 To 7
+    t1 = InStr(stringy, ";")
+    t2 = InStr(stringy, ":")
+    Cells(starting_row + i, 1 + k).Value = Right(Left(stringy, t1 - 1), t1 - t2 - 1)
+    Cells(6, 1 + k).Value = Right(Left(stringy, t1 - 1), t1 - t2 - 1)
+    data_array(k) = Cells(6, 1 + k).Value
+    stringy = Right(stringy, Len(stringy) - t1)
+    Next k
+    Cells(starting_row + i, 1).Value = Now()
+    Cells(6, 1).Value = Now()
+    Set my_obj = Nothing
+
+    For j = 1 To 6
+    sSQL = sSQL & data_array(j) & ", "
+    Next j
+    sSQL = sSQL & data_array(7) & ")"
+
+    Set rs = cnx.Execute(sSQL)
+    WaitSeconds (5)
+
+Next i
+cnx.Close: Set cnx = Nothing
+
+
+End Sub
+```
+
+It is really easy to pull it off-line and look at it and fiddle with different averaging and signal processing techniques.
 
 ## Data analysis
-So what have I found out?
-### Energy usage - stats
-### Noise floor
-### Seeing a lightbulb
-### Toasters vs. washing machines - Real and reactive power
-### 120V vs. 240V
-### Fridge
-### Coffee machine
-### Garage door opener
-### Gas usage - boiling water vs. heating the house
+So what have I found out? Well, for starters, its really cool to have coincident electrical and gas measurements since together they tell a story. Here's how I figured out what was going on that October night:
+
+![]({{ site.url }}/assets/images/projects/home_energy/sleuthing.png)
+*Like reading palms ... or being a stock market chartologist*
+
+## Learning by re-doing
 
 ### Disaggregation algorithm
 The goal is to have a master code set that maps the entire house energy usage through clever signal processing of just this one data feed.
 
-## Learning by re-doing
-
 ### Gas circuit in the elements
-A few drawbacks about the outdoors piece. Spiders, snow, rain, voles.
+A few drawbacks about the outdoors piece. Spiders, snow, rain, voles. But we are 3 winters and still going, though I have to get out there from time to time and tweak the alignment.
 
-### Why stick with 8 bits & all that
+### Why stick with an 8 bit microcontroller ... & all that
 Ok, you've got me there. Maybe time to move on.
