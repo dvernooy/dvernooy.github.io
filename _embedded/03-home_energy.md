@@ -895,8 +895,8 @@ These are two different concepts, so here's an example looking at them together.
 
 Breaking it down, there are a few interesting things.
 
-![]({{ site.url }}/assets/images/projects/home_energy/explanation.png)
-*Keeping it simple, this is what things look like*
+![]({{ site.url }}/assets/images/projects/home_energy/explanation_full.png)
+*Circuits, phases & factors ... need any more geekiness?*
 
 First, clearly some of the appliances are only on one circuit or another because they use 120V. The oven is an example of one that's on both because it runs off of 240V:
 
@@ -910,7 +910,7 @@ Cool ... its now all there for the curious to see.
 ## Learning by re-doing
 
 ### Disaggregation algorithm
-The goal is to have a master code set that maps the entire house energy usage through clever signal processing of just this one data feed.
+The goal is to have a master code set that maps the entire house energy usage through clever signal processing of just this one data feed. There is a ton of data, so it'll be interesting to see how much can be automated.
 
 ### Gas circuit in the elements
 A few drawbacks about the outdoors piece. Spiders, snow, rain, voles. But we are 3 winters and still going, though I have to get out there from time to time and tweak the alignment.
