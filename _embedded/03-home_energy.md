@@ -187,7 +187,7 @@ $$
 \end{align*}
 $$
 
-In practice on the digital computer, I took snapshots of $$v_{1}(t)$$, and $$i_{1}(t)$$ over about 4 cycles instead of just one (at about 130 samples/cycle), and then did the averaging over these 4 cycles. Note that the math in Equation $$\ref{p_bar}$$ is the same whether we integrate for $$4T$$ as it is for $$T$$, but just a little bit less noise that way. And still pretty "instantaneous" since 4 cycles at 60Hz is still about 65 ms, or less than a tenth of a second. You'll see that getting the details right, though, took quite some sleuthing.
+In practice on the digital computer, I took snapshots of $$v_{1}(t)$$, and $$i_{1}(t)$$ over about 2 cycles instead of just one (at about 139 samples/cycle), and then did the averaging over these 2 cycles. Note that the math in Equation $$\ref{p_bar}$$ is the same whether we integrate for $$2T$$ as it is for $$T$$, but just a little bit less noise that way. And still pretty "instantaneous" since 2 cycles at 60Hz is still about 33 ms, which is less than a tenth of a second. You'll see that getting the details right, though, took quite some sleuthing.
 
 Finally, the energy $$E$$ consumed is just power $$P$$ times time $$t$$. Since the power is changing every few seconds (or faster), we have to get a bit fancier. Over some time span $$t_{s}$$ much larger than a cycle $$T$$, the energy consumed in circuit 1 $$E_{1}(t_{s})$$ is
 
@@ -307,10 +307,8 @@ So, just align the laser spot on the dial, follow the reflected path back to the
 Wait, it's outdoors? And it uses a solar cell? Ooops, the reflected laser signal is not exactly massive, and the solar cell will also detected any reflected sunlight, so its baseline will bounce around over time. So I implemented two things to get rid of the impact of this variability.
 
 1. A red laser filter helps.
-
-![]({{ site.url }}/assets/images/projects/home_energy/laser_filter.png)
-*670 nm laser line filter helps block out unwanted sunlight*
-
+  ![]({{ site.url }}/assets/images/projects/home_energy/laser_filter.png)
+  *670 nm laser line filter helps block out unwanted sunlight*
 2. And software discrimination using our AC signal - helps quite a bit more. More about that technique soon.
 
 In the end, I would still get a situation when at noon on the hottest summer days, the laser threshold would fall and the solar baseline would be at its peak .. and the signal would die. Its a challenge for another day.

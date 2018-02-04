@@ -72,7 +72,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-02-03T17:43:39-05:00">
+  <meta property="article:published_time" content="2018-02-03T18:45:23-05:00">
 
 
 
@@ -565,7 +565,7 @@ i_{1,rms}(t) &= \sqrt{(\frac{1}{T}\int_{t}^{t+T} i_{1}(\tau) d\tau)^2} \\
 &=\sqrt{\overline{P_{\text{1,cycle}}(t)}^2 + \overline{Q_{\text{1,cycle}}(t)}^2}\\
 \end{align*} %]]></script>
 
-<p>In practice on the digital computer, I took snapshots of <script type="math/tex">v_{1}(t)</script>, and <script type="math/tex">i_{1}(t)</script> over about 4 cycles instead of just one (at about 130 samples/cycle), and then did the averaging over these 4 cycles. Note that the math in Equation <script type="math/tex">\ref{p_bar}</script> is the same whether we integrate for <script type="math/tex">4T</script> as it is for <script type="math/tex">T</script>, but just a little bit less noise that way. And still pretty “instantaneous” since 4 cycles at 60Hz is still about 65 ms, or less than a tenth of a second. You’ll see that getting the details right, though, took quite some sleuthing.</p>
+<p>In practice on the digital computer, I took snapshots of <script type="math/tex">v_{1}(t)</script>, and <script type="math/tex">i_{1}(t)</script> over about 2 cycles instead of just one (at about 139 samples/cycle), and then did the averaging over these 2 cycles. Note that the math in Equation <script type="math/tex">\ref{p_bar}</script> is the same whether we integrate for <script type="math/tex">2T</script> as it is for <script type="math/tex">T</script>, but just a little bit less noise that way. And still pretty “instantaneous” since 2 cycles at 60Hz is still about 33 ms, which is less than a tenth of a second. You’ll see that getting the details right, though, took quite some sleuthing.</p>
 
 <p>Finally, the energy <script type="math/tex">E</script> consumed is just power <script type="math/tex">P</script> times time <script type="math/tex">t</script>. Since the power is changing every few seconds (or faster), we have to get a bit fancier. Over some time span <script type="math/tex">t_{s}</script> much larger than a cycle <script type="math/tex">T</script>, the energy consumed in circuit 1 <script type="math/tex">E_{1}(t_{s})</script> is</p>
 
@@ -683,13 +683,9 @@ v_{2}(t) &= V_{2}(t)\cos(2\pi f t)\\
 <p>Wait, it’s outdoors? And it uses a solar cell? Ooops, the reflected laser signal is not exactly massive, and the solar cell will also detected any reflected sunlight, so its baseline will bounce around over time. So I implemented two things to get rid of the impact of this variability.</p>
 
 <ol>
-  <li>A red laser filter helps.</li>
-</ol>
-
-<p><img src="http://localhost:4000/assets/images/projects/home_energy/laser_filter.png" alt="" />
-<em>670 nm laser line filter helps block out unwanted sunlight</em></p>
-
-<ol>
+  <li>A red laser filter helps.
+  <img src="http://localhost:4000/assets/images/projects/home_energy/laser_filter.png" alt="" />
+  <em>670 nm laser line filter helps block out unwanted sunlight</em></li>
   <li>And software discrimination using our AC signal - helps quite a bit more. More about that technique soon.</li>
 </ol>
 
