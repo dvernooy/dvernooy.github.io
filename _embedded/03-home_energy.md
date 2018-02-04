@@ -879,10 +879,33 @@ End Sub
 It is really easy to pull it off-line and look at it and fiddle with different averaging and signal processing techniques.
 
 ## Data analysis
-So what have I found out? Well, for starters, its really cool to have coincident electrical and gas measurements since together they tell a story. Here's how I figured out what was going on that October night:
+So what can you do with all of this fine clap-trap?
 
+### Gas + Electric
+Well, for starters, its really cool to have coincident electrical and gas measurements since together they tell a story. Here's how I figured out what was going on that October night:
 ![]({{ site.url }}/assets/images/projects/home_energy/sleuthing.png)
 *Like reading palms ... or being a stock market chartologist*
+
+### Two phases + real & reactive power
+
+These are two different concepts, so here's an example looking at them together. First, the big picture - a 6 hour span with just a couple of things going on, at a total electrical energy cost of about $1.20
+
+![]({{ site.url }}/assets/images/projects/home_energy/big_picture.png)
+*Keeping it simple, this is what things look like*
+
+Breaking it down, there are a few interesting things.
+
+![]({{ site.url }}/assets/images/projects/home_energy/explanation.png)
+*Keeping it simple, this is what things look like*
+
+First, clearly some of the appliances are only on one circuit or another because they use 120V. The oven is an example of one that's on both because it runs off of 240V:
+
+![]({{ site.url }}/assets/images/projects/home_energy/oven.png)
+*Breaker, breaker ... we need this thing to end*
+
+Second, you can see that when resistive appliances (like heaters, ovens, etc..) kick in, the power factor goes close to 1. There is no inductance or capacitance in most heaters, just a resistor (like the element inside your oven). However, pumps, compressors, motors all have inductance so appliances that use those (like washing machines, dryers and fridges) will all show a power factor less than 100%.
+
+Cool ... its now all there for the curious to see.
 
 ## Learning by re-doing
 
