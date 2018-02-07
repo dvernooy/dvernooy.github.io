@@ -26,22 +26,27 @@ Winter months in the Northeast US give you plenty of time to sit around and come
 
  **How much energy are we using right now**?
 
-After noodling on that, I backed myself into it by getting most of the piece parts together. Then I had to build it. In the end, it was another really fun project, especially the mix of hardware and software.
+After noodling on that, I backed myself into it by getting most of the piece parts together. Then I had to build it. In the end, it was another really fun project, especially the mix of hardware and software. *And* I learned some interesting things:
 
-Lets start off with some of the techy-background.
+![]({{ site.url }}/assets/images/projects/home_energy/combined_picture.png)
+*24 hour view of electricity and gas usage in our house*
+
+Lets start off with some of the science/technology/engineering/math background.
 
 ## S.T.E.M.
 ### Heat ... + gas
 
-To really answer this question, I knew that most energy usage comes from heating and cooling. Our fridge, oven and dryer run on electricity. Our stove (range), fireplace and furnace run on natural gas. So I need to monitor both to get the answer I'm looking for. Ok, you eat an elephant one bite at a time.
+To answer the energy question, I knew that appliances that heat and cool things was the first place to look. Our fridge, oven and dryer run on electricity. Our stove (range), fireplace and furnace run on natural gas. So I will need to monitor both to get the answer I'm looking for. Ok, you eat an elephant one bite at a time.
 
 ### Electricity in the house
 
-There are lots of ways to measure electricity usage in your home. By far the simplest is to find the single point where the electricity enters and monitor it there. The advantage is that you get "everything" and the monitoring need only be done at one spot. The disadvantage is that everything will be measured at once.
+There are lots of ways to measure electricity usage in your home. By far the simplest is to find the single point where the electricity enters and monitor it there. The advantage is that you get "everything" and the monitoring need only be done at one spot. The disadvantage is that everything will be measured at once and it may be hard to figure out who is doing what.
 
-I also thought it would be cool to see what the individual appliances are doing (we'll come back to that), so the other option is to measure every endpoint (or at least the big ones). This requires more hardware but will allow the effects of each appliance to be more clear. I went with the first solution. Easiest and fastest to implement. Cheap and fast, every time, until I end up re-doing it.
+I also thought it would be cool to see what the individual appliances are doing (we'll come back to that), so the second option was to measure every endpoint (or at least the big ones that I thought were the major culprits). This requires more hardware but will allow the effects of each appliance to be more clear.
 
-One of my major goals at the outset was to be able to "see" an individual light bulb turning on in the house, even with everything else going. This was so cool ...
+I went with the first approach. Easiest and fastest to implement. I opt for cheap and fast, every time, until I end up re-doing it.
+
+One of my major goals at the outset was to be able to "see" an individual light bulb turning on in the house, even with everything else running at the same time. This was so cool ...
 
 ![]({{ site.url }}/assets/images/projects/home_energy/see_a_lightbulb.png)
 *Tracking down all the leaks*
@@ -57,15 +62,16 @@ When you open up your electricity panel, there are generally two large wires tha
 
 Our panel is rated for 200A service.
 
-The two central wires both carry 120 V at 60 Hz, but 180 degrees out of phase with each other. The neutral connection, which is grounded at this point, is the copper exposed wire. This scheme is sometimes referred to as "split phase 120V". So measuring between each wire and ground, you get 120V, but wire to wire is 240V. Most home appliances use one of the two 120V circuits. You can see the individual circuit breakers lined up in two columns underneath the central wires. Some, like the oven, use 240V. Everything is oscillating at 60Hz.
+The two central wires both carry 120 V at 60 Hz, but 180 degrees out of phase with each other. The neutral connection, which is grounded at this point, is the exposed braided wire. This scheme is sometimes referred to as "split phase 120V". So measuring between each wire and ground, you get 120V, but wire to wire is 240V. Most home appliances use one of the two 120V circuits. You can see the individual circuit breakers lined up in two columns underneath the central wires. Some, like our oven, use 240V. Everything is oscillating at 60Hz, at least in the US.
 
 Home wiring will divvy up the circuits between these two split phases, so it is important to monitor both of the phases and then "add together" the results.
 
 So how do we get started?
 
 ### Current detection
+Why with a little physics lesson, of course.
 
-A wire that carries current generates a magnetic field. That field can be collected in a secondary magnetic circuit and be used to generate a current in another wire. This is called "transformer action", and a device that it designed to do this is called a current transformer (CT). CTs will come with a secondary current ratio rating. This means the (large and unsafe) current in the original wire can be back-calculated from this ratio, once you have measured the (much lower and safer) current in the CT.
+A wire that carries current generates a magnetic field. That field can be "collected" in a magnetic circuit and be used to generate a current in a completely different wire. This is called "transformer action", and a device that is designed to do this is called a current transformer (CT). CTs will come with a rating which dictates their secondary current ratio. This means the (large and unsafe) current in the original wire can be back-calculated from this ratio, once you have measured the (much lower and safer) current in the CT.
 
 So lets see if we can figure it out. We'll put a ring of magnetic material around the wire carrying our house current $$I_{1}$$. The magnetic field $$B$$ in that material (permeability $$\mu_{r}$$ at a distance $$R$$ from the wire) is
 
@@ -77,7 +83,7 @@ B = \frac{\mu_{r} \mu_{0} I_{1}}{2\pi R}
 \end{align*}
 $$
 
-We'll use that magnetic field to induce another current $$I_{2}$$ in our CT, which is really just a coil of $$N$$ turns of wire of inductance $$L$$ wrapped around that material. So, if that material has cross-sectional area $$A$$ the induced current is related to the flux $$\phi$$ by $$LI_{2} = N\phi$$, or
+We'll use that magnetic field to induce another current $$I_{2}$$ in our CT, which is really just a coil of $$N$$ turns of wire of inductance $$L$$ wrapped around that ring of magnetic material. So, if that ring (donut) has cross-sectional area $$A$$ the induced current is related to the flux $$\phi$$ by $$LI_{2} = N\phi$$, or
 
 $$
 \begin{align*}
@@ -118,7 +124,7 @@ In order to get to our goal of energy consumption, we need also need to know the
 
 ### AC power calculations
 
-Really what we want here is power. Power is voltage x current. Easy. Except everything here is AC at a frequency $$f=$$ 60 Hz, not DC. So we need to pay a bit of attention. Since we're monitoring each of the two 120V circuits independently, lets dive deeply into one of them. I'll choose circuit 1 and carry around a subscript 1 to remind us of that. The instantaneous voltage and current in circuit 1 are:
+Really what we want here is power. Power is voltage X current. Easy. Except everything here is AC at a frequency $$f=$$ 60 Hz, not DC. So we need to pay a bit of attention. Since we're monitoring each of the two 120V circuits independently, lets dive deeply into one of them. I'll choose circuit 1 and carry around a subscript 1 to remind us of that. The instantaneous voltage and current in circuit 1 are:
 
 $$
 \begin{align*}
@@ -127,7 +133,7 @@ i_{1}(t) &= I_{1}(t)\cos(2\pi f t+ \phi_{1}(t))
 \end{align*}
 $$
 
-As a first little diversion, if you were to stick the wall plug directly into an oscilloscope that is following every move, you would find that the amplitude $$V_{1}(t)$$ is close to a constant 170V, and peak to peak the cosine wave would be double that. So where does the "120V" come from? Hold on for a min.
+As a first little diversion, if you were to stick the wall plug directly into an oscilloscope that is following every move, you would find that the amplitude $$V_{1}(t)$$ is close to a constant 170V, and peak to peak the cosine wave would be double that. So where does the "120V" come from? Hold on to that question for a minute.
 
 As another little diversion, the phase $$\phi_{1}(t)$$ tells you what type of load you have. If it is close to zero, the load is primarily resistive - like the heater in your toaster, or a light bulb, or the oven or dryer. If it is greater than zero, the load is inductive, like the motor in the washing machine, or the compressor motor in the fridge. If it is less than zero, the load is more capacitive - like perhaps the microwave.
 
@@ -161,7 +167,7 @@ i_{1,rms}(t) &= \sqrt{(\frac{1}{T}\int_{t}^{t+T} i_{1}(\tau) d\tau)^2} \\
 \end{align*}
 $$
 
-It turns out that these rms values are what a handheld multimeter will measure. More like an averaged voltage over a few cycles. If you calculate it out, you find $$v_{1,rms}(t) = V_{1}(t)/\sqrt{2}$$ = 120V. So that's where the 120V comes from. Almost any power engineer will only ever talk about rms values, not amplitudes or peak-to-peak values. We can now calculate the phase angle $$\phi_{1}(t)$$, which also called the **power factor**
+It turns out that these rms values are what a hand-held multimeter will measure. More like an averaged voltage over a few cycles. If you calculate it out, you find $$v_{1,rms}(t) = V_{1}(t)/\sqrt{2}$$ = 120V. So that's where the 120V comes from. Almost any power engineer will only ever talk about rms values, not amplitudes or peak-to-peak values. We can now calculate the phase angle $$\phi_{1}(t)$$, which also called the **power factor**.
 
 $$
 \begin{align*}
@@ -311,27 +317,27 @@ Wait, it's outdoors? And it uses a solar cell? Ooops, the reflected laser signal
   *670 nm laser line filter helps block out unwanted sunlight*
 2. And software discrimination using our AC signal - helps quite a bit more. More about that technique soon.
 
-In the end, I would still get a situation when at noon on the hottest summer days, the laser threshold would fall and the solar baseline would be at its peak .. and the signal would die. Its a challenge for another day.
+In the end, I would still get a situation when at noon on the hottest summer days, the laser threshold current would increase and its output decrease because its threshold and slope efficiency are both temperature dependent. And at the same time the unwanted solar leakage would be greatest because some sunlight still does get through the filter .. and these two would combine to give spurious counts. Not really that big a deal: its a challenge for another day.
 
 ### Ethernet board
 
-To do an embedded webserver, I used [this](http://www.geeetech.com/wiki/index.php/Arduino_ENC28J60_Ethernet_Module) ethernet board to be able to talk to the outside world. It is based on the ENC28J60 chip and had everything else easily accessbile. Since all the work is in the software, won't say much more about it other than it worked really well with the drivers I included with the source code.
+To do an embedded webserver, I used [this](http://www.geeetech.com/wiki/index.php/Arduino_ENC28J60_Ethernet_Module) ethernet board to be able to talk to the outside world. It is based on the ENC28J60 chip and had everything else easily accessible. Since all the work is in the software, won't say much more about it other than it worked really well with the drivers I included with the source code.
 
 ![]({{ site.url }}/assets/images/projects/home_energy/ethernet_board.jpg)
 *Connection to the outside*
 
 ### ATMega1284
 
-There was enough going on in this project that I opted for the largest 8 bit microcontroller, the ATmega1284. It has 128K of flash, 4K of SRAM and 2K of EEPROM space. Other than a few tweaks in pin, port and interrupt vector names it was easy to work with.
+There was enough going on in this project that I opted for a larger 8 bit microcontroller, the ATmega1284. It has 128K of flash, 4K of SRAM and 2K of EEPROM space. Other than a few tweaks in pin, port and interrupt vector names it was easy to work with.
 
 Here are some pictures of the main board:
 
 ![]({{ site.url }}/assets/images/projects/home_energy/main_board.png)
 *Main circuit board build*
 
-### ATTiny
+### ATTiny45
 
-Because the laser was remote from the main monitoring, I used the ATTinyXX microcontroller for the laser driver circuit. Again, really easy to work with. Here are a few pictures of the remote gas monitoring board.
+Because the laser was remote from the main monitoring, I used the ATtiny45 microcontroller for the laser driver circuit. Again, really easy to work with. Here are a few pictures of the remote gas monitoring board.
 
 ![]({{ site.url }}/assets/images/projects/home_energy/laser_board.png)
 *Laser driver and solar cell receiver board*
