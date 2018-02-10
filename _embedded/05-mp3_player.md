@@ -106,10 +106,10 @@ Why?
 1. I knew a 1 cell LiPO battery typically works between 3.65V (discharged) and 4.2V (fully charged)
 2. I also knew a "low drop out regulator (LDO)" for these voltage levels can stabilize an output voltage with as little as 0.2 to 0.3V overhead. And 3.3V + 0.3V = 3.6V, which is less that the lowest voltage on a 1 cell LiPO.
 
-Bottom line, we can get away with a 1 cell LiPO circuit for the entire thing, with a hack to the GEEEtech board using an LP2966.
+Bottom line, we can get away with a 1 cell LiPO circuit for the entire thing, with this hack to the GEEEtech board using an LP2966:
 
 ![]({{ site.url }}/assets/images/projects/mp3/geee_mod.png)
-*USB connector pinout*
+*Just a bit of minor surgery required here*
 
 Remembering that the 5V input pin is now a 3.7V (nominal) input pin from the battery. And that simplifies life. Game on.
 
