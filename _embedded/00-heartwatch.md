@@ -204,7 +204,7 @@ Definitely good enough for now. I build it "tight enough" to not slip in the sil
 
 ### Case design & 3D printing
 
-So now that I had a roughly functioning watch, I wanted something to give it a bit more protection. I thought about using Sugru (too finicky for what I wanted) or making some Oogoo (likely not skin friendly unless I bought some Al-cure silicone) to form the skin. Then the kids had a week off of school and looked bored. And they each have their favority CAD software. And their friend Rohan has a hobby 3D printer. So we whipped up a little box one morning and had it printed by that evening. I did a bunch of rough measurements and estimating, we had a contest to see which software was easier to use (Ian's Fusion360 was the winner), and then went for it.
+So now that I had a roughly functioning watch, I wanted something to give it a bit more protection. I thought about using Sugru (too finicky for what I wanted) or making some Oogoo (likely not skin friendly unless I bought some aluminum-cure silicone) to form the watch protective skin. Then the kids had a week off of school and looked bored. And they each have their favorite CAD software. And their friend Rohan has a hobby 3D printer. So we whipped up a little box one morning and had it printed by that evening. I did a bunch of rough measurements and estimating, we had a contest to see which software was easier to use (Ian's Fusion360 was the winner), and then went for it.
 
 ![]({{ site.url }}/assets/images/projects/heartwatch/CAD.png)
 *Personal Fabrication: From CAD to doo-dad in 3 hrs. Neil Gershenfeld, eat your heart out*
@@ -223,10 +223,12 @@ The whole thing went together rather well. Measure once, cut twice.
 
 ### Case to arm
 
-I did end up adding some contouring to shape it more to my arm. It'll be interesting to add this to a rev 2.0 case, but the thickness of the case is only about 1.5 mm thick, so hard to do too much "after the fact" shaping.
+I did end up adding some contouring to shape it more to my arm.
 
 ![]({{ site.url }}/assets/images/projects/heartwatch/form_fit.png)
 *Matching my delicate contours*
+
+The current thickness is only about 1.5 mm, so hard to do too much "after the fact" shaping right now. Add this to my list of tweaks for a rev 2.0 case.
 
 ### Pushbuttons - silicone & hot glue
 
@@ -251,7 +253,7 @@ This project is one of the more ambitious ones on the software side. I wanted fu
 
 ### Apps Screenshots: watch, compass, HRM, SPO2, photos, altimeter
 
-To start, here are current screenshots of the various apps - I'll add/update as new things become available.
+Here are current screenshots of the various apps - I'll add/update as new things become available.
 
 #### Menu & Navigation
 ![]({{ site.url }}/assets/images/projects/heartwatch/menu.png)
@@ -571,7 +573,7 @@ First of all, they warn you printf is not safe. Okay, well its my wrist, and the
 
 One thing I did know was that the LCD can be a power hog. So I implemented a variable PWM backlight with a pushbutton and interrupt dedicated only to this. Other than that, I have to admit I didn't really have a clue how long the battery was going to last. I didn't even do the most basic benchtop measurements. So here is the initial data:
 
-Not a disaster, but not great. You'll see below this at the top of the list of things to work on. I'll come back and document here
+Not a disaster, but not great. You'll see below this at the top of the list of things to work on. I'll come back and document here.
 
 ### Debugging & Evaluating
 
