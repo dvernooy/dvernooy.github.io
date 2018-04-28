@@ -247,7 +247,7 @@ For the SD card, just keep a paperclip handy.
 
 ## Software
 
-This project is one of the more ambitious ones on the software side. I wanted full functionality, a good user experience and reasonable battery life - along with the ability to add new "apps" as I dreamed them up. The entire codebase, along with some of the spreadsheets and Matlab scripts are posted on my github repository.
+This project is one of the more ambitious ones on the software side. I wanted full functionality, a good user experience and reasonable battery life - along with the ability to add new "apps" as I dreamed them up. The entire codebase, along with some of the spreadsheets and Matlab scripts are posted [at my github repository.](https://www.github.com/dvernooy/heartwatch/)
 
 ### Apps Screenshots: watch, compass, HRM, SPO2, photos, altimeter
 
