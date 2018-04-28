@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.8.0 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+--><html lang="en" class="no-js">
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Heartwatch - Ab hinc</title>
+
+
+
+
+<meta name="description" content="An open source, DIY smartwatch with heart rate &amp; SpO2 monitoring">
+
+
+
+
+<meta name="author" content="Dave Vernooy">
+
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Ab hinc">
+<meta property="og:title" content="Heartwatch">
+
+
+  <link rel="canonical" href="http://localhost:4000/projects/heartwatch/">
+  <meta property="og:url" content="http://localhost:4000/projects/heartwatch/">
+
+
+
+  <meta property="og:description" content="An open source, DIY smartwatch with heart rate &amp; SpO2 monitoring">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/front/site-logo.png">
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2018-04-27T21:38:23-04:00">
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "http://localhost:4000",
+      "logo": "http://localhost:4000/assets/images/front/site-logo.png"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Dave Vernooy",
+      "url" : "http://localhost:4000",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Ab hinc Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
+  </head>
+
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="http://localhost:4000/">Ab hinc</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/projects/">Projects</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/blog/">Blog</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about/">About</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        
+        <a href="https://dvernooy.github.io">
+          <img src="http://localhost:4000/assets/images/front/dave-vernooy-cropped.jpg" alt="Dave Vernooy" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <a href="https://dvernooy.github.io"><h3 class="author__name" itemprop="name">Dave Vernooy</h3></a>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Learning by (re)doing
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Niskayuna, NY</span>
+        </li>
+      
+
+      
+        <li>
+          <a href="https://dvernooy.github.io" itemprop="url">
+            <i class="fa fa-fw fa-chain" aria-hidden="true"></i> Website
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/dvernooy" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Heartwatch">
+    <meta itemprop="description" content="An open source, DIY smartwatch with heart rate &amp; SpO2 monitoring">
+    <meta itemprop="datePublished" content="April 27, 2018">
+    <meta itemprop="dateModified" content="April 20, 2018">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Heartwatch
+</h1>
+          <h4 class="page__related-title">The ticker-ticker</h4> 
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  29 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fa fa-file-text"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li>
+<a href="#project-overview">Project overview</a>
+    <ul>
+      <li><a href="#what-it-is">What it is</a></li>
+      <li><a href="#what-it-currently-is-not">What it (currently) is not</a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#stem">S.T.E.M.</a>
+    <ul>
+      <li><a href="#measuring-heartrate-and-spo2-with-plethosysmography">Measuring Heartrate and SPO2 with Plethosysmography</a></li>
+      <li><a href="#accelerometers-gyros--sensor-fusion">Accelerometers, Gyros &amp; Sensor Fusion</a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#hardware---electronics">Hardware - Electronics</a>
+    <ul>
+      <li><a href="#microcontroller-choice">Microcontroller choice</a></li>
+      <li><a href="#battery-and-charging-circuit">Battery and charging circuit</a></li>
+      <li><a href="#ds3231-real-time-clock--battery">DS3231 Real time clock + Battery</a></li>
+      <li><a href="#l3gd20-accelerometer">L3GD20 Accelerometer</a></li>
+      <li><a href="#lsm303-gyro-and-compass">LSM303 Gyro And Compass</a></li>
+      <li><a href="#bmp085-altitude-pressure-and-temperature-sensor">BMP085 Altitude, Pressure and Temperature Sensor</a></li>
+      <li><a href="#max30102-and-max301xx-led-and-photodiode">MAX30102 and MAX301XX LED and photodiode</a></li>
+      <li><a href="#st7735-color-lcd-and-sd-card">ST7735 color LCD and SD card</a></li>
+      <li><a href="#other-connectors">Other Connectors</a></li>
+      <li><a href="#circuit-diagram--component-choices">Circuit diagram &amp; component choices</a></li>
+      <li><a href="#circuit-build-assembly--component-mounting">Circuit build, assembly &amp; component mounting</a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#hardware---watch-skin-and-straps">Hardware - watch skin and straps</a>
+    <ul>
+      <li><a href="#strap-strategy---road-id">Strap strategy - Road-ID</a></li>
+      <li><a href="#mounting-the-heart-rate-sensor">Mounting the heart rate sensor</a></li>
+      <li><a href="#case-design--3d-printing">Case design &amp; 3D printing</a></li>
+      <li><a href="#case-to-arm">Case to arm</a></li>
+      <li><a href="#pushbuttons---silicone--hot-glue">Pushbuttons - silicone &amp; hot glue</a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#software">Software</a>
+    <ul>
+      <li><a href="#apps-screenshots-watch-compass-hrm-spo2-photos-altimeter">Apps Screenshots: watch, compass, HRM, SPO2, photos, altimeter</a></li>
+      <li><a href="#heartrate-algorithm">Heartrate algorithm</a></li>
+      <li><a href="#spo2-algorithm">SPO2 algorithm</a></li>
+      <li><a href="#rtos--performance">RTOS &amp; performance</a></li>
+      <li><a href="#menus-icons-and-buttons">Menus, icons and buttons</a></li>
+      <li><a href="#sd-cards-and-fatfs-revisited">SD cards and Fatfs-revisited</a></li>
+      <li><a href="#bitmaps-fonts-and-shapes">Bitmaps, fonts and shapes</a></li>
+      <li><a href="#and-about-that-printf">And about that printf</a></li>
+      <li><a href="#low-power-design-and-analysis">Low power design and analysis</a></li>
+      <li><a href="#debugging--evaluating">Debugging &amp; Evaluating</a></li>
+    </ul>
+  </li>
+  <li><a href="#learning-by-re-doing">Learning by re-doing</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <script type="text/javascript" async="" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/watch_on_arm.jpg" alt="">
+<em>Watch out</em></p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/watch_face.jpg" alt="">
+<em>Resting heart rate of 60 bpm? Need to do a few more of these hikes</em></p>
+
+<h2 id="project-overview">Project overview</h2>
+
+<h3 id="what-it-is">What it is</h3>
+
+<p>This watch will keep time accurately, measure heart rate, measure SPO2%, act as a compass, measure altitude, air pressure &amp; temperature, measure your acceleration and angular rotation. It has a color LCD display, SD card slot, a mini-USB charging port, an ISP programming port, a serial debugging port and pushbutton interface. All of the functions are accessed by a menu-driven user interface. Oh yeah, I also tried to keep it reasonably compact.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/the_guts.png" alt="">
+<em>Would you like fries with this delicious burger?</em></p>
+
+<h3 id="what-it-currently-is-not">What it (currently) is not</h3>
+
+<p>I thought about supporting Wifi or Bluetooth connectivity, but in this first version I opted against it to keep the power draw and initial complexity to a minimum. I figured getting the heart rate measurement working robustly would be enough of a challenge (it was!). So it isn’t really a bona-fide “smartwatch”. The way I look at it, its just something to put on the list for rev 2.</p>
+<h2 id="stem">S.T.E.M.</h2>
+
+<p>So what are the interesting tech bits here?</p>
+
+<h3 id="measuring-heartrate-and-spo2-with-plethosysmography">Measuring Heartrate and SPO2 with Plethosysmography</h3>
+
+<p>The simple idea behind this is that light (say, from an LED) penetrates your skin and makes its way to your veins (and everywhere else within its cone of illumination). At every single interface along the way, a tiny bit gets reflected back. The path the light takes is the same from instant to instant, so the amount reflected should not change, <strong>except for one place</strong>: where the blood is flowing. That path <em>is</em> changing from instant to instant because your heart is pumping the blood through it. This changes the density (local amount) of the blood, which changes how much light gets absorbed at this spot, which changes how much is available to get reflected. With this simple fact, you can actually measure your heartrate, because it produces a somewhat regular reflection that changes as your heart pumps. Cool.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/pulseox.png" alt="">
+<em>Reflecting light off of your vein can help you measure blood flow, and therefore your heartbeat</em></p>
+
+<p>Adding one more fact: depending on the color of light you use, the amount reflected changes. This is mainly because your skin absorbs different colors of light differently. You can use this to get a bigger (or smaller) reflected signal to work with. Obviously, <em>where</em> you shine the light matters too. Hitting bone would not be that helpful, for example.</p>
+
+<p>Adding just one more fact. Your blood also absorbs different colors of light in different amounts. However, the amount of oxygen in the blood determines just how differently. So if we were to shine two different colors (say, red at 650 nm and infrared at 850 nm - foreshadowing), look at their reflections, and watch how they change, not only would we be able to measure the heartbeat from each color individually, but we could also measure how much oxygen is bound up by hemoglobin in the blood by looking at the difference in reflected amount between the two colors. This is called pulse oximetry. Very cool.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/hemoglobin.png" alt="">
+<em>Oxygenated and non-oxygenated hemoglobin absorb light in very different ways</em></p>
+
+<p>The actual measurement we are making is something called SpO2, the % of hemoglobin that is saturated (that’s where the <strong>S</strong> comes from) with oxygen (<strong>O2</strong>), using pulse oxymetry (<strong>p</strong>). You can also make a direct arterial (<strong>a</strong>) measurement &amp; get SaO2. Neither of these measures the other component of oxygen (the free oxygen that is not attached to hemoglobin - PaO2). There is a curve that will give you this second number knowing the SpO2. You can add the two of them, and do a bit more math to get CaO2, which tells you the total concentration of oxygen. For now, we’ll measure the SpO2 and leave it at that.</p>
+
+<p>Really what I want to know is what my pulse ox #’s look like before and after exercising.</p>
+
+<h4 id="getting-it-to-actually-work-with-minimal-devilopment">Getting it to actually work with minimal “devil”opment</h4>
+<p>The devil, of course, is in the details. What colors to choose? Where to place the LED? Where to place the detector? Will the signal be big enough? What if I jiggle my arm? Will it be accurate? How fast do I need to sample? Will there be too much noise to be able to get anything interesting? I’ll talk through most of these things in the blog post. Its interesting that it all (physics of light, biology of the vascular system, sensor technology, low noise electronics, digital signal processing, software, packaging) needs to work together for a good user experience.</p>
+
+<p>I will mention right away, though, that companies are making sensor devices that make several of these choices for you. For example, the MAX30102 chip I used has a red &amp; infrared LEDs, and detectors, and electronics all built in for you. The MAX30101 (which I haven’t played with yet) adds a green LED for even more flexibility!</p>
+
+<h4 id="placement-on-the-arm">Placement on the arm</h4>
+
+<p>The second thing I’ll mention is that this whole thing would be a non-starter if the only place you can measure anything is on your finger tip. I wanted to make a watch-like thingy, not a glove. Usually I don’t get lucky with these projects (as you know by now I learn by re-doing), but it so happens the position of the sensor that produced a good signal was pretty much in line with where a watch would naturally sit on my arm. Nice.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/wrist_position.png" alt="">
+<em>After some experimentation, this was a good place for the sensor to give a decent signal</em></p>
+
+<h3 id="accelerometers-gyros--sensor-fusion">Accelerometers, Gyros &amp; Sensor Fusion</h3>
+<p>The other technology that has come a very long way in the last 25 yrs is “PNT”, or positioning, navigation and timing, with advances like GPS and miniaturized gyrocompasses and accelerometers. Gyro/acc sensors work by having an <em>extremely</em> small “proof mass” that is set into a back and forth vibration using electronic techniques. As you change either the orientation of the mass relative to gravity (by moving your smartphone around - which has these chips inside it), or if you accelerate the mass (say by running with your smart phone), the details of these vibrations change. You measure them and figure out which way things are moving. There’s a bunch of interesting math behind this.</p>
+
+<p>A “macro” analogy would be watching how your back-and-forth motion on a playground swing would change if gravity suddenly started acting up instead of down, or if someone came up and started pushing you from the side instead of from behind. Studying your swinging motion on a video camera would allow you to figure out what forces were acting on you, and from where. That’s what these tiny chips do.</p>
+
+<h2 id="hardware---electronics">Hardware - Electronics</h2>
+
+<p>There was a ton of hardware in this project, so lets go piece by piece. I actually individually breadboarded almost every element just to convince myself this whole thing didn’t have any showstoppers.</p>
+
+<h3 id="microcontroller-choice">Microcontroller choice</h3>
+
+<p>I went with the ATMega1284 for this project. The 40-pin version I have is a bit on the large side physically, but since I’m hand assembling it all, that doesn’t really matter. And I’m not going for style points. It has 128K Flash, 16K SRAM and a 4K EEPROM. I’ll clock it at 16MHz with an external crystal. I’m sure I’ll hit some limitations, but lets see how far we get.</p>
+
+<h3 id="battery-and-charging-circuit">Battery and charging circuit</h3>
+
+<p>I’m putting this up front: this is as important a decision as the microcontroller. I wanted a nice, compact 500 mAh 1-cell Li-ion battery and found a great little mini-USB charging circuit for it.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/charger_and_lipo.png" alt="">
+<em>A nice compact LiPO charger and battery for this project</em></p>
+
+<p>Sold. The main implication is that everything needs to be designed for 3.3V. And I also need to worry about power consumption, but I’ll cross that second bridge later. The charger also has a couple of LEDs on it to show charging progress - and they are bright enough to show up through my watch skin:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/charging_action.png" alt="">
+<em>Topping it up</em></p>
+
+<h3 id="ds3231-real-time-clock--battery">DS3231 Real time clock + Battery</h3>
+
+<p>A watch should keep time, and reasonably accurately. There are a ton of options, but I went with Maxim’s DS3231M. Its only 8-pins, doesn’t require an external crystal, and needs just one decoupling capacitor and a small battery for backup power when the main battery is off. Its got an I2C interface, and a bunch of cool functions. I made my own little header for it.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/DS3231-datasheet.png" alt="">
+<em>An 8-pin real time clock (RTC) that needs no crystal!</em></p>
+
+<p>For the battery, I used a low profile 3V Li cell CR1025. I took a file, roughed up both sides and (very quickly, to minimize heating) soldered a wire to each. Then I encapsulated the whole thing in a very thin layer of hot glue to insulate it. Good to go. You can just see it tucked under the strap in the image on the right.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/CR-cell-encap.png" alt="">
+<em>Low profile 3V battery to keep the RTC going</em></p>
+
+<p>Of course, this failed within a week. Not sure why - I don’t think it was a bad connection. I think either the soldering was a big mistake, or the battery got shorted somewhere in the watch. Because when I pulled it out, it was 0.8V, not the 3.2 that went in. So I re-did it with a DIY battery holder:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/battery_holder.png" alt="">
+<em>Plus is actually minus … plus or minus</em></p>
+
+<p>which I also eventually covered in hot glue. I’ll do some experiments on the clock stability over time, but I don’t have any data yet.</p>
+
+<h3 id="l3gd20-accelerometer">L3GD20 Accelerometer</h3>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/L3GD20.png" alt="">
+<em>Measures acceleration</em></p>
+
+<p>You can see x, y and z printed on the little pcb as an easy reference. The initial output looks like this:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/gravity.png" alt="">
+<em>The gravity of the situation</em></p>
+
+<p>Good. Without anything moving, the 1.0 beside the z direction means gravity is pointing down, which it actually is. If you want to do everything relative to gravity, you’d have to subtract 1.0 g’s (or 9.8 m/s^2) from it.</p>
+
+<h3 id="lsm303-gyro-and-compass">LSM303 Gyro And Compass</h3>
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/LSM303.png" alt="">
+<em>Measures rotational rate and heading relative to magnetic north</em></p>
+
+<p>The quick check on accuracy was to see if North was correct - it was roughly where I thought, pointing to the woods across the street. Here it is compared to a hand compass:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/magnetometer.png" alt="">
+<em>North</em></p>
+
+<h3 id="bmp085-altitude-pressure-and-temperature-sensor">BMP085 Altitude, Pressure and Temperature Sensor</h3>
+<p>I am pretty interested in seeing how much “up and down” I do during a bike ride or a run, and also generally when out for hikes. The BMP080 pressure sensor board will be able to measure altitude, pressure and temperature accurately enough to log some of these things. It uses I2C like many of the others and is compact.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/BMP085.png" alt="">
+<em>Jack of all trades</em></p>
+
+<p>So how much “vacuum” can you get with a vacuum?</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/vacuum.png" alt="">
+<em>Conclusion: placing a vacuum close to a DIY smartwatch changes its altitude. ;)</em></p>
+
+<h3 id="max30102-and-max301xx-led-and-photodiode">MAX30102 and MAX301XX LED and photodiode</h3>
+<p>I already mentioned this guy in the intro.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/max30102-pic.png" alt="">
+<em>This tiny device does all the heavy lifting</em></p>
+
+<h3 id="st7735-color-lcd-and-sd-card">ST7735 color LCD and SD card</h3>
+<p>I went for a color LCD, which came bundled with a micro SD card slot.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/LCD_and_SD.png" alt="">
+<em>A great two-for-one</em></p>
+
+<h3 id="other-connectors">Other Connectors</h3>
+
+<p>The SPI header can be used for in-system programming, and the serial port is used for debugging &amp; data logging:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/connectors.png" alt="">
+<em>Getting stuff done</em></p>
+
+<h3 id="circuit-diagram--component-choices">Circuit diagram &amp; component choices</h3>
+<p>Here is a circuit diagram. I have not drawn all of the details of the daughterboards, since most of them are a direct i2c/twi interface using SDL and SCA.</p>
+
+<p><a href="http://localhost:4000/assets/images/projects/heartwatch/schematic.png"><img src="http://localhost:4000/assets/images/projects/heartwatch/schematic.png" alt=""></a>
+<em>Circuit diagram for the heartwatch</em></p>
+
+<p>I haven’t shown the individual connections for each of the sensor devices as I got most of them already mounted on daughter boards. I’ll just show the part number of the daughter board and the pins I actually used. That other detail is obviously important to make this thing work, and especially if you wanted to get rid of those daughter boards and really slim this thing down.</p>
+
+<h3 id="circuit-build-assembly--component-mounting">Circuit build, assembly &amp; component mounting</h3>
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/full_views.png" alt="">
+<em>The full watch prior to assembly into its 3D-printed skin</em></p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/gallery.png" alt="">
+<em>A gallery of various components and steps in the assembly</em></p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/profile_views.png" alt="">
+<em>Trying to keep it reasonably thin</em></p>
+
+<h2 id="hardware---watch-skin-and-straps">Hardware - watch skin and straps</h2>
+
+<h3 id="strap-strategy---road-id">Strap strategy - Road-ID</h3>
+
+<p>I never really have a solid plan going into these things. Maybe it shows in the final results. Anyways, after mounting up all the parts, I needed to make this thing look a bit more real with a watch band. I didn’t want the band to be skin-irritating and it needed to somehow secure to the board and hold the whole thing in place. I went for a double: two skinny bands working together vs. one thicker one. Might look a bit goofy, not sure.</p>
+
+<p>After a bit of research, I found out that RoadID sells replacement parts for their ID bracelets. Silicone straps and a simple metal clasp system. Simple, low cost and modifiable to my needs. Perfect.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/roadid-clasp.png" alt="">
+<em>Two is better than one</em></p>
+
+<p>They also sell a thicker one that I might try later.</p>
+
+<h3 id="mounting-the-heart-rate-sensor">Mounting the heart rate sensor</h3>
+
+<p>A side benefit of the two-strap system is that now I had a decent way to hold the heart rate monitor board in the right place on my wrist. My process was this:</p>
+<blockquote>
+  <ol>
+    <li>Take an old credit card and cut a roughly 3” by 1” strip</li>
+    <li>Heat a soldering iron up and melt the plastic very briefly and then bend it before it cools. When it cools, it will harden nicely in that formed shape. Takes a tiny bit of practice.</li>
+    <li>Using this technique, form a shape to hold the board and straps, with just the LED sensor chip poking through.</li>
+  </ol>
+</blockquote>
+
+<p>Definitely good enough for now. I build it “tight enough” to not slip in the silicone straps, but loose enough so that its position could be adjusted as needed.
+<img src="http://localhost:4000/assets/images/projects/heartwatch/credit_card_magic.png" alt="">
+<em>A sensible holder</em></p>
+
+<h3 id="case-design--3d-printing">Case design &amp; 3D printing</h3>
+
+<p>So now that I had a roughly functioning watch, I wanted something to give it a bit more protection. I thought about using Sugru (too finicky for what I wanted) or making some Oogoo (likely not skin friendly unless I bought some Al-cure silicone) to form the skin. Then the kids had a week off of school and looked bored. And they each have their favority CAD software. And their friend Rohan has a hobby 3D printer. So we whipped up a little box one morning and had it printed by that evening. I did a bunch of rough measurements and estimating, we had a contest to see which software was easier to use (Ian’s Fusion360 was the winner), and then went for it.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/CAD.png" alt="">
+<em>Personal Fabrication: From CAD to doo-dad in 3 hrs. Neil Gershenfeld, eat your heart out</em></p>
+
+<p>Rohan’s the man: here is the printing in action, courtesy of his “Octoprint” setup.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/octoprint.png" alt="">
+<em>3D printing the case</em></p>
+
+<p>It crashed with one layer to go. That’s fine, I’ll take it. And with a couple of jeweller’s files and an hour of tweaking, it was ready for assembly.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/case_finished.jpg" alt="">
+<em>Case (almost) closed</em></p>
+
+<p>The whole thing went together rather well. Measure once, cut twice.</p>
+
+<h3 id="case-to-arm">Case to arm</h3>
+
+<p>I did end up adding some contouring to shape it more to my arm. It’ll be interesting to add this to a rev 2.0 case, but the thickness of the case is only about 1.5 mm thick, so hard to do too much “after the fact” shaping.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/form_fit.png" alt="">
+<em>Matching my delicate contours</em></p>
+
+<h3 id="pushbuttons---silicone--hot-glue">Pushbuttons - silicone &amp; hot glue</h3>
+
+<p>So (almost) everything was cool about the case. Except it is hard to reach the SD card (either long fingernails or a key or coin or pen tip). And then what to do about the pushbutton switches? They’re recessed &amp; also hard to reach. Hmmmm.</p>
+
+<p>Here’s what worked. Go buy some Reynolds Parchment paper. Take a hot glue gun, run a line of hot glue on it and press it really flat with another piece of parchment paper. Then release it from the paper (it won’t stick), and trim it to fit between the buttons and the 3D printed case, on the inside of the case. Hot-glue tack it there. Then from the outside, on top of this thin hot-glue skin, melt a small ball of hot glue onto it. Works awesome, and has a really nice feel to it when actuating the pushbuttons.</p>
+
+<p>Here’s a close-up of what I’m talking about, and the finished result:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/button-technique.png" alt="">
+<em>Cute as a button</em></p>
+
+<p>And because I’m so proud of this, a little video of the pushbutton “action”:</p>
+
+<!-- Courtesy of embedresponsively.com //-->
+<div class="responsive-video-container">
+
+  <iframe src="https://www.youtube.com/embed/aAxDjnLHjf4" frameborder="0" allowfullscreen=""></iframe>
+
+</div>
+
+<p>For the SD card, just keep a paperclip handy.</p>
+
+<h2 id="software">Software</h2>
+
+<p>This project is one of the more ambitious ones on the software side. I wanted full functionality, a good user experience and reasonable battery life - along with the ability to add new “apps” as I dreamed them up. The entire codebase, along with some of the spreadsheets and Matlab scripts are posted on my github repository.</p>
+
+<h3 id="apps-screenshots-watch-compass-hrm-spo2-photos-altimeter">Apps Screenshots: watch, compass, HRM, SPO2, photos, altimeter</h3>
+
+<p>To start, here are current screenshots of the various apps - I’ll add/update as new things become available.</p>
+
+<h4 id="menu--navigation">Menu &amp; Navigation</h4>
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/menu.png" alt=""></p>
+
+<h4 id="clock--setting-the-time">Clock &amp; Setting the time</h4>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/watch_app.png" alt=""></p>
+
+<h4 id="heartrate">Heartrate</h4>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/heartrate_app.png" alt=""></p>
+
+<h4 id="spo2">SPO2</h4>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/spo2_app.png" alt=""></p>
+
+<h4 id="compass-gyro--accelerometer">Compass, Gyro &amp; Accelerometer</h4>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/compass_app.png" alt=""></p>
+
+<h4 id="pressure-altitude--temperature">Pressure, Altitude &amp; Temperature</h4>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/altitude_app.png" alt=""></p>
+
+<h3 id="heartrate-algorithm">Heartrate algorithm</h3>
+
+<p>So lets start the software discussion with the heartrate algorithm. There are 4 steps:</p>
+
+<ol>
+  <li>
+    <p>Step 1: Get a strong base signal to work with</p>
+  </li>
+  <li>
+    <p>Step 2: From the signal, detect whether we think a valid heartbeat just happened</p>
+  </li>
+  <li>
+    <p>Step 3: From the heartbeat, calculate the current heartrate</p>
+  </li>
+  <li>
+    <p>Go back to step 1, and make sure it’s all done fast enough</p>
+  </li>
+</ol>
+
+<p>Lets start with Step 1.</p>
+
+<h4 id="setting-up-the-sensor">Setting up the sensor</h4>
+
+<p>A little math says that we’ll between 30 BPM and 180 BPM (which is a maximum fundamental frequency of about 3 Hz), so the minimum inter-beat spacing will be &gt; 300 ms. Nyquist says our absolute minimum sampling rate needs to be 2X that, or 6 Hz, for a sample time of 160 ms. Since I don’t know any better yet, I’d add a safety factor of 5 to 10, so we’ll shoot for a sampling time of 20 - 30 ms. 20 ms, for example, corresponds to a 50Hz sampling frequency.</p>
+
+<h4 id="dc-removal">DC removal</h4>
+
+<p>The raw signal we’re working with looks like this:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/IR-LED-raw.png" alt="">
+<em>Raw sensor signal over the I2C bus</em></p>
+
+<p>The first step is to remove the DC. I first tried a simple DC removal filter</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+y(n) =x(n) - x(n-1) + Ry(n-1)
+\end{align*}</script>
+
+<p>where R is a parameter that is ~ 0.8 to 0.95. For a number of reasons didn’t like the performance. More about that in a minute.</p>
+
+<p>So I did my homework on this one and came across <a href="https://www.dsprelated.com/showarticle/58.php">an idea</a> for a filter that I really liked. The basic idea is to take a moving average and subtract it from a delayed version of the input:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/dcblock1.png" alt="">
+<em>Basic idea for a digital DC blocker</em></p>
+
+<p>The actual implementation is a bit more complex if you want it to be done quickly with integer power-of-2 math:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/dcblock2.png" alt="">
+<em>A digital DC blocking filter that performs very well</em></p>
+
+<p>The choice of how much to average has tradeoffs - not too long that its sluggish and not too short that you aren’t really getting a good estimate of the average. I thought averaging over close to one beat (0.5 to 1s) made sense, so at a sample rate of 20 ms, this was 32 samples (closest power of 2). Something to play with later would be to make this dependent on current heartrate.</p>
+
+<p>I rolled my own code to implement it, after first playing with an excel implementation to look at the behaviour. Here’s what the average estimate looks like:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/DC-avg1.png" alt="">
+<em>DC average (in red) follows the heartbeat signal</em></p>
+
+<p>And here is a close-in showing how it handles largish changes in DC level. You can see that it ignores “really fast” changes that happen faster than ~ 1000 ms, but tracks the others. That’s what we want.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/DC-avg2.png" alt="">
+<em>Response time of the DC average is about 600 ms</em></p>
+
+<p>Note for that second plot I offset the average by 32 counts (approx. 600 ms) to show it right on top of the signal &amp; eliminate the group delay of the DC block filter. The code does that naturally for us.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for (i = 0 ; i &lt; 32 ; i++) {
+  HR_state-&gt;abuf_DC[HR_state-&gt;offset_DC] += HR_state-&gt;xbuf_DC[i];
+}
+HR_state-&gt;abuf_DC[HR_state-&gt;offset_DC] = (HR_state-&gt;abuf_DC[HR_state-&gt;offset_DC])&gt;&gt;5;
+
+for (i = 0 ; i &lt; 32 ; i++) {
+*avg_estimate += HR_state-&gt;abuf_DC[i];
+}
+*avg_estimate = *avg_estimate&gt;&gt;5;
+output_buffer[0] = (*avg_estimate - HR_state-&gt;xbuf_DC[(HR_state-&gt;offset_DC+1)%4])&lt;&lt;2;
+</code></pre></div></div>
+
+<p>It rocked. I’ve posted the excel in the repo.</p>
+
+<h4 id="filter-design---rev-1">Filter design - rev 1</h4>
+
+<p>With the DC gone, the next step was to low pass filter the resulting DC-stripped signal. The transfer function of a simple digital low pass filter is:</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+y(n) =y(n-1) + \alpha (x(n) - y(n-1))
+\end{align*}</script>
+
+<p>which can be implemented really easily. In fact, I thought I would be clever and combine this with my first attempt at a DC removal filter above, and do both in one step. This combination has the following transfer function</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+H(z) = \frac{\alpha}{1-(1-\alpha)z^{-1}}\frac{1-z^{-1}}{1-Rz^{-1}}
+\end{align*}</script>
+
+<p>And from that you can get the difference equation. I tried it, but didn’t like the signal quality coming out. So its back to the DC removal filter I like, and time to search for a better low pass filter.</p>
+
+<h4 id="filter-design---rev-2-analysis-and-synthesis">Filter design - rev 2, analysis and synthesis</h4>
+
+<p>The (semi)pro way to go about this is to design an actual digital filter. Time for Oppenheim and Schaeffer. Or Google. The latter was the path of least resistance, so I went digging, and (lo and behold) buried in the Adafruit git repo for MAX3010x for “heartrate.c” was a finite impulse response (FIR) filter with the following coefficients:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="k">const</span> <span class="kt">uint16_t</span> <span class="n">FIRCoeffs</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">172</span><span class="p">,</span> <span class="mi">321</span><span class="p">,</span> <span class="mi">579</span><span class="p">,</span> <span class="mi">927</span><span class="p">,</span> <span class="mi">1360</span><span class="p">,</span> <span class="mi">1858</span><span class="p">,</span> <span class="mi">2390</span><span class="p">,</span> <span class="mi">2916</span><span class="p">,</span> <span class="mi">3391</span><span class="p">,</span> <span class="mi">3768</span><span class="p">,</span> <span class="mi">4012</span><span class="p">,</span> <span class="mi">4096</span><span class="p">};</span>
+</code></pre></div></div>
+<p>Hmmm, wonder what it would do “as is” at, say, a 20 ms sample rate. Here’s the Matlab/octave script to find out with filter <em>analysis</em></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function FIR_test;
+b = [172 321 579 927 1360 1858 2390 2916 3391 3768 4012 4096];
+b = [b b(11:-1:1)];
+a = 1;
+fs = 50; %20 ms/sample = 50 samples/sec
+[h,w]=freqz(b, a, 500, fs);
+h = h./32768;
+plot(w,20*log10(abs(h)));
+xlabel('Normalized Frequency (\times\pi rad/sample)');
+ylabel('Magnitude (dB)');
+</code></pre></div></div>
+
+<p>with the following result:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/filter-1.png" alt="">
+<em>The default “heartrate.c” low pass filter, about a 1.5 Hz bandwidth</em></p>
+
+<p>Ok, so we now know its a low pass filter, which is what we need. And since the highest heartrate I’ll ever see is ~ 180 bpm, which is 3 beats/sec (3 Hz), the 1.5 Hz 3dB low pass cutoff frequency is a little on the low side.</p>
+
+<p>So, instead of hoping to get lucky with google &amp; just using something blindly, we need to do a filter design ourselves. Turns out, there is a clever algorithm called the Remez exchange algorithm. This algorithm takes filter target “specs”, and a filter “length” and will output a design that comes close. Here is some octave code to do the filter <em>synthesis</em>, which only took a few minutes to get right. It sets a target passband of [0 to 0.0079] and stopband from [0.186 to 1] in normalized frequency units. These numbers were chosen to very closely reproduce the performance of the filter above:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function FIR_test;
+close all;
+b = [172 321 579 927 1360 1858 2390 2916 3391 3768 4012 4096];
+b = [b b(11:-1:1)];
+a = 1;
+fs = 50; %20 ms/sample = 50 samples/sec
+[h,w]=freqz(b, a, 500, fs);
+h = h./32768;
+plot(w,20*log10(abs(h)));
+hold on;
+xlabel('Normalized Frequency (\times\pi rad/sample)');
+ylabel('Magnitude (dB)');
+
+b = 46000*remez(22,[0 0.0079 0.186 1], [1 1 0 0]);
+b = round(b)
+[h,w]=freqz(b, a, 500, fs);
+h = h./(2^15);
+plot(w,20*log10(abs(h)));
+</code></pre></div></div>
+<p>You can see it both in the generated filter coefficients and the expected performance:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/remez.png" alt="">
+<em>Can you tell the difference?</em></p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/remez-coeffs.png" alt="">
+<em>Reverse engineering</em></p>
+
+<p>Cool. With this capability, we can now <em>design our own</em> filter with custom bandwidths of, say, 2, 2.5 and 3Hz bandwidth, all with N = 23 filter coefficients so the c code doesn’t need to change. Here is the relevant line in the Matlab code</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%b = 46000*remez(22,[0 0.0079 0.186 1], [1 1 0 0]); %nominal 1.5Hz
+%b = 46000*remez(22,[0 0.011 0.24 1], [1 1 0 0]); %2Hz
+%b = 46000*remez(22,[0 0.015 0.255 1], [1 1 0 0]); %2.5Hz
+%b = 46000*remez(22,[0 0.018 0.27 1], [1 1 0 0]); %3Hz
+</code></pre></div></div>
+<p>and the results:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/new_filters.png" alt="">
+<em>You get the idea</em></p>
+
+<p>We can implement several of these very easily on the watch by changing that one line of code in heartrate.c and immediately assess the performance. You could also have a dynamic filter depending on your heartrate. Now <em>that</em> would be pro.</p>
+
+<p>I ended up using the 2Hz filter as a good compromise between eliminating noise and keeping the detection speed high. Here is what the filtered signal looks like:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/filtered.png" alt="">
+<em>Finally, something that looks like a series of heartbeats</em></p>
+
+<p>At last, something we can work with!</p>
+
+<h4 id="importance-of-integer-math">Importance of integer math</h4>
+
+<p>The native output of the sensor is an 18 bit unsigned integer. After removing the DC, I knew I would need a signed integer representation if I didn’t want to pull my hair out. In order for everything to run quickly, it is essential to avoid floats &amp; doubles, so using signed 32 bit int32’s seemed like an ok compromise. Not as good as, say, limiting to 16bit unsigned, but still ok. I used a spreadsheet to check every point of each of the calculations to both ensure no overflow and also to use the full width of the int32 representation I did use.</p>
+
+<h4 id="step-2---detecting-a-beat">Step 2 - detecting a beat</h4>
+
+<p>With the signal above, it is now reasonably straightforward to define when a beat occurs. My algorithm was:</p>
+<ol>
+  <li>first find a minimum</li>
+  <li>then ensure you get at least 6 data points increasing monotonically</li>
+  <li>then find a maximum</li>
+  <li>then ensure the maximum is &gt; 0</li>
+  <li>then ensure the (maximum-minimum) is within a (pretty liberal) range</li>
+</ol>
+
+<p>And that constitutes a beat. It works really well, assuming the previous steps were followed. Here is a visualization of the beat detection algorithm in action on the signal above:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/beat_detect1.png" alt="">
+<em>Like a metronome</em></p>
+
+<p>You can also get sudden shifts in signal level, as the sensor shifts slightly during movement. The algorithm tracks that pretty well</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/beat_detect2.png" alt="">
+<em>During a period when the signal level changed quickly</em></p>
+
+<p>I also have periods of more erratic heartbeat, and the algorithm still performs well:</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/beat_detect3.png" alt="">
+<em>Following Mr. Crazy</em></p>
+
+<h4 id="step-3---heartrate-tracking">Step 3 - Heartrate tracking</h4>
+
+<p>We’re close. All we need to do is keep track of the time between those beats &amp; do a tiny bit of math to get heartrate. Its also a good idea to layer a bit of a tracking algorithm on top of this as well. To do that, I borrowed the heartbeat filter algorithm from <a href="https://dvernooy.github.io/projects/HRM">my earlier heartrate monitor project</a>. I made 3 changes:</p>
+<ol>
+  <li>I tweaked it to run with fixed point math (fast!).</li>
+  <li>I used a 50% “blanking time” in software to eliminate double beats or other hiccups.</li>
+  <li>I used an actual timer to count time between beats</li>
+</ol>
+
+<p>That algorithm already has 8s averaging built in. It worked even better than I expected. It even works replacing the IR channel with the red channel. Not quite as well, though, because of the weaker signal on the red channel. I’m really interested to try out green, but I need the MAX30101 for that. Maybe I’ll kill a weekend some time and build one up. Good news is that implementing the code should be fast - most of it is already written.</p>
+
+<h3 id="spo2-algorithm">SPO2 algorithm</h3>
+
+<p>With all of this work done, getting the SPO2 measurement working was much simpler. All you need to do is once an (IR LED-based) beat is detected, keep track of the DC baseline from the DC filter and the maximum-minimum from the beat detector. Then also run the red LED signal through exactly the same algorithm, and extract the same two parameters. Then do the following math:</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+R = \frac{AC_{red}}{AC_{IR}}\frac{DC_{IR}}{DC_{red}}
+\end{align*}</script>
+
+<p>where <script type="math/tex">AC_{x}</script> is the max-minimum of the filtered red and IR signals, and <script type="math/tex">DC_{x}</script> is the DC level of each signal that we strip with the DC blocking filter. We can finally apply the following mapping to get SPO2 %</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+SpO2[\%] = 110-25R
+\end{align*}</script>
+
+<p>There are more complicated relationships between SpO2 and R you can use, but I started with this.</p>
+
+<p>I did two more things to ensure SPO2 measurements were “good”:</p>
+<ol>
+  <li>I did them during “stable periods” in my heartbeat - I only recorded measurements when the beat-to-beat variability is &lt; 10%.</li>
+  <li>I output the rolling average of 7 measurements.</li>
+</ol>
+
+<h3 id="rtos--performance">RTOS &amp; performance</h3>
+
+<p>So none of this would have been possible with using a real time operating system (RTOS). This was something I did not do on my OBD-II or MP3-player projects, and regretted it. I used one on my erg project and was happy with the result, so I invested a bunch of time getting it working here, and I love how things worked out. But I also learned a ton doing it, and the more I work on it, the more I realize how much more I need to learn. I’m sure I’ve made a zillion faux-pas (faux-pi?) in the implementation.</p>
+
+<p>Since I was getting familiar with NilRTOS (aka Chibios/NIL) I continued on with it, with very minor tweaks to port from ATMega328 to ATMega1284. The system tick rate I chose was 64 us, as a compromise between responsivity and operating system overhead. I also am up to over 16 threads running concurrently - with minimal performance issues.</p>
+
+<p>Chibios/RT and Chibios/NIL have both hardware (HAL) and OS (OSAL) abstraction layers built in. I am actually not using any of this capability (yet) in my code. But I will in some later version.</p>
+
+<h4 id="threadsafeness">Threadsafeness</h4>
+
+<p>So to make something “threadsafe”, you have to anticipate that at any time, the thread (aka “task”) will be interrupted to let another higher priority thread/task. So non-RTOS-supported delays in the code are bad. It is also really important to keep critical sections really short, and to protect them if needed. I ended up making tweaks to many of the routines I had on hand, and I’m sure I did more harm than good to some of them.</p>
+
+<h4 id="how-many-threadstasks">How many threads/tasks?</h4>
+
+<p>Good question. I’m at 16 and counting. You really have to pay attention to priorities and ensure that the high priority ones “sleep” often enough to let the lower priority ones execute. Because Chibios/NIL is a fully pre-emptive OS, the second thing is that, on a per-thread-basis, you need to reserve stack space. This can get heavy if the thread has subroutines that call printf, for example. In fact, not paying attention to this causes all kinds of weird errors that can be traced to stack-trashing. If you’re still reading, I’m sure I’m not telling you anything you don’t already know.</p>
+
+<h4 id="serial-debugging">Serial debugging</h4>
+
+<p>Essential for any embedded work. I have both a software and hardware UART implemented. I need to pick one and kill the other one at some point.</p>
+
+<h4 id="i2c-spi-and-serial-buses---protecting">I2C, SPI and Serial buses - protecting</h4>
+
+<p>Besides multi-threaded operation, a second important RTOS capability is protecting precious resources. What the heck does that mean? It means that when all of the threads want to write to the LCD or serial port at the same time, you have to have a way to keep the peace. The answer is to use semaphores and mutexes. The version of Chibios/NIL that I used has a binary semaphore, and I implemented them for each of the following “multi-use” resources:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chSemObjectInit(&amp;lcdUSE,1); //LCD
+chSemObjectInit(&amp;sdUSE,1); //SD Card
+chSemObjectInit(&amp;spiUSE,1); //SPI bus
+chSemObjectInit(&amp;i2cUSE,1); //I2C bus
+chSemObjectInit(&amp;usartUSE,1); //USART
+chSemObjectInit(&amp;ButtonPressed,1); //Button Handler
+chSemObjectInit(&amp;testTHREAD,1); // Test thread
+</code></pre></div></div>
+
+<h3 id="menus-icons-and-buttons">Menus, icons and buttons</h3>
+
+<p>I had this grand vision of implementing the menu as icons instead of text. Still do. But I had already built up all of the code base around a text based menu and button navigation. I also had figured out how to make the button function depend on the context of the thread, using a third major capability of the RTOS: its ability to signal and pass messages between threads. So that’s what I did. The icon thing is on the list. This is going to be a multi-year project, so I’m buckled in.</p>
+
+<h3 id="sd-cards-and-fatfs-revisited">SD cards and Fatfs-revisited</h3>
+
+<p>The SD card is great when you have limited memory, which of course is the case for these 8bit micros. Good for storing photos as backgrounds for the watch, and good as a destination for data logging. I was interested in both. Once again, Fatfs to the rescue. Implementing it didn’t take much time as I’d tackled it with a previous project. Using it with the RTOS is also working ok. I know my code is pretty amateurish, and I intend to come back to it at some point to do way better error checking/handling. I also think a queue might give better performance vs. using a semaphore to protect.</p>
+
+<p>I also want to push the write speed performance. Right now its about 20 ms for an f_write() + f_sync() using unoptimized FatFS code. Seems to be what other people see, but I’m sure I can do better with a dedicated push on this.</p>
+
+<h3 id="bitmaps-fonts-and-shapes">Bitmaps, fonts and shapes</h3>
+
+<p>Pushing bitmaps to the screen, supporting fonts and drawing things are all pieces of the lcd jiu-jitsu.</p>
+<ol>
+  <li>I have a chunk of bitmap code that works well. Check.</li>
+  <li>I have a base 5x7 font that can be scaled up and down in size. Check.</li>
+  <li>I don’t have any of the lines and shapes tested yet. Coming soon with the compass app.</li>
+</ol>
+
+<h3 id="and-about-that-printf">And about that printf</h3>
+
+<p>First of all, they warn you printf is not safe. Okay, well its my wrist, and there is no internet connection to this thng. Then they say printf is bloated code-wise. I can verify that first hand: RTOS threads need to reserve more than 1K of space to deal with it! Yikes! That’s more of a problem. So I’m about halfway through eliminating the avr-gcc printf and implementing xprintf instead. The only thing it doesn’t support is floats, but I’m working that. More to come.</p>
+
+<h3 id="low-power-design-and-analysis">Low power design and analysis</h3>
+
+<p>One thing I did know was that the LCD can be a power hog. So I implemented a variable PWM backlight with a pushbutton and interrupt dedicated only to this. Other than that, I have to admit I didn’t really have a clue how long the battery was going to last. I didn’t even do the most basic benchtop measurements. So here is the initial data:</p>
+
+<p>Not a disaster, but not great. You’ll see below this at the top of the list of things to work on. I’ll come back and document here</p>
+
+<h3 id="debugging--evaluating">Debugging &amp; Evaluating</h3>
+
+<p>In an application like this, there are a number of things to keep an eye on</p>
+<ol>
+  <li>Voltage level of the battery - done with ADC &amp; a bit of math</li>
+  <li>Speed &amp; timing performance of the RTOS - using its internal test thread</li>
+  <li>Memory performance of the RTOS - especially status of each thread stack</li>
+  <li>Individual thread real-time status: executing, blocked, stopped etc..</li>
+  <li>Performance of the real-time clock - (I read the DS3231 status byte)</li>
+</ol>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/monitoring.png" alt="">
+<em>Monitoring</em></p>
+
+<h2 id="learning-by-re-doing">Learning by re-doing</h2>
+
+<p>There are a zillion tweaks I already want to make to the software to both learn its limits and make it better. Right now, it ain’t really broke, so I won’t spend a ton of time fixing. But it is a nice platform on which to experiment and learn.</p>
+
+<p>As far as new features, here’s my backlog, in order from “duh, you don’t have that yet?” to “probably will happen” to “ain’t gonna happen”:</p>
+<blockquote>
+  <ol>
+    <li>Low power consumption optimization</li>
+    <li>Stopwatch/timer</li>
+    <li>Way better screens and menu structure for almost everything</li>
+    <li>Step counter</li>
+    <li>Different variations on the outer skin</li>
+    <li>Heartrate with green LED on MAX30101 instead of IR LED on MAX30102</li>
+    <li>ICON-based UI instead of text menu</li>
+    <li>Speaker/microphone support</li>
+    <li>Wifi or bluetooth</li>
+  </ol>
+</blockquote>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-04-20">April 20, 2018</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Heartwatch%20http%3A%2F%2Flocalhost%3A4000%2Fprojects%2Fheartwatch%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fprojects%2Fheartwatch%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=http%3A%2F%2Flocalhost%3A4000%2Fprojects%2Fheartwatch%2F" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Flocalhost%3A4000%2Fprojects%2Fheartwatch%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="#" class="pagination--pager disabled">Previous</a>
+    
+    
+      <a href="http://localhost:4000/projects/ergware/" class="pagination--pager" title="ErgWare
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <!-- <script src="http://localhost:4000/assets/js/comments.js"></script> -->
+      <!-- <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a Comment</h4>
+      <section id="disqus_thread"></section>
+    
+</div> -->
+    <div id="disqus_thread"></div>
+    <a href="single.html#disqus_thread" data-disqus-identifier=""></a>
+
+    <script>
+      // var disqus_developer = 1;
+      var disqus_config = function () {
+      this.page.url = "/projects/heartwatch/";
+      this.page.identifier = "/projects/heartwatch/";
+      };
+
+      (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://dvernooy-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+      <script id="dsq-count-scr" src="//dvernooy-github-io.disqus.com/count.js" async></script>
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+  <input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term...">
+  <div id="results" class="results"></div>
+</div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+      <li><a href="https://github.com/dvernooy"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="http://localhost:4000/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">© 2018 Dave Vernooy. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="http://localhost:4000/assets/js/main.min.js"></script>
+
+
+
+  <script src="http://localhost:4000/assets/js/lunr.min.js"></script>
+  <script src="http://localhost:4000/assets/js/lunr-en.js"></script>
+
+
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://localhost:4000/projects/heartwatch/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/projects/00-heartwatch"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://dvernooy.github.io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+
+
+  
+
+
+
+  </body>
+</html>
