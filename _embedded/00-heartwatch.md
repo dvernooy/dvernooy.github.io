@@ -31,6 +31,7 @@ This watch will keep time accurately, measure heart rate, measure SPO2%, act as 
 ### What it (currently) is not
 
 I thought about supporting Wifi or Bluetooth connectivity, but in this first version I opted against it to keep the power draw and initial complexity to a minimum. I figured getting the heart rate measurement working robustly would be enough of a challenge (it was!). So it isn't really a bona-fide "smartwatch". The way I look at it, its just something to put on the list for rev 2.
+
 ## S.T.E.M.
 
 So what are the interesting tech bits here?
@@ -571,9 +572,7 @@ First of all, they warn you printf is not safe. Okay, well its my wrist, and the
 
 ### Low power design and analysis
 
-One thing I did know was that the LCD can be a power hog. So I implemented a variable PWM backlight with a pushbutton and interrupt dedicated only to this. Other than that, I have to admit I didn't really have a clue how long the battery was going to last. I didn't even do the most basic benchtop measurements. So here is the initial data:
-
-Not a disaster, but not great. You'll see below this at the top of the list of things to work on. I'll come back and document here.
+One thing I did know was that the LCD can be a power hog. So I implemented a variable PWM backlight with a pushbutton and interrupt dedicated only to this. Other than that, I have to admit I didn't really have a clue how long the battery was going to last. I didn't even do the most basic benchtop measurements. You'll see that understanding the power consumption is at the top of my list of things to work on. I'll come back and document here.
 
 ### Debugging & Evaluating
 
