@@ -45,7 +45,7 @@ The simple idea behind this is that light (say, from an LED) penetrates your ski
 
 Adding one more fact: depending on the color of light you use, the amount reflected changes. This is mainly because your skin absorbs different colors of light differently. You can use this to get a bigger (or smaller) reflected signal to work with. Obviously, *where* you shine the light matters too. Hitting bone would not be that helpful, for example.
 
-Adding just one more fact. Your blood also absorbs different colors of light in different amounts. However, the amount of oxygen in the blood determines just how differently. So if we were to shine two different colors (say, red at 650 nm and infrared at 850 nm - foreshadowing), look at their reflections, and watch how they change, not only would we be able to measure the heartbeat from each color individually, but we could also measure how much oxygen is bound up by hemoglobin in the blood by looking at the difference in reflected amount between the two colors. This is called pulse oximetry. Very cool.
+Adding just one more fact. Your blood also absorbs different colors of light in different amounts. However, the amount of oxygen in the blood determines just how differently. So what happens if shine two different colors (say, red at 650 nm and infrared at 850 nm - foreshadowing), look at their reflections, and watch how they change? Not only would we be able to measure the heartbeat from each color individually, but we could also measure how much oxygen is bound up by hemoglobin in the blood. All of this just by looking at the difference in reflected amount between the two colors. This is called pulse oximetry. Very cool.
 
 ![]({{ site.url }}/assets/images/projects/heartwatch/hemoglobin.png)
 *Oxygenated and non-oxygenated hemoglobin absorb light in very different ways*
@@ -162,12 +162,12 @@ The SPI header can be used for in-system programming, and the serial port is use
 *Getting stuff done*
 
 ### Circuit diagram & component choices
-Here is a circuit diagram. I have not drawn all of the details of the daughterboards, since most of them are a direct i2c/twi interface using SDL and SCA.
+Here is a circuit diagram
 
 [![]({{ site.url }}/assets/images/projects/heartwatch/schematic.png)]({{site.url}}/assets/images/projects/heartwatch/schematic.png)
 *Circuit diagram for the heartwatch*
 
-I haven't shown the individual connections for each of the sensor devices as I got most of them already mounted on daughter boards. I'll just show the part number of the daughter board and the pins I actually used. That other detail is obviously important to make this thing work, and especially if you wanted to get rid of those daughter boards and really slim this thing down.
+I haven't shown the individual connections for each of the sensor devices as I got them already mounted on daughter boards and access them via an i2c/twi interface using SDL and SCA. That other detail is obviously important to make this thing work, and especially if you wanted to get rid of those daughter boards and really slim this thing down. Note that the pullups for the i2c lines are essential, and not shown here since they are populated already on a couple of the daughter boards.
 
 ### Circuit build, assembly & component mounting
 ![]({{ site.url }}/assets/images/projects/heartwatch/full_views.png)
@@ -181,20 +181,20 @@ I haven't shown the individual connections for each of the sensor devices as I g
 
 ## Hardware - watch skin and straps
 
-### Strap strategy - Road-ID
+### Strap strategy - ROAD iD
 
 I never really have a solid plan going into these things. Maybe it shows in the final results. Anyways, after mounting up all the parts, I needed to make this thing look a bit more real with a watch band. I didn't want the band to be skin-irritating and it needed to somehow secure to the board and hold the whole thing in place. I went for a double: two skinny bands working together vs. one thicker one. Might look a bit goofy, not sure.
 
-After a bit of research, I found out that RoadID sells replacement parts for their ID bracelets. Silicone straps and a simple metal clasp system. Simple, low cost and modifiable to my needs. Perfect.
+After a bit of research, I found out that **ROAD iD** sells replacement parts for their ID bracelets. Silicone straps and a simple metal clasp system. Simple, low cost and modifiable to my needs. Perfect.
 
 ![]({{ site.url }}/assets/images/projects/heartwatch/roadid-clasp.png)
 *Two is better than one*
 
-They also sell a thicker one that I might try later.
+They also sell a thicker one that I might try later as a single strap.
 
 ### Mounting the heart rate sensor
 
-A side benefit of the two-strap system is that now I had a decent way to hold the heart rate monitor board in the right place on my wrist. My process was this:
+A side benefit of the two-strap system is that now I had a decent way to hold the heart rate monitor board in the correct place on my wrist. My process was this:
 >1. Take an old credit card and cut a roughly 3" by 1" strip
 >2. Heat a soldering iron up and melt the plastic very briefly and then bend it before it cools. When it cools, it will harden nicely in that formed shape. Takes a tiny bit of practice.
 >3. Using this technique, form a shape to hold the board and straps, with just the LED sensor chip poking through.
