@@ -70,7 +70,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-04-27T21:38:23-04:00">
+  <meta property="article:published_time" content="2018-05-01T21:26:10-04:00">
 
 
 
@@ -320,7 +320,7 @@
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     <meta itemprop="headline" content="Heartwatch">
     <meta itemprop="description" content="An open source, DIY smartwatch with heart rate &amp; SpO2 monitoring">
-    <meta itemprop="datePublished" content="April 27, 2018">
+    <meta itemprop="datePublished" content="May 01, 2018">
     <meta itemprop="dateModified" content="April 20, 2018">
 
     <div class="page__inner-wrap">
@@ -335,7 +335,7 @@
 
 
 
-  29 minute read
+  30 minute read
 </p>
           
         </header>
@@ -381,7 +381,7 @@
   <li>
 <a href="#hardware---watch-skin-and-straps">Hardware - watch skin and straps</a>
     <ul>
-      <li><a href="#strap-strategy---road-id">Strap strategy - Road-ID</a></li>
+      <li><a href="#strap-strategy---road-id">Strap strategy - ROAD iD</a></li>
       <li><a href="#mounting-the-heart-rate-sensor">Mounting the heart rate sensor</a></li>
       <li><a href="#case-design--3d-printing">Case design &amp; 3D printing</a></li>
       <li><a href="#case-to-arm">Case to arm</a></li>
@@ -429,6 +429,7 @@
 <h3 id="what-it-currently-is-not">What it (currently) is not</h3>
 
 <p>I thought about supporting Wifi or Bluetooth connectivity, but in this first version I opted against it to keep the power draw and initial complexity to a minimum. I figured getting the heart rate measurement working robustly would be enough of a challenge (it was!). So it isn’t really a bona-fide “smartwatch”. The way I look at it, its just something to put on the list for rev 2.</p>
+
 <h2 id="stem">S.T.E.M.</h2>
 
 <p>So what are the interesting tech bits here?</p>
@@ -442,7 +443,7 @@
 
 <p>Adding one more fact: depending on the color of light you use, the amount reflected changes. This is mainly because your skin absorbs different colors of light differently. You can use this to get a bigger (or smaller) reflected signal to work with. Obviously, <em>where</em> you shine the light matters too. Hitting bone would not be that helpful, for example.</p>
 
-<p>Adding just one more fact. Your blood also absorbs different colors of light in different amounts. However, the amount of oxygen in the blood determines just how differently. So if we were to shine two different colors (say, red at 650 nm and infrared at 850 nm - foreshadowing), look at their reflections, and watch how they change, not only would we be able to measure the heartbeat from each color individually, but we could also measure how much oxygen is bound up by hemoglobin in the blood by looking at the difference in reflected amount between the two colors. This is called pulse oximetry. Very cool.</p>
+<p>Adding just one more fact. Your blood also absorbs different colors of light in different amounts. However, the amount of oxygen in the blood determines just how differently. So what happens if shine two different colors (say, red at 650 nm and infrared at 850 nm - foreshadowing), look at their reflections, and watch how they change? Not only would we be able to measure the heartbeat from each color individually, but we could also measure how much oxygen is bound up by hemoglobin in the blood. All of this just by looking at the difference in reflected amount between the two colors. This is called pulse oximetry. Very cool.</p>
 
 <p><img src="http://localhost:4000/assets/images/projects/heartwatch/hemoglobin.png" alt="">
 <em>Oxygenated and non-oxygenated hemoglobin absorb light in very different ways</em></p>
@@ -559,12 +560,12 @@
 <em>Getting stuff done</em></p>
 
 <h3 id="circuit-diagram--component-choices">Circuit diagram &amp; component choices</h3>
-<p>Here is a circuit diagram. I have not drawn all of the details of the daughterboards, since most of them are a direct i2c/twi interface using SDL and SCA.</p>
+<p>Here is a circuit diagram</p>
 
 <p><a href="http://localhost:4000/assets/images/projects/heartwatch/schematic.png"><img src="http://localhost:4000/assets/images/projects/heartwatch/schematic.png" alt=""></a>
 <em>Circuit diagram for the heartwatch</em></p>
 
-<p>I haven’t shown the individual connections for each of the sensor devices as I got most of them already mounted on daughter boards. I’ll just show the part number of the daughter board and the pins I actually used. That other detail is obviously important to make this thing work, and especially if you wanted to get rid of those daughter boards and really slim this thing down.</p>
+<p>I haven’t shown the individual connections for each of the sensor devices as I got them already mounted on daughter boards and access them via an i2c/twi interface using SDL and SCA. That other detail is obviously important to make this thing work, and especially if you wanted to get rid of those daughter boards and really slim this thing down. Note that the pullups for the i2c lines are essential, and not shown here since they are populated already on a couple of the daughter boards.</p>
 
 <h3 id="circuit-build-assembly--component-mounting">Circuit build, assembly &amp; component mounting</h3>
 <p><img src="http://localhost:4000/assets/images/projects/heartwatch/full_views.png" alt="">
@@ -578,20 +579,20 @@
 
 <h2 id="hardware---watch-skin-and-straps">Hardware - watch skin and straps</h2>
 
-<h3 id="strap-strategy---road-id">Strap strategy - Road-ID</h3>
+<h3 id="strap-strategy---road-id">Strap strategy - ROAD iD</h3>
 
 <p>I never really have a solid plan going into these things. Maybe it shows in the final results. Anyways, after mounting up all the parts, I needed to make this thing look a bit more real with a watch band. I didn’t want the band to be skin-irritating and it needed to somehow secure to the board and hold the whole thing in place. I went for a double: two skinny bands working together vs. one thicker one. Might look a bit goofy, not sure.</p>
 
-<p>After a bit of research, I found out that RoadID sells replacement parts for their ID bracelets. Silicone straps and a simple metal clasp system. Simple, low cost and modifiable to my needs. Perfect.</p>
+<p>After a bit of research, I found out that <strong>ROAD iD</strong> sells replacement parts for their ID bracelets. Silicone straps and a simple metal clasp system. Simple, low cost and modifiable to my needs. Perfect.</p>
 
 <p><img src="http://localhost:4000/assets/images/projects/heartwatch/roadid-clasp.png" alt="">
 <em>Two is better than one</em></p>
 
-<p>They also sell a thicker one that I might try later.</p>
+<p>They also sell a thicker one that I might try later as a single strap.</p>
 
 <h3 id="mounting-the-heart-rate-sensor">Mounting the heart rate sensor</h3>
 
-<p>A side benefit of the two-strap system is that now I had a decent way to hold the heart rate monitor board in the right place on my wrist. My process was this:</p>
+<p>A side benefit of the two-strap system is that now I had a decent way to hold the heart rate monitor board in the correct place on my wrist. My process was this:</p>
 <blockquote>
   <ol>
     <li>Take an old credit card and cut a roughly 3” by 1” strip</li>
@@ -606,7 +607,7 @@
 
 <h3 id="case-design--3d-printing">Case design &amp; 3D printing</h3>
 
-<p>So now that I had a roughly functioning watch, I wanted something to give it a bit more protection. I thought about using Sugru (too finicky for what I wanted) or making some Oogoo (likely not skin friendly unless I bought some Al-cure silicone) to form the skin. Then the kids had a week off of school and looked bored. And they each have their favority CAD software. And their friend Rohan has a hobby 3D printer. So we whipped up a little box one morning and had it printed by that evening. I did a bunch of rough measurements and estimating, we had a contest to see which software was easier to use (Ian’s Fusion360 was the winner), and then went for it.</p>
+<p>So now that I had a roughly functioning watch, I wanted something to give it a bit more protection. I thought about using Sugru (too finicky for what I wanted) or making some Oogoo (likely not skin friendly unless I bought some aluminum-cure silicone) to form the watch protective skin. Then the kids had a week off of school and looked bored. And they each have their favorite CAD software. And their friend Rohan has a hobby 3D printer. So we whipped up a little box one morning and had it printed by that evening. I did a bunch of rough measurements and estimating, we had a contest to see which software was easier to use (Ian’s Fusion360 was the winner), and then went for it.</p>
 
 <p><img src="http://localhost:4000/assets/images/projects/heartwatch/CAD.png" alt="">
 <em>Personal Fabrication: From CAD to doo-dad in 3 hrs. Neil Gershenfeld, eat your heart out</em></p>
@@ -625,10 +626,12 @@
 
 <h3 id="case-to-arm">Case to arm</h3>
 
-<p>I did end up adding some contouring to shape it more to my arm. It’ll be interesting to add this to a rev 2.0 case, but the thickness of the case is only about 1.5 mm thick, so hard to do too much “after the fact” shaping.</p>
+<p>I did end up adding some contouring to shape it more to my arm.</p>
 
 <p><img src="http://localhost:4000/assets/images/projects/heartwatch/form_fit.png" alt="">
 <em>Matching my delicate contours</em></p>
+
+<p>The current case sidewall thickness is only about 1.5 mm, so hard to do too much “after the fact” shaping right now. Add this to my list of tweaks for a rev 2.0 case.</p>
 
 <h3 id="pushbuttons---silicone--hot-glue">Pushbuttons - silicone &amp; hot glue</h3>
 
@@ -654,11 +657,11 @@
 
 <h2 id="software">Software</h2>
 
-<p>This project is one of the more ambitious ones on the software side. I wanted full functionality, a good user experience and reasonable battery life - along with the ability to add new “apps” as I dreamed them up. The entire codebase, along with some of the spreadsheets and Matlab scripts are posted on my github repository.</p>
+<p>This project is one of the more ambitious ones on the software side. I wanted full functionality, a good user experience and reasonable battery life - along with the ability to add new “apps” as I dreamed them up. The entire codebase, along with some of the spreadsheets and Matlab scripts are posted <a href="https://www.github.com/dvernooy/heartwatch/">at my github repository.</a></p>
 
 <h3 id="apps-screenshots-watch-compass-hrm-spo2-photos-altimeter">Apps Screenshots: watch, compass, HRM, SPO2, photos, altimeter</h3>
 
-<p>To start, here are current screenshots of the various apps - I’ll add/update as new things become available.</p>
+<p>Here are current screenshots of the various apps - I’ll add/update as new things become available.</p>
 
 <h4 id="menu--navigation">Menu &amp; Navigation</h4>
 <p><img src="http://localhost:4000/assets/images/projects/heartwatch/menu.png" alt=""></p>
@@ -975,15 +978,23 @@ chSemObjectInit(&amp;testTHREAD,1); // Test thread
 
 <h3 id="low-power-design-and-analysis">Low power design and analysis</h3>
 
-<p>One thing I did know was that the LCD can be a power hog. So I implemented a variable PWM backlight with a pushbutton and interrupt dedicated only to this. Other than that, I have to admit I didn’t really have a clue how long the battery was going to last. I didn’t even do the most basic benchtop measurements. So here is the initial data:</p>
+<p>One thing I did know was that the LCD can be a power hog. So I implemented a variable PWM backlight with a pushbutton and interrupt dedicated only to this. Other than that, I have to admit I didn’t really have a clue how long the battery was going to last. I didn’t even do the most basic benchtop measurements. You’ll see that understanding the power consumption was at the top of my list of things to work on. First data looks really promising:</p>
 
-<p>Not a disaster, but not great. You’ll see below this at the top of the list of things to work on. I’ll come back and document here</p>
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/charge_life.png" alt="">
+<em>We’ll get at least a 12+ hour day</em></p>
+
+<p>Pretty interesting how close this looks to published 1s LiPo discharge curves.</p>
+
+<p><img src="http://localhost:4000/assets/images/projects/heartwatch/discharge-curves.png" alt="">
+<em>Typical LiPo discharging</em></p>
+
+<p>Ours looks to be a discharge rate of about 0.05C. The battery is a 500 mAh battery, which implies an effective constant current consumption of 35mA. Seems high even with the LEDs on all the time, so I hope there is room to improve here. I’ll document more on this as results come in. Maybe this doesn’t need to be quite at the top of the “to do” list.</p>
 
 <h3 id="debugging--evaluating">Debugging &amp; Evaluating</h3>
 
 <p>In an application like this, there are a number of things to keep an eye on</p>
 <ol>
-  <li>Voltage level of the battery - done with ADC &amp; a bit of math</li>
+  <li>Voltage level of the battery - we just talked about it - which is done with the ADC and a bit of math</li>
   <li>Speed &amp; timing performance of the RTOS - using its internal test thread</li>
   <li>Memory performance of the RTOS - especially status of each thread stack</li>
   <li>Individual thread real-time status: executing, blocked, stopped etc..</li>

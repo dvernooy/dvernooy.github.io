@@ -229,7 +229,7 @@ I did end up adding some contouring to shape it more to my arm.
 ![]({{ site.url }}/assets/images/projects/heartwatch/form_fit.png)
 *Matching my delicate contours*
 
-The current thickness is only about 1.5 mm, so hard to do too much "after the fact" shaping right now. Add this to my list of tweaks for a rev 2.0 case.
+The current case sidewall thickness is only about 1.5 mm, so hard to do too much "after the fact" shaping right now. Add this to my list of tweaks for a rev 2.0 case.
 
 ### Pushbuttons - silicone & hot glue
 
@@ -572,12 +572,22 @@ First of all, they warn you printf is not safe. Okay, well its my wrist, and the
 
 ### Low power design and analysis
 
-One thing I did know was that the LCD can be a power hog. So I implemented a variable PWM backlight with a pushbutton and interrupt dedicated only to this. Other than that, I have to admit I didn't really have a clue how long the battery was going to last. I didn't even do the most basic benchtop measurements. You'll see that understanding the power consumption is at the top of my list of things to work on. I'll come back and document here.
+One thing I did know was that the LCD can be a power hog. So I implemented a variable PWM backlight with a pushbutton and interrupt dedicated only to this. Other than that, I have to admit I didn't really have a clue how long the battery was going to last. I didn't even do the most basic benchtop measurements. You'll see that understanding the power consumption was at the top of my list of things to work on. First data looks really promising:
+
+![]({{ site.url }}/assets/images/projects/heartwatch/charge_life.png)
+*We'll get at least a 12+ hour day*
+
+Pretty interesting how close this looks to published 1s LiPo discharge curves.
+
+![]({{ site.url }}/assets/images/projects/heartwatch/discharge-curves.png)
+*Typical LiPo discharging*
+
+Ours looks to be a discharge rate of about 0.05C. The battery is a 500 mAh battery, which implies an effective constant current consumption of 35mA. Seems high even with the LEDs on all the time, so I hope there is room to improve here. I'll document more on this as results come in. Maybe this doesn't need to be quite at the top of the "to do" list.
 
 ### Debugging & Evaluating
 
 In an application like this, there are a number of things to keep an eye on
-1. Voltage level of the battery - done with ADC & a bit of math
+1. Voltage level of the battery - we just talked about it - which is done with the ADC and a bit of math
 2. Speed & timing performance of the RTOS - using its internal test thread
 3. Memory performance of the RTOS - especially status of each thread stack
 4. Individual thread real-time status: executing, blocked, stopped etc..
