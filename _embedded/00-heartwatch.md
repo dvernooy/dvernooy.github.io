@@ -28,6 +28,33 @@ This watch will keep time accurately, measure heart rate, measure SPO2%, act as 
 ![]({{ site.url }}/assets/images/projects/heartwatch/the_guts.png)
 *Would you like fries with this delicious burger?*
 
+### Screenshots
+
+Here are current screenshots of various apps - I'll add/update as new things become available.
+
+#### Menu & Navigation
+![]({{ site.url }}/assets/images/projects/heartwatch/menu.png)
+
+#### Clock & Setting the time
+
+![]({{ site.url }}/assets/images/projects/heartwatch/watch_app.png)
+
+#### Heartrate
+
+![]({{ site.url }}/assets/images/projects/heartwatch/heartrate_app.png)
+
+#### SPO2
+
+![]({{ site.url }}/assets/images/projects/heartwatch/spo2_app.png)
+
+#### Compass, Gyro & Accelerometer
+
+![]({{ site.url }}/assets/images/projects/heartwatch/compass_app.png)
+
+#### Pressure, Altitude & Temperature
+
+![]({{ site.url }}/assets/images/projects/heartwatch/altitude_app.png)
+
 ### What it (currently) is not
 
 I thought about supporting Wifi or Bluetooth connectivity, but in this first version I opted against it to keep the power draw and initial complexity to a minimum. I figured getting the heart rate measurement working robustly would be enough of a challenge (it was!). So it isn't really a bona-fide "smartwatch". The way I look at it, its just something to put on the list for rev 2.
@@ -235,7 +262,9 @@ The current case sidewall thickness is only about 1.5 mm, so hard to do too much
 
 So (almost) everything was cool about the case. Except it is hard to reach the SD card (either long fingernails or a key or coin or pen tip). And then what to do about the pushbutton switches? They're recessed & also hard to reach. Hmmmm.
 
-Here's what worked. Go buy some Reynolds Parchment paper. Take a hot glue gun, run a line of hot glue on it and press it really flat with another piece of parchment paper. Then release it from the paper (it won't stick), and trim it to fit between the buttons and the 3D printed case, on the inside of the case. Hot-glue tack it there. Then from the outside, on top of this thin hot-glue skin, melt a small ball of hot glue onto it. Works awesome, and has a really nice feel to it when actuating the pushbuttons.
+Lets skip the experiments on this one.
+
+Here's what actually worked. Go buy some Reynolds Parchment paper. Take a hot glue gun, run a line of hot glue on it and press it really flat with another piece of parchment paper. Then release it from the paper (it won't stick), and trim it to fit between the buttons and the 3D printed case, on the inside of the case. Hot-glue tack it there. Then from the outside, on top of this thin hot-glue skin, melt a small ball of hot glue onto it. Works awesome, and has a really nice feel to it when actuating the pushbuttons.
 
 Here's a close-up of what I'm talking about, and the finished result:
 
@@ -251,33 +280,6 @@ For the SD card, just keep a paperclip handy.
 ## Software
 
 This project is one of the more ambitious ones on the software side. I wanted full functionality, a good user experience and reasonable battery life - along with the ability to add new "apps" as I dreamed them up. The entire codebase, along with some of the spreadsheets and Matlab scripts are posted [at my github repository.](https://www.github.com/dvernooy/heartwatch/)
-
-### Apps Screenshots: watch, compass, HRM, SPO2, photos, altimeter
-
-Here are current screenshots of the various apps - I'll add/update as new things become available.
-
-#### Menu & Navigation
-![]({{ site.url }}/assets/images/projects/heartwatch/menu.png)
-
-#### Clock & Setting the time
-
-![]({{ site.url }}/assets/images/projects/heartwatch/watch_app.png)
-
-#### Heartrate
-
-![]({{ site.url }}/assets/images/projects/heartwatch/heartrate_app.png)
-
-#### SPO2
-
-![]({{ site.url }}/assets/images/projects/heartwatch/spo2_app.png)
-
-#### Compass, Gyro & Accelerometer
-
-![]({{ site.url }}/assets/images/projects/heartwatch/compass_app.png)
-
-#### Pressure, Altitude & Temperature
-
-![]({{ site.url }}/assets/images/projects/heartwatch/altitude_app.png)
 
 ### Heartrate algorithm
 
@@ -557,7 +559,7 @@ I had this grand vision of implementing the menu as icons instead of text. Still
 
 The SD card is great when you have limited memory, which of course is the case for these 8bit micros. Good for storing photos as backgrounds for the watch, and good as a destination for data logging. I was interested in both. Once again, Fatfs to the rescue. Implementing it didn't take much time as I'd tackled it with a previous project. Using it with the RTOS is also working ok. I know my code is pretty amateurish, and I intend to come back to it at some point to do way better error checking/handling. I also think a queue might give better performance vs. using a semaphore to protect.
 
-I also want to push the write speed performance. Right now its about 20 ms for an f_write() + f_sync() using unoptimized FatFS code. Seems to be what other people see, but I'm sure I can do better with a dedicated push on this.
+I also want to push the write speed performance. Right now its about 15 ms for an f_write() + f_sync() using unoptimized FatFS code. Seems to be what other people get, but I'm sure I can do better with a dedicated push on this.
 
 ### Bitmaps, fonts and shapes
 
@@ -568,7 +570,7 @@ Pushing bitmaps to the screen, supporting fonts and drawing things are all piece
 
 ### And about that printf
 
-First of all, they warn you printf is not safe. Okay, well its my wrist, and there is no internet connection to this thng. Then they say printf is bloated code-wise. I can verify that first hand: RTOS threads need to reserve more than 1K of space to deal with it! Yikes! That's more of a problem. So I'm about halfway through eliminating the avr-gcc printf and implementing xprintf instead. The only thing it doesn't support is floats, but I'm working that. More to come.
+First of all, they warn you printf is not safe. Okay, well its my wrist, and there is no internet connection to this thing. Then they say printf is bloated code-wise. I can verify that first hand: RTOS threads need to reserve more than 1K of space to deal with it! Yikes! That's more of a problem. So I'm about halfway through eliminating the avr-gcc printf and implementing xprintf instead. The only thing it doesn't support is floats, but I'm working that. More to come.
 
 ### Low power design and analysis
 
