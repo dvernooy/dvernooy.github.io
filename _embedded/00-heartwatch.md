@@ -232,7 +232,7 @@ Definitely good enough for now. I build it "tight enough" to not slip in the sil
 
 ### Case design & 3D printing
 
-So now that I had a roughly functioning watch, I wanted something to give it a bit more protection. I thought about using Sugru (too finicky for what I wanted) or making some Oogoo (likely not skin friendly unless I bought some aluminum-cure silicone) to form the watch protective skin. Then the kids had a week off of school and looked bored. And they each have their favorite CAD software. And their friend Rohan has a hobby 3D printer. So we whipped up a little box one morning and had it printed by that evening. I did a bunch of rough measurements and estimating, we had a contest to see which software was easier to use (Ian's Fusion360 was the winner), and then went for it.
+So now that I had a roughly functioning watch, I wanted something to give it a bit more protection. I thought about using Sugru (too finicky for what I wanted) or making some Oogoo (likely not skin friendly unless I bought some aluminum-cure silicone) to form the watch protective skin. Then the kids had a week off of school and looked bored. And they each have their favorite CAD software. And their friend Rohan has a hobby 3D printer. So we whipped up a little box one morning and had it printed in polylactic acid (PLA) thermoplastic by that evening. I did a bunch of rough measurements and estimating, we had a contest to see which software was easier to use (Ian's Fusion360 was the winner), and then went for it.
 
 ![]({{ site.url }}/assets/images/projects/heartwatch/CAD.png)
 *Personal Fabrication: From CAD to doo-dad in 3 hrs. Neil Gershenfeld, eat your heart out*
@@ -260,7 +260,7 @@ The current case sidewall thickness is only about 1.5 mm, so hard to do too much
 
 ### Pushbuttons - silicone & hot glue
 
-So (almost) everything was cool about the case. Except it is hard to reach the SD card (either long fingernails or a key or coin or pen tip). And then what to do about the pushbutton switches? They're recessed & also hard to reach. Hmmmm.
+So (almost) everything was cool about the case. Except it is hard to reach the SD card (either long fingernails or a paperclip). And then what to do about the pushbutton switches? They're recessed & also hard to reach. Hmmmm.
 
 Lets skip the experiments on this one.
 
@@ -577,7 +577,7 @@ First of all, they warn you printf is not safe. Okay, well its my wrist, and the
 One thing I did know was that the LCD can be a power hog. So I implemented a variable PWM backlight with a pushbutton and interrupt dedicated only to this. Other than that, I have to admit I didn't really have a clue how long the battery was going to last. I didn't even do the most basic benchtop measurements. You'll see that understanding the power consumption was at the top of my list of things to work on. First data looks really promising:
 
 ![]({{ site.url }}/assets/images/projects/heartwatch/charge_life.png)
-*We'll get at least a 12+ hour day*
+*We'll get 18 hours out of it*
 
 Pretty interesting how close this looks to published 1s LiPo discharge curves.
 
