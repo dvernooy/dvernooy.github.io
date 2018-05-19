@@ -297,7 +297,19 @@ Lets start with Step 1.
 
 #### Setting up the sensor
 
-A little math says that we'll between 30 BPM and 180 BPM (which is a maximum fundamental frequency of about 3 Hz), so the minimum inter-beat spacing will be > 300 ms. Nyquist says our absolute minimum sampling rate needs to be 2X that, or 6 Hz, for a sample time of 160 ms. Since I don't know any better yet, I'd add a safety factor of 5 to 10, so we'll shoot for a sampling time of 20 - 30 ms. 20 ms, for example, corresponds to a 50Hz sampling frequency.
+A little math says that we'll between 30 BPM and 180 BPM (which is a maximum fundamental frequency of about 3 Hz), so the minimum inter-beat spacing will be > 300 ms. Nyquist says our absolute minimum sampling rate needs to be 2X that, or 6 Hz, for a sample time of 160 ms. Since I don't know any better yet, I'd add a safety factor of 5 to 10, so we'll shoot for a sampling time of 20 - 30 ms. Note that a 20 ms sampling time, for example, corresponds to a 50Hz sampling frequency.
+
+The MAX30102 sensor allows for setting LED power levels, a number of sample averages, the number of LEDs, the sample rate, the pulse width and the range of the ADC. All of this is done in MAX30105.c.The MAX30105 and MAX30102 sensors  are very similar in their register layout and share essentially identical firmware.
+
+```c
+void MAX30105_setup(uint8_t powerLevel, uint8_t sampleAverage, uint8_t ledMode, int sampleRate, int pulseWidth, int adcRange)
+```
+Here are the settings I used when calling this function (after studying the datasheet):
+
+```c
+MAX30105_setup(0x3F, 8, 2, 400, 411, 4096);
+```
+In particular, the sampling rate was 400 samples per second, with an 8-sample average, meaning 50 averaged samples per second ... which is exactly 20 ms per sample.
 
 #### DC removal
 
@@ -559,7 +571,7 @@ I had this grand vision of implementing the menu as icons instead of text. Still
 
 The SD card is great when you have limited memory, which of course is the case for these 8bit micros. Good for storing photos as backgrounds for the watch, and good as a destination for data logging. I was interested in both. Once again, Fatfs to the rescue. Implementing it didn't take much time as I'd tackled it with a previous project. Using it with the RTOS is also working ok. I know my code is pretty amateurish, and I intend to come back to it at some point to do way better error checking/handling. I also think a queue might give better performance vs. using a semaphore to protect.
 
-I also want to push the write speed performance. Right now its about 15 ms for an f_write() + f_sync() using unoptimized FatFS code. Seems to be what other people get, but I'm sure I can do better with a dedicated push on this.
+I also wanted to push the write speed performance. Initially, I saw about 15 ms delay per sample loop for an f_write() + f_sync() using unoptimized FatFS code, writing a 50+ byte message per loop to the file. The 20 ms delay seemed to be what others doing a similar thing see in their code, but I wanted to do much better. After studying the FatFS code, the trick was simply to aggregate data in a 512 byte buffer until it was filled, and then write just this 512 byte buffer to the SD card with a single f_write + f_sync. With a 32 byte message per sample, I only needed to do this write once every 16 samples, and the average performance penalty on this sample was only about 5 or 6 ms. So the performance rocked. And this can be further optimized since I am writing ascii characters, not binary data.
 
 ### Bitmaps, fonts and shapes
 
