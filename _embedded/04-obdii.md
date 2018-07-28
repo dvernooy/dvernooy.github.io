@@ -37,7 +37,11 @@ Have you ever seen that poster of the grizzly bear with the salmon in its mouth,
 
 > And, of course, the check engine light (CEL or MIL) ... and more to the point, my desire to figure out which code was causing it, & then douse it.
 
-I'll get a video loaded here of that, but for now here's one of the system booting up and me checking out the identity of the vehicle and what information I can see. My hands were freezing (it was -25C that day) & you gotta love the music that was playing on the radio-
+Here's a video of this hack in action. As it always seems to be on my Camry, the code set was P0136, which is an oxygen sensor. I've been ignoring it for years. I'm sure that's not good.
+
+{% include video id="q_J4OGaI9wE" provider="youtube" %}
+
+Here's another video of the system booting up and me checking out the identity of the vehicle and what information I can see. My hands were freezing (it was -25C that day) & you gotta love the music that was playing on the radio-
 
 {% include video id="z_7kp_Pfc5Q" provider="youtube" %}
 
