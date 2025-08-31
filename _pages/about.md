@@ -7,8 +7,8 @@ layouts_gallery:
     image_path: /assets/images/front/mom_kai.jpg
   - url: /assets/images/front/camping.jpg
     image_path: /assets/images/front/camping.jpg
-  - url: /assets/images/front/dad_sarah.jpg
-    image_path: /assets/images/front/dad_sarah.jpg
+  - url: /assets/images/front/dad_child.jpg
+    image_path: /assets/images/front/dad_child.jpg
 last_modified_at: 2017-11-06T16:27:14-05:00
 toc: true
 ---
